@@ -1,0 +1,87 @@
+openapi: 3.1.0
+info:
+  title: AGCO AgCommand API
+  description: >-
+    The AGCO AgCommand API provides approved third-party developers with access
+    to machine telemetry data from AGCO equipment. Enables building management
+    dashboards and mobile apps that access real-time machine data including
+    location, performance metrics, and diagnostics.
+  version: '1.0'
+servers:
+  - url: https://api.agcocorp.com
+tags:
+  - name: Machines
+    description: Access machine information and status.
+  - name: Telemetry
+    description: Retrieve machine telemetry and sensor data.
+  - name: Locations
+    description: Access machine location and tracking data.
+paths:
+  /machines:
+    get:
+      operationId: listMachines
+      summary: List machines
+      description: >-
+        Retrieves a list of AGCO machines associated with the authenticated
+        account, including machine type, model, and connectivity status.
+      tags:
+        - Machines
+      responses:
+        '200':
+          description: Success
+  /machines/{machineId}/telemetry:
+    get:
+      operationId: getMachineTelemetry
+      summary: Get machine telemetry
+      description: >-
+        Retrieves telemetry data for a specific machine including engine hours,
+        fuel level, speed, and diagnostic codes.
+      tags:
+        - Telemetry
+      parameters:
+        - name: machineId
+          in: path
+          required: true
+          description: The unique machine identifier.
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          description: Filter telemetry from this date.
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          description: Filter telemetry up to this date.
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Success
+  /machines/{machineId}/locations:
+    get:
+      operationId: getMachineLocations
+      summary: Get machine locations
+      description: >-
+        Retrieves location history for a specific machine including GPS
+        coordinates and timestamps.
+      tags:
+        - Locations
+      parameters:
+        - name: machineId
+          in: path
+          required: true
+          description: The unique machine identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: Authorization

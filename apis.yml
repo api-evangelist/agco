@@ -1,0 +1,29 @@
+aid: agco
+url: https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/apis.yml
+apis:
+  - aid: agco:agcommand-api
+    name: AGCO AgCommand API
+    tags:
+      - Agriculture
+      - Farm Equipment
+      - Telematics
+      - Precision Farming
+      - IoT
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.agcocorp.com
+    humanURL: https://get.agcoconnect.com/
+    properties:
+      - url: https://get.agcoconnect.com/
+        type: Portal
+      - url: https://github.com/agco/agco-json-api-profiles
+        type: Documentation
+      - url: openapi/agco-agcommand-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      The AGCO AgCommand API provides approved third-party developers and service
+      providers with access to machine telemetry data from AGCO equipment. The
+      API enables farming application developers to build management dashboards
+      and mobile apps that access real-time machine data including location,
+      performance metrics, and diagnostic information from AGCO Connect-ready
+      machines. AGCO uses JSON API profiles for standardized filtering, search,
+      and change events.
