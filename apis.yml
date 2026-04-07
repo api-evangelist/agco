@@ -1,5 +1,6 @@
 aid: agco
-url: https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/apis.yml
 apis:
   - aid: agco:agcommand-api
     name: AGCO AgCommand API
@@ -9,7 +10,8 @@ apis:
       - Telematics
       - Precision Farming
       - IoT
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.agcocorp.com
     humanURL: https://get.agcoconnect.com/
     properties:
@@ -27,3 +29,5 @@ apis:
       performance metrics, and diagnostic information from AGCO Connect-ready
       machines. AGCO uses JSON API profiles for standardized filtering, search,
       and change events.
+description: >-
+  Always connected to machine location, performance and condition.
