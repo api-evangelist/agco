@@ -1,17 +1,15 @@
 aid: agco
-url: 
-  https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/apis.yml
 apis:
   - aid: agco:agcommand-api
     name: AGCO AgCommand API
     tags:
       - Agriculture
       - Farm Equipment
-      - Telematics
-      - Precision Farming
       - IoT
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Precision Farming
+      - Telematics
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.agcocorp.com
     humanURL: https://get.agcoconnect.com/
     properties:

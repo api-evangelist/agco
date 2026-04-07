@@ -10,12 +10,12 @@ info:
 servers:
   - url: https://api.agcocorp.com
 tags:
+  - name: Locations
+    description: Access machine location and tracking data.
   - name: Machines
     description: Access machine information and status.
   - name: Telemetry
     description: Retrieve machine telemetry and sensor data.
-  - name: Locations
-    description: Access machine location and tracking data.
 paths:
   /machines:
     get:
