@@ -1,0 +1,184 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "AGCO"
+  description: "Unified taxonomy of the AGCO AgCommand API covering agricultural machine telematics, location tracking, and performance monitoring."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: agco-agcommand
+      name: AGCO AgCommand API
+      version: "1.0"
+      baseUrl: https://api.agcocorp.com/v1
+      status: active
+
+  resources:
+    - name: machines
+      description: "AGCO agricultural machines connected to AgCommand."
+      apis:
+        - agco-agcommand
+      actions:
+        - list
+        - get
+    - name: telemetry
+      description: "Real-time performance and operational telematics from AGCO machines."
+      apis:
+        - agco-agcommand
+      actions:
+        - get
+    - name: locations
+      description: "GPS location history for AGCO machine fleet tracking."
+      apis:
+        - agco-agcommand
+      actions:
+        - get
+
+  actions:
+    - name: list
+      description: "List all machines associated with the account."
+      httpMethod: GET
+      pattern: read
+    - name: get
+      description: "Retrieve data for a specific machine."
+      httpMethod: GET
+      pattern: read
+
+  schemas:
+    core:
+      - name: Machine
+        description: "An AGCO machine with connectivity and telematics data."
+        api: agco-agcommand
+    telemetry:
+      - name: Telemetry
+        description: "Real-time telematics data including engine performance and fuel metrics."
+        api: agco-agcommand
+    location:
+      - name: MachineLocation
+        description: "GPS location data point for a machine."
+        api: agco-agcommand
+
+  parameters:
+    pagination:
+      - name: limit
+        description: "Maximum number of results per page."
+        type: integer
+      - name: offset
+        description: "Offset for pagination."
+        type: integer
+    identifiers:
+      - name: machineId
+        description: "AGCO machine identifier."
+        type: string
+    filters:
+      - name: from
+        description: "Start timestamp for time-range queries."
+        type: string
+      - name: to
+        description: "End timestamp for time-range queries."
+        type: string
+
+  enums:
+    machine-brands:
+      - Fendt
+      - Massey Ferguson
+      - Challenger
+      - Valtra
+      - GSI
+    machine-types:
+      - tractor
+      - combine
+      - sprayer
+      - planter
+      - harvester
+      - other
+    machine-statuses:
+      - online
+      - offline
+      - unknown
+
+  authentication:
+    schemes:
+      - type: bearer
+        description: "Bearer token authentication for AgCommand API access."
+        apis:
+          - agco-agcommand
+
+capability:
+  workflows:
+    - name: Precision Farming
+      file: capabilities/precision-farming.yaml
+      description: "Fleet monitoring and performance tracking for AGCO agricultural machines."
+      apisComposed:
+        - agco-agcommand
+      toolCount: 3
+      personas:
+        - farm-manager
+        - precision-ag-developer
+
+  personas:
+    - id: farm-manager
+      name: Farm Manager
+      description: "Agricultural operation manager monitoring machine fleet location and performance."
+      workflows:
+        - Precision Farming
+    - id: precision-ag-developer
+      name: Precision Ag Developer
+      description: "Developer building farm management applications using AGCO machine telemetry data."
+      workflows:
+        - Precision Farming
+
+  domains:
+    - name: Machine Fleet
+      description: "Agricultural machine inventory and fleet management."
+      resources:
+        - machines
+    - name: Performance Monitoring
+      description: "Real-time engine, fuel, and operational telemetry monitoring."
+      resources:
+        - telemetry
+    - name: Location Tracking
+      description: "GPS-based machine location and field work tracking."
+      resources:
+        - locations
+
+  namespaces:
+    consumed:
+      - agco-agcommand
+    rest:
+      - name: agco-precision-api
+        port: 8080
+    mcp:
+      - name: agco-precision-mcp
+        port: 9090
+
+  binds:
+    - name: AGCO_API_KEY
+      description: "API key for AGCO AgCommand API authentication."
+      usedIn:
+        - Precision Farming
+
+crossReference:
+  - resource: machines
+    operations:
+      - list-machines
+    workflows:
+      - Precision Farming
+    personas:
+      - farm-manager
+      - precision-ag-developer
+  - resource: telemetry
+    operations:
+      - get-machine-telemetry
+    workflows:
+      - Precision Farming
+    personas:
+      - farm-manager
+  - resource: locations
+    operations:
+      - get-machine-locations
+    workflows:
+      - Precision Farming
+    personas:
+      - farm-manager

@@ -1,0 +1,15 @@
+{
+  "machine_id": "500123",
+  "timestamp": "2025-04-01T10:30:00Z",
+  "engine_speed": 99.5,
+  "engine_load": 99.5,
+  "engine_hours": 99.5,
+  "fuel_level": 99.5,
+  "fuel_consumption_rate": 99.5,
+  "ground_speed": 99.5,
+  "coolant_temperature": 99.5,
+  "fault_codes": [
+    "example_value"
+  ],
+  "operating_mode": "example_value"
+}

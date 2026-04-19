@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/json-schema/agco-machine-schema.json",
+  "title": "Machine",
+  "description": "An AGCO agricultural machine with telematics capabilities.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique machine identifier.",
+      "example": "mach-500123"
+    },
+    "serial_number": {
+      "type": "string",
+      "description": "Machine serial number.",
+      "example": "AGC-2025-001234"
+    },
+    "model": {
+      "type": "string",
+      "description": "Machine model name.",
+      "example": "Fendt 942 Vario"
+    },
+    "brand": {
+      "type": "string",
+      "description": "AGCO brand.",
+      "enum": [
+        "Fendt",
+        "Massey Ferguson",
+        "Challenger",
+        "Valtra",
+        "GSI"
+      ],
+      "example": "Fendt"
+    },
+    "type": {
+      "type": "string",
+      "description": "Machine type.",
+      "enum": [
+        "tractor",
+        "combine",
+        "sprayer",
+        "planter",
+        "harvester",
+        "other"
+      ],
+      "example": "tractor"
+    },
+    "status": {
+      "type": "string",
+      "description": "Machine connectivity status.",
+      "enum": [
+        "online",
+        "offline",
+        "unknown"
+      ],
+      "example": "online"
+    },
+    "location": {
+      "$ref": "#/definitions/Location"
+    },
+    "engine_hours": {
+      "type": "number",
+      "description": "Total engine hours.",
+      "example": 1250.5
+    },
+    "fuel_level": {
+      "type": "number",
+      "description": "Current fuel level percentage.",
+      "example": 78.5
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Record creation timestamp.",
+      "example": "2025-01-15T09:00:00Z"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Record last updated timestamp.",
+      "example": "2025-04-01T12:00:00Z"
+    }
+  },
+  "definitions": {
+    "Location": {
+      "type": "object",
+      "description": "Geographic location coordinates.",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "description": "Latitude in decimal degrees.",
+          "example": 41.8781
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude in decimal degrees.",
+          "example": -87.6298
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Location timestamp.",
+          "example": "2025-04-01T10:30:00Z"
+        }
+      }
+    }
+  }
+}

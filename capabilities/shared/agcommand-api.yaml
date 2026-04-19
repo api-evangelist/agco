@@ -1,0 +1,132 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AGCO AgCommand API"
+  description: "Shared capability definition for the AGCO AgCommand API covering machine listings, telemetry data, and location history."
+  tags:
+    - AGCO
+    - Agriculture
+    - IoT
+    - Telematics
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AGCO_API_KEY: AGCO_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: agco-agcommand
+      baseUri: https://api.agcocorp.com/v1
+      description: "AGCO AgCommand API for machine telematics and location data."
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "Bearer {{AGCO_API_KEY}}"
+        placement: header
+      resources:
+        - name: machines
+          path: /machines
+          description: "Agricultural machine listing."
+          operations:
+            - name: list-machines
+              method: GET
+              description: "List all machines associated with the account."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: machine-telemetry
+          path: /machines/{machineId}/telemetry
+          description: "Machine telematics data."
+          operations:
+            - name: get-machine-telemetry
+              method: GET
+              description: "Retrieve real-time telemetry data for a machine."
+              inputParameters:
+                - name: machineId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Machine identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: machine-locations
+          path: /machines/{machineId}/locations
+          description: "Machine location history."
+          operations:
+            - name: get-machine-locations
+              method: GET
+              description: "Retrieve location history for a machine."
+              inputParameters:
+                - name: machineId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Machine identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: agco-telematics-api
+      resources:
+        - path: /v1/machines
+          name: machines
+          description: "Machine listing."
+          operations:
+            - method: GET
+              name: list-machines
+              description: "List machines."
+              call: "agco-agcommand.list-machines"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: agco-telematics-mcp
+      transport: http
+      tools:
+        - name: list-machines
+          description: "List all AGCO machines connected to an account."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "agco-agcommand.list-machines"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-machine-telemetry
+          description: "Retrieve real-time telematics data for an AGCO machine."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "agco-agcommand.get-machine-telemetry"
+          with:
+            machineId: "tools.machineId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-machine-locations
+          description: "Retrieve location history for an AGCO machine."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "agco-agcommand.get-machine-locations"
+          with:
+            machineId: "tools.machineId"
+          outputParameters:
+            - type: object
+              mapping: "$."

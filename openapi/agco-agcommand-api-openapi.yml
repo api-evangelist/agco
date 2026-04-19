@@ -8,77 +8,90 @@ info:
     location, performance metrics, and diagnostics.
   version: '1.0'
 servers:
-  - url: https://api.agcocorp.com
+- url: https://api.agcocorp.com
 tags:
-  - name: Locations
-    description: Access machine location and tracking data.
-  - name: Machines
-    description: Access machine information and status.
-  - name: Telemetry
-    description: Retrieve machine telemetry and sensor data.
+- name: Locations
+  description: Access machine location and tracking data.
+- name: Machines
+  description: Access machine information and status.
+- name: Telemetry
+  description: Retrieve machine telemetry and sensor data.
 paths:
   /machines:
     get:
       operationId: listMachines
-      summary: List machines
+      summary: AGCO List Machines
       description: >-
         Retrieves a list of AGCO machines associated with the authenticated
         account, including machine type, model, and connectivity status.
       tags:
-        - Machines
+      - Machines
       responses:
         '200':
           description: Success
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /machines/{machineId}/telemetry:
     get:
       operationId: getMachineTelemetry
-      summary: Get machine telemetry
+      summary: AGCO Get Machine Telemetry
       description: >-
         Retrieves telemetry data for a specific machine including engine hours,
         fuel level, speed, and diagnostic codes.
       tags:
-        - Telemetry
+      - Telemetry
       parameters:
-        - name: machineId
-          in: path
-          required: true
-          description: The unique machine identifier.
-          schema:
-            type: string
-        - name: startDate
-          in: query
-          description: Filter telemetry from this date.
-          schema:
-            type: string
-            format: date
-        - name: endDate
-          in: query
-          description: Filter telemetry up to this date.
-          schema:
-            type: string
-            format: date
+      - name: machineId
+        in: path
+        required: true
+        description: The unique machine identifier.
+        schema:
+          type: string
+        example: example_value
+      - name: startDate
+        in: query
+        description: Filter telemetry from this date.
+        schema:
+          type: string
+          format: date
+        example: '2025-03-15'
+      - name: endDate
+        in: query
+        description: Filter telemetry up to this date.
+        schema:
+          type: string
+          format: date
+        example: '2025-03-15'
       responses:
         '200':
           description: Success
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /machines/{machineId}/locations:
     get:
       operationId: getMachineLocations
-      summary: Get machine locations
+      summary: AGCO Get Machine Locations
       description: >-
         Retrieves location history for a specific machine including GPS
         coordinates and timestamps.
       tags:
-        - Locations
+      - Locations
       parameters:
-        - name: machineId
-          in: path
-          required: true
-          description: The unique machine identifier.
-          schema:
-            type: string
+      - name: machineId
+        in: path
+        required: true
+        description: The unique machine identifier.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Success
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     apiKey:

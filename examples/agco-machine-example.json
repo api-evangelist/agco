@@ -1,0 +1,13 @@
+{
+  "id": "500123",
+  "serial_number": "example_value",
+  "model": "Fendt 942 Vario",
+  "brand": "Fendt",
+  "type": "tractor",
+  "status": "online",
+  "location": "example_value",
+  "engine_hours": 99.5,
+  "fuel_level": 99.5,
+  "created_at": "2025-04-01T10:30:00Z",
+  "updated_at": "2025-04-01T10:30:00Z"
+}

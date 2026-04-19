@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/json-schema/agco-location-schema.json",
+  "title": "MachineLocation",
+  "description": "Historical location data point for an AGCO machine.",
+  "type": "object",
+  "properties": {
+    "machine_id": {
+      "type": "string",
+      "description": "Machine identifier.",
+      "example": "mach-500123"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Latitude in decimal degrees.",
+      "example": 41.8781
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Longitude in decimal degrees.",
+      "example": -87.6298
+    },
+    "altitude": {
+      "type": "number",
+      "description": "Altitude in meters.",
+      "example": 215.0
+    },
+    "heading": {
+      "type": "number",
+      "description": "Direction of travel in degrees (0-360).",
+      "example": 45.0
+    },
+    "ground_speed": {
+      "type": "number",
+      "description": "Ground speed in km/h at this location.",
+      "example": 8.5
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Location timestamp.",
+      "example": "2025-04-01T10:30:00Z"
+    }
+  }
+}

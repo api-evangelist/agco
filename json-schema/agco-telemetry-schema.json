@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/json-schema/agco-telemetry-schema.json",
+  "title": "Telemetry",
+  "description": "Real-time telematics data from an AGCO machine.",
+  "type": "object",
+  "properties": {
+    "machine_id": {
+      "type": "string",
+      "description": "Machine identifier.",
+      "example": "mach-500123"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data collection timestamp.",
+      "example": "2025-04-01T10:30:00Z"
+    },
+    "engine_speed": {
+      "type": "number",
+      "description": "Engine RPM.",
+      "example": 1850
+    },
+    "engine_load": {
+      "type": "number",
+      "description": "Engine load percentage.",
+      "example": 75.2
+    },
+    "engine_hours": {
+      "type": "number",
+      "description": "Cumulative engine hours.",
+      "example": 1250.5
+    },
+    "fuel_level": {
+      "type": "number",
+      "description": "Fuel level percentage.",
+      "example": 78.5
+    },
+    "fuel_consumption_rate": {
+      "type": "number",
+      "description": "Fuel consumption in liters/hour.",
+      "example": 22.3
+    },
+    "ground_speed": {
+      "type": "number",
+      "description": "Ground speed in km/h.",
+      "example": 8.5
+    },
+    "coolant_temperature": {
+      "type": "number",
+      "description": "Engine coolant temperature in Celsius.",
+      "example": 85.0
+    },
+    "fault_codes": {
+      "type": "array",
+      "description": "Active diagnostic fault codes.",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    },
+    "operating_mode": {
+      "type": "string",
+      "description": "Current machine operating mode.",
+      "example": "field_work"
+    }
+  }
+}

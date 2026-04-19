@@ -1,0 +1,109 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "agco": "https://agcocorp.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "MachineLocation": "agco:MachineLocation",
+    "machineId": {
+      "@id": "agco:machine_id",
+      "@type": "xsd:string"
+    },
+    "latitude": {
+      "@id": "agco:latitude",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "agco:longitude",
+      "@type": "xsd:decimal"
+    },
+    "altitude": {
+      "@id": "agco:altitude",
+      "@type": "xsd:decimal"
+    },
+    "heading": {
+      "@id": "agco:heading",
+      "@type": "xsd:decimal"
+    },
+    "groundSpeed": {
+      "@id": "agco:ground_speed",
+      "@type": "xsd:decimal"
+    },
+    "timestamp": {
+      "@id": "agco:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "Telemetry": "agco:Telemetry",
+    "engineSpeed": {
+      "@id": "agco:engine_speed",
+      "@type": "xsd:decimal"
+    },
+    "engineLoad": {
+      "@id": "agco:engine_load",
+      "@type": "xsd:decimal"
+    },
+    "engineHours": {
+      "@id": "agco:engine_hours",
+      "@type": "xsd:decimal"
+    },
+    "fuelLevel": {
+      "@id": "agco:fuel_level",
+      "@type": "xsd:decimal"
+    },
+    "fuelConsumptionRate": {
+      "@id": "agco:fuel_consumption_rate",
+      "@type": "xsd:decimal"
+    },
+    "coolantTemperature": {
+      "@id": "agco:coolant_temperature",
+      "@type": "xsd:decimal"
+    },
+    "faultCodes": {
+      "@id": "agco:fault_codes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "operatingMode": {
+      "@id": "agco:operating_mode",
+      "@type": "xsd:string"
+    },
+    "Machine": "agco:Machine",
+    "id": {
+      "@id": "agco:id",
+      "@type": "xsd:string"
+    },
+    "serialNumber": {
+      "@id": "agco:serial_number",
+      "@type": "xsd:string"
+    },
+    "model": {
+      "@id": "agco:model",
+      "@type": "xsd:string"
+    },
+    "brand": {
+      "@id": "agco:brand",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "agco:type",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "agco:status",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "agco:location",
+      "@type": "xsd:string"
+    },
+    "createdAt": {
+      "@id": "agco:created_at",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "agco:updated_at",
+      "@type": "xsd:dateTime"
+    }
+  }
+}
