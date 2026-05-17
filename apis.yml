@@ -82,7 +82,7 @@ common:
   url: json-structure/agco-machine-structure.json
 - type: JSONStructure
   url: json-structure/agco-telemetry-structure.json
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/agco-telematics-context.jsonld
 - type: Example
   url: examples/agco-location-example.json
