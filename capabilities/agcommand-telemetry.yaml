@@ -1,0 +1,94 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AGCO AgCommand API — Telemetry
+  description: 'AGCO AgCommand API — Telemetry. 1 operations. Lead operation: AGCO Get Machine Telemetry. Self-contained Naftiko
+    capability covering one Agco business surface.'
+  tags:
+  - Agco
+  - Telemetry
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AGCO_API_KEY: AGCO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agcommand-telemetry
+    baseUri: https://api.agcocorp.com
+    description: AGCO AgCommand API — Telemetry business capability. Self-contained, no shared references.
+    resources:
+    - name: machines-machineId-telemetry
+      path: /machines/{machineId}/telemetry
+      operations:
+      - name: getmachinetelemetry
+        method: GET
+        description: AGCO Get Machine Telemetry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: machineId
+          in: path
+          type: string
+          description: The unique machine identifier.
+          required: true
+        - name: startDate
+          in: query
+          type: string
+          description: Filter telemetry from this date.
+        - name: endDate
+          in: query
+          type: string
+          description: Filter telemetry up to this date.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AGCO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: agcommand-telemetry-rest
+    port: 8080
+    description: REST adapter for AGCO AgCommand API — Telemetry. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/machines/{machineid}/telemetry
+      name: machines-machineid-telemetry
+      description: REST surface for machines-machineId-telemetry.
+      operations:
+      - method: GET
+        name: getmachinetelemetry
+        description: AGCO Get Machine Telemetry
+        call: agcommand-telemetry.getmachinetelemetry
+        with:
+          machineId: rest.machineId
+          startDate: rest.startDate
+          endDate: rest.endDate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agcommand-telemetry-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AGCO AgCommand API — Telemetry. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: agco-get-machine-telemetry
+      description: AGCO Get Machine Telemetry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agcommand-telemetry.getmachinetelemetry
+      with:
+        machineId: tools.machineId
+        startDate: tools.startDate
+        endDate: tools.endDate
+      outputParameters:
+      - type: object
+        mapping: $.

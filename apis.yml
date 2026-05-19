@@ -32,6 +32,8 @@ description: >-
   to access machine telemetry data, location tracking, and performance metrics from AGCO Connect-ready equipment including Fendt, Massey Ferguson, Challenger, and Valtra brands.
 modified: '2026-04-19'
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/agco-corporation
 - type: Portal
   url: https://get.agcoconnect.com/
 - type: GettingStarted

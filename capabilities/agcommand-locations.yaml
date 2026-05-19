@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AGCO AgCommand API — Locations
+  description: 'AGCO AgCommand API — Locations. 1 operations. Lead operation: AGCO Get Machine Locations. Self-contained Naftiko
+    capability covering one Agco business surface.'
+  tags:
+  - Agco
+  - Locations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AGCO_API_KEY: AGCO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agcommand-locations
+    baseUri: https://api.agcocorp.com
+    description: AGCO AgCommand API — Locations business capability. Self-contained, no shared references.
+    resources:
+    - name: machines-machineId-locations
+      path: /machines/{machineId}/locations
+      operations:
+      - name: getmachinelocations
+        method: GET
+        description: AGCO Get Machine Locations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: machineId
+          in: path
+          type: string
+          description: The unique machine identifier.
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AGCO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: agcommand-locations-rest
+    port: 8080
+    description: REST adapter for AGCO AgCommand API — Locations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/machines/{machineid}/locations
+      name: machines-machineid-locations
+      description: REST surface for machines-machineId-locations.
+      operations:
+      - method: GET
+        name: getmachinelocations
+        description: AGCO Get Machine Locations
+        call: agcommand-locations.getmachinelocations
+        with:
+          machineId: rest.machineId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agcommand-locations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AGCO AgCommand API — Locations. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: agco-get-machine-locations
+      description: AGCO Get Machine Locations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agcommand-locations.getmachinelocations
+      with:
+        machineId: tools.machineId
+      outputParameters:
+      - type: object
+        mapping: $.
