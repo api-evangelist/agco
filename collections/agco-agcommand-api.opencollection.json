@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AGCO AgCommand API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Machines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AGCO List Machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agcocorp.com/machines"
+          },
+          "docs": "Retrieves a list of AGCO machines associated with the authenticated account, including machine type, model, and connectivity status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Telemetry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AGCO Get Machine Telemetry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agcocorp.com/machines/:machineId/telemetry",
+            "params": [
+              {
+                "name": "machineId",
+                "value": "example_value",
+                "type": "path",
+                "description": "The unique machine identifier."
+              },
+              {
+                "name": "startDate",
+                "value": "2025-03-15",
+                "type": "query",
+                "description": "Filter telemetry from this date."
+              },
+              {
+                "name": "endDate",
+                "value": "2025-03-15",
+                "type": "query",
+                "description": "Filter telemetry up to this date."
+              }
+            ]
+          },
+          "docs": "Retrieves telemetry data for a specific machine including engine hours, fuel level, speed, and diagnostic codes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AGCO Get Machine Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agcocorp.com/machines/:machineId/locations",
+            "params": [
+              {
+                "name": "machineId",
+                "value": "example_value",
+                "type": "path",
+                "description": "The unique machine identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves location history for a specific machine including GPS coordinates and timestamps."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

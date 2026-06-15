@@ -1,0 +1,290 @@
+{
+  "item": [
+    {
+      "id": "1f3034e2-7bb6-4fff-a19b-5833f1974068",
+      "name": "Locations",
+      "description": {
+        "content": "Access machine location and tracking data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6d9d2bb2-d2c8-4e04-8f7d-5a611b1f7f1e",
+          "name": "AGCO Get Machine Locations",
+          "request": {
+            "name": "AGCO Get Machine Locations",
+            "description": {
+              "content": "Retrieves location history for a specific machine including GPS coordinates and timestamps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "machines",
+                ":machineId",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "machineId",
+                  "description": "(Required) The unique machine identifier."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe0a8d73-eac2-4e7e-b058-ee4bb1b50ac2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines",
+                    ":machineId",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "machineId",
+                      "description": "(Required) The unique machine identifier."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "db2305ce-3696-48c9-8f3a-86bbb751e802",
+      "name": "Machines",
+      "description": {
+        "content": "Access machine information and status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43dcd655-3a46-4681-8ecc-01f55449379a",
+          "name": "AGCO List Machines",
+          "request": {
+            "name": "AGCO List Machines",
+            "description": {
+              "content": "Retrieves a list of AGCO machines associated with the authenticated account, including machine type, model, and connectivity status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "machines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e34edda6-69e9-4763-9867-75b8c486d223",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c93de22f-5db6-4cb3-951e-fdac8906ae18",
+      "name": "Telemetry",
+      "description": {
+        "content": "Retrieve machine telemetry and sensor data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a36d895e-af8e-4359-bc0f-088497cd46f4",
+          "name": "AGCO Get Machine Telemetry",
+          "request": {
+            "name": "AGCO Get Machine Telemetry",
+            "description": {
+              "content": "Retrieves telemetry data for a specific machine including engine hours, fuel level, speed, and diagnostic codes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "machines",
+                ":machineId",
+                "telemetry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Filter telemetry from this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "Filter telemetry up to this date."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "machineId",
+                  "description": "(Required) The unique machine identifier."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2746550-369d-43a2-ab31-a1d4d8f424ee",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines",
+                    ":machineId",
+                    "telemetry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2025-03-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-03-15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "machineId",
+                      "description": "(Required) The unique machine identifier."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agcocorp.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b7231587-6f01-406f-8589-2b34d92a6cf6",
+    "name": "AGCO AgCommand API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AGCO AgCommand API provides approved third-party developers with access to machine telemetry data from AGCO equipment. Enables building management dashboards and mobile apps that access real-time machine data including location, performance metrics, and diagnostics.",
+      "type": "text/plain"
+    }
+  }
+}
