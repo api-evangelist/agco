@@ -96,11 +96,11 @@ common:
     url: json-structure/agco-telemetry-structure.json
   - type: JSONLD
     url: json-ld/agco-telematics-context.jsonld
-  - type: Example
+  - type: Examples
     url: examples/agco-location-example.json
-  - type: Example
+  - type: Examples
     url: examples/agco-machine-example.json
-  - type: Example
+  - type: Examples
     url: examples/agco-telemetry-example.json
   - type: SpectralRules
     url: rules/agco-spectral-rules.yml
