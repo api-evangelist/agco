@@ -34,6 +34,10 @@ description: >-
   Ferguson, Challenger, and Valtra brands.
 modified: '2026-04-19'
 common:
+  - type: DomainSecurity
+    url: security/agco-domain-security.yml
+  - type: Authentication
+    url: authentication/agco-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/agco-corporation
   - type: Portal
@@ -44,6 +48,8 @@ common:
     url: https://github.com/agco
   - type: TermsOfService
     url: https://www.agcocorp.com/legal/privacy-policy.html
+  - type: Blog
+    url: https://news.agcocorp.com/
   - type: Features
     data:
       - name: Machine Telematics
