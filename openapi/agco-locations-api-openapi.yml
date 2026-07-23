@@ -1,0 +1,38 @@
+openapi: 3.1.0
+info:
+  title: AGCO AgCommand Locations API
+  description: The AGCO AgCommand API provides approved third-party developers with access to machine telemetry data from AGCO equipment. Enables building management dashboards and mobile apps that access real-time machine data including location, performance metrics, and diagnostics.
+  version: '1.0'
+servers:
+- url: https://api.agcocorp.com
+tags:
+- name: Locations
+  description: Access machine location and tracking data.
+paths:
+  /machines/{machineId}/locations:
+    get:
+      operationId: getMachineLocations
+      summary: AGCO Get Machine Locations
+      description: Retrieves location history for a specific machine including GPS coordinates and timestamps.
+      tags:
+      - Locations
+      parameters:
+      - name: machineId
+        in: path
+        required: true
+        description: The unique machine identifier.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Success
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: Authorization
