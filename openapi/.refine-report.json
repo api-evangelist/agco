@@ -1,0 +1,18 @@
+{
+  "provider": "agco",
+  "sources": [
+    "agco-locations-api-openapi.yml",
+    "agco-machines-api-openapi.yml",
+    "agco-telemetry-api-openapi.yml"
+  ],
+  "outputs": [
+    "agco-locations-api-openapi.yml",
+    "agco-machines-api-openapi.yml",
+    "agco-telemetry-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
