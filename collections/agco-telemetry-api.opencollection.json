@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AGCO AgCommand Locations Telemetry API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Telemetry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AGCO Get Machine Telemetry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agcocorp.com/machines/:machineId/telemetry",
+            "params": [
+              {
+                "name": "machineId",
+                "value": "example_value",
+                "type": "path",
+                "description": "The unique machine identifier."
+              },
+              {
+                "name": "startDate",
+                "value": "2025-03-15",
+                "type": "query",
+                "description": "Filter telemetry from this date."
+              },
+              {
+                "name": "endDate",
+                "value": "2025-03-15",
+                "type": "query",
+                "description": "Filter telemetry up to this date."
+              }
+            ]
+          },
+          "docs": "Retrieves telemetry data for a specific machine including engine hours, fuel level, speed, and diagnostic codes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

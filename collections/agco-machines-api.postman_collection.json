@@ -1,0 +1,90 @@
+{
+  "item": [
+    {
+      "id": "92534717-e39c-4fc0-996e-1a664491f339",
+      "name": "Machines",
+      "description": {
+        "content": "Access machine information and status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c566a943-6a74-4862-ab45-85f073ae29c6",
+          "name": "AGCO List Machines",
+          "request": {
+            "name": "AGCO List Machines",
+            "description": {
+              "content": "Retrieves a list of AGCO machines associated with the authenticated account, including machine type, model, and connectivity status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "machines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db57a2e1-192a-4623-998d-4bec0224f22e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agcocorp.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "52b197c8-d913-4010-8788-ddce137c6bb8",
+    "name": "AGCO AgCommand Locations Machines API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AGCO AgCommand API provides approved third-party developers with access to machine telemetry data from AGCO equipment. Enables building management dashboards and mobile apps that access real-time machine data including location, performance metrics, and diagnostics.",
+      "type": "text/plain"
+    }
+  }
+}

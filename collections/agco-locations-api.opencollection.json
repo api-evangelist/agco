@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AGCO AgCommand Locations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AGCO Get Machine Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agcocorp.com/machines/:machineId/locations",
+            "params": [
+              {
+                "name": "machineId",
+                "value": "example_value",
+                "type": "path",
+                "description": "The unique machine identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves location history for a specific machine including GPS coordinates and timestamps."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,110 @@
+{
+  "item": [
+    {
+      "id": "cd72ed25-f226-4a45-a026-b9cd6a214d18",
+      "name": "Locations",
+      "description": {
+        "content": "Access machine location and tracking data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6ee3bebc-b246-43d0-97ea-cad954629396",
+          "name": "AGCO Get Machine Locations",
+          "request": {
+            "name": "AGCO Get Machine Locations",
+            "description": {
+              "content": "Retrieves location history for a specific machine including GPS coordinates and timestamps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "machines",
+                ":machineId",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "machineId",
+                  "description": "(Required) The unique machine identifier."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13eafce4-5780-4aba-b1ae-a99f1b052e60",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines",
+                    ":machineId",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "machineId",
+                      "description": "(Required) The unique machine identifier."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agcocorp.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "258e296d-3260-466f-aa2a-7042e7b80b17",
+    "name": "AGCO AgCommand Locations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AGCO AgCommand API provides approved third-party developers with access to machine telemetry data from AGCO equipment. Enables building management dashboards and mobile apps that access real-time machine data including location, performance metrics, and diagnostics.",
+      "type": "text/plain"
+    }
+  }
+}

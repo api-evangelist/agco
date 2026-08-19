@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AGCO AgCommand Locations Machines API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Machines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AGCO List Machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agcocorp.com/machines"
+          },
+          "docs": "Retrieves a list of AGCO machines associated with the authenticated account, including machine type, model, and connectivity status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
