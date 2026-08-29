@@ -1,0 +1,43 @@
+slug: agco
+provider: agco
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Agriculture & Food Production
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Telemetry
+  spec_file: agco-telemetry-api-openapi.yml
+  capability_id: BC-3540.30
+  capability_id_l1: BC-3540
+  capability_name: Farm Equipment Management
+  confidence: 0.88
+  evidence: GET /machines/{machineId}/telemetry  getMachineTelemetry — "real-time machine data including
+    location, performance metrics, and diagnostics"
+  reason: Machinery telemetry for agricultural equipment is explicitly Farm Equipment Management (ISOBUS
+    telemetry).
+- tag: Locations
+  spec_file: agco-locations-api-openapi.yml
+  capability_id: BC-3540.30
+  capability_id_l1: BC-3540
+  capability_name: Farm Equipment Management
+  confidence: 0.85
+  evidence: GET /machines/{machineId}/locations  getMachineLocations  AGCO Get Machine Locations — "access
+    machine telemetry data, location tracking, and performance metrics from AGCO Connect-ready equipment"
+  reason: Location tracking of agricultural machinery is on-farm equipment/machinery telemetry, matching
+    Farm Equipment Management.
+- tag: Machines
+  spec_file: agco-machines-api-openapi.yml
+  capability_id: BC-3540.30
+  capability_id_l1: BC-3540
+  capability_name: Farm Equipment Management
+  confidence: 0.85
+  evidence: GET /machines  listMachines  AGCO List Machines
+  reason: Listing farm machines from AGCO agricultural equipment fleet is on-farm equipment inventory/telemetry.

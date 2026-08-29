@@ -79,6 +79,9 @@ description: >-
   Ferguson, Challenger, and Valtra brands.
 modified: '2026-04-19'
 common:
+  - type: CapabilityMap
+    url: capabilities/agco-capability-edges.yml
+    name: agco Business Capability Map
   - type: AgenticAccess
     url: agentic-access/agco-agentic-access.yml
   - type: DomainSecurity
