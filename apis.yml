@@ -1,3 +1,4 @@
+name: Agco
 aid: agco
 deliveryModel:
   model: saas
@@ -14,16 +15,17 @@ deliveryModel:
 specificationVersion: '0.23'
 accessModel:
   pricing: unknown
-  onboarding: self-serve
+  onboarding: unknown
   trial: false
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: high
+  label: Unknown
+  confidence: low
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/agco.png
 tags:
@@ -72,6 +74,36 @@ apis:
     url: https://get.agcoconnect.com/
   - type: Documentation
     url: https://github.com/agco/agco-json-api-profiles
+- aid: agco:agco-ats-api
+  name: AGCO ATS API
+  description: >-
+    The AGCO Technical Support (ATS) API behind AGCO's Electronic Diagnostic Tool (EDT) and dealer
+    software distribution platform. Publishes 285 operations across 55 tags covering authorization
+    codes and vouchers, dealer and client records, content submission and release, software packages,
+    update groups and subscriptions, translation sets, users, roles and permissions, and AGCO Power
+    aftermarket services (ECU activation, engine production data, IQA codes). Served from
+    secure.agco-ats.com with a public Swagger UI; calling it requires EDT Support Portal credentials.
+  humanURL: https://secure.agco-ats.com/swagger
+  baseURL: https://secure.agco-ats.com
+  tags:
+  - Diagnostics
+  - Dealers
+  - Software Distribution
+  - Authorization
+  - Engines
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-ats-api-openapi.json
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+  - type: Overlay
+    url: overlays/agco-ats-api-overlay.yaml
 description: >-
   AGCO is a global leader in the design, manufacture, and distribution of agricultural machinery and precision ag
   technology. The AGCO AgCommand API enables approved third-party developers and service providers to access machine
