@@ -1,0 +1,118 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  AGCO's own published JSON API Profiles (https://github.com/agco/agco-json-api-profiles) and the
+  live AGCO ATS contract saved verbatim to openapi/agco-ats-api-openapi.json (fetched from
+  https://secure.agco-ats.com/swagger/docs/v1 on 2026-09-04). Claims are asserted only where an AGCO
+  document or the contract itself states them.
+description: >-
+  What AGCO's published API surface conforms to, and what it does not. The one strong, first-party,
+  documented conformance is JSON:API 1.0 with three AGCO-authored profile extensions — a genuinely
+  unusual thing for an equipment OEM to publish. The ATS/EDT contract, by contrast, conforms to
+  nothing beyond Swagger 2.0 itself.
+conformance:
+  - id: jsonapi
+    name: JSON:API 1.0
+    conforms: true
+    surface: AGCO JSON:API surface (AgCommand / telematics)
+    evidence: https://github.com/agco/agco-json-api-profiles
+    detail: >-
+      AGCO publishes three normative JSON:API profiles of its own — Filtering, Search and Change
+      Events — and documents advertising them at runtime in the response `meta.profile` array, which
+      is the extension mechanism JSON:API itself defines at https://jsonapi.org/extending/. The
+      implementing stack (harvesterjs, hapi-harvester) is AGCO first-party open source described as
+      "a JSON:API 1.0 plugin".
+  - id: fiql
+    name: FIQL (Feed Item Query Language, RFC-draft) range operators
+    conforms: true
+    surface: AGCO JSON:API surface
+    evidence: https://github.com/agco/agco-json-api-profiles/blob/master/public/filtering-profile.md
+    detail: >-
+      "FIQL syntax should be used for range queries" — quoted from AGCO's filtering profile, which
+      documents =lt=, =le=, =gt= and =ge= operators on resource attributes.
+  - id: openapi
+    name: OpenAPI / Swagger
+    conforms: true
+    version: Swagger 2.0
+    surface: AGCO ATS / EDT API
+    evidence: https://secure.agco-ats.com/swagger/docs/v1
+    detail: >-
+      A complete, publicly reachable Swagger 2.0 document with 167 paths, 285 operations and 166
+      definitions, served with a public Swagger UI at https://secure.agco-ats.com/swagger. Swagger
+      2.0 is superseded; AGCO publishes no OpenAPI 3.x document.
+  - id: oidc
+    name: OpenID Connect
+    conforms: partial
+    surface: AGCO ATS / EDT API
+    evidence: openapi/agco-ats-api-openapi.json#/paths/~1api~1v2~1Authentication~1OAuthRedirect
+    detail: >-
+      The contract declares OAuthRedirect, OAuthCallback, OAuthUser and OAuthCertificate operations
+      and the public login page redirects through them, so an OIDC relying-party flow is in use. But
+      no issuer is named, no scopes are published, and /.well-known/openid-configuration returns 404
+      on secure.agco-ats.com (probed 2026-09-04), so the conformance cannot be verified from any
+      public document.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: partial
+    surface: AGCO ATS / EDT API
+    evidence: https://www.agco-ats.com/login.aspx
+    detail: >-
+      Authorization-code redirect flow observed in the login page's navigateToSSO(); no authorization
+      server metadata is published and no scopes are documented.
+  - id: pagination
+    name: Documented, machine-readable pagination
+    conforms: true
+    surface: AGCO ATS / EDT API
+    evidence: openapi/agco-ats-api-openapi.json#/definitions/API.PagedResponseMetadata
+    detail: >-
+      64 collection operations take limit/offset and return API.PagedResponse[T] with a required
+      Metadata block carrying TotalCount, Limit and Offset. Offset paging with a total count, no
+      cursors.
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    surface: AGCO ATS / EDT API
+    evidence: openapi/agco-ats-api-openapi.json#/definitions/API.Models.ApiError
+    detail: >-
+      Errors use a custom envelope { DeveloperMessage, UserMessage, ErrorCode, MoreInfo } served as
+      application/json, not application/problem+json. No type URI, title, status or instance member.
+  - id: idempotency
+    name: Idempotency keys on unsafe methods
+    conforms: false
+    surface: AGCO ATS / EDT API
+    evidence: openapi/agco-ats-api-openapi.json
+    detail: >-
+      153 mutating operations (63 PUT, 56 POST, 34 DELETE) and not one header parameter declared
+      anywhere in the contract. No replay protection.
+  - id: rate-limit-headers
+    name: RFC 9239 / draft-ietf-httpapi-ratelimit-headers signaling
+    conforms: false
+    surface: AGCO ATS / EDT API
+    evidence: openapi/agco-ats-api-openapi.json
+    detail: No RateLimit-*, X-RateLimit-* or Retry-After header and no 429 response is declared.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: https://github.com/agco
+    detail: >-
+      AGCO documents a change-event feed in its JSON:API Change Events profile and its GitHub org
+      carries SSE tooling (event-source-stream, sse-checkpointing-consumer, node-tiny-sse), but no
+      AsyncAPI document is published anywhere. Recorded as absent, not fabricated.
+domain_standards:
+  note: >-
+    REWARD-ONLY check. AGCO's markets are agricultural machinery telematics and dealer service
+    software. The relevant domain standards are ISUBUS/ISO 11783 (ISOBUS), AEF, and the
+    AgGateway ADAPT data model. We found NO declaration of any of them in AGCO's published
+    contracts. The ATS contract's closest domain-specific vocabulary is AGCO Power ECU and engine
+    production data (AGCOPowerServices.Models.ECU, .ProductionData, IQA codes), which is AGCO's own
+    internal model, not an industry standard. No domain-standard conformance is asserted.
+  candidates_checked:
+    - id: isobus
+      name: ISO 11783 / ISOBUS
+      found: false
+    - id: adapt
+      name: AgGateway ADAPT
+      found: false
+    - id: aef
+      name: Agricultural Industry Electronics Foundation (AEF) profiles
+      found: false

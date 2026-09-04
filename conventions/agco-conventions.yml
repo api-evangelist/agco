@@ -1,0 +1,205 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  Two first-party AGCO sources. (1) The AGCO JSON API Profiles published by AGCO at
+  https://github.com/agco/agco-json-api-profiles — three normative documents standardising Filtering,
+  Search and Change Events across AGCO's JSON:API surfaces. (2) The live AGCO ATS contract at
+  https://secure.agco-ats.com/swagger/docs/v1, saved verbatim to openapi/agco-ats-api-openapi.json,
+  from which the pagination envelope, error envelope and write semantics are derived. Both read
+  2026-09-04.
+description: >-
+  Cross-cutting request/response semantics across AGCO's API estate. AGCO runs two different
+  conventions regimes and they do not agree: the AgCommand/telematics surface follows JSON:API 1.0
+  plus AGCO's own published profiles (FIQL range filters, a /search verb with Elasticsearch-style
+  aggregations, a /changes change-event feed), while the ATS/EDT surface at secure.agco-ats.com is a
+  plain .NET Web API with limit/offset paging and a custom error envelope. Nothing links the two.
+
+surfaces:
+  - name: AGCO JSON:API surface (AgCommand / telematics)
+    style: JSON:API 1.0 with AGCO profiles
+    profiles_doc: https://github.com/agco/agco-json-api-profiles
+    note: >-
+      AGCO's profiles are advertised at runtime by putting the three profile URLs in the response
+      `meta.profile` array, so a consumer can discover the extended semantics from a response body.
+  - name: AGCO ATS / EDT API
+    style: REST over HTTPS, .NET Web API, JSON and XML
+    base_url: https://secure.agco-ats.com
+    contract: openapi/agco-ats-api-openapi.json
+
+authentication:
+  scheme: >-
+    ATS: username/password login minting API tokens, or delegated OpenID Connect. No securityScheme
+    is declared in the contract.
+  detail: authentication/agco-ats-authentication.yml
+
+idempotency:
+  supported: false
+  coverage: none
+  mechanism: null
+  scope: []
+  detail: >-
+    No Idempotency-Key header, no client-supplied request key, and no replay-protection language
+    appears anywhere in the 285-operation ATS contract — it declares no header parameters at all.
+    153 of those operations mutate state (63 PUT, 56 POST, 34 DELETE). A retried POST after a
+    timeout will create a duplicate. The AGCO JSON API profiles are silent on idempotency too.
+
+reversibility:
+  grade: documented
+  detail: >-
+    A reversal path exists and is visible in the contract, but no window is stated anywhere, so this
+    grades `documented` rather than `verified`. The ATS API's DELETE operations are predominantly
+    SOFT deletes — the contract says so in its own summaries ("Mark the delete flag for the
+    Activity", "Marks language as deleted", "Mark a file as 'Removed'", "Hide an authorization
+    code", "Disable an authorization code definition"). Deleted records remain retrievable via the
+    `includeDeleted` / `isIncludeDeleted` query parameter (11 operations), and the writable
+    IsDeleted / Deleted field on several models means the corresponding PUT can restore a record.
+  write_surfaces:
+    - surface: Authorization codes
+      delete: AuthorizationCodes_DeleteAuthorizationCode (DELETE /api/v2/AuthorizationCodes/{id})
+      reversal: >-
+        PUT /api/v2/AuthorizationCodes/{id} (AuthorizationCodes_PutAuthorizationCode) with
+        IsDeleted=false. The model's IsDeleted, DeletedByUserID and DeletedDate fields record the
+        soft delete.
+      window: null
+    - surface: Authorization code definitions
+      delete: AuthorizationCodeDefinitions_DeleteAuthorizationCodeDefinition
+      reversal: PUT /api/v2/AuthorizationCodeDefinitions/{id} with IsDeleted=false — the summary calls the delete "Disable".
+      window: null
+    - surface: Languages
+      delete: Languages_DeleteLanguage — "Marks language as deleted"
+      reversal: PUT /api/v2/Languages/{LocaleID} with IsDeleted=false
+      window: null
+    - surface: Files and global images
+      delete: Files_DeleteFile / GlobalImages_DeleteFile — "Mark a file as 'Removed'"
+      reversal: null
+      window: null
+      note: Marked Removed rather than erased, but the contract states no restore operation.
+    - surface: Build system activities, jobs, steps, content release versions
+      delete: Activities_DeleteActivity, Jobs_DeleteJob, ContentRelease_DeleteContentReleaseVersionn
+      reversal: The corresponding PUT carries a writable Deleted flag.
+      window: null
+    - surface: AGCO Power ECUs
+      operation: AftermarketServices_PutECU (PUT /api/v2/AftermarketServices/ECUs/{serialNumber})
+      reversal: >-
+        The same operation activates OR deactivates an ECU, so deactivation is itself the reversal of
+        activation. Reporting an ECU as Damaged carries a DamagedDescription and the contract states
+        no path back from that state.
+      window: null
+  gaps:
+    - No retention or restore window is stated for any soft-deleted entity anywhere in the contract or on any AGCO page we could reach.
+    - Vouchers, users, roles, permissions, packages and bundles are deleted with no documented restore operation.
+
+dry_run_mode:
+  supported: false
+  detail: No preview, validate-only, simulate or dry-run parameter appears in the contract.
+
+pagination:
+  style: offset
+  applies_to: 64 collection operations
+  request_params:
+    limit: Maximum number of entities to return.
+    offset: Number of entities to skip before this page.
+  response_envelope:
+    schema: API.PagedResponse[T] / API.IPagedResponse[T]
+    fields:
+      Metadata: API.PagedResponseMetadata — { TotalCount, Limit, Offset }, all readOnly and all required.
+      Entities: The array of results for this page, readOnly.
+  note: >-
+    TotalCount makes the surface fully enumerable — a client can compute the page count up front.
+    There are no cursors and no link relations.
+  json_api_surface:
+    note: >-
+      On the JSON:API surface, pagination follows JSON:API 1.0; AGCO's profiles do not extend it.
+
+filtering:
+  source: https://github.com/agco/agco-json-api-profiles/blob/master/public/filtering-profile.md
+  applies_to: AGCO JSON:API surface
+  rules:
+    - Simple equality on a resource attribute — /equipment?vin=19UYA31581L000000
+    - Wildcard/regex matching — /equipment?serialNumber=123*
+    - FIQL range operators for ranges — /trackingData?raw=lt=50, /trackingPoint?alt=ge=50
+    - >-
+      Filtering on linked resources with dot paths, including two levels deep —
+      /trackingData?linked.trackingPoint.equipment.vin=... — and combinable with primary-resource filters.
+  ats_surface:
+    style: Ad-hoc query parameters, per operation.
+    common_params: [name, state, Active, includeDeleted, isIncludeDeleted, includeAttributes, afterDate, Tag]
+    note: There is no general filtering grammar on the ATS API; each operation declares its own parameters.
+
+search:
+  source: https://github.com/agco/agco-json-api-profiles/blob/master/public/search-profile.md
+  applies_to: AGCO JSON:API surface
+  mechanism: >-
+    A /search suffix on a resource routes the request to the search engine rather than the source of
+    record — /dealers/search. Search data has the same shape as the base resource and supports the
+    same JSON:API features (inclusions, sparse fields) plus the filtering profile.
+  aggregations: >-
+    An `aggregations` query parameter names one or more labelled aggregations; each label takes
+    .type and .property attributes (e.g. zip_agg.type=terms&zip_agg.property=zip). Results are
+    returned under meta.aggregations keyed by the label. Metric and bucket aggregation categories
+    are both described.
+
+change_events:
+  source: https://github.com/agco/agco-json-api-profiles/blob/master/public/change-events-profile.md
+  applies_to: AGCO JSON:API surface
+  mechanism: >-
+    A /changes suffix on any resource returns that resource's change events — /equipment/changes —
+    as a `<resource>_changes` array of { event, id, timestamp, data } records, where `event` is
+    typed by operation (e.g. equipment_insert).
+  note: >-
+    This is a polled/streamed change feed, not a webhook callback and not an AsyncAPI channel. No
+    AsyncAPI document and no webhook registration endpoint is published by AGCO, so no AsyncAPI or
+    Webhooks pointer is emitted from this record.
+
+field_expansion:
+  supported: partial
+  detail: >-
+    On the JSON:API surface, inclusions and sparse fieldsets come from JSON:API 1.0 itself. On the
+    ATS surface the equivalents are per-operation booleans — includeAttributes,
+    includeActivityRunDetails — not a general expansion grammar.
+
+metadata:
+  supported: false
+  detail: No arbitrary key/value metadata bag is offered on ATS resources.
+
+request_tracing:
+  request_id_header: null
+  detail: >-
+    No correlation or request-id header is declared. The ATS API does expose a server-side log
+    resource (/api/v2/Logs, 3 operations), but a caller cannot tie a response back to a log entry
+    from anything in the response itself.
+
+versioning:
+  scheme: Path-based major version plus a separate Swagger document version.
+  detail: >-
+    Every ATS route is under /api/v2/, while the Swagger document is served at /swagger/docs/v1 and
+    reports info.version "v1". Requesting /swagger/docs/v2 returns 404 "Unknown API version - v2",
+    so v1 is the only published document. That mismatch between the route version and the document
+    version is undocumented.
+  detail_file: lifecycle/agco-lifecycle.yml
+
+error_envelope:
+  format: custom
+  schema: API.Models.ApiError — { DeveloperMessage, UserMessage, ErrorCode, MoreInfo }
+  detail: errors/agco-problem-types.yml
+  note: Declared only as an OpenAPI `default` response; no 4xx or 5xx status code appears in the contract.
+
+rate_limiting:
+  signaled: false
+  headers: []
+  detail: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header is declared, and no 429 response appears in
+    the contract. See rate-limits/agco-rate-limits.yml.
+
+content_negotiation:
+  produces: [application/json, text/json, application/xml, text/xml]
+  consumes: [application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded]
+  note: The ATS API serves XML as a first-class representation alongside JSON.
+
+cross_references:
+  errors: errors/agco-problem-types.yml
+  lifecycle: lifecycle/agco-lifecycle.yml
+  authentication: authentication/agco-ats-authentication.yml
+  rate_limits: rate-limits/agco-rate-limits.yml
+  conformance: conformance/agco-conformance.yml
+  data_model: data-model/agco-data-model.yml

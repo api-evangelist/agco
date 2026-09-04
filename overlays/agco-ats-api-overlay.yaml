@@ -1,0 +1,117 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the AGCO ATS API
+  version: 1.0.0
+extends: ../openapi/agco-ats-api-openapi.json
+x-provenance:
+  generated: '2026-09-04'
+  method: generated
+  source: >-
+    Authored by API Evangelist against the AGCO ATS contract fetched verbatim from
+    https://secure.agco-ats.com/swagger/docs/v1 on 2026-09-04. This overlay carries OUR annotations
+    only — it is applied on top of AGCO's document and never mutates it. Every statement below is
+    either a fact read out of the contract or an observation recorded elsewhere in this repository
+    with its own evidence.
+  author: API Evangelist (https://apievangelist.com) — third-party profile, not AGCO.
+actions:
+  - target: $.info
+    description: >-
+      AGCO's document declares only version "v1" and title "API". Name the surface and say what it is,
+      so a consumer or an agent reading the spec alone can tell which AGCO system this is.
+    update:
+      title: AGCO Technical Support (ATS) API
+      description: >-
+        The API behind AGCO's Electronic Diagnostic Tool (EDT) and its dealer software distribution
+        platform. Covers dealer and client records, authorization codes and vouchers, software
+        packages, update groups and subscriptions, a content submission and release pipeline, a build
+        orchestration system, translation workflow, users/roles/permissions, and AGCO Power
+        aftermarket services (ECU activation, engine production data, IQA injector codes). Credentials
+        come from the AGCO EDT Support Portal; contact EDT_Support@agcocorp.com. There is no
+        self-service signup.
+      contact:
+        name: AGCO EDT Support
+        email: EDT_Support@agcocorp.com
+        url: https://www.agco-ats.com/
+      x-api-evangelist-note: >-
+        Annotation added by API Evangelist, not by AGCO. See
+        https://github.com/api-evangelist/agco for provenance.
+  - target: $
+    description: >-
+      Record the cross-cutting runtime semantics the contract does not express, so a client or agent
+      does not have to infer them.
+    update:
+      x-conventions: ../conventions/agco-conventions.yml
+      x-error-catalog: ../errors/agco-problem-types.yml
+      x-data-model: ../data-model/agco-data-model.yml
+      x-authentication: ../authentication/agco-ats-authentication.yml
+      x-lifecycle: ../lifecycle/agco-lifecycle.yml
+      x-conformance: ../conformance/agco-conformance.yml
+      x-pagination:
+        style: offset
+        params: [limit, offset]
+        envelope: API.PagedResponse[T] with required Metadata { TotalCount, Limit, Offset }
+        applies_to: 64 collection operations
+      x-idempotency:
+        supported: false
+        coverage: none
+        note: >-
+          153 mutating operations and no header parameter declared anywhere in the contract. A retried
+          POST after a timeout creates a duplicate.
+      x-reversibility:
+        grade: documented
+        note: >-
+          Most DELETE operations are soft deletes the contract describes as "mark the delete flag" or
+          "hide"; deleted records stay retrievable via includeDeleted and several models expose a
+          writable IsDeleted the PUT can clear. No retention or restore window is stated anywhere.
+      x-rate-limits:
+        signaled: false
+        note: No RateLimit-*, X-RateLimit-* or Retry-After header and no 429 response is declared.
+  - target: $.securityDefinitions
+    description: >-
+      The document declares NO security schemes, so a client generated from it sends no credentials
+      at all. Add the two mechanisms that are observable from the contract's own Authentication
+      resource and the public login page. These are OUR annotations of an undocumented surface — the
+      exact token transport is not published and is NOT asserted here.
+    update:
+      agcoOidc:
+        type: oauth2
+        flow: accessCode
+        authorizationUrl: https://secure.agco-ats.com/api/v2/Authentication/OAuthRedirect
+        tokenUrl: https://secure.agco-ats.com/api/v2/Authentication/OAuthUser
+        scopes: {}
+        description: >-
+          Delegated OpenID Connect login. Observed from navigateToSSO() on
+          https://www.agco-ats.com/login.aspx and from the OAuthRedirect / OAuthCallback / OAuthUser /
+          OAuthCertificate operations in this contract. The issuer, its discovery document and its
+          scopes are NOT published by AGCO — /.well-known/openid-configuration returns 404 on this
+          host. Scopes are intentionally left empty rather than invented.
+      agcoApiToken:
+        type: apiKey
+        in: header
+        name: Authorization
+        description: >-
+          API tokens minted through POST /api/v2/Authentication and managed via
+          PUT /api/v2/AuthenticatedUsers/{UserID}/Tokens. AGCO does not publish the header name or
+          token prefix; `Authorization` is the conventional placement and is recorded here as an
+          UNVERIFIED annotation, not as a documented fact.
+  - target: $.definitions['API.Models.ApiError']
+    description: >-
+      Flag the untyped error contract. ErrorCode is an unenumerated int32 with no published mapping,
+      which is this API's single largest error-handling gap.
+    update:
+      x-error-code-enumerated: false
+      x-rfc9457: false
+      x-note: >-
+        Declared only on `default` responses; no 4xx or 5xx status code appears anywhere in the
+        285-operation contract. There is no published error-code reference.
+  - target: $.paths['/api/v2/AftermarketServices/ECUs/{serialNumber}'].put
+    description: >-
+      Mark the highest-consequence write in the contract so an agent or a generated client treats it
+      as human-in-the-loop.
+    update:
+      x-consequence: high
+      x-human-in-the-loop: true
+      x-note: >-
+        Activates, deactivates or reports as damaged a physical AGCO Power engine ECU. Deactivation
+        reverses activation, but the contract states no path back from the Damaged state and no
+        idempotency key protects a retry.

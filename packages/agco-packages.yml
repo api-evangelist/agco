@@ -1,0 +1,112 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  npm registry metadata (registry.npmjs.org) for every package published from the AGCO GitHub
+  organization (github.com/agco), cross-checked against the org's repository list via the GitHub API
+  on 2026-09-04. PyPI, Maven Central, NuGet, RubyGems, crates.io, Packagist and pkg.go.dev were
+  searched for AGCO-published client libraries and returned nothing.
+description: >-
+  AGCO publishes no client SDK for any of its APIs. What it does publish on npm is a family of
+  first-party SERVER-side Node.js libraries — the "harvester" stack it built to implement its own
+  JSON:API surface, plus supporting logging, migration and messaging utilities. These are the tools
+  AGCO used to BUILD its APIs, not tools a consumer uses to CALL them, so no SDKs pointer is emitted
+  from this record. Every one of them is abandoned: the newest release in the set is
+  harvesterjs 3.2.4 from 2018-07-06, and the AGCO GitHub organization has had no push to any
+  repository since 2019.
+summary:
+  total: 8
+  official: 7
+  client_sdks: 0
+  newest_release: '2018-07-06'
+  oldest_release: '2015-10-07'
+  abandonment_signal: >-
+    All first-party packages predate 2019. The live AGCO ATS contract at secure.agco-ats.com is a
+    .NET/ASP.NET Web API surface with no published client library in any registry.
+packages:
+  - name: harvesterjs
+    registry: npm
+    url: https://www.npmjs.com/package/harvesterjs
+    repository: https://github.com/agco/harvesterjs
+    official: true
+    kind: server-framework
+    language: JavaScript
+    version: 3.2.4
+    published: '2018-07-06'
+    description: A library which makes it easy to construct a JSON-API compliant API over Node.js + MongoDB.
+    note: The framework behind AGCO's JSON:API surface and its published JSON API profiles. Not a client SDK.
+  - name: hapi-harvester
+    registry: npm
+    url: https://www.npmjs.com/package/hapi-harvester
+    repository: https://github.com/agco/hapi-harvester
+    official: true
+    kind: server-framework
+    language: JavaScript
+    version: 0.5.1
+    published: '2016-05-03'
+    description: A JSON:API 1.0 plugin for Hapi.
+  - name: elastic-harvesterjs
+    registry: npm
+    url: https://www.npmjs.com/package/elastic-harvesterjs
+    repository: https://github.com/agco/elastic-harvesterjs
+    official: true
+    kind: server-framework
+    language: JavaScript
+    version: 3.1.1
+    published: '2018-02-26'
+    description: Connects Elasticsearch, harvester.js and MongoDB — the engine behind AGCO's JSON:API search profile.
+    note: >-
+      The npm `repository` field still points at the upstream fork source (ssebro/elastic-fortune);
+      the AGCO org hosts the maintained repo at github.com/agco/elastic-harvesterjs.
+  - name: harvester-test-utils
+    registry: npm
+    url: https://www.npmjs.com/package/harvester-test-utils
+    repository: https://github.com/agco/harvester-test-utils
+    official: true
+    kind: test-utility
+    language: JavaScript
+    version: 1.0.4
+    published: '2017-11-15'
+    description: Utilities for testing hapi-harvester based applications.
+  - name: agco-logger
+    registry: npm
+    url: https://www.npmjs.com/package/agco-logger
+    repository: https://github.com/agco/agco-logger
+    official: true
+    kind: utility
+    language: JavaScript
+    version: 1.0.0
+    published: '2018-02-23'
+    description: A configurable logger for AGCO Node.js services.
+  - name: cultivator
+    registry: npm
+    url: https://www.npmjs.com/package/cultivator
+    repository: https://github.com/agco/cultivator
+    official: true
+    kind: utility
+    language: JavaScript
+    version: 0.0.1
+    published: '2018-02-23'
+    description: A MongoDB migration tool.
+  - name: bunny-paws
+    registry: npm
+    url: https://www.npmjs.com/package/bunny-paws
+    repository: https://github.com/agco/bunny-paws
+    official: true
+    kind: utility
+    language: JavaScript
+    version: 0.0.2
+    published: '2015-10-07'
+    description: Pause and resume RabbitMQ consumers created with jackrabbit.
+  - name: agco-codestyle
+    registry: npm
+    url: https://github.com/agco/agco-codestyle
+    repository: https://github.com/agco/agco-codestyle
+    official: true
+    kind: lint-config
+    language: JavaScript
+    version: null
+    published: null
+    note: >-
+      AGCO's JavaScript code style guide. Repository exists on the AGCO GitHub org but the name is
+      not published to the npm registry — registry.npmjs.org returns no document, so there is no
+      version or publish date to record. Checked 2026-09-04.

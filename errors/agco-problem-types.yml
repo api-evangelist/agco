@@ -1,0 +1,64 @@
+generated: '2026-09-04'
+method: derived
+source: >-
+  openapi/agco-ats-api-openapi.json — the live AGCO ATS Swagger 2.0 contract fetched from
+  https://secure.agco-ats.com/swagger/docs/v1 on 2026-09-04. Derived from the `default` response
+  schema (API.Models.ApiError) declared on 250 of its 285 operations. AGCO publishes no separate
+  error-code reference page, so titles and remediation below are taken from the contract itself and
+  from the field descriptions it carries — nothing is invented.
+description: >-
+  The AGCO ATS API returns a single custom error envelope, not RFC 9457 problem+json. Errors are
+  declared only as an OpenAPI `default` response — the contract names no specific 4xx or 5xx status
+  codes anywhere, so a client cannot learn from the spec which failures are retryable, which are
+  authorization failures, and which are validation failures. The numeric `ErrorCode` field is not
+  enumerated in any published document.
+format: custom
+media_types:
+  - application/json
+  - text/json
+  - application/xml
+  - text/xml
+envelope:
+  schema: API.Models.ApiError
+  ref: openapi/agco-ats-api-openapi.json#/definitions/API.Models.ApiError
+  fields:
+    - name: DeveloperMessage
+      type: string
+      description: Machine/developer-facing description of the failure. Not enumerated.
+    - name: UserMessage
+      type: string
+      description: End-user-safe description of the failure, intended for display in EDT and the ATS web UI.
+    - name: ErrorCode
+      type: integer
+      format: int32
+      description: >-
+        Numeric AGCO error code. NOT enumerated in the contract and not published in any error
+        reference we could find — a client cannot map a code to a cause without contacting
+        EDT_Support@agcocorp.com.
+    - name: MoreInfo
+      type: string
+      description: Free-text pointer to further information about the failure.
+coverage:
+  operations_total: 285
+  operations_with_default_error: 250
+  operations_without_declared_error: 35
+  status_codes_declared:
+    - code: '200'
+      count: 178
+      meaning: OK
+    - code: '204'
+      count: 107
+      meaning: No Content
+    - code: default
+      count: 250
+      meaning: API Error Response (API.Models.ApiError)
+problem_types: []
+gaps:
+  - >-
+    No 4xx or 5xx status code is declared anywhere in the 285-operation contract. Every failure is
+    collapsed into a single untyped `default` response.
+  - >-
+    ErrorCode is an unenumerated int32. There is no published catalog mapping codes to causes or
+    remediation, which is the single largest error-handling gap in this API.
+  - Not RFC 9457 (application/problem+json). No `type` URI, no `title`, no `status`, no `instance`.
+  - No retry guidance, no Retry-After, and no rate-limit or throttling error shape is described.

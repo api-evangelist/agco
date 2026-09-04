@@ -1,0 +1,114 @@
+generated: '2026-09-04'
+method: probed
+source: >-
+  Direct unauthenticated HTTPS probes of every host this record knows — the registrable domain and
+  www, the AgCommand developer portal host, the AWS API Gateway host named as baseURL, the AGCO
+  Technical Support (ATS/EDT) API host that serves the live Swagger contract, its web front end, and
+  the AGCO Access customer portal. Probed 2026-09-04 with a browser User-Agent, following redirects.
+description: >-
+  AGCO publishes no /.well-known/ discovery documents on any host we can reach. Recorded so the
+  absence is measured rather than assumed. NOTE the false positive on www.agco-ats.com: that host
+  answers 200 with its ASP.NET login HTML page for arbitrary /.well-known/ paths, which is an SPA /
+  catch-all shell and NOT a document. It is recorded here as a miss.
+summary:
+  hosts_probed: 7
+  paths_probed: 35
+  documents_found: 0
+  html_shell_false_positives: 3
+hosts:
+  - host: agcocorp.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: www.agcocorp.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: get.agcoconnect.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: api.agcocorp.com
+    note: >-
+      AWS API Gateway. Every path, including every /.well-known/ path, answers 403
+      {"message":"Missing Authentication Token"} — the gateway's default for an unmatched or
+      unauthenticated route. Nothing is served anonymously here.
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+      - path: /.well-known/openid-configuration
+        status: 403
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+      - path: /.well-known/api-catalog
+        status: 403
+      - path: /.well-known/ai-plugin.json
+        status: 403
+  - host: secure.agco-ats.com
+    note: API host serving the live Swagger 2.0 contract at /swagger/docs/v1. No discovery documents.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: www.agco-ats.com
+    note: >-
+      FALSE POSITIVE HOST. Three paths return 200 but the body is the site's ASP.NET login page
+      (redirected to /login.aspx), not a discovery document. Treated as a miss; no WellKnown pointer
+      is emitted from this record.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 200
+        content: text/html login page — not a document
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content: text/html login page — not a document
+      - path: /.well-known/api-catalog
+        status: 200
+        content: text/html login page — not a document
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: access.agcocorp.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404

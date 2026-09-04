@@ -1,0 +1,128 @@
+generated: '2026-09-04'
+method: derived
+status: candidate
+source: >-
+  No AGCO MCP server exists. Searched the AGCO GitHub organization (github.com/agco, ~50 repos, no
+  push since 2019), npm for @agco/* and *agco*mcp*, the AGCO corporate site, the AGCO Access portal
+  and the ATS/EDT surface on 2026-09-04 — nothing. The candidate tool list below is DERIVED from
+  operationIds in openapi/agco-ats-api-openapi.json, the live Swagger contract AGCO serves at
+  https://secure.agco-ats.com/swagger/docs/v1. It describes what an MCP server over this API could
+  expose; AGCO ships no such server.
+description: >-
+  A candidate MCP tool surface over the AGCO Technical Support (ATS) API. Scoped deliberately to the
+  read and low-consequence operations a dealer-support agent would actually need — the full contract
+  carries 153 mutating operations including ECU activation and user/permission management, which
+  should not be exposed to an agent without a human in the loop. See
+  agentic-access/agco-agentic-access.yml and conventions/agco-conventions.yml for
+  why: this API has no idempotency mechanism, so a retried write duplicates.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: derived
+  note: >-
+    mode:none because AGCO publishes neither a hosted MCP endpoint nor a stdio package. Any server
+    over this API would need EDT Support Portal credentials (see
+    authentication/agco-ats-authentication.yml); the contract declares no securityScheme at all, so
+    auth is recorded as unknown rather than guessed.
+api: agco:agco-ats-api
+contract: openapi/agco-ats-api-openapi.json
+summary:
+  contract_operations: 285
+  candidate_tools: 20
+  read_only: true
+tools:
+  - name: agco_check_api_alive
+    operationId: Authentication_IsAlive
+    rest: GET /api/v2/Authentication/IsAlive
+    description: Acknowledges the connection to the API.
+  - name: agco_check_power_services_connectivity
+    operationId: AftermarketServices_GetConnectionStatus
+    rest: GET /api/v2/AftermarketServices/Hello
+    description: Check whether there is connectivity to AGCO Power Web Services.
+  - name: agco_list_dealers
+    operationId: Dealers_GetDealers
+    rest: GET /api/v2/Dealers
+    description: Get a list of dealers. Paged with limit/offset.
+  - name: agco_get_dealer_by_code
+    operationId: Dealers_GetDealerbyDealerCode
+    rest: GET /api/v2/Dealers/{DealerCode}
+    description: Lookup a dealer using a dealer code.
+  - name: agco_count_dealers_by_country
+    operationId: DealerByCountry_GetCountries
+    rest: GET /api/v2/DealerByCountry
+    description: Get a total count of dealers per country.
+  - name: agco_list_brands
+    operationId: Brands_Brands
+    rest: GET /api/v2/Brands
+    description: Gets a list of Brands.
+  - name: agco_list_clients
+    operationId: Clients_Get
+    rest: GET /api/v2/Clients
+    description: Get a list of Clients in the Update System (registered EDT installations).
+    note: >-
+      operationId Clients_Get is reused by the contract for both the collection and the item
+      (/api/v2/Clients/{ID}). A tool binding must disambiguate on path, not operationId.
+  - name: agco_get_client_subscriptions
+    operationId: Clients_GetSubscriptions
+    rest: GET /api/v2/Clients/{ID}/UpdateGroupSubscriptions
+    description: Get a client's current update group subscriptions.
+  - name: agco_get_client_available_subscriptions
+    operationId: Clients_GetAvailableSubscriptions
+    rest: GET /api/v2/Clients/{ID}/AvailableUpdateGroupSubscriptions
+    description: Get a client's available update group subscriptions.
+  - name: agco_list_packages
+    operationId: Packages_GetPackages
+    rest: GET /api/v2/Packages
+    description: List distributable software packages.
+  - name: agco_get_package
+    operationId: Packages_GetPackage
+    rest: GET /api/v2/Packages/{ID}
+    description: Find a Package.
+  - name: agco_list_package_types
+    operationId: PackageTypes_Get
+    rest: GET /api/v2/PackageTypes
+    description: Get all of the Package Types.
+    note: operationId PackageTypes_Get is reused for the item route /api/v2/PackageTypes/{ID}.
+  - name: agco_list_update_groups
+    operationId: UpdateGroups_Get
+    rest: GET /api/v2/UpdateGroups
+    description: Get a list of Update Groups.
+    note: operationId UpdateGroups_Get is reused for the item route /api/v2/UpdateGroups/{ID}.
+  - name: agco_list_bundles
+    operationId: Bundles_GetBundles
+    rest: GET /api/v2/Bundles
+    description: Get the list of bundles.
+  - name: agco_list_authorization_codes
+    operationId: AuthorizationCodes_GetAuthorizationCodes
+    rest: GET /api/v2/AuthorizationCodes
+    description: Get authorization codes.
+  - name: agco_get_authorization_code
+    operationId: AuthorizationCodes_GetAuthorizationCode
+    rest: GET /api/v2/AuthorizationCodes/{id}
+    description: Get an authorization code by its ID.
+  - name: agco_validate_authorization_code
+    operationId: AuthorizationCodes_ValidateAuthorizationCode
+    rest: GET /api/v2/AuthorizationCodes/{id}/Validate
+    description: Validate an authorization code. The contract carries no description for this operation.
+  - name: agco_get_engine_production_data
+    operationId: AftermarketServices_GetProductionData
+    rest: GET /api/v2/AftermarketServices/Engines/{serialNumber}/ProductionData
+    description: Get production calibration data for a given AGCO Power engine.
+  - name: agco_get_engine_iqa_codes
+    operationId: AftermarketServices_GetEngineIQACodes
+    rest: GET /api/v2/AftermarketServices/Engines/{serialNumber}/IQACodes
+    description: Get injector (IQA) codes for a given engine.
+  - name: agco_list_languages
+    operationId: Languages_GetLanguages
+    rest: GET /api/v2/Languages
+    description: Get a list of the languages for which translations are supported.
+excluded:
+  - reason: >-
+      153 mutating operations (63 PUT, 56 POST, 34 DELETE) are deliberately excluded from this
+      candidate surface. The API offers no idempotency key and no dry-run mode, and several writes —
+      AftermarketServices_PutECU (activate/deactivate/damage an ECU), Users_Delete, Roles_DeleteRole,
+      Permissions_DeletePermission, Vouchers_Delete — have real-world consequences for dealer
+      operations and machine function.

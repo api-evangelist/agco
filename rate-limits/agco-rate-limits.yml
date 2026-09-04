@@ -4,38 +4,49 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: AGCO Corporation
 providerId: agco
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-04'
+generated: '2026-09-04'
+method: searched
+source: >-
+  Searched AGCO's published documentation for rate limits on 2026-09-04 and read the live AGCO ATS
+  contract (openapi/agco-ats-api-openapi.json, fetched from
+  https://secure.agco-ats.com/swagger/docs/v1). The contract declares 285 operations, ZERO header
+  parameters, and only three response codes anywhere — 200, 204 and an untyped `default`. No 429 and
+  no throttling response is described. AGCO publishes no rate-limit documentation on any reachable
+  page.
+reconciled: true
+limit_count: 0
 tags:
   - Agriculture
   - Farm Equipment
   - Telematics
   - Rate Limiting
-description: AGCO does not publish rate-limit documentation for AgCommand or related OEM telematics APIs.
-  Access is granted through dealer / OEM contracts and any throughput limits are defined in those
-  agreements.
-notes: No public rate-limit documentation; placeholder pending direct vendor confirmation.
-sources:
-  - https://www.agcocorp.com/
+description: >-
+  AGCO documents no rate limits for any of its APIs, and — more consequentially for a client — its
+  contract signals none at runtime either. There is no RateLimit-*, no X-RateLimit-*, no Retry-After
+  and no 429 anywhere in the 285-operation ATS contract, so a caller cannot discover its remaining
+  budget, cannot tell a throttle from any other failure, and has nothing to back off against. Any
+  throughput ceiling that exists is a term of the dealer/OEM agreement, not something the API tells
+  you about.
+notes: >-
+  An honest zero. limit_count: 0 records "checked, nothing published", not "not checked". Recorded
+  after reading the full contract, not inferred from the absence of a docs page.
+response_headers: []
 responseCodes:
-  throttled: 429
-  serviceUnavailable: 503
-limits:
-  - name: Contractual telematics throughput
-    scope: contract
-    metric: varies
-    limit: defined per dealer / fleet contract
-    notes: Telemetry frequency and fleet polling cadence are negotiated as part of the AgCommand
-      provisioning agreement.
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter on throttling responses.
-  - name: Contractual Limits
-    description: Throughput, polling intervals, and concurrent connection limits are defined in the
-      AgCommand customer agreement; contact your AGCO dealer to revise.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  throttled: null
+  serviceUnavailable: null
+  declared_in_contract: ['200', '204', default]
+limits: []
+sources:
+  - url: https://secure.agco-ats.com/swagger/docs/v1
+    status: 200
+    note: Live Swagger 2.0 contract. No header parameters, no 429, no Retry-After.
+  - url: https://secure.agco-ats.com/swagger
+    status: 200
+    note: Public Swagger UI. No rate-limit documentation.
+  - url: https://get.agcoconnect.com/
+    status: 200
+    note: AgCommand portal. No developer documentation and no rate-limit page.
+  - url: https://developer.agcocorp.com/
+    status: 404
+    note: GitHub Pages "Site not found".

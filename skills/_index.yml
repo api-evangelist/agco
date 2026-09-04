@@ -1,0 +1,26 @@
+generated: '2026-09-04'
+method: generated
+source: >-
+  Packaged Agent Skills written by API Evangelist from openapi/agco-ats-api-openapi.json — the AGCO
+  ATS Swagger 2.0 contract fetched verbatim from https://secure.agco-ats.com/swagger/docs/v1 on
+  2026-09-04. Every operationId named in every step was verified against that document
+  programmatically; none is invented. Cross-cutting rules cite conventions/, errors/,
+  authentication/ and lifecycle/ in this repository. AGCO publishes no skills, AGENTS.md or
+  agent-facing documentation of its own — searched 2026-09-04.
+note: >-
+  Skills are written only against the AGCO ATS API. The three AgCommand entries in apis.yml
+  (Locations, Machines, Telemetry) have no verifiable published contract behind them — see
+  lifecycle/agco-lifecycle.yml (decay_signals) — so no skill is grounded in them.
+skills:
+  - file: agco-look-up-a-dealer.md
+    name: Look up an AGCO dealer
+    api: openapi/agco-ats-api-openapi.json
+    operations: [Authentication_IsAlive, Dealers_GetDealers, Dealers_GetDealerbyDealerCode, DealerByCountry_GetCountries]
+  - file: agco-audit-client-update-subscriptions.md
+    name: Audit an EDT client's update subscriptions
+    api: openapi/agco-ats-api-openapi.json
+    operations: [Clients_Get, Clients_GetSubscriptions, Clients_GetAvailableSubscriptions, UpdateGroups_Get, PackageTypes_Get, Packages_GetPackages, Bundles_GetBundles]
+  - file: agco-look-up-agco-power-engine-data.md
+    name: Look up AGCO Power engine and ECU data
+    api: openapi/agco-ats-api-openapi.json
+    operations: [AftermarketServices_GetConnectionStatus, AftermarketServices_GetProductionData, AftermarketServices_GetEngineIQACodes, AftermarketServices_GetUserStatus, AftermarketServices_GetCerts]

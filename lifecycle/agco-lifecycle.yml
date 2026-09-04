@@ -1,0 +1,76 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  Live probes of https://secure.agco-ats.com/swagger/docs/v1, /swagger/docs/v2, /swagger/docs/v3 and
+  https://developer.agcocorp.com/, plus the saved contract openapi/agco-ats-api-openapi.json. All
+  probed 2026-09-04.
+description: >-
+  AGCO publishes no versioning policy, no deprecation policy, no Sunset/Deprecation header
+  convention, no SLA and no status page for any of its APIs. What can be established comes entirely
+  from the shape of the contract and from what the hosts return.
+versioning:
+  scheme: path
+  current: /api/v2/ (all 167 ATS paths)
+  document_version: v1
+  detail: >-
+    The route version and the document version disagree: every ATS route is under /api/v2/ while the
+    only Swagger document is served at /swagger/docs/v1 and declares info.version "v1".
+    /swagger/docs/v2 and /swagger/docs/v3 both return 404 with ExceptionMessage
+    "Unknown API version - v2" / "- v3", so v1 is the only published document and there is no v1
+    route surface to go with it.
+  policy_published: false
+  breaking_change_policy: null
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: 0
+  detail: >-
+    Every one of the 285 operations carries deprecated:false. No operation, parameter or definition
+    is marked deprecated, and AGCO publishes no deprecation or sunset policy on any page we could
+    reach.
+sla:
+  published: false
+  uptime_target: null
+status_page:
+  published: false
+  detail: >-
+    No status.agcocorp.com, no status.agco-ats.com, and no status link on the AGCO Access portal or
+    the ATS login page. The API's own liveness signals are in-band only —
+    GET /api/v2/Authentication/IsAlive (Authentication_IsAlive) acknowledges the connection, and
+    GET /api/v2/AftermarketServices/Hello (AftermarketServices_GetConnectionStatus) checks
+    connectivity to AGCO Power Web Services.
+changelog:
+  published: false
+  detail: >-
+    No public API changelog or release-notes feed. AGCO ships dated EDT client releases to dealers
+    (the diagnostic tool the ATS API distributes), but those notes are behind the EDT Support Portal
+    and are release notes for the Windows application, not for the API.
+decay_signals:
+  - signal: Dead developer portal
+    detail: >-
+      developer.agcocorp.com resolves and is a GitHub Pages CNAME, but returns 404 "Site not found ·
+      GitHub Pages" — the backing repository (github.com/agco/developer-agcocorp-website, last pushed
+      2017-10-24) no longer publishes. AGCO's 2015 press announcement pointed developers at
+      www.AGCOtechnologies.com/developers. That domain still resolves but serves no HTTPS listener,
+      and over HTTP it 301s every path — including /developers — to AGCO's end-user licence
+      agreement at
+      https://www.agcocorp.com/us/en/home/compliance-center/eula/eula-en.html (200, probed
+      2026-09-04). The announced developer portal now dead-ends at a EULA.
+    checked: '2026-09-04'
+  - signal: Abandoned first-party open source
+    detail: >-
+      The AGCO GitHub organization's newest push to any of its ~50 repositories is 2019-10-31, and
+      the newest npm release across all seven first-party packages is harvesterjs 3.2.4 from
+      2018-07-06. See packages/agco-packages.yml.
+    checked: '2026-09-04'
+  - signal: Superseded contract format
+    detail: The only machine-readable contract AGCO publishes is Swagger 2.0. No OpenAPI 3.x document exists.
+    checked: '2026-09-04'
+  - signal: Announced-but-unfindable public API
+    detail: >-
+      AGCO announced in 2015 that the AgCommand API would open to third-party developers. Eleven
+      years later there is no reachable public documentation, no reachable developer portal, and
+      api.agcocorp.com answers every path with an AWS API Gateway 403 "Missing Authentication Token".
+    checked: '2026-09-04'

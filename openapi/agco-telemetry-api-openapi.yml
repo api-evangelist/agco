@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: AGCO AgCommand Locations Telemetry API
   description: The AGCO AgCommand API provides approved third-party developers with access to machine telemetry data from AGCO equipment. Enables building management dashboards and mobile apps that access real-time machine data including location, performance metrics, and diagnostics.

@@ -30,6 +30,12 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/agco.png
 tags:
   - Fortune 500
+  - Agriculture
+  - Farm Equipment
+  - Manufacturing
+  - Telematics
+  - Precision Agriculture
+  - Diagnostics
 url: https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/apis.yml
 apis:
 - aid: agco:agco-locations-api
@@ -104,12 +110,23 @@ apis:
     url: data-model/agco-data-model.yml
   - type: Overlay
     url: overlays/agco-ats-api-overlay.yaml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
 description: >-
-  AGCO is a global leader in the design, manufacture, and distribution of agricultural machinery and precision ag
-  technology. The AGCO AgCommand API enables approved third-party developers and service providers to access machine
-  telemetry data, location tracking, and performance metrics from AGCO Connect-ready equipment including Fendt, Massey
-  Ferguson, Challenger, and Valtra brands.
-modified: '2026-04-19'
+  AGCO is a global manufacturer of agricultural machinery and precision-ag technology — Fendt, Massey Ferguson, Valtra,
+  Challenger, GSI and PTx. Its one publicly reachable machine-readable contract is the AGCO Technical Support (ATS) API
+  at secure.agco-ats.com: a Swagger 2.0 document with 285 operations across 55 tags, served with a public Swagger UI,
+  covering dealer records, authorization codes and vouchers, software package distribution to Electronic Diagnostic Tool
+  (EDT) installations, a content submission and release pipeline, translation workflow, and AGCO Power aftermarket
+  services. AGCO also publishes three first-party JSON:API profiles standardising filtering, search and change events.
+  The AgCommand telematics API announced in 2015 for third-party developers has no reachable public documentation: the
+  developer portal at developer.agcocorp.com no longer publishes and api.agcocorp.com is an API Gateway that
+  authenticates every path.
+created: '2026-05-04'
+modified: '2026-09-04'
 common:
   - type: CapabilityMap
     url: capabilities/agco-capability-edges.yml
@@ -128,8 +145,6 @@ common:
     url: https://github.com/agco/agco-json-api-profiles
   - type: GitHubOrganization
     url: https://github.com/agco
-  - type: TermsOfService
-    url: https://www.agcocorp.com/legal/privacy-policy.html
   - type: Blog
     url: https://news.agcocorp.com/
   - type: Features
@@ -194,3 +209,46 @@ common:
     url: rules/agco-spectral-rules.yml
   - type: Vocabulary
     url: vocabulary/agco-vocabulary.yaml
+  - type: Packages
+    url: packages/agco-packages.yml
+  - type: X-MCPServerCandidate
+    url: mcp/agco-mcp.yml
+  - type: LLMsTxt
+    url: llms/agco-llms.txt
+  - type: Conformance
+    url: conformance/agco-conformance.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/agco-lifecycle.yml
+  - type: Conventions
+    url: conventions/agco-conventions.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+  - type: Overlay
+    url: overlays/agco-ats-api-overlay.yaml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Plans
+    url: plans/agco-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/agco-rate-limits.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Documentation
+    url: https://github.com/agco/agco-json-api-profiles
+  - type: Support
+    url: https://agcocorp.support/
+  - type: PrivacyPolicy
+    url: https://www.agcocorp.com/us/en/home/compliance-center/privacy-statement/privacy-statement-en.html
+  - type: TermsOfService
+    url: https://www.agcocorp.com/us/en/home/compliance-center/legal.html
+  - type: Login
+    url: https://access.agcocorp.com/en/
+  - type: Website
+    url: https://www.agcocorp.com/
+x-enrichment:
+  date: '2026-09-04'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v3

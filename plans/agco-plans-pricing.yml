@@ -4,46 +4,55 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: AGCO Corporation
 providerId: agco
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-04'
+generated: '2026-09-04'
+method: searched
+source: >-
+  Searched AGCO's own web properties on 2026-09-04 for any published API pricing or plan page —
+  https://www.agcocorp.com/ (200), https://get.agcoconnect.com/ (200),
+  https://access.agcocorp.com/en/ (200), https://www.agco-ats.com/ (302 to a login page),
+  https://secure.agco-ats.com/swagger (200). None publishes a price, a tier, a quota or a
+  self-service signup for any API. The dead developer portal at https://developer.agcocorp.com/
+  (404, GitHub Pages "Site not found") would have been the place.
+reconciled: true
+plan_count: 0
 tags:
   - Agriculture
   - Farm Equipment
   - Telematics
   - IoT
-description: AGCO Corporation is an OEM (Massey Ferguson, Fendt, Valtra, Challenger, GSI). Its AgCommand
-  telematics platform is bundled with eligible AGCO equipment and dealer programs rather than sold as
-  a standalone public API. No public pricing list is published; access and any data-feed pricing are
-  arranged through AGCO dealers and fleet-management agreements.
-notes: AGCO does not publish list prices for AgCommand or related telematics APIs. Plan below is a
-  placeholder reflecting the dealer/OEM contract model.
+description: >-
+  AGCO publishes NO API plans, tiers or prices. Both of its API surfaces are contract-gated rather
+  than sold. The AGCO Technical Support (ATS) API at secure.agco-ats.com serves its Swagger document
+  anonymously but issues credentials only through the AGCO EDT Support Portal — the login page reads
+  "This site now uses login credentials from the EDT Support Portal. For access, please contact
+  EDT_Support@agcocorp.com". AgCommand telematics access is provisioned by AGCO dealers as part of an
+  equipment sale, lease or fleet-management agreement; AGCO's 2015 announcement described API access
+  as available to "approved third-party developers and service providers", i.e. by approval, not by
+  purchase.
+notes: >-
+  plan_count is 0 because nothing is published, not because nothing is charged for. Third-party
+  trade press has reported a list price for factory-installed AgCommand hardware including a
+  multi-year subscription, but that is equipment pricing reported by others, not an AGCO-published
+  API plan, so it is deliberately not recorded here as a plan.
+access_model:
+  pricing: contact-sales
+  onboarding: manual
+  self_service: false
+  trial: false
+  public_signup: false
+  contact: EDT_Support@agcocorp.com
 sources:
-  - https://www.agcocorp.com/
-plans:
-  - id: agco-dealer-contract
-    name: Dealer / OEM Contract
-    type: enterprise
-    description: AgCommand telematics access is provisioned through AGCO dealers as part of equipment
-      sale, lease, or fleet-management agreements. Pricing depends on equipment, fleet size, and
-      contract terms.
-    entries:
-      - label: Custom contract
-        name: custom_contract
-        type: subscription
-        metric: contract
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: contact AGCO dealer
-        userMultiplied: false
-    elements:
-      - name: AGCO AgCommand telematics data
-      - name: Dealer-provisioned access
-      - name: Fleet management portal
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  - url: https://www.agcocorp.com/
+    status: 200
+  - url: https://get.agcoconnect.com/
+    status: 200
+  - url: https://access.agcocorp.com/en/
+    status: 200
+  - url: https://www.agco-ats.com/
+    status: 200
+    note: Redirects to /login.aspx; names EDT_Support@agcocorp.com as the access route.
+  - url: https://developer.agcocorp.com/
+    status: 404
+    note: GitHub Pages "Site not found" — the developer portal that would carry plans no longer publishes.
+plans: []

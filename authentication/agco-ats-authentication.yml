@@ -1,0 +1,79 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  openapi/agco-ats-api-openapi.json (live contract, https://secure.agco-ats.com/swagger/docs/v1,
+  fetched 2026-09-04) plus the public sign-in page at https://www.agco-ats.com/login.aspx, which
+  states the credential authority and the OIDC redirect entry point verbatim.
+api: agco:agco-ats-api
+description: >-
+  The AGCO ATS contract declares NO securityDefinitions — an OpenAPI-level gap, not an open API. In
+  practice the surface is authenticated two ways, both discoverable from the API's own Authentication
+  resource and the public login page: a first-party username/password login that mints API tokens,
+  and an OpenID Connect flow delegated to an external identity provider. Credentials are issued
+  through the AGCO EDT Support Portal; there is no self-service signup.
+summary:
+  declared_security_schemes: 0
+  observed_mechanisms: 2
+  self_service: false
+  credential_authority: AGCO EDT Support Portal (EDT_Support@agcocorp.com)
+gaps:
+  - >-
+    securityDefinitions is null and no operation carries a `security` block, so a generated client
+    from this spec sends no credentials at all. Every one of the 285 operations is undocumented as
+    to which mechanism and which permission it requires.
+  - >-
+    The OIDC provider, its issuer URL, its scopes and its discovery document are not published.
+    /.well-known/openid-configuration returns 404 on secure.agco-ats.com (probed 2026-09-04).
+mechanisms:
+  - name: Password login with API tokens
+    type: http
+    scheme: custom
+    flow: >-
+      POST /api/v2/Authentication authenticates a user (operationId Authentication_Default);
+      PUT /api/v2/AuthenticatedUsers/{UserID}/Tokens manages that user's API tokens
+      (operationId Authentication_PutManageTokens).
+    operations:
+      - Authentication_Default
+      - Authentication_PutManageTokens
+      - Authentication_RequestPasswordReset
+      - Authentication_ResetPasword
+    note: >-
+      Token transport (header name, prefix, lifetime) is not described in the contract and is not
+      published. Determining it requires credentialed access we do not have and did not attempt.
+  - name: OpenID Connect (delegated)
+    type: openIdConnect
+    flow: authorization_code
+    operations:
+      - Authentication_OAuthRedirect
+      - Authentication_OAuthCallback
+      - Authentication_OAuthUser
+      - Authentication_OAuthCertificate
+    entry_point: https://secure.agco-ats.com/api/v2/Authentication/OAuthRedirect?redirectUri={redirectUri}
+    evidence: >-
+      https://www.agco-ats.com/login.aspx ships a navigateToSSO() function that redirects the browser
+      to /api/v2/Authentication/OAuthRedirect with the current page as redirectUri.
+    detail: >-
+      Authentication_OAuthRedirect redirects to the configured OIDC provider;
+      Authentication_OAuthCallback receives the redirect; Authentication_OAuthUser exchanges the
+      result for an ATS session; Authentication_OAuthCertificate returns the certificate used for
+      OAuth client authentication.
+    issuer: null
+    scopes_published: false
+authorization:
+  model: >-
+    Role- and permission-based, exposed as first-class resources rather than OAuth scopes:
+    /api/v2/Roles, /api/v2/Permissions, /api/v2/UserPermissions, /api/v2/AuthorizationCategories,
+    /api/v2/AuthorizationCodeDefinitions and /api/v2/AuthorizationCodes. Visibility of package types,
+    update groups and authorization categories is granted per user.
+  scopes: []
+health_check:
+  operation: Authentication_IsAlive
+  path: /api/v2/Authentication/IsAlive
+  note: Unauthenticated liveness acknowledgement declared in the contract.
+onboarding:
+  self_service: false
+  contact: EDT_Support@agcocorp.com
+  docs: https://www.agco-ats.com/
+  note: >-
+    "This site now uses login credentials from the EDT Support Portal. For access, please contact
+    EDT_Support@agcocorp.com" — quoted verbatim from https://www.agco-ats.com/login.aspx, 2026-09-04.
