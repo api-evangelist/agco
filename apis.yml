@@ -44,6 +44,8 @@ apis:
   humanURL: https://get.agcoconnect.com/
   baseURL: https://api.agcocorp.com
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
@@ -122,6 +124,8 @@ apis:
   humanURL: https://get.agcoconnect.com/
   baseURL: https://api.agcocorp.com
   tags:
+  - Aftermarket Services
+  tags_raw:
   - AftermarketServices
   properties:
   - type: OpenAPI
@@ -412,6 +416,8 @@ apis:
   humanURL: https://get.agcoconnect.com/
   baseURL: https://api.agcocorp.com
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -520,6 +526,8 @@ apis:
   humanURL: https://get.agcoconnect.com/
   baseURL: https://api.agcocorp.com
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -538,6 +546,8 @@ apis:
   humanURL: https://get.agcoconnect.com/
   baseURL: https://api.agcocorp.com
   tags:
+  - Language
+  tags_raw:
   - Languages
   properties:
   - type: OpenAPI
@@ -610,6 +620,8 @@ apis:
   humanURL: https://get.agcoconnect.com/
   baseURL: https://api.agcocorp.com
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -718,6 +730,8 @@ apis:
   humanURL: https://get.agcoconnect.com/
   baseURL: https://api.agcocorp.com
   tags:
+  - Releases
+  tags_raw:
   - Release
   properties:
   - type: OpenAPI
@@ -972,6 +986,8 @@ apis:
   humanURL: https://get.agcoconnect.com/
   baseURL: https://api.agcocorp.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
