@@ -1,0 +1,1100 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Reporting API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Reporting
+paths:
+  /api/v2/Reporting/GetClient:
+    get:
+      tags:
+      - Reporting
+      summary: Get a Client in the Update System
+      description: No Documentation Found.
+      operationId: Reporting_GetClient
+      parameters:
+      - name: ID
+        in: query
+        description: The Client ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Client'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Client'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Client'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Client'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Reporting/ClientInfo:
+    get:
+      tags:
+      - Reporting
+      summary: Get Client Information
+      description: No Documentation Found.
+      operationId: Reporting_ClientInfo
+      parameters:
+      - name: ClientID
+        in: query
+        description: The Client ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.ClientInfo'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.ClientInfo'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.ClientInfo'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.ClientInfo'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Reporting/GetSubscriptions:
+    get:
+      tags:
+      - Reporting
+      summary: Get a list of current Client Subscriptions
+      description: No Documentation Found.
+      operationId: Reporting_GetSubscriptions
+      parameters:
+      - name: ClientID
+        in: query
+        description: Optional. Filter by Client ID
+        required: false
+        schema:
+          type: string
+      - name: UpdateGroupID
+        in: query
+        description: Optional. Filter by Update Group ID
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroupClientRelationship'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroupClientRelationship'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Reporting/RegisteredClients:
+    get:
+      tags:
+      - Reporting
+      summary: Get a list of subscribed clients
+      description: No Documentation Found.
+      operationId: Reporting_RegisteredClients
+      parameters:
+      - name: UpdateGroupID
+        in: query
+        description: 'Optional but required when including any or all of following parameters: ReportValue, ReportResult, ReportResultIsValid. The Update Group ID. If not provided, all clients will be returned.'
+        required: false
+        schema:
+          type: string
+      - name: ClientID
+        in: query
+        description: Optional. Filter where ClientID matches a value. Wildcards are supported (*).
+        required: false
+        schema:
+          type: string
+      - name: Tag
+        in: query
+        description: Optional. Filter where Tag matches a value. Wildcards are supported (*).
+        required: false
+        schema:
+          type: string
+      - name: ReportResult
+        in: query
+        description: Optional and UpdateGroupID must be included. Filter where ReportResult matches a value. Wildcards are supported (*).
+        required: false
+        schema:
+          type: string
+      - name: ReportResultIsValid
+        in: query
+        description: Optional and UpdateGroupID must be included. When 'true' filters results where ReportResult equals ReportResultExpected.  When 'false' filters results where ValueToValidate does not equal ReportResults.
+        required: false
+        schema:
+          type: boolean
+      - name: ReportValue
+        in: query
+        description: Optional and UpdateGroupID must be included. Filter where ReportValue matches a value. Wildcards are supported (*).
+        required: false
+        schema:
+          type: string
+      - name: LastCheckInBefore
+        in: query
+        description: Optional. Filter where LastCheckIn occured before the provided date.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: LastCheckInAfter
+        in: query
+        description: Optional. Filter where LastCheckIn occured after the provided date.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: OrderBy
+        in: query
+        description: "Optional. Specify the order in which results should be returned. Use this format: [FieldName] [ASC|ASCENDING|DESC|DESCENDING],...   \n            If sort direction is not provided for a field, it will be sorted ascending."
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.ClientStatus_UpdateSystem.Models.PagedClientStatusMetadata'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.ClientStatus_UpdateSystem.Models.PagedClientStatusMetadata'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Reporting/UpdateGroups:
+    get:
+      tags:
+      - Reporting
+      summary: Get a list of Update Groups.
+      description: No Documentation Found.
+      operationId: Reporting_UpdateGroups
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroup'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroup'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Reporting/PackageStatusSummary:
+    get:
+      tags:
+      - Reporting
+      summary: Get a summary report for a Specific Package
+      description: No Documentation Found.
+      operationId: Reporting_PackageStatusSummary
+      parameters:
+      - name: PackageID
+        in: query
+        description: The Package ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageStatusSummary'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageStatusSummary'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageStatusSummary'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageStatusSummary'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Reporting/BundleStatusSummary:
+    get:
+      tags:
+      - Reporting
+      summary: Get a summary of all Packages in a Bundle
+      description: No Documentation Found.
+      operationId: Reporting_BundleStatusSummary
+      parameters:
+      - name: BundleID
+        in: query
+        description: The BundleID
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.PackageStatusSummary'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.PackageStatusSummary'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Reporting/BundlesInUpdateGroup:
+    get:
+      tags:
+      - Reporting
+      summary: Get a list of bundles for UpdateGroup
+      description: No Documentation Found.
+      operationId: Reporting_BundlesInUpdateGroup
+      parameters:
+      - name: ID
+        in: query
+        description: The UpdateGroupID
+        required: true
+        schema:
+          type: string
+      - name: IncludeInactive
+        in: query
+        description: Include Inactive Bundles (true|false)
+        required: true
+        schema:
+          type: boolean
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.Bundle'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.Bundle'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Reporting/CurrentPackagesInUpdateGroup:
+    get:
+      tags:
+      - Reporting
+      summary: Get the current packages for an update group
+      description: No Documentation Found.
+      operationId: Reporting_CurrentPackagesInUpdateGroup
+      parameters:
+      - name: ID
+        in: query
+        description: The UpdateGroupID
+        required: true
+        schema:
+          type: string
+      - name: SubscriptionTypeFilter
+        in: query
+        description: Optional.  The subscription type filter to use.  By default the Default packages (Required and IncludeByDefault) will be returned.
+        required: false
+        schema:
+          type: string
+          enum:
+          - RequiredOnly
+          - Default
+          - All
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UpdateSystem.Models.Package'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UpdateSystem.Models.Package'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UpdateSystem.Models.Package'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UpdateSystem.Models.Package'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Reporting/UpdateMetrics:
+    get:
+      tags:
+      - Reporting
+      summary: Get data for pie charts in UpdateMetrics
+      description: No Documentation Found.
+      operationId: Reporting_UpdateMetrics
+      parameters:
+      - name: UpdateGroupID
+        in: query
+        description: The UpdateType in which clients must be for the report to include them.
+        required: true
+        schema:
+          type: string
+      - name: bundleNumber
+        in: query
+        description: Optional. Tells us which chart to show based upon filter.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateMetricsData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateMetricsData'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateMetricsData'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateMetricsData'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    UpdateSystem.Models.Category:
+      required:
+      - category
+      type: object
+      properties:
+        category:
+          description: The category name. Limit 50 characters. Categories with names exceeding this limit will be ignored.
+          type: string
+        Values:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.AttributeValue'
+    UpdateSystem.Models.PackageReport:
+      type: object
+      properties:
+        PackageID:
+          description: The PackageID.
+          type: string
+        PackageDescription:
+          description: Read Only. The package description
+          type: string
+        Categories:
+          description: The package report's categories.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Category'
+    UpdateSystem.Models.UpdateMetricsData.ActiveVersionByClientRecord:
+      type: object
+      properties:
+        ReleaseName:
+          type: string
+        ClientCount:
+          format: int32
+          type: integer
+        BundleNumber:
+          format: int32
+          type: integer
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    UpdateSystem.Models.UpdateGroupClientRelationship:
+      required:
+      - UpdateGroupID
+      - ClientID
+      type: object
+      properties:
+        RelationshipID:
+          description: Read Only after creation. The relationship id.  A relationship id will be assigned if not provided on creation.
+          type: string
+        UpdateGroupID:
+          description: Read Only after creation. The update group to subscribe to.
+          type: string
+        ClientID:
+          description: Read Only after creation. The client id of the subscriber.
+          type: string
+        LastCheckin:
+          format: date-time
+          description: ReadOnly. The timestamp of the last checkin.
+          type: string
+        Active:
+          description: The subscription status.  The status is active by default.
+          type: boolean
+    UpdateSystem.Models.Package:
+      required:
+      - PackageTypeID
+      - Url
+      - CRC
+      - Version
+      - Description
+      - ReleaseDate
+      type: object
+      properties:
+        PackageID:
+          description: Read Only. The package ID
+          type: string
+        PackageTypeID:
+          description: The id of the package type this package belongs to.
+          type: string
+        Url:
+          description: The Url to download the package from.
+          type: string
+        CRC:
+          description: The CRC used to validate the download.
+          type: string
+        Notes:
+          description: Notes about the package
+          type: string
+        Version:
+          format: int32
+          description: The version.
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        PreviousVersion:
+          format: int32
+          description: For delta packages, the previous version required.  For non-delta packages, the Previous version is 0.  Default value is 0.
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        Description:
+          description: The package description
+          type: string
+        ReleaseDate:
+          format: date-time
+          description: The date the package was released
+          type: string
+        Released:
+          description: True if the package is released.  Default value is False.
+          type: boolean
+        Autorun:
+          description: Value is true if package should run automatically. Default value is false.
+          type: boolean
+        Switches:
+          description: The command line arguments for the package.  Default value is an empty string.
+          type: string
+        Size:
+          format: int64
+          description: "The size of the file at the specified URL.  If a size is not supplied at creation time, the size will be determined by the response from the URL.\n            If the size provided does not match the size in the response from the URL an error will be returned."
+          type: integer
+        RemoveOnSuccess:
+          description: True to remove the package after successful execution.  Default value is False.
+          type: boolean
+        LocalizedName:
+          description: Optional. The StringID used to localize the name of the Package
+          type: string
+    UpdateSystem.Models.UpdateMetricsData:
+      description: Model that retrieves the data for UpdateMetrics
+      type: object
+      properties:
+        FilteredClientCount:
+          format: int32
+          description: "Sum of clients represented\n            Filtered by updateType and lastCheckedInDate"
+          type: integer
+        TotalClientCount:
+          format: int32
+          description: Total clients we have ever serviced
+          type: integer
+        CutOffDate:
+          format: date-time
+          description: Date that has been configured to only show the most recent clients with a cut off date. (Ex. year from current date)
+          type: string
+        DataRefreshed:
+          format: date-time
+          description: Data was refreshed at this time.
+          type: string
+        ActiveVersion:
+          description: Active version (bundle number) of update type.
+          type: string
+        ActiveVersionByClient:
+          description: Generic collection that is of type ActiveVersionByClientRecord
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateMetricsData.ActiveVersionByClientRecord'
+        CurrentStateByClient:
+          description: Generic collection that is of type CurrentStateByClientRecord
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateMetricsData.CurrentStateByClientRecord'
+        PackageErrors:
+          description: Generic collection that is of type PackageErrorsRecord
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateMetricsData.PackageErrorsRecord'
+    API.PagedResponse_UpdateSystem.Models.UpdateGroupClientRelationship:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          readOnly: true
+    UpdateSystem.Models.PackageStatus:
+      type: object
+      properties:
+        ClientID:
+          description: The id of the client
+          type: string
+        DownloadTime:
+          description: The amount of time spent downloading
+          type: string
+        Downloaded:
+          description: The number of bytes downloaded
+          type: string
+        Size:
+          description: The total size of the package
+          type: string
+        Percentage:
+          description: The download completion percentage
+          type: string
+        InstallStarted:
+          description: The time the package was started
+          type: string
+        InstallCompleted:
+          description: The time the package completed
+          type: string
+        InstallResult:
+          description: The package result
+          type: string
+        ClientKey:
+          description: The client's tag
+          type: string
+        InstallTime:
+          description: The amount of time required to run the package
+          type: string
+        Timestamp:
+          format: date-time
+          description: The time the status was last updated
+          type: string
+    UpdateSystem.Models.PackageStatusSummary:
+      type: object
+      properties:
+        PackageStatusItems:
+          description: The individual package status items
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.PackageStatus'
+        PackageID:
+          description: The ID of the package
+          type: string
+        Package:
+          description: The name of the package
+          type: string
+        Downloaded:
+          format: int64
+          description: The number of clients that have completed the download
+          type: integer
+        Installed:
+          format: int64
+          description: The number of clients that have completed the install
+          type: integer
+        Error:
+          format: int32
+          description: The result of the install
+          type: integer
+        AverageDownloadTime:
+          description: The average time required to complete the download
+          type: string
+        AverageInstallTime:
+          description: The average time required to complete the install
+          type: string
+    API.PagedResponse_UpdateSystem.Models.UpdateGroup:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          readOnly: true
+    UpdateSystem.Models.Bundle:
+      required:
+      - Description
+      - UpdateGroupID
+      - BundleNumber
+      type: object
+      properties:
+        BundleID:
+          description: Read-Only.
+          type: string
+        Description:
+          description: The Bundle description.
+          type: string
+        UpdateGroupID:
+          description: The update group this bundle belongs to.
+          type: string
+        BundleNumber:
+          format: int32
+          description: The bundle number
+          type: integer
+        Active:
+          description: 'Default Value: false. During the creation of the Bundle, this field must be false.'
+          type: boolean
+    UpdateSystem.Models.PagedClientStatusMetadata:
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      - ReportValueLabel
+      - ReportResultLabel
+      - ReportResultExpected
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+        ReportValueLabel:
+          description: The label for data contained in ClientStatus.ReportValue
+          type: string
+        ReportResultLabel:
+          description: The label for data contained in ClientStatus.ReportResults
+          type: string
+        ReportResultExpected:
+          description: The label for data contained in ClientStatus.ReportResults
+          type: string
+    API.PagedResponse_UpdateSystem.Models.PackageStatusSummary:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.PackageStatusSummary'
+          readOnly: true
+    UpdateSystem.Models.UpdateMetricsData.PackageErrorsRecord:
+      type: object
+      properties:
+        ErrorCode:
+          type: string
+        ShortDescription:
+          type: string
+        LongDescription:
+          type: string
+        ClientCount:
+          format: int32
+          type: integer
+    UpdateSystem.Models.UpdateMetricsData.CurrentStateByClientRecord:
+      type: object
+      properties:
+        State:
+          type: string
+        ClientCount:
+          format: int32
+          type: integer
+    API.PagedResponse_UpdateSystem.Models.Bundle:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+          readOnly: true
+    UpdateSystem.Models.Client:
+      type: object
+      properties:
+        ClientID:
+          description: Read Only. The id of the client
+          type: string
+        Tag:
+          description: A description of the client that can be used for easy reference
+          type: string
+        LastCheckin:
+          format: date-time
+          description: Read Only. The time of the client's last checkin with the server.
+          type: string
+    UpdateSystem.Models.ClientInfo:
+      type: object
+      properties:
+        ClientID:
+          description: The id of the client
+          type: string
+        Package:
+          description: The packages
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.PagedResponse_UpdateSystem.Models.ClientStatus_UpdateSystem.Models.PagedClientStatusMetadata:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/UpdateSystem.Models.PagedClientStatusMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.ClientStatus'
+          readOnly: true
+    UpdateSystem.Models.UpdateGroup:
+      required:
+      - Description
+      - UpdateType
+      - Priority
+      type: object
+      properties:
+        ID:
+          type: string
+        Description:
+          description: The description of the update group
+          type: string
+        UpdateType:
+          description: The update type name
+          type: string
+        InventoryPackage:
+          description: The Package ID of the package used for inventory
+          type: string
+        ReportField:
+          description: "A field to return in the status report for this update group.\n            Specify the field with the format [Label]: {[InventoryPackageID].[Category].[Attribute]}.  (i.e. example: {bec778ca-278d-424a-867a-4653a1a19e86.MyCategory.MyAttribute})"
+          type: string
+        ValidatingField:
+          description: "A field used for validation in the status report for this update group.\n            Specify the field with the format [Label]: {[InventoryPackageID].[Category].[Attribute]}.  (i.e. example: {bec778ca-278d-424a-867a-4653a1a19e86.MyCategory.MyAttribute})"
+          type: string
+        ValueToValidate:
+          description: The value to validate the ValidationField against.
+          type: string
+        InventoryFrequency:
+          format: int32
+          description: The time in minutes between inventory checks. Default value is 1440 minutes (one day).
+          type: integer
+        Priority:
+          format: int32
+          description: The execution priority of the package relative to other packages in the bundle. Range 1 - 100, lower value indication higher priority.
+          maximum: 100
+          minimum: 1
+          type: integer
+        Version:
+          format: byte
+          description: The version of the UpdateGroup, this value is incremented with each modification to a related Bundle or PackageType
+          type: string
+        LocalizedDescription:
+          description: Optional. The StringID used to localize the description of the update group
+          type: string
+        LocalizedName:
+          description: Optional. The StringID used to localize the name of the update group
+          type: string
+    UpdateSystem.Models.ClientStatus:
+      type: object
+      properties:
+        ClientID:
+          description: The Client ID
+          type: string
+        Tag:
+          description: A descriptive name for the client
+          type: string
+        LastCheckin:
+          format: date-time
+          description: The time of the client's last check-in
+          type: string
+        ReportValue:
+          description: The value for the client included in the UpdateGroup's report
+          type: string
+        ReportResult:
+          description: The result for the client included in the UpdateGroup's report
+          type: string
+        ReportResultIsValid:
+          description: True if the result for the client matches what is expected for the UpdateGroup
+          type: boolean
+        MinutesElapsed:
+          format: int32
+          description: The number of minutes that have passed since the last check-in
+          type: integer
+    UpdateSystem.Models.AttributeValue:
+      required:
+      - Key
+      type: object
+      properties:
+        Key:
+          description: The attribute name. Limit 50 characters. Attributes with names exceeding this limit will be ignored.
+          type: string
+        Value:
+          description: The value
+          type: string
+        TimeStamp:
+          format: date-time
+          description: Read Only. The timestamp.
+          type: string

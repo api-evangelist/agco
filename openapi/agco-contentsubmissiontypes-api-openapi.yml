@@ -1,0 +1,291 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Content Submission Types API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: ContentSubmissionTypes
+paths:
+  /api/v2/ContentSubmissionTypes:
+    get:
+      tags:
+      - ContentSubmissionTypes
+      summary: Returns available Content Submission Types
+      description: No Documentation Found.
+      operationId: ContentSubmissionTypes_GetContentSubmissionTypes
+      parameters:
+      - name: enabled
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - ContentSubmissionTypes
+      summary: Add a Content Submission Type
+      description: No Documentation Found.
+      operationId: ContentSubmissionTypes_PostContentSubmissionType
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+        description: The Content Submission Type
+        required: true
+  /api/v2/ContentSubmissionTypes/{id}:
+    get:
+      tags:
+      - ContentSubmissionTypes
+      summary: Retrieves a Content Submission Type by its ID
+      description: No Documentation Found.
+      operationId: ContentSubmissionTypes_GetContentSubmissionType
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Content Submission Type
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - ContentSubmissionTypes
+      summary: Update a Content Submission Type
+      description: No Documentation Found.
+      operationId: ContentSubmissionTypes_PutContentSubmissionType
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Content Submission Type
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionType'
+        description: The Content Submission Type
+        required: true
+    delete:
+      tags:
+      - ContentSubmissionTypes
+      summary: Remove a Content Submission Type
+      description: No Documentation Found.
+      operationId: ContentSubmissionTypes_DeleteContentSubmissionType
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Content Submission Type
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    ContentSubmission.Shared.BusinessEntities.ContentSubmissionType:
+      description: A type of content available for submission
+      required:
+      - Name
+      - Description
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The ID of the Content Submission Type
+          type: integer
+        Name:
+          description: The Name of the Content Submission Type
+          type: string
+        Description:
+          description: A description for the Content Submission Type
+          type: string
+        ReleaseNotesDescription:
+          description: A description of how release notes for this Content Submission Type are used
+          type: string
+        JobID:
+          format: int32
+          description: The ID of the JobDefinition for which to initiate a Job. A value of '0' will cause a submission to fail. Either 'BuildDefinitionID' or 'JobID' is required.
+          type: integer
+        BuildDefinitionID:
+          format: int32
+          description: The ID of the Azure DevOps Build Definition for which to create a Build. Either 'BuildDefinitionID' or 'JobID' is required.
+          type: integer
+        InventoryPackageID:
+          description: The ID of the Inventory Package from which to read the version of the package installed.
+          type: string
+        CategoryTemplate:
+          description: 'A template for the category from which to read the version of the package installed. The following placeholders are valid: {ContentDefinitionType}, {ContentDefinitionID}, {ContentDefinitionName}'
+          type: string
+        AttributeTemplate:
+          description: 'A template for the Attribute from which to read the version of the package installed. The following placeholders are valid: {ContentDefinitionType}, {ContentDefinitionID}, {ContentDefinitionName}'
+          type: string
+        Enabled:
+          description: Indicates whether this submission type is available to be used
+          type: boolean
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

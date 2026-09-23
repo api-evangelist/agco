@@ -1,7 +1,9 @@
 ---
 title: AGCO to Showcase Full-Line Innovation and Smart ...
 url: https://www.prnewswire.com/news-releases/agco-to-showcase-full-line-innovation-and-smart-farming-technologies-at-agritechnica-2025-302604586.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"AGCO" press release artificial intelligence'
 position: 2
 source: serpapi-google

@@ -1,0 +1,428 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Files API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Files
+paths:
+  /api/v2/Files:
+    get:
+      tags:
+      - Files
+      summary: Get a paged response of file metadata
+      description: No Documentation Found.
+      operationId: Files_GetFiles
+      parameters:
+      - name: includeDeleted
+        in: query
+        description: Indicates whether to include files marked as removed.
+        required: false
+        schema:
+          type: boolean
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.FileDownload'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.FileDownload'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.FileDownload'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.FileDownload'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Files
+      summary: Create the metadata for a file before uploading.
+      description: No Documentation Found.
+      operationId: Files_PostFile
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+        description: The file's metadata.
+        required: true
+  /api/v2/Files/{ID}:
+    get:
+      tags:
+      - Files
+      summary: Gets a file's metadata
+      description: No Documentation Found.
+      operationId: Files_GetFile
+      parameters:
+      - name: ID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Files
+      summary: Update the metadata for a file. Size may not be modified by the client
+      description: 'Update the metadata for a file. Size may not be modified by the client.
+
+        Set status to ''Available'' to publish a file. The file must be uploaded.
+
+        Set status to ''Created'' to reset a file''s contents and re-upload.
+
+        A file may only be ''Removed'' by the DELETE method.'
+      operationId: Files_PutFile
+      parameters:
+      - name: ID
+        in: path
+        description: The file's id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+        description: The file's metadata
+        required: true
+    delete:
+      tags:
+      - Files
+      summary: Mark a file as 'Removed'.
+      description: No Documentation Found.
+      operationId: Files_DeleteFile
+      parameters:
+      - name: ID
+        in: path
+        description: The file's id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Files/{ID}/FileContents:
+    get:
+      tags:
+      - Files
+      summary: Download the contents of a file.
+      description: No Documentation Found.
+      operationId: Files_GetFileContents
+      parameters:
+      - name: ID
+        in: path
+        description: The file's metadata.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Files
+      summary: Upload the contents of a file. The current State of the File should be 'Created'
+      description: No Documentation Found.
+      operationId: Files_PutFileContents
+      parameters:
+      - name: ID
+        in: path
+        description: The file's metadata.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    GlobalResources.Shared.Models.FileDownload:
+      description: A language used for string translations.
+      required:
+      - Name
+      - Description
+      - ContentType
+      - State
+      - IsPublic
+      - CRC
+      - Path
+      type: object
+      properties:
+        Id:
+          description: The Id of the file.
+          type: string
+        Name:
+          description: The name of the file when downloaded.
+          type: string
+        Description:
+          description: The description of the file.
+          type: string
+        ContentType:
+          description: The type of file; sent as the content-type header.
+          type: string
+        State:
+          description: Indicates the state of this file. Must be 'Created' when created.
+          enum:
+          - Created
+          - Available
+          - Removed
+          type: string
+        IsPublic:
+          description: Indicates whether this file is available to the public for download.
+          type: boolean
+        Size:
+          format: int64
+          description: The size of the file in bytes. Null until assigned by server when marked as 'Available'. Read Only
+          type: integer
+        CRC:
+          description: The crc of the file (SHA256, HEX-encoded). Must be provided when creating a file.
+          type: string
+        Path:
+          description: The Path of the file.
+          type: string
+    System.Object:
+      type: object
+      properties: {}
+    API.IPagedResponse_GlobalResources.Shared.Models.FileDownload:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true

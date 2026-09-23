@@ -1,0 +1,70 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Brands API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Brands
+paths:
+  /api/v2/Brands:
+    get:
+      tags:
+      - Brands
+      summary: Gets a list of Brands
+      description: No Documentation Found.
+      operationId: Brands_Brands
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

@@ -1,0 +1,685 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Content Definitions API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: ContentDefinitions
+paths:
+  /api/v2/ContentDefinitions:
+    get:
+      tags:
+      - ContentDefinitions
+      summary: Get ContentDefinitions
+      description: 'Gets a collection of ContentDefinitions. When successful, the response is a PagedResponse of ContentDefinitions.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentDefinitions_GetContentDefinitions
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: userID
+        in: query
+        description: Optional. Filter by UserID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeAttributes
+        in: query
+        description: Names of Attributes to include when retrieving this definition. This should be a comma-separated list. If not provided, Attributes are not included. If '*', all Attributes are included.
+        required: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Optional. Filter by Name. Supports beginning and ending wildcard (*).
+        required: false
+        schema:
+          type: string
+      - name: typeID
+        in: query
+        description: Optional. Filter by TypeID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: packageTypeID
+        in: query
+        description: Optional. Filter by PackageTypeID.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - ContentDefinitions
+      summary: Create a ContentDefinition
+      description: 'Creates a ContentDefinition. The body of the POST is the ContentDefinition to create.
+
+        The ContentDefinitionID will be assigned on creation of the Job. When successful, the response
+
+        is the JobID. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentDefinitions_PostContentDefinition
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+        description: The ContentDefinition to create.
+        required: true
+  /api/v2/ContentDefinitions/{contentDefinitionID}:
+    get:
+      tags:
+      - ContentDefinitions
+      summary: Get a ContentDefinition by ID
+      description: 'Gets a ContentDefinition by ID. When successful, the response is the requested ContentDefinition.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentDefinitions_GetContentDefinition
+      parameters:
+      - name: contentDefinitionID
+        in: path
+        description: The ID of the ContentDefinition to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: includeAttributes
+        in: query
+        description: Names of Attributes to include when retrieving this definition. This should be a comma-separated list. If not provided, Attributes are not included. If '*', all Attributes are included.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - ContentDefinitions
+      summary: Update a ContentDefinition
+      description: 'Updates a ContentDefinition. The body of the PUT is the updated ContentDefinition.
+
+        When successful, the response is empty. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentDefinitions_PutContentDefinition
+      parameters:
+      - name: contentDefinitionID
+        in: path
+        description: The ID of the ContentDefinition to update
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+        description: The updated ContentDefinition
+        required: true
+    delete:
+      tags:
+      - ContentDefinitions
+      summary: Delete a ContentDefinition
+      description: 'Deletes an ContentDefinition. When successful, the response is empty. If unsuccessful, an appropriate
+
+        ApiError is returned.'
+      operationId: ContentDefinitions_DeleteContentDefinition
+      parameters:
+      - name: contentDefinitionID
+        in: path
+        description: The ID of the ContentDefinition to delete
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/ContentDefinitions/{contentDefinitionID}/Attributes:
+    get:
+      tags:
+      - ContentDefinitions
+      summary: Get Attributes for a ContentDefinition
+      description: No Documentation Found.
+      operationId: ContentDefinitions_GetContentDefinitionAttributes
+      parameters:
+      - name: contentDefinitionID
+        in: path
+        description: The ID of the ContentDefinition.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: Optional. Filter the attributes by Name.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - ContentDefinitions
+      summary: Add an Attribute to a ContentDefinition
+      description: No Documentation Found.
+      operationId: ContentDefinitions_PostContentDefinitionAttribute
+      parameters:
+      - name: contentDefinitionID
+        in: path
+        description: The ID of the ContentDefinition
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+        description: The Attribute to add.
+        required: true
+  /api/v2/ContentDefinitions/{contentDefinitionID}/Attributes/Batch:
+    post:
+      tags:
+      - ContentDefinitions
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: ContentDefinitions_PostContentDefinitionAttributes
+      parameters:
+      - name: contentDefinitionID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+        required: true
+  /api/v2/ContentDefinitionAttributes/{contentDefinitionAttributeID}:
+    put:
+      tags:
+      - ContentDefinitions
+      summary: Update an Attribute for a ContentDefinition
+      description: No Documentation Found.
+      operationId: ContentDefinitions_PutContentDefinitionAttributeAsync
+      parameters:
+      - name: contentDefinitionAttributeID
+        in: path
+        description: The ID of the Attribute to update.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+        description: The Attribute to update.
+        required: true
+    delete:
+      tags:
+      - ContentDefinitions
+      summary: Remove an Attribute from a ContentDefinition
+      description: No Documentation Found.
+      operationId: ContentDefinitions_DeleteContentDefinitionAttribute
+      parameters:
+      - name: contentDefinitionAttributeID
+        in: path
+        description: The ID of the Attribute to remove.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/ContentDefinitionAttributes/Batch:
+    put:
+      tags:
+      - ContentDefinitions
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: ContentDefinitions_PutContentDefinitionAttributes
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+        required: true
+components:
+  schemas:
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          readOnly: true
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinition:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
+      description: An attribute of a definition of the content for submission
+      required:
+      - Name
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The ID of this attribute.
+          type: integer
+        ContentDefinitionID:
+          format: int32
+          description: The ID of the content definition to which this attribute belongs.
+          type: integer
+        Name:
+          description: The name of this Attribute.
+          pattern: '[a-zA-Z0-9]+'
+          type: string
+        Value:
+          description: The value of this Attribute
+          type: string
+    ContentSubmission.Shared.BusinessEntities.ContentDefinition:
+      description: The definition of the content for submission
+      required:
+      - Description
+      type: object
+      properties:
+        ContentDefinitionID:
+          format: int32
+          description: The ID of this content definition.
+          type: integer
+        Name:
+          description: The name of this content. Name must be valid for Attribute on PackageType.
+          type: string
+        TypeID:
+          format: int32
+          description: The type of content.
+          type: integer
+        PackageTypeID:
+          description: Read Only. The ID of the package type used for this content.
+          type: string
+        Description:
+          description: The description used on the package type in the AGCO Update System
+          type: string
+        Attributes:
+          description: Attributes of this ContentDefinition
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'

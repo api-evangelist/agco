@@ -1,7 +1,9 @@
 ---
 title: AGCO Invests in AI-Weeding Company
 url: https://www.no-tillfarmer.com/articles/11047-agco-invests-in-ai-weeding-company
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"AGCO" press release artificial intelligence'
 position: 4
 source: serpapi-google

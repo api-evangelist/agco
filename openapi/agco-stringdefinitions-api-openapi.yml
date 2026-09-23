@@ -1,0 +1,376 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: String Definitions API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: StringDefinitions
+paths:
+  /api/v2/StringDefinitions:
+    get:
+      tags:
+      - StringDefinitions
+      summary: Get a paged response of Global String Definitions
+      description: No Documentation Found.
+      operationId: StringDefinitions_GetDefinitions
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10. Ignored if 'stringIds' is provided.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: modifiedAfterTimestamp
+        in: query
+        description: Optional. Return only the StringDefinition objects that have a Timestamp value greater than that provided. This will be an encoded byte array.
+        required: false
+        schema:
+          type: string
+      - name: includeTranslations
+        in: query
+        description: Optional. Indicates whether to include the StringTranslations for the StringDefinition. Defaults to false.
+        required: false
+        schema:
+          type: boolean
+      - name: stringText
+        in: query
+        description: Optional. The text for which to search in the StringDefinition object’s translations. Only StringDefinition objects for matching StringTranslation objects are returned. Does not filter if no value is provided. Supports beginning and/or ending wildcards. includeTranslations must be true.
+        required: false
+        schema:
+          type: string
+      - name: descriptionText
+        in: query
+        description: Optional. The text for which to search in the StringDefinition description field. Only matching objects are returned. Does not filter if no value is provided. Supports beginning and/or ending wildcards.
+        required: false
+        schema:
+          type: string
+      - name: useFullText
+        in: query
+        description: Optional. This flag is used to determin whether to use the FullText Search or not.
+        required: false
+        schema:
+          type: boolean
+      - name: includeDeletedLanguages
+        in: query
+        description: Optional. Indicates whether to include languages marked as deleted. includeTranslations must be true. Defaults to false.
+        required: false
+        schema:
+          type: boolean
+      - name: languageIds
+        in: query
+        description: Optional. A comma-delimited list of language ids. Only StringTranslation objects with a matching language id will be returned. Optional. By default all locales are returned. includeTranslations must be true. The StringDefinition is still returned even if the filtered translations list is empty.
+        required: false
+        schema:
+          type: string
+      - name: stringIds
+        in: query
+        description: Optional. A comma-delimited list of string ids. Up to 40 string IDs may be provided. May not be used with 'modifiedAfterTimestamp', 'stringText', 'descriptionText', or 'useFullText'.
+        required: false
+        schema:
+          type: string
+      - name: matchingTranslationsOnly
+        in: query
+        description: Optional. If false, all translations for returned String Definitions are included. Must be used with 'stringText' provided and 'includeTranslations' = true.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.StringDefinition'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.StringDefinition'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.StringDefinition'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.StringDefinition'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/StringDefinitions/{ID}:
+    get:
+      tags:
+      - StringDefinitions
+      summary: Get a paged response of Global String Definitions
+      description: No Documentation Found.
+      operationId: StringDefinitions_GetDefinition
+      parameters:
+      - name: ID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: includeTranslations
+        in: query
+        description: Optional. Indicates whether to include the StringTranslations for the StringDefinition. Defaults to false.
+        required: false
+        schema:
+          type: boolean
+      - name: includeDeletedLanguages
+        in: query
+        description: Optional. Indicates whether to include languages marked as deleted. includeTranslations must be true. Defaults to false.
+        required: false
+        schema:
+          type: boolean
+      - name: languageIds
+        in: query
+        description: Optional. A comma-delimited list of language ids. Only StringTranslation objects with a matching language id will be returned. Optional. By default all locales are returned. includeTranslations must be true. The StringDefinition is still returned even if the filtered translations list is empty.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/StringDefinitions/Batch:
+    put:
+      tags:
+      - StringDefinitions
+      summary: Update StringDefinition objects.
+      description: No Documentation Found.
+      operationId: StringDefinitions_UpdateDefinitions
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+        description: The Array of Definitions to update
+        required: true
+    post:
+      tags:
+      - StringDefinitions
+      summary: Create StringDefinition object.
+      description: No Documentation Found.
+      operationId: StringDefinitions_PostDefinition
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+        description: The StringDefinition Object array, along with originating translation.
+        required: true
+components:
+  schemas:
+    GlobalResources.Shared.Models.StringTranslation:
+      description: A translation of a string in a specific language
+      required:
+      - StringValue
+      type: object
+      properties:
+        StringValue:
+          description: The translated string
+          type: string
+        State:
+          description: The state of the translation
+          enum:
+          - Original
+          - Requested
+          - Processing
+          - Processed
+          - Validated
+          - Invalidated
+          - RequestPending
+          - CreatePending
+          type: string
+        Timestamp:
+          format: byte
+          description: A value indicating the last modification of this translation. Read Only.
+          type: string
+        AuthorId:
+          format: int32
+          description: The id of the user to last edit thie translation
+          type: integer
+        StringId:
+          description: The id of the string that is translated
+          type: string
+        LanguageId:
+          format: int32
+          description: The id of the language of the translation
+          type: integer
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.IPagedResponse_GlobalResources.Shared.Models.StringDefinition:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.StringDefinition'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    GlobalResources.Shared.Models.StringDefinition:
+      description: The definition of a string to be translated
+      required:
+      - DescriptionForTranslator
+      type: object
+      properties:
+        Id:
+          description: The identifier for the string. Read Only.
+          type: string
+        DescriptionForTranslator:
+          description: The description of the string to be translated.
+          type: string
+        ParameterCount:
+          format: int32
+          description: The number of parameters expected for the string.
+          type: integer
+        Timestamp:
+          format: byte
+          description: A value indicating the last modification of this string. Read Only.
+          type: string
+        DoNotTranslate:
+          description: True if the string should not be translated. False by default.
+          type: boolean
+        Translations:
+          description: Translations for the string.
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.StringTranslation'

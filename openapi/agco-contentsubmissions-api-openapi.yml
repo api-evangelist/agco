@@ -1,0 +1,1004 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Content Submissions API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: ContentSubmissions
+paths:
+  /api/v2/ContentSubmissions:
+    get:
+      tags:
+      - ContentSubmissions
+      summary: Get ContentSubmissions
+      description: 'Gets a collection of ContentSubmissions. When successful, the response is a PagedResponse of ContentSubmissions. Additional searches: attributes[Name]=Value. This can be used to search for submissions that have the specified values for attributes. Beginning and ending wildcard (*) supported for value.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentSubmissions_GetContentSubmissions
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: userID
+        in: query
+        description: Optional. Filter by UserID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: contentDefinitionID
+        in: query
+        description: Optional. Filter by ContentDefinitionID
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeAttributes
+        in: query
+        description: Names of Attributes to include when retrieving this submission. This should be a comma-separated list. If not provided, Attributes are not included. If '*', all Attributes are included.
+        required: false
+        schema:
+          type: string
+      - name: releaseID
+        in: query
+        description: Optional. Filter the submissions by whether they are part of the Release with the specified Release ID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: typeID
+        in: query
+        description: Optional. Filter submissions by their ContentDefinition's Type ID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: version
+        in: query
+        description: Optional. Filter submissions by their Version.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeDefinition
+        in: query
+        description: Optional. If true, includes the ContentDefinition for each submission.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - ContentSubmissions
+      summary: Create a ContentSubmission
+      description: 'Creates a ContentSubmission. The body of the POST is the ContentSubmission to create.
+
+        The ContentSubmissionID will be assigned on creation of the Job. When successful, the response
+
+        is the ContentSubmissionID. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentSubmissions_PostContentSubmission
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+        description: The ContentSubmission to create.
+        required: true
+  /api/v2/ContentSubmissions/{contentSubmissionID}:
+    get:
+      tags:
+      - ContentSubmissions
+      summary: Get a ContentSubmission by ID
+      description: 'Gets a ContentSubmission by ID. When successful, the response is the requested ContentSubmission.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentSubmissions_GetContentSubmission
+      parameters:
+      - name: contentSubmissionID
+        in: path
+        description: The ID of the ContentSubmission to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: includeAttributes
+        in: query
+        description: Names of Attributes to include when retrieving this submission. This should be a comma-separated list.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - ContentSubmissions
+      summary: Update a ContentSubmission
+      description: 'Updates a ContentSubmission. The body of the PUT is the updated ContentSubmission.
+
+        When successful, the response is empty. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentSubmissions_PutContentSubmission
+      parameters:
+      - name: contentSubmissionID
+        in: path
+        description: The ID of the ContentSubmission to update
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+        description: The updated ContentSubmission
+        required: true
+    delete:
+      tags:
+      - ContentSubmissions
+      summary: Delete a ContentSubmission
+      description: 'Deletes an ContentSubmission. When successful, the response is empty. If unsuccessful, an appropriate
+
+        ApiError is returned.'
+      operationId: ContentSubmissions_DeleteContentSubmission
+      parameters:
+      - name: contentSubmissionID
+        in: path
+        description: The ID of the ContentSubmission to delete
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/ContentSubmissions/{contentSubmissionID}/Status:
+    get:
+      tags:
+      - ContentSubmissions
+      summary: Get the status of a ContentSubmission
+      description: No Documentation Found.
+      operationId: ContentSubmissions_GetContentSubmissionStatus
+      parameters:
+      - name: contentSubmissionID
+        in: path
+        description: The ID of the ContentSubmission to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: includeActivityRunDetails
+        in: query
+        description: True to include all status details if JobRun. Defaults to false
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IJobRun'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IJobRun'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IJobRun'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IJobRun'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/ContentSubmissions/{contentSubmissionID}/Attributes:
+    get:
+      tags:
+      - ContentSubmissions
+      summary: Get Attributes for a ContentSubmission
+      description: No Documentation Found.
+      operationId: ContentSubmissions_GetContentSubmissionAttributes
+      parameters:
+      - name: contentSubmissionID
+        in: path
+        description: The ID of the ContentSubmission.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: Optional. Filter the attributes by Name.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - ContentSubmissions
+      summary: Add an Attribute to a ContentSubmission
+      description: No Documentation Found.
+      operationId: ContentSubmissions_PostContentSubmissionAttribute
+      parameters:
+      - name: contentSubmissionID
+        in: path
+        description: The ID of the ContentSubmission
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+        description: The Attribute to add.
+        required: true
+  /api/v2/ContentSubmissions/{contentSubmissionID}/Attributes/Batch:
+    post:
+      tags:
+      - ContentSubmissions
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: ContentSubmissions_PostContentSubmissionAttributes
+      parameters:
+      - name: contentSubmissionID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+        required: true
+  /api/v2/ContentSubmissionAttributes/{contentSubmissionAttributeID}:
+    put:
+      tags:
+      - ContentSubmissions
+      summary: Update an Attribute for a ContentSubmission
+      description: No Documentation Found.
+      operationId: ContentSubmissions_PutContentSubmissionAttributeAsync
+      parameters:
+      - name: contentSubmissionAttributeID
+        in: path
+        description: The ID of the Attribute to update.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+        description: The Attribute to update.
+        required: true
+    delete:
+      tags:
+      - ContentSubmissions
+      summary: Remove an Attribute from a ContentSubmission
+      description: No Documentation Found.
+      operationId: ContentSubmissions_DeleteContentSubmissionAttribute
+      parameters:
+      - name: contentSubmissionAttributeID
+        in: path
+        description: The ID of the Attribute to remove.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/ContentSubmissionAttributes/Batch:
+    put:
+      tags:
+      - ContentSubmissions
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: ContentSubmissions_PutContentSubmissionAttributes
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+        required: true
+components:
+  schemas:
+    BuildSystem.Shared.Interfaces.IActivityRun:
+      description: IActivityRun
+      type: object
+      properties:
+        ActivityRunID:
+          format: int32
+          description: ActivityRunID
+          type: integer
+          readOnly: true
+        JobActivityID:
+          format: int32
+          description: JobActivityID
+          type: integer
+          readOnly: true
+        JobRunID:
+          format: int32
+          description: JobRunID
+          type: integer
+          readOnly: true
+        Parameters:
+          description: Parameters
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterValue'
+        Status:
+          $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityRunStatus'
+          description: Status
+        Steps:
+          description: Steps
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityStep'
+          readOnly: true
+        StartDate:
+          format: date-time
+          description: StartDate
+          type: string
+          readOnly: true
+        EndDate:
+          format: date-time
+          description: EndDate
+          type: string
+          readOnly: true
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          readOnly: true
+    BuildSystem.Shared.Interfaces.IActivityStep:
+      description: IActivityStep
+      type: object
+      properties:
+        ActivityStepID:
+          format: int32
+          description: ActivityStepID
+          type: integer
+          readOnly: true
+        ActivityID:
+          format: int32
+          description: ActivityID
+          type: integer
+        StepID:
+          format: int32
+          description: step id
+          type: integer
+        RunOrder:
+          format: int32
+          description: run order
+          type: integer
+        UseConfig:
+          description: UseConfig
+          type: string
+        StepName:
+          description: steo name
+          type: string
+          readOnly: true
+        ImplementationID:
+          description: Implementation ID
+          type: string
+          readOnly: true
+        ParameterMappings:
+          description: ParameterMappings
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterMapping'
+    BuildSystem.Shared.Interfaces.IParameterValue:
+      description: Declares members that must be implemented by parameter value objects.
+      type: object
+      properties:
+        Name:
+          description: Gets or sets the name of the parameter.
+          type: string
+        Value:
+          description: Gets or sets the value of the parameter.
+          type: string
+        Direction:
+          description: "Gets or sets a value indicating whether the parameter value is an \n            input to the build part or an output from the build part."
+          enum:
+          - Input
+          - Output
+          type: string
+    BuildSystem.Shared.Interfaces.IParameterMapping:
+      description: IParameterMapping
+      type: object
+      properties:
+        Name:
+          description: name
+          type: string
+        SourceType:
+          description: SourceType
+          enum:
+          - Constant
+          - Variable
+          type: string
+        Source:
+          description: Source
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    ContentSubmission.Shared.BusinessEntities.ContentSubmission:
+      description: A content submission
+      type: object
+      properties:
+        ContentSubmissionID:
+          format: int32
+          description: The ID of this Content Submission.
+          type: integer
+        ContentDefinitionID:
+          format: int32
+          description: The ID of the Content Definition.
+          type: integer
+        Repository:
+          description: The SVN repository used as the source of this content submission
+          type: string
+        Revision:
+          format: int32
+          description: The SVN revision used as the source of this content submission.
+          type: integer
+        Version:
+          format: int32
+          description: "Optional.  The version number assigned to this Content Submission and the resulting Package.\n            If not provided, version shall be 1 if it is the first content submission for the \n            ContentDefinitionID otherwise it shall be the highest content submission version for the\n            specified ContentDefinitionID incremented by 1."
+          type: integer
+        UserID:
+          format: int32
+          description: Read Only. The ID of the user who submitted the content
+          type: integer
+        SubmissionDate:
+          format: date-time
+          description: Read Only. The UTC date and time the content submission was made.
+          type: string
+        JobRunID:
+          format: int32
+          description: ReadOnly. The ID of the JobRun which will build the content package.
+          type: integer
+        BuildID:
+          format: int32
+          description: ReadOnly. The ID of the Azure DevOps Build which will build the content package.
+          type: integer
+        PackageID:
+          description: The ID of package generated by this content submission.
+          type: string
+        ReleaseNotes:
+          description: Release Notes for this ContentSubmission
+          type: string
+        Attributes:
+          description: Attributes of this ContentSubmission
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+        Definition:
+          $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+          description: The ContentDefinition for this ContentSubmission
+    ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
+      description: An attribute of a definition of the content for submission
+      required:
+      - Name
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The ID of this attribute.
+          type: integer
+        ContentDefinitionID:
+          format: int32
+          description: The ID of the content definition to which this attribute belongs.
+          type: integer
+        Name:
+          description: The name of this Attribute.
+          pattern: '[a-zA-Z0-9]+'
+          type: string
+        Value:
+          description: The value of this Attribute
+          type: string
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    BuildSystem.Shared.Interfaces.IActivityRunStatus:
+      description: "Declares members of objects that communicate the progress of an \n            asynchronous activity run."
+      type: object
+      properties:
+        Status:
+          description: Gets or sets the status of the activity run.
+          enum:
+          - Ready
+          - InProgress
+          - Succeeded
+          - Cancelled
+          - Failed
+          type: string
+        CurrentStep:
+          format: int32
+          description: Gets or sets the number of the step the activity is currently running.
+          type: integer
+        StepStatus:
+          description: "Gets or sets a description of the current status of the currently \n            running step."
+          type: string
+        StepProgress:
+          format: int32
+          description: Gets or sets a measurement of the current progress of the current step.
+          type: integer
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmission:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+          readOnly: true
+    ContentSubmission.Shared.BusinessEntities.ContentDefinition:
+      description: The definition of the content for submission
+      required:
+      - Description
+      type: object
+      properties:
+        ContentDefinitionID:
+          format: int32
+          description: The ID of this content definition.
+          type: integer
+        Name:
+          description: The name of this content. Name must be valid for Attribute on PackageType.
+          type: string
+        TypeID:
+          format: int32
+          description: The type of content.
+          type: integer
+        PackageTypeID:
+          description: Read Only. The ID of the package type used for this content.
+          type: string
+        Description:
+          description: The description used on the package type in the AGCO Update System
+          type: string
+        Attributes:
+          description: Attributes of this ContentDefinition
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+    ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
+      description: The definition of the content for submission
+      required:
+      - Name
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The ID of this attribute.
+          type: integer
+        ContentSubmissionID:
+          format: int32
+          description: The ID of the content submission to which this attribute belongs.
+          type: integer
+        Name:
+          description: The name of this Attribute.
+          pattern: '[a-zA-Z0-9]+'
+          type: string
+        Value:
+          description: The value of this Attribute
+          type: string
+    BuildSystem.Shared.Interfaces.IJobRun:
+      description: interface of JobRun
+      type: object
+      properties:
+        JobRunID:
+          format: int32
+          description: JobRunID
+          type: integer
+          readOnly: true
+        JobID:
+          format: int32
+          description: job id
+          type: integer
+        Parameters:
+          description: Parameters
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterValue'
+          readOnly: true
+        Status:
+          description: status
+          enum:
+          - Ready
+          - InProgress
+          - Succeeded
+          - Cancelled
+          - Failed
+          type: string
+        ActivityRuns:
+          description: ActivityRuns
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityRun'
+        StartDate:
+          format: date-time
+          description: Start Date
+          type: string
+        EndDate:
+          format: date-time
+          description: end date
+          type: string

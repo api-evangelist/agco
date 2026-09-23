@@ -1,0 +1,206 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Logs API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Logs
+paths:
+  /api/v2/Logs:
+    get:
+      tags:
+      - Logs
+      summary: Get the API System logs, most recent first
+      description: No Documentation Found.
+      operationId: Logs_GetLogs
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Log'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Log'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Logs
+      summary: Add a Log entry
+      description: No Documentation Found.
+      operationId: Logs_PostLog
+      parameters:
+      - name: Message
+        in: query
+        description: Message to enter into the log
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Logs/{ID}:
+    get:
+      tags:
+      - Logs
+      summary: Get a log by ID
+      description: No Documentation Found.
+      operationId: Logs_GetLog
+      parameters:
+      - name: ID
+        in: path
+        description: The Log ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.Log'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.Log'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.Log'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.Log'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    API.Models.Log:
+      type: object
+      properties:
+        ID:
+          type: string
+        Message:
+          type: string
+        TimeStamp:
+          format: date-time
+          type: string
+    API.PagedResponse_API.Models.Log:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.Log'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

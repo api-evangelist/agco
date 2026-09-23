@@ -1,0 +1,322 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Bundles API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Bundles
+paths:
+  /api/v2/Bundles:
+    get:
+      tags:
+      - Bundles
+      summary: Get the list of bundles
+      description: No Documentation Found.
+      operationId: Bundles_GetBundles
+      parameters:
+      - name: UpdateGroupID
+        in: query
+        description: Optional. Filter by UpdateGroup ID.
+        required: false
+        schema:
+          type: string
+      - name: Active
+        in: query
+        description: Optional. Filter by active status.
+        required: false
+        schema:
+          type: boolean
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: BundleNumber
+        in: query
+        description: Optional. If provided, filters by BundleNumber.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.Bundle'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.Bundle'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Bundles
+      summary: Add a Bundle to the Update System
+      description: No Documentation Found.
+      operationId: Bundles_PostBundle
+      parameters:
+      - name: cloneFromBundleID
+        in: query
+        description: Optional. A BundleID from which to clone PackageTypetoBundleIDs.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+        description: The bundle to add
+        required: true
+  /api/v2/Bundles/{ID}:
+    get:
+      tags:
+      - Bundles
+      summary: Get a specific Bundle by ID
+      description: No Documentation Found.
+      operationId: Bundles_GetBundle
+      parameters:
+      - name: ID
+        in: path
+        description: The Bundle ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Bundles
+      summary: Modify a Bundle in the Update System
+      description: No Documentation Found.
+      operationId: Bundles_PutBundle
+      parameters:
+      - name: ID
+        in: path
+        description: The unique ID of the Bundle
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+        description: The bundle to modify
+        required: true
+    delete:
+      tags:
+      - Bundles
+      summary: Delete a Bundle
+      description: No Documentation Found.
+      operationId: Bundles_DeleteBundle
+      parameters:
+      - name: ID
+        in: path
+        description: The Bundle ID to Delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    UpdateSystem.Models.Bundle:
+      required:
+      - Description
+      - UpdateGroupID
+      - BundleNumber
+      type: object
+      properties:
+        BundleID:
+          description: Read-Only.
+          type: string
+        Description:
+          description: The Bundle description.
+          type: string
+        UpdateGroupID:
+          description: The update group this bundle belongs to.
+          type: string
+        BundleNumber:
+          format: int32
+          description: The bundle number
+          type: integer
+        Active:
+          description: 'Default Value: false. During the creation of the Bundle, this field must be false.'
+          type: boolean
+    API.PagedResponse_UpdateSystem.Models.Bundle:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

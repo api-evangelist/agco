@@ -1,0 +1,212 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Licenses API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Licenses
+paths:
+  /api/v2/Licenses:
+    get:
+      tags:
+      - Licenses
+      summary: Gets a list of licenses with the specified criteria
+      description: No Documentation Found.
+      operationId: Licenses_Get
+      parameters:
+      - name: VoucherCode
+        in: query
+        description: Optional. Filter by VoucherCode
+        required: false
+        schema:
+          type: string
+      - name: DealerCode
+        in: query
+        description: Optional. Filter by DealerCode
+        required: false
+        schema:
+          type: string
+      - name: Status
+        in: query
+        description: Optional. Filter by Status.  By default only active licenses will be returned.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - All
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.License'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.License'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Licenses/{ID}:
+    get:
+      tags:
+      - Licenses
+      summary: Get a license
+      description: No Documentation Found.
+      operationId: Licenses_Get
+      parameters:
+      - name: ID
+        in: path
+        description: The ID of the license to get.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.License'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.License'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.License'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.License'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    DealerDB.Models.License:
+      type: object
+      properties:
+        LicenseID:
+          description: The LicenseID
+          type: string
+        VoucherCode:
+          description: The voucher code that generated the license.
+          type: string
+        LicenseActivationType:
+          description: The type of license (e.g. EDT, EDT Lite)
+          enum:
+          - EDT
+          - EDTLite
+          type: string
+        CreatedDate:
+          format: date-time
+          description: The date the license was created.
+          type: string
+        RefreshDate:
+          format: date-time
+          description: The date the license was refreshed.
+          type: string
+        DeactivatedDate:
+          format: date-time
+          description: The date the license was deactivated.
+          type: string
+        Active:
+          description: True if license is active.
+          type: boolean
+        LicenseVersion:
+          description: The version of the license.
+          type: string
+        UpdatedLicenseVersion:
+          description: The updated version of the license.  A value in this field indicates that the update has not been confirmed.
+          type: string
+        SystemInfo:
+          description: Information about the system which is licensed.
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.PagedResponse_DealerDB.Models.License:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/DealerDB.Models.License'
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

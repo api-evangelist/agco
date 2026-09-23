@@ -1,0 +1,312 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Users API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Users
+paths:
+  /api/v2/Users:
+    get:
+      tags:
+      - Users
+      summary: Get users
+      description: No Documentation Found.
+      operationId: Users_Get
+      parameters:
+      - name: username
+        in: query
+        description: Optional. Search by username. Supports beginning and ending wildcards (*).
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: Optional. Search by email. Supports beginning and ending wildcards (*).
+        required: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Optional. Search by name. Supports beginning and ending wildcards (*).
+        required: false
+        schema:
+          type: string
+      - name: hasRole
+        in: query
+        description: Optional. Return only users having the provided role name.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.User'
+      deprecated: false
+    post:
+      tags:
+      - Users
+      summary: Create a user
+      description: No Documentation Found.
+      operationId: Users_Post
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+        description: The user to create.
+        required: true
+  /api/v2/Users/{id}:
+    get:
+      tags:
+      - Users
+      summary: Get a specific user
+      description: No Documentation Found.
+      operationId: Users_Get
+      parameters:
+      - name: id
+        in: path
+        description: The user ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+      deprecated: false
+    put:
+      tags:
+      - Users
+      summary: Update a user
+      description: No Documentation Found.
+      operationId: Users_Put
+      parameters:
+      - name: id
+        in: path
+        description: The user id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+        description: The user
+        required: true
+    delete:
+      tags:
+      - Users
+      summary: Delete a user
+      description: No Documentation Found.
+      operationId: Users_Delete
+      parameters:
+      - name: id
+        in: path
+        description: The user id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+  /api/v2/Users/Current:
+    get:
+      tags:
+      - Users
+      summary: Gets the current user
+      description: No Documentation Found.
+      operationId: Users_GetCurrentUser
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.User'
+      deprecated: false
+    put:
+      tags:
+      - Users
+      summary: Update a user
+      description: No Documentation Found.
+      operationId: Users_PutCurrentUser
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.User'
+        description: The user
+        required: true
+components:
+  schemas:
+    API.Models.User:
+      type: object
+      properties:
+        UserID:
+          format: int32
+          description: The user ID
+          type: integer
+        Name:
+          description: The user's name
+          type: string
+        Username:
+          description: The username used for authentication
+          type: string
+        Password:
+          description: Never Returned.  Required when creating a new user or updating a user.  When changing a user's password this field must contain the current password.
+          type: string
+        ChangePassword:
+          description: Never Returned.  When changing a user's password, this field must contain the new password.
+          type: string
+        Email:
+          description: The user's email address
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.PagedResponse_API.Models.User:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.User'
+          readOnly: true

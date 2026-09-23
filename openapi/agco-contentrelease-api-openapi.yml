@@ -1,0 +1,360 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Content Release API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: ContentRelease
+paths:
+  /api/v2/ContentReleases:
+    get:
+      tags:
+      - ContentRelease
+      summary: Get ContentReleaseVersion
+      description: 'Gets a collection of ContentReleaseVersion. When successful, the response is a PagedResponse of ContentReleaseVersion.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentRelease_GetContentReleaseVersion
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: deleted
+        in: query
+        description: Optional. Filter by deleted.
+        required: false
+        schema:
+          type: boolean
+      - name: releaseID
+        in: query
+        description: Optional. Filter by releaseID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: userId
+        in: query
+        description: Optional. Filter by UserID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: contentDefinitionID
+        in: query
+        description: Optional. Filter by ContentDefinitionID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: version
+        in: query
+        description: Optional. Filter by Version.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - ContentRelease
+      summary: Create a ContentReleaseVersion
+      description: 'Creates a ContentReleaseVersion. The body of the POST is the ContentReleaseVersion to create.
+
+        The ContentReleaseId will be assigned on creation of the Job. When successful, the response
+
+        is the contentReleaseId. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentRelease_PostContentRelease
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+        description: The ContentReleaseVersion to create.
+        required: true
+  /api/v2/ContentReleases/{ContentReleaseId}:
+    get:
+      tags:
+      - ContentRelease
+      summary: Get a Content Release Version by ID
+      description: 'Gets a ContentReleaseVersion by ID. When successful, the response is the requested ContentReleaseVersion.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentRelease_GetContentReleaseVersion
+      parameters:
+      - name: ContentReleaseId
+        in: path
+        description: The ID of the ContentReleaseVersion to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - ContentRelease
+      summary: Update a ContentReleaseVersion
+      description: 'Updates a ContentReleaseVersion. The body of the PUT is the updated ContentReleaseVersion.
+
+        When successful, the response is empty. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: ContentRelease_PutContentDefinition
+      parameters:
+      - name: ContentReleaseId
+        in: path
+        description: The ID of the ContentReleaseVersion to update
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+        description: The updated ContentReleaseVersion
+        required: true
+    delete:
+      tags:
+      - ContentRelease
+      summary: Delete a ContentReleaseVersion
+      description: 'Deletes an ContentReleaseVersion. When successful, the response is empty. If unsuccessful, an appropriate
+
+        ApiError is returned.'
+      operationId: ContentRelease_DeleteContentReleaseVersionn
+      parameters:
+      - name: ContentReleaseId
+        in: path
+        description: The ID of the ContentReleaseVersion to delete
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion:
+      description: ContentReleaseVersion class
+      type: object
+      properties:
+        ContentReleaseID:
+          format: int32
+          description: ContentReleaseID
+          type: integer
+        ContentDefinitionID:
+          format: int32
+          description: ContentDefinitionID
+          type: integer
+        Version:
+          format: int32
+          description: version
+          type: integer
+        ReleaseID:
+          format: int32
+          description: rele4ase Id
+          type: integer
+        PublisherUserID:
+          format: int32
+          description: PublisherUser ID
+          type: integer
+        UpdatedDate:
+          format: date-time
+          description: Updated Date
+          type: string
+        Deleted:
+          description: deleted flag
+          type: boolean
+        TestReportUrl:
+          description: The URL at which test reports for this content can be found
+          type: string
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

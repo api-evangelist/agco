@@ -1,0 +1,403 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Activities API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Activities
+paths:
+  /api/v2/activities:
+    get:
+      tags:
+      - Activities
+      summary: Get Activities
+      description: 'Gets a collection of Activities. When successful, the response is a PagedResponse of Activities.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Activities_GetActivities
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: isIncludeDeleted
+        in: query
+        description: Does it include deleted activity, or not
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_BuildSystem.Shared.DTO.Activity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_BuildSystem.Shared.DTO.Activity'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Activities
+      summary: Create an Activity
+      description: 'Creates an Activity. The body of the POST is the Activity to create. The ActivityID will be assigned
+
+        on creation of the Activity. When successful, the response is the ActivityID. If unsuccessful, an
+
+        appropriate ApiError is returned.'
+      operationId: Activities_PostActivity
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+        description: The activity to create.  The ActivityID will be assigned on creation of the Activity.
+        required: true
+  /api/v2/activities/{activityID}:
+    get:
+      tags:
+      - Activities
+      summary: Get an Activity by ID
+      description: 'Gets an Activity by ID. When successful, the response is the requested Activity. If unsuccessful,
+
+        an appropriate ApiError is returned.'
+      operationId: Activities_GetActivity
+      parameters:
+      - name: activityID
+        in: path
+        description: The ID of the Activity to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: isIncludeDeleted
+        in: query
+        description: Does it include deleted activity, or not
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Activities
+      summary: Update an Activity
+      description: 'Updates an Activity. The body of the PUT is the updated Activity. When successful, the response is empty.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Activities_PutActivity
+      parameters:
+      - name: activityID
+        in: path
+        description: The id of the activity to update
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+        description: The updated activity
+        required: true
+    delete:
+      tags:
+      - Activities
+      summary: Mark the delete flag for the Activity
+      description: 'Deletes an Activity. When successful, the response is empty. If unsuccessful, an appropriate
+
+        ApiError is returned.'
+      operationId: Activities_DeleteActivity
+      parameters:
+      - name: activityID
+        in: path
+        description: The id of the activity to delete
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    BuildSystem.Shared.DTO.Activity:
+      description: A DTO for an IActivity
+      type: object
+      properties:
+        ActivityID:
+          format: int32
+          description: The ID of the activity
+          type: integer
+        Name:
+          description: The name of the activity
+          type: string
+        Deleted:
+          description: ''
+          type: boolean
+        Parameters:
+          description: The parameters for this activity
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Parameter'
+          readOnly: true
+        Steps:
+          description: The steps which are performed for this activity
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityStep'
+          readOnly: true
+    BuildSystem.Shared.DTO.ParameterMapping:
+      description: A DTO for an IParameterMapping
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter this mapping applies to
+          type: string
+        SourceType:
+          description: The source type used for supplying the parameter
+          enum:
+          - Constant
+          - Variable
+          type: string
+        Source:
+          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
+          type: string
+    BuildSystem.Shared.DTO.ActivityStep:
+      description: A DTO for an IActivityStep
+      type: object
+      properties:
+        ActivityStepID:
+          format: int32
+          description: The id of this activity step
+          type: integer
+        ActivityID:
+          format: int32
+          description: The id of the activity this activity step belongs to
+          type: integer
+        StepID:
+          format: int32
+          description: The id of the step
+          type: integer
+        RunOrder:
+          format: int32
+          description: The order of this activity step relative to other activity steps
+          type: integer
+        UseConfig:
+          description: Indicates the configuration for the ActivityStep to use at runtime.  The build agent must provide this configuration
+          type: string
+        StepName:
+          description: The name of the step
+          type: string
+        ImplementationID:
+          description: The implementation id which is used to look up the step implementation
+          type: string
+        ParameterMappings:
+          description: The mapping of values from a source to be used for the step parameters
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterMapping'
+          readOnly: true
+    BuildSystem.Shared.DTO.Parameter:
+      description: A DTO for an IParameter
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter
+          type: string
+        Type:
+          description: The data type of the parameter
+          enum:
+          - String
+          - Boolean
+          - Integer
+          - Float
+          - StringDictionary
+          type: string
+        Direction:
+          description: The parameter direction (Input or Output)
+          enum:
+          - Input
+          - Output
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.PagedResponse_BuildSystem.Shared.DTO.Activity:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Activity'
+          readOnly: true

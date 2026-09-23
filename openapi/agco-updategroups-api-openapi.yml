@@ -1,0 +1,387 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Update Groups API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: UpdateGroups
+paths:
+  /api/v2/UpdateGroups:
+    get:
+      tags:
+      - UpdateGroups
+      summary: Get a list of Update Groups.
+      description: No Documentation Found.
+      operationId: UpdateGroups_Get
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: userID
+        in: query
+        description: Optional. The user ID to sort update groups by the user's access
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroup'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroup'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - UpdateGroups
+      summary: Add a new Update Group.
+      description: No Documentation Found.
+      operationId: UpdateGroups_Post
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+        required: true
+  /api/v2/UpdateGroups/{ID}:
+    get:
+      tags:
+      - UpdateGroups
+      summary: Get a specific Update Group by ID
+      description: No Documentation Found.
+      operationId: UpdateGroups_Get
+      parameters:
+      - name: ID
+        in: path
+        description: The ID of the Update Group
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - UpdateGroups
+      summary: Modify an Update Group
+      description: No Documentation Found.
+      operationId: UpdateGroups_Put
+      parameters:
+      - name: ID
+        in: path
+        description: ID of the Update Group
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+        description: The Update Group to update.
+        required: true
+    delete:
+      tags:
+      - UpdateGroups
+      summary: Delete an Update Group
+      description: No Documentation Found.
+      operationId: UpdateGroups_Delete
+      parameters:
+      - name: ID
+        in: path
+        description: The ID of the Update Group to Delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/UpdateGroups/{id}/Users/{userID}:
+    post:
+      tags:
+      - UpdateGroups
+      summary: Add an updateGroup that a user can see
+      description: No Documentation Found.
+      operationId: UpdateGroups_AddUpdateGroupUser
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the update group
+        required: true
+        schema:
+          type: string
+      - name: userID
+        in: path
+        description: The userID to link to the update group
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    delete:
+      tags:
+      - UpdateGroups
+      summary: Deletes an update group a user could see
+      description: No Documentation Found.
+      operationId: UpdateGroups_RemoveUpdateGroupUser
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the update group
+        required: true
+        schema:
+          type: string
+      - name: userID
+        in: path
+        description: The userID to link to the update group
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    UpdateSystem.Models.UpdateGroup:
+      required:
+      - Description
+      - UpdateType
+      - Priority
+      type: object
+      properties:
+        ID:
+          type: string
+        Description:
+          description: The description of the update group
+          type: string
+        UpdateType:
+          description: The update type name
+          type: string
+        InventoryPackage:
+          description: The Package ID of the package used for inventory
+          type: string
+        ReportField:
+          description: "A field to return in the status report for this update group.\n            Specify the field with the format [Label]: {[InventoryPackageID].[Category].[Attribute]}.  (i.e. example: {bec778ca-278d-424a-867a-4653a1a19e86.MyCategory.MyAttribute})"
+          type: string
+        ValidatingField:
+          description: "A field used for validation in the status report for this update group.\n            Specify the field with the format [Label]: {[InventoryPackageID].[Category].[Attribute]}.  (i.e. example: {bec778ca-278d-424a-867a-4653a1a19e86.MyCategory.MyAttribute})"
+          type: string
+        ValueToValidate:
+          description: The value to validate the ValidationField against.
+          type: string
+        InventoryFrequency:
+          format: int32
+          description: The time in minutes between inventory checks. Default value is 1440 minutes (one day).
+          type: integer
+        Priority:
+          format: int32
+          description: The execution priority of the package relative to other packages in the bundle. Range 1 - 100, lower value indication higher priority.
+          maximum: 100
+          minimum: 1
+          type: integer
+        Version:
+          format: byte
+          description: The version of the UpdateGroup, this value is incremented with each modification to a related Bundle or PackageType
+          type: string
+        LocalizedDescription:
+          description: Optional. The StringID used to localize the description of the update group
+          type: string
+        LocalizedName:
+          description: Optional. The StringID used to localize the name of the update group
+          type: string
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.PagedResponse_UpdateSystem.Models.UpdateGroup:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          readOnly: true

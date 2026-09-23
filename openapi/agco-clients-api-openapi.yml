@@ -1,0 +1,486 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Clients API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Clients
+paths:
+  /api/v2/Clients:
+    get:
+      tags:
+      - Clients
+      summary: Get a List of Clients in the Update System
+      description: No Documentation Found.
+      operationId: Clients_Get
+      parameters:
+      - name: Tag
+        in: query
+        description: Optional. Filter clients by Tag. Wildcards are supported (*).
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.Client'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.Client'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Clients/{ID}:
+    get:
+      tags:
+      - Clients
+      summary: Get a Client in the Update System
+      description: No Documentation Found.
+      operationId: Clients_Get
+      parameters:
+      - name: ID
+        in: path
+        description: The Client ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Client'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Client'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Client'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Client'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Clients
+      summary: Update a Client
+      description: No Documentation Found.
+      operationId: Clients_Put
+      parameters:
+      - name: ID
+        in: path
+        description: The Client ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Client'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Client'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Client'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Client'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Client'
+        description: Updated Client Object.
+        required: true
+  /api/v2/Clients/{ID}/UpdateGroupSubscriptions:
+    get:
+      tags:
+      - Clients
+      summary: Get a Client's Current Update Group Subscriptions
+      description: No Documentation Found.
+      operationId: Clients_GetSubscriptions
+      parameters:
+      - name: ID
+        in: path
+        description: The Client ID
+        required: true
+        schema:
+          type: string
+      - name: UpdateGroupID
+        in: query
+        description: Optional. Filter by Update Group.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Clients/{ID}/AvailableUpdateGroupSubscriptions:
+    get:
+      tags:
+      - Clients
+      summary: Get a Client's Available Update Group Subscriptions
+      description: No Documentation Found.
+      operationId: Clients_GetAvailableSubscriptions
+      parameters:
+      - name: ID
+        in: path
+        description: The Client ID
+        required: true
+        schema:
+          type: string
+      - name: UpdateGroupID
+        in: query
+        description: Optional. Filter by Update Group.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.AvailableUpdateGroupSubscription'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.AvailableUpdateGroupSubscription'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    UpdateSystem.Models.AvailableSubscription:
+      type: object
+      properties:
+        PackageType:
+          $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          description: The PackageType this subscription is for.
+        SubscriptionType:
+          description: The type of subscription supported.
+          enum:
+          - Required
+          - IncludeByDefault
+          - ExcludeByDefault
+          type: string
+    UpdateSystem.Models.Client:
+      type: object
+      properties:
+        ClientID:
+          description: Read Only. The id of the client
+          type: string
+        Tag:
+          description: A description of the client that can be used for easy reference
+          type: string
+        LastCheckin:
+          format: date-time
+          description: Read Only. The time of the client's last checkin with the server.
+          type: string
+    UpdateSystem.Models.PackageType:
+      required:
+      - Description
+      type: object
+      properties:
+        PackageTypeID:
+          description: Read Only. The package type id.
+          type: string
+        Description:
+          description: The description of the package type
+          type: string
+        InventoryPackage:
+          description: The inventory package used to determine what version of this package type is installed.
+          type: string
+        Category:
+          description: The inventory category (from the InventoryPackage) used to determine what version of this package type is installed.
+          type: string
+        Attribute:
+          description: The inventory attribute (from the InventoryPackage) used to determine what version of this package type is installed.
+          type: string
+        InventoryFrequency:
+          format: int32
+          description: The number of minutes to wait before requesting another inventory.  The default value is 1440 (24 hours).
+          type: integer
+        MaxDeltaPackages:
+          format: int32
+          description: The maximum number of "chained" delta packages to use when updating the client
+          type: integer
+        LocalizedDescription:
+          description: Optional. The StringID used to localize the description of the PackageType
+          type: string
+        LocalizedName:
+          description: Optional. The StringID used to localize the name of the PackageType
+          type: string
+        Icon:
+          description: Optional.  The icon to use for the PackageType, in base 64
+          type: string
+    API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.PagedResponse_UpdateSystem.Models.Client:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Client'
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    UpdateSystem.Models.UpdateGroup:
+      required:
+      - Description
+      - UpdateType
+      - Priority
+      type: object
+      properties:
+        ID:
+          type: string
+        Description:
+          description: The description of the update group
+          type: string
+        UpdateType:
+          description: The update type name
+          type: string
+        InventoryPackage:
+          description: The Package ID of the package used for inventory
+          type: string
+        ReportField:
+          description: "A field to return in the status report for this update group.\n            Specify the field with the format [Label]: {[InventoryPackageID].[Category].[Attribute]}.  (i.e. example: {bec778ca-278d-424a-867a-4653a1a19e86.MyCategory.MyAttribute})"
+          type: string
+        ValidatingField:
+          description: "A field used for validation in the status report for this update group.\n            Specify the field with the format [Label]: {[InventoryPackageID].[Category].[Attribute]}.  (i.e. example: {bec778ca-278d-424a-867a-4653a1a19e86.MyCategory.MyAttribute})"
+          type: string
+        ValueToValidate:
+          description: The value to validate the ValidationField against.
+          type: string
+        InventoryFrequency:
+          format: int32
+          description: The time in minutes between inventory checks. Default value is 1440 minutes (one day).
+          type: integer
+        Priority:
+          format: int32
+          description: The execution priority of the package relative to other packages in the bundle. Range 1 - 100, lower value indication higher priority.
+          maximum: 100
+          minimum: 1
+          type: integer
+        Version:
+          format: byte
+          description: The version of the UpdateGroup, this value is incremented with each modification to a related Bundle or PackageType
+          type: string
+        LocalizedDescription:
+          description: Optional. The StringID used to localize the description of the update group
+          type: string
+        LocalizedName:
+          description: Optional. The StringID used to localize the name of the update group
+          type: string
+    UpdateSystem.Models.AvailableUpdateGroupSubscription:
+      type: object
+      properties:
+        UpdateGroup:
+          $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          description: The Update Group this subscription is for.
+        AvailableSubscriptions:
+          description: The available subscriptions for this update group.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.AvailableSubscription'
+    UpdateSystem.Models.UpdateGroupSubscription:
+      required:
+      - UpdateGroupID
+      - PackageTypeID
+      - ClientID
+      - Include
+      type: object
+      properties:
+        UpdateGroupSubscriptionID:
+          format: int32
+          description: The Update Group Subscription ID.  This ID will be automatically assigned when creating an Update Group Subscription.
+          type: integer
+        UpdateGroupID:
+          description: The Update Group this subscription is relevant for.
+          type: string
+        PackageTypeID:
+          description: The PackageType to set subscription status for
+          type: string
+        ClientID:
+          description: The ClientID.
+          type: string
+        Include:
+          description: True to receive content of type indicated by PackageTypeID.
+          type: boolean
+    API.PagedResponse_UpdateSystem.Models.AvailableUpdateGroupSubscription:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.AvailableUpdateGroupSubscription'
+          readOnly: true

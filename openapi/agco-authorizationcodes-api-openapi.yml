@@ -1,0 +1,527 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Authorization Codes API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: AuthorizationCodes
+paths:
+  /api/v2/AuthorizationCodes:
+    get:
+      tags:
+      - AuthorizationCodes
+      summary: Get authorization codes
+      description: 'Additional searches: validationParameters[Name]=Value and dataParameters[Name]=Value. These can be used to search for authorization codes that have been generated using specified values for data or validation parameters.'
+      operationId: AuthorizationCodes_GetAuthorizationCodes
+      parameters:
+      - name: code
+        in: query
+        description: Optional. If provided, searches for entities with the provided authorization code.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: definitionID
+        in: query
+        description: Optional. If specified, filters codes by definition id.
+        required: false
+        schema:
+          type: string
+      - name: createdByUserID
+        in: query
+        description: Optional. If specified, filters codes to those created by the given User ID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: deletedByUserID
+        in: query
+        description: Optional. If specified, filters codes to those deleted by the given User ID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeDeleted
+        in: query
+        description: Optional. Whether to include deleted codes. 'False' by default.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCode'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCode'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCode'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCode'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - AuthorizationCodes
+      summary: Generates an authorization code using the provided definition and parameters
+      description: No Documentation Found.
+      operationId: AuthorizationCodes_PostAuthorizationCode
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+        description: The model from which to generate an authorization code.
+        required: true
+  /api/v2/AuthorizationCodes/{id}:
+    get:
+      tags:
+      - AuthorizationCodes
+      summary: Get an authorization code by its ID
+      description: No Documentation Found.
+      operationId: AuthorizationCodes_GetAuthorizationCode
+      parameters:
+      - name: id
+        in: path
+        description: The id of the authorization code.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - AuthorizationCodes
+      summary: Update an authorization code
+      description: No Documentation Found.
+      operationId: AuthorizationCodes_PutAuthorizationCode
+      parameters:
+      - name: id
+        in: path
+        description: The id of the authorization code.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+        description: The model from which to update an authorization code.
+        required: true
+    delete:
+      tags:
+      - AuthorizationCodes
+      summary: Hide an authorization code
+      description: No Documentation Found.
+      operationId: AuthorizationCodes_DeleteAuthorizationCode
+      parameters:
+      - name: id
+        in: path
+        description: The id of the authorization code.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/AuthorizationCodes/{id}/Validate:
+    get:
+      tags:
+      - AuthorizationCodes
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: AuthorizationCodes_ValidateAuthorizationCode
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.CodeValidationModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.CodeValidationModel'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.CodeValidationModel'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.CodeValidationModel'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/AuthorizationCodes/{id}/ContactInformation:
+    get:
+      tags:
+      - AuthorizationCodes
+      summary: Get contact information for an authorization code
+      description: No Documentation Found.
+      operationId: AuthorizationCodes_GetContactInformation
+      parameters:
+      - name: id
+        in: path
+        description: The id of the authorization code.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationContactInformation'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationContactInformation'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationContactInformation'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationContactInformation'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    AuthorizationCodes.Shared.Models.AuthorizationCode:
+      description: Represents the model containing an authorization code used to unlock a feature in machines and EDT
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The identifier for the authorization code. Read only.
+          type: integer
+        Code:
+          description: The code to enter to unlock a feature. Read only.
+          type: string
+        DefinitionID:
+          description: The id of the definition for this authorization code. May not be updated.
+          type: string
+        ValidationParameters:
+          description: The parameters and values used to validate this authorization code. May not be updated.
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Parameter'
+        DataParameters:
+          description: The parameters and values contained as data in this authorization code. May not be updated.
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Parameter'
+        CreatedByUserID:
+          format: int32
+          description: The ID of the user that created this authorization code. Read only.
+          type: integer
+        CreatedDate:
+          format: date-time
+          description: A timestamp of when this code was created. Read only.
+          type: string
+        IsDeleted:
+          description: Indicates whether this code is deleted.
+          type: boolean
+        DeletedByUserID:
+          format: int32
+          description: The ID of the user that deleted this authorization code. Read only.
+          type: integer
+        DeletedDate:
+          format: date-time
+          description: A timestamp of when this authorization code was deleted. Read only.
+          type: string
+        EffectiveDate:
+          format: date-time
+          description: A date at which this code should begin being valid. Optional. Set on create only.
+          type: string
+    API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCode:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    AuthorizationCodes.Shared.Models.AuthorizationContactInformation:
+      required:
+      - AuthorizationCodeID
+      - Contact
+      - Dealership
+      - DealerCode
+      - Phone
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: ID of authorizationContactInformation
+          type: integer
+        AuthorizationCodeID:
+          format: int32
+          description: AuthorizationCode ID that the contact information ties into.
+          type: integer
+        Contact:
+          description: Name of contact requesting an authorization code. Minimum length of 3 characters.
+          type: string
+        Dealership:
+          description: Name of dealership. Minimum length of 3 characters.
+          type: string
+        DealerCode:
+          description: Dealer code that relates to the dealership. Minimum length of 3 characters.
+          type: string
+        Phone:
+          description: Phone number of contact.
+          type: string
+        Email:
+          description: Email of contact.
+          type: string
+        Notes:
+          description: Optional notes used for internal use.
+          type: string
+        DefinitionName:
+          description: The name of the definition used for generating this authorization code. Read Only.
+          type: string
+        Code:
+          description: The authorization code. Read Only.
+          type: string
+        CreatedBy:
+          description: The name of the user that created this code. Read Only.
+          type: string
+        CreatedDate:
+          format: date-time
+          description: The date the authorization code was created.
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    AuthorizationCodes.Shared.Models.Parameter:
+      description: A parameter used to create an authorization code.
+      required:
+      - Name
+      - Value
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter. May not be updated.
+          type: string
+        Value:
+          description: The value of the parameter. May not be updated.
+          type: string
+    AuthorizationCodes.Shared.Models.CodeValidationModel:
+      type: object
+      properties:
+        IsValid:
+          type: boolean
+        ExpirationDate:
+          format: date-time
+          type: string

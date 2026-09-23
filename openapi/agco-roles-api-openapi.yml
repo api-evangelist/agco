@@ -1,0 +1,404 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Roles API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Roles
+paths:
+  /api/v2/Roles:
+    get:
+      tags:
+      - Roles
+      summary: List Roles
+      description: No Documentation Found.
+      operationId: Roles_GetRoles
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: Optional. Finds a role with the given name.
+        required: false
+        schema:
+          type: string
+      - name: permissionID
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: permissionName
+        in: query
+        description: Optional. Filters roles by whether they contain the provided permission.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Role'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Role'
+      deprecated: false
+    post:
+      tags:
+      - Roles
+      summary: Adds a User Role
+      description: No Documentation Found.
+      operationId: Roles_PostRole
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Role'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Role'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Role'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Role'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.Role'
+        description: Role to add
+        required: true
+  /api/v2/Roles/{id}:
+    get:
+      tags:
+      - Roles
+      summary: Gets a User Role
+      description: No Documentation Found.
+      operationId: Roles_GetRole
+      parameters:
+      - name: id
+        in: path
+        description: The role's id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.Role'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.Role'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.Role'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.Role'
+      deprecated: false
+    put:
+      tags:
+      - Roles
+      summary: Updates a User Role
+      description: No Documentation Found.
+      operationId: Roles_PutRole
+      parameters:
+      - name: id
+        in: path
+        description: The role's id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Role'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Role'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Role'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Role'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.Role'
+        description: The Updated Role
+        required: true
+    delete:
+      tags:
+      - Roles
+      summary: Deletes a User Role
+      description: No Documentation Found.
+      operationId: Roles_DeleteRole
+      parameters:
+      - name: id
+        in: path
+        description: The role's id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+  /api/v2/Roles/{id}/Permissions:
+    get:
+      tags:
+      - Roles
+      summary: Get the Permissions for a Role
+      description: No Documentation Found.
+      operationId: Roles_GetRolePermissions
+      parameters:
+      - name: id
+        in: path
+        description: The id of the Role
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: Filter by permission name. Optional.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Permission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Permission'
+      deprecated: false
+    put:
+      tags:
+      - Roles
+      summary: Manage the Permissions for a Role
+      description: No Documentation Found.
+      operationId: Roles_PutRolePermissions
+      parameters:
+      - name: id
+        in: path
+        description: The id of the Role
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.RolePermissionChange'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.RolePermissionChange'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.RolePermissionChange'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.RolePermissionChange'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.RolePermissionChange'
+        description: Permissions Changes for the Role
+        required: true
+components:
+  schemas:
+    API.Models.Role:
+      description: Defines an API Role
+      required:
+      - Name
+      - Description
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: The role's identifier.
+          type: integer
+        Name:
+          description: The name of the role. Must be alpha-numeric strings separated by a period (.).
+          pattern: ^[0-9a-zA-Z]*?[a-zA-Z]+[0-9a-zA-Z]*$
+          type: string
+        Description:
+          description: Role description
+          type: string
+    API.PagedResponse_API.Models.Role:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.Role'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.Permission:
+      required:
+      - Name
+      - DataRequired
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: The identifier of the permission.
+          type: integer
+        Name:
+          description: The name of the permission.
+          type: string
+        Description:
+          type: string
+        DataRequired:
+          description: Indicates if data is required or optional
+          enum:
+          - 'Yes'
+          - 'No'
+          - Optional
+          type: string
+        DataDescription:
+          description: Description of data to be provided with Role Authorization
+          type: string
+    API.Models.RolePermissionChange:
+      description: Change to the Permissions that a Role is given.
+      required:
+      - Permission
+      - Action
+      type: object
+      properties:
+        Permission:
+          description: The name of the permission to grant or revoke.
+          type: string
+        Action:
+          description: The action to take.
+          enum:
+          - Grant
+          - Revoke
+          type: string
+    API.PagedResponse_API.Models.Permission:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.Permission'
+          readOnly: true

@@ -1,0 +1,704 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Agents API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Agents
+paths:
+  /api/v2/agents:
+    get:
+      tags:
+      - Agents
+      summary: Get Agents
+      description: 'Gets a collection of Agents. When successful, the response is a PagedResponse of Agents.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Agents_GetAgents
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_BuildSystem.Shared.DTO.Agent'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_BuildSystem.Shared.DTO.Agent'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Agents
+      summary: Create an Agent
+      description: 'Creates an Agent. The body of the POST is the Agent to create. The AgentID will be assigned
+
+        on creation of the Agent. When successful, the response is the AgentID. If unsuccessful, an
+
+        appropriate ApiError is returned.'
+      operationId: Agents_PostAgent
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+        description: The Agent to create.  The AgentID will be assigned on creation of the Agent.
+        required: true
+  /api/v2/agents/{agentID}:
+    get:
+      tags:
+      - Agents
+      summary: Get Agent
+      description: 'Gets an Agent by ID. When successful, the response is the requested Agent. If unsuccessful,
+
+        an appropriate ApiError is returned.'
+      operationId: Agents_GetAgentAsync
+      parameters:
+      - name: agentID
+        in: path
+        description: The id of the Agent to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Agents
+      summary: Update an Agent
+      description: 'Updates an Agent. The body of the PUT is the updated Agent. When successful, the response is empty.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Agents_PutAgent
+      parameters:
+      - name: agentID
+        in: path
+        description: The id of the Agent to update.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+        description: The updated Agent
+        required: true
+    delete:
+      tags:
+      - Agents
+      summary: Delete an Agent
+      description: 'Deletes an Agent. When successful, the response is empty. If unsuccessful, an appropriate
+
+        ApiError is returned.'
+      operationId: Agents_DeleteAgent
+      parameters:
+      - name: agentID
+        in: path
+        description: The id of the Agent to delete.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/agents/Current:
+    get:
+      tags:
+      - Agents
+      summary: Get Agent associated with the current user
+      description: 'Gets the Agent associated with the current user. When successful, the response is the requested Agent. If unsuccessful,
+
+        an appropriate ApiError is returned.'
+      operationId: Agents_GetCurrentAgentAsync
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/agents/{agentID}/ActivityRun:
+    get:
+      tags:
+      - Agents
+      summary: Get an Agent's ActivityRun
+      description: 'Gets the activity run assigned to an agent. When successful, the response is the ActivityRun
+
+        assigned to the Agent. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Agents_GetAgentActivityRun
+      parameters:
+      - name: agentID
+        in: path
+        description: The id of the Agent to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Agents
+      summary: Update the ActivityRun assigned to the Agent
+      description: No Documentation Found.
+      operationId: Agents_PutAgentActivityRun
+      parameters:
+      - name: agentID
+        in: path
+        description: The id of the Agent to update.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+        description: The ActivityRun assigned to the agent.  Only the ActivityRunID is used.
+        required: true
+  /api/v2/agents/Current/ActivityRun:
+    get:
+      tags:
+      - Agents
+      summary: Get the ActivityRun of Agent associated with the current user
+      description: 'Gets the activity run assigned to an agent. When successful, the response is the ActivityRun
+
+        assigned to the Agent. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Agents_GetCurrentAgentActivityRun
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRun'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/agents/{agentID}/Status:
+    put:
+      tags:
+      - Agents
+      summary: Update an Agent
+      description: 'Updates the status of an Agent.The body of the PUT is the updated Agent status. When successful,
+
+        the response is empty.If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Agents_PutAgentStatus
+      parameters:
+      - name: agentID
+        in: path
+        description: The id of the Agent to update.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.AgentStatus'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.AgentStatus'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.AgentStatus'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.AgentStatus'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.AgentStatus'
+        description: The updated AgentStatus.
+        required: true
+components:
+  schemas:
+    BuildSystem.Shared.DTO.Agent:
+      description: A DTO for an IAgent
+      required:
+      - UserID
+      - MachineName
+      - Status
+      - KeepAliveInterval
+      type: object
+      properties:
+        AgentID:
+          format: int32
+          description: The id of the Agent
+          type: integer
+        UserID:
+          format: int32
+          description: The UserID of the Agent
+          type: integer
+        MachineName:
+          description: The machine name of the computer the agent is running on
+          type: string
+        StepConfigurations:
+          description: The agent's step configurations
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.StepConfiguration'
+          readOnly: true
+        Status:
+          $ref: '#/components/schemas/BuildSystem.Shared.DTO.AgentStatus'
+          description: The agent status.
+        KeepAliveInterval:
+          format: int32
+          description: The 'Heartbeat Interval' used by the Build Agent.
+          type: integer
+    API.PagedResponse_BuildSystem.Shared.DTO.Agent:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+          readOnly: true
+    BuildSystem.Shared.DTO.ActivityRun:
+      description: A DTO for an IActivityRun
+      required:
+      - Status
+      type: object
+      properties:
+        ActivityRunID:
+          format: int32
+          description: The identifier for the ActivityRun
+          type: integer
+        JobActivityID:
+          format: int32
+          description: Read Only. The ID of the Job Activity that defines this activity run
+          type: integer
+        JobRunID:
+          format: int32
+          description: Read Only. The ID of the JobRun under which this ActivityRun is executing
+          type: integer
+        Parameters:
+          description: The parameters used for this run of the activity.  Parameters cannot be added or removed, but output parameter values may be updated.
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterValue'
+          readOnly: true
+        Status:
+          $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRunStatus'
+          description: The status of this ActivityRun
+        Steps:
+          description: Read Only. The steps to be executed for the activity.  These steps come from the relationship through JobActivity down to ActivityStep
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityStep'
+          readOnly: true
+        StartDate:
+          format: date-time
+          description: Read Only. The UTC date and time when the activity started
+          type: string
+        EndDate:
+          format: date-time
+          description: Read Only. The UTC date and time when the activity completed
+          type: string
+    BuildSystem.Shared.DTO.ParameterMapping:
+      description: A DTO for an IParameterMapping
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter this mapping applies to
+          type: string
+        SourceType:
+          description: The source type used for supplying the parameter
+          enum:
+          - Constant
+          - Variable
+          type: string
+        Source:
+          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
+          type: string
+    BuildSystem.Shared.DTO.ActivityStep:
+      description: A DTO for an IActivityStep
+      type: object
+      properties:
+        ActivityStepID:
+          format: int32
+          description: The id of this activity step
+          type: integer
+        ActivityID:
+          format: int32
+          description: The id of the activity this activity step belongs to
+          type: integer
+        StepID:
+          format: int32
+          description: The id of the step
+          type: integer
+        RunOrder:
+          format: int32
+          description: The order of this activity step relative to other activity steps
+          type: integer
+        UseConfig:
+          description: Indicates the configuration for the ActivityStep to use at runtime.  The build agent must provide this configuration
+          type: string
+        StepName:
+          description: The name of the step
+          type: string
+        ImplementationID:
+          description: The implementation id which is used to look up the step implementation
+          type: string
+        ParameterMappings:
+          description: The mapping of values from a source to be used for the step parameters
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterMapping'
+          readOnly: true
+    BuildSystem.Shared.DTO.StepConfiguration:
+      description: Step Configuration
+      required:
+      - StepImplementationID
+      type: object
+      properties:
+        StepImplementationID:
+          description: The Implementation ID of the step this configuration is for
+          type: string
+        Configurations:
+          description: The configuration names supported.  The configurations collection is empty for steps which do not require configuration.
+          type: array
+          items:
+            type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    BuildSystem.Shared.DTO.AgentStatus:
+      description: A DTO for an IAgentStatus
+      required:
+      - Online
+      type: object
+      properties:
+        Online:
+          description: Indicates if the agent is online
+          type: boolean
+        LastStatusUpdate:
+          format: date-time
+          description: ReadOnly. The UTC date and time of the last status update
+          type: string
+    BuildSystem.Shared.DTO.ParameterValue:
+      description: A DTO for an IParameterValue
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter this value is for
+          type: string
+        Value:
+          description: The parameter value in string representation
+          type: string
+        Direction:
+          description: The parameter direction (Input or Output)
+          enum:
+          - Input
+          - Output
+          type: string
+    BuildSystem.Shared.DTO.ActivityRunStatus:
+      description: A DTO for an IActivityRunStatus
+      type: object
+      properties:
+        Status:
+          description: The status of the ActivityRun
+          enum:
+          - Ready
+          - InProgress
+          - Succeeded
+          - Cancelled
+          - Failed
+          type: string
+        CurrentStep:
+          format: int32
+          description: The activity step currently executing, indicated by numeric order
+          type: integer
+        StepStatus:
+          description: The status text from the currently executing step
+          type: string
+        StepProgress:
+          format: int32
+          description: The percent progress from the currently executing step.  This value shall be null if progress is not available
+          type: integer

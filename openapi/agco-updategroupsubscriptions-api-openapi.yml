@@ -1,0 +1,411 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Update Group Subscriptions API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: UpdateGroupSubscriptions
+paths:
+  /api/v2/UpdateGroupSubscriptions:
+    get:
+      tags:
+      - UpdateGroupSubscriptions
+      summary: Get Update Group Subscriptions
+      description: No Documentation Found.
+      operationId: UpdateGroupSubscriptions_GetUpdateGroupSubscriptions
+      parameters:
+      - name: UpdateGroupID
+        in: query
+        description: Optional. Filter by Update Group ID.
+        required: false
+        schema:
+          type: string
+      - name: PackageTypeID
+        in: query
+        description: Optional. Filter by Package Type ID.
+        required: false
+        schema:
+          type: string
+      - name: ClientID
+        in: query
+        description: Optional. Filter by Client ID.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - UpdateGroupSubscriptions
+      summary: Add an Update Group Subscription
+      description: No Documentation Found.
+      operationId: UpdateGroupSubscriptions_PostUpdateGroupSubscription
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+        description: The Update Group Subscription to add
+        required: true
+  /api/v2/UpdateGroupSubscriptions/{UpdateGroupSubscriptionID}:
+    get:
+      tags:
+      - UpdateGroupSubscriptions
+      summary: Get an Update Group Subscription
+      description: No Documentation Found.
+      operationId: UpdateGroupSubscriptions_GetUpdateGroupSubscription
+      parameters:
+      - name: UpdateGroupSubscriptionID
+        in: path
+        description: The Update Group Subscription ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - UpdateGroupSubscriptions
+      summary: Update an Update Group Subscription
+      description: No Documentation Found.
+      operationId: UpdateGroupSubscriptions_PutUpdateGroupSubscription
+      parameters:
+      - name: UpdateGroupSubscriptionID
+        in: path
+        description: The Update Group Subscription ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+        description: The updated Update Group Subscription
+        required: true
+    delete:
+      tags:
+      - UpdateGroupSubscriptions
+      summary: Delete an Update Group Subscription
+      description: No Documentation Found.
+      operationId: UpdateGroupSubscriptions_DeleteUpdateGroupSubscription
+      parameters:
+      - name: UpdateGroupSubscriptionID
+        in: path
+        description: The Update Group Subscription ID to delete
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/UpdateGroupSubscriptions/Batch:
+    put:
+      tags:
+      - UpdateGroupSubscriptions
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: UpdateGroupSubscriptions_PutUpdateGroupSubscriptions
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+        required: true
+    post:
+      tags:
+      - UpdateGroupSubscriptions
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: UpdateGroupSubscriptions_PostUpdateGroupSubscriptions
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+        required: true
+components:
+  schemas:
+    API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          readOnly: true
+    UpdateSystem.Models.UpdateGroupSubscription:
+      required:
+      - UpdateGroupID
+      - PackageTypeID
+      - ClientID
+      - Include
+      type: object
+      properties:
+        UpdateGroupSubscriptionID:
+          format: int32
+          description: The Update Group Subscription ID.  This ID will be automatically assigned when creating an Update Group Subscription.
+          type: integer
+        UpdateGroupID:
+          description: The Update Group this subscription is relevant for.
+          type: string
+        PackageTypeID:
+          description: The PackageType to set subscription status for
+          type: string
+        ClientID:
+          description: The ClientID.
+          type: string
+        Include:
+          description: True to receive content of type indicated by PackageTypeID.
+          type: boolean
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

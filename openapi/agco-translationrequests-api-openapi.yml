@@ -1,0 +1,381 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Translation Requests API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: TranslationRequests
+paths:
+  /api/v2/TranslationRequests:
+    get:
+      tags:
+      - TranslationRequests
+      summary: Get all TranslationRequest objects.
+      description: No Documentation Found.
+      operationId: TranslationRequests_GetTranslationRequests
+      parameters:
+      - name: limit
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationRequest'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationRequest'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationRequest'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationRequest'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - TranslationRequests
+      summary: Create a translation request.
+      description: No Documentation Found.
+      operationId: TranslationRequests_CreateTranslationRequest
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+        required: true
+  /api/v2/TranslationRequests/{Id}:
+    get:
+      tags:
+      - TranslationRequests
+      summary: Get a TranslationRequest object by id.
+      description: No Documentation Found.
+      operationId: TranslationRequests_GetTranslationRequest
+      parameters:
+      - name: Id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - TranslationRequests
+      summary: Update a TranslationRequest object by id. Accepts a TranslationRequest object
+      description: No Documentation Found.
+      operationId: TranslationRequests_UpdateTranslationRequest
+      parameters:
+      - name: Id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: doResendRequest
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+        required: true
+  /api/v2/TranslationRequests/{Id}/Strings:
+    put:
+      tags:
+      - TranslationRequests
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: TranslationRequests_UpdateTranslationRequestStrings
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          text/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          text/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+components:
+  schemas:
+    GlobalResources.Shared.Models.TranslationRequest:
+      description: A request to translate specified strings into specified locales
+      required:
+      - ChargeToAccount
+      - Deadline
+      - Notes
+      - State
+      - CCEmailAddresses
+      - LocaleIds
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: The ID of the request
+          type: integer
+        SubmittedBy:
+          format: int32
+          description: The ID of the User that submitted the request
+          type: integer
+        ChargeToAccount:
+          description: The account to charge for the request
+          type: string
+        Deadline:
+          format: date-time
+          description: The date by which the translations in the request are needed. Defaults to 30 days from the current date
+          type: string
+        Notes:
+          description: Additional notes or comments about the request
+          type: string
+        State:
+          description: The state of the request
+          enum:
+          - NotSubmitted
+          - Submitted
+          - Cancelled
+          - Completed
+          type: string
+        CCEmailAddresses:
+          description: Additional email addresses to CC on emails pertaining to the request
+          pattern: ^(?(")("[^"]+?"@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,24}))$
+          type: array
+          items:
+            type: string
+        TranslatorName:
+          description: The name of the translator
+          type: string
+        TranslatorEmail:
+          description: The email address for the translator
+          type: string
+        QuestionsUserId:
+          format: int32
+          description: The ID of the user to which to address questions regarding the request
+          type: integer
+        ApprovalUserId:
+          format: int32
+          description: The ID of the user from which approval for the request is required
+          type: integer
+        LocaleIds:
+          description: Locale IDs to which these strings are requested to be translated
+          type: array
+          items:
+            format: int32
+            type: integer
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.IPagedResponse_GlobalResources.Shared.Models.TranslationRequest:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationRequest'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

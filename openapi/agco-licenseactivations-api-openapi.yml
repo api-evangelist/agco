@@ -1,0 +1,322 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: License Activations API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: LicenseActivations
+paths:
+  /api/v2/LicenseActivations:
+    post:
+      tags:
+      - LicenseActivations
+      summary: Create a license activation
+      description: No Documentation Found.
+      operationId: LicenseActivations_Post
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.LicenseActivation'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.LicenseActivation'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.LicenseActivation'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.LicenseActivation'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationCreate'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationCreate'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationCreate'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationCreate'
+        description: The data required for creating the license.
+        required: true
+  /api/v2/LicenseActivations/{ID}:
+    put:
+      tags:
+      - LicenseActivations
+      summary: Update a license activiation
+      description: No Documentation Found.
+      operationId: LicenseActivations_Put
+      parameters:
+      - name: ID
+        in: path
+        description: The ID of the license.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.LicenseActivation'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.LicenseActivation'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.LicenseActivation'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.LicenseActivation'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationUpdate'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationUpdate'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationUpdate'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationUpdate'
+        description: The data required for updating the license.
+        required: true
+  /api/v2/LicenseActivations/{ID}/Confirm:
+    put:
+      tags:
+      - LicenseActivations
+      summary: Confirm that the client has applied the updated license
+      description: No Documentation Found.
+      operationId: LicenseActivations_PutConfirm
+      parameters:
+      - name: ID
+        in: path
+        description: The ID of the license
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationConfirm'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationConfirm'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationConfirm'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.LicenseActivationConfirm'
+        description: The license data.
+        required: true
+  /api/v2/LicenseActivations/RegisterEDTLite:
+    post:
+      tags:
+      - LicenseActivations
+      summary: Register an EDT Lite with the Server
+      description: No Documentation Found.
+      operationId: LicenseActivations_PostRegisterEDTLite
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.EDTLiteRegistration'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.EDTLiteRegistration'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.EDTLiteRegistration'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.EDTLiteRegistration'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.EDTLiteRegistration'
+        description: The information required for registration.
+        required: true
+components:
+  schemas:
+    DealerDB.Models.LicenseActivationUpdate:
+      required:
+      - LicenseVersion
+      type: object
+      properties:
+        LicenseVersion:
+          description: The license version to update
+          type: string
+        SystemInfo:
+          description: Information about  the system being activated
+          type: string
+    DealerDB.Models.LicenseActivationConfirm:
+      required:
+      - LicenseVersion
+      type: object
+      properties:
+        LicenseVersion:
+          description: The license version to confirm
+          type: string
+    DealerDB.Models.LicenseActivation:
+      type: object
+      properties:
+        LicenseData:
+          description: The license data in base64 format.
+          type: string
+        Key:
+          description: The license key in base64 format.  This is only provided when the LicenseData is a new license.
+          type: string
+    DealerDB.Models.EDTLiteRegistration:
+      description: Registration for an EDT Lite
+      required:
+      - InstanceID
+      - VoucherCode
+      - ExpirationDate
+      type: object
+      properties:
+        InstanceID:
+          description: The identifier for the EDT Lite.
+          type: string
+        VoucherCode:
+          description: The voucher code with which the EDT Lite was created.
+          type: string
+        DealerCode:
+          description: The dealer code with which the EDT Lite was created.
+          type: string
+        ExpirationDate:
+          format: date-time
+          description: The date at which the content of the EDT Lite expires.
+          type: string
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    DealerDB.Models.LicenseActivationCreate:
+      required:
+      - VoucherCode
+      - DealerCode
+      - PostalCode
+      - SystemInfo
+      type: object
+      properties:
+        VoucherCode:
+          description: The Voucher Code to use for activation
+          type: string
+        DealerCode:
+          description: The Dealer Code of the dealer activating the license
+          type: string
+        PostalCode:
+          description: The dealer's postal code (zip code)
+          type: string
+        SystemInfo:
+          description: Information about  the system being activated
+          type: string
+        LicenseActivationType:
+          description: The type of license to create (e.g. EDT, EDT Lite)
+          enum:
+          - EDT
+          - EDTLite
+          type: string

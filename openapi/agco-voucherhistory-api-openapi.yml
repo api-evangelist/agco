@@ -1,0 +1,161 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Voucher History API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: VoucherHistory
+paths:
+  /api/v2/VoucherHistory:
+    get:
+      tags:
+      - VoucherHistory
+      summary: Gets voucher history data
+      description: No Documentation Found.
+      operationId: VoucherHistory_GetVoucherHistory
+      parameters:
+      - name: VoucherCode
+        in: query
+        description: Optional. Filter history data by Voucher Code.
+        required: false
+        schema:
+          type: string
+      - name: ChangedBefore
+        in: query
+        description: Optional. Filter history data where changes occured before provided date.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: ChangedAfter
+        in: query
+        description: Optional. Filter history data where changes occured after provided date.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.VoucherHistory'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.VoucherHistory'
+      deprecated: false
+components:
+  schemas:
+    API.PagedResponse_DealerDB.Models.VoucherHistory:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/DealerDB.Models.VoucherHistory'
+          readOnly: true
+    DealerDB.Models.VoucherHistory:
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The id of the voucher history item
+          type: integer
+        ChangedDate:
+          format: date-time
+          type: string
+        VoucherCode:
+          description: The voucher code.
+          type: string
+        Type:
+          description: The type of voucher.
+          enum:
+          - Commercial
+          - Internal
+          - Temporary
+          - RightToRepair
+          type: string
+        DealerCode:
+          description: The dealer code the voucher is assigned to.  Required for commercial vouchers.
+          type: string
+        LicenseTo:
+          description: Required for Internal Vouchers
+          type: string
+        Purpose:
+          description: Required for Internal Vouchers
+          type: string
+        OrderNumber:
+          description: The order number of a commercial license. Required for Commercial Vouchers. Not supported for other Vouchers.
+          type: string
+        Email:
+          description: The email address. Required for Internal Vouchers
+          type: string
+        ModifiedBy:
+          description: Read-Only. The user that made the last modification to the voucher.
+          type: string
+        CreatedDate:
+          format: date-time
+          description: Read-Only. The date the voucher was created.
+          type: string
+        PunchedDate:
+          format: date-time
+          description: Read-Only. The date the voucher was punched.
+          type: string
+        Punched:
+          description: True if voucher has aleady been used.  False if the voucher has not been used.
+          type: boolean
+        Deleted:
+          description: Read-Only. True if voucher has been deleted.
+          type: boolean
+        ExpirationDate:
+          format: date-time
+          description: The expiration date of the voucher. Required for Temporary Vouchers.
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true

@@ -1,0 +1,327 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Steps API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Steps
+paths:
+  /api/v2/steps:
+    get:
+      tags:
+      - Steps
+      summary: Get Steps
+      description: 'Gets a collection of Steps. When successful, the response is a PagedResponse of Steps.
+
+        If unsuccessful, an appropriate ApiError is returned. Steps.Read permission is required.'
+      operationId: Steps_GetSteps
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeDeleted
+        in: query
+        description: Does it include deleted step, or not
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_BuildSystem.Shared.DTO.Step'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_BuildSystem.Shared.DTO.Step'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Steps
+      summary: Create a Step
+      description: No Documentation Found.
+      operationId: Steps_PostStep
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+        description: The step to create
+        required: true
+  /api/v2/steps/{stepID}:
+    get:
+      tags:
+      - Steps
+      summary: Get a Step by ID
+      description: 'Gets a Step by ID. When successful, the response is the requested Step.
+
+        If unsuccessful, an appropriate ApiError is returned. Steps.Read permission is required.'
+      operationId: Steps_GetStep
+      parameters:
+      - name: stepID
+        in: path
+        description: The ID of the Step to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: isIncludeDeleted
+        in: query
+        description: Does it include deleted step, or not
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Steps
+      summary: Update a Step
+      description: No Documentation Found.
+      operationId: Steps_PutStep
+      parameters:
+      - name: stepID
+        in: path
+        description: The step ID of the step to update
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+        description: The updated step
+        required: true
+components:
+  schemas:
+    BuildSystem.Shared.DTO.Parameter:
+      description: A DTO for an IParameter
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter
+          type: string
+        Type:
+          description: The data type of the parameter
+          enum:
+          - String
+          - Boolean
+          - Integer
+          - Float
+          - StringDictionary
+          type: string
+        Direction:
+          description: The parameter direction (Input or Output)
+          enum:
+          - Input
+          - Output
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    BuildSystem.Shared.DTO.Step:
+      description: Step
+      required:
+      - Name
+      - ConfigRequired
+      - ImplementationID
+      type: object
+      properties:
+        StepID:
+          format: int32
+          description: The ID of the step
+          type: integer
+        Name:
+          description: The name of the step
+          type: string
+        ConfigRequired:
+          description: Indicates if the step requires configuration values to be provided by the build agent
+          type: boolean
+        Description:
+          description: A description of the step to be presented to a user
+          type: string
+        ImplementationID:
+          description: The implementation ID used to lookup the step implementation when it is executed
+          type: string
+        Deleted:
+          description: Read Only.  Indicates if the record is deleted.
+          type: boolean
+        Parameters:
+          description: The parameters for this step
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Parameter'
+          readOnly: true
+    API.PagedResponse_BuildSystem.Shared.DTO.Step:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
+          readOnly: true

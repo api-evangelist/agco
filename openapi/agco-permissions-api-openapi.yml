@@ -1,0 +1,248 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Permissions API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Permissions
+paths:
+  /api/v2/Permissions:
+    get:
+      tags:
+      - Permissions
+      summary: List Permissions
+      description: No Documentation Found.
+      operationId: Permissions_GetPermissions
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: Filter by permission name. Supports ending wildcard (*). Optional.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Permission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Permission'
+      deprecated: false
+    post:
+      tags:
+      - Permissions
+      summary: Adds a Permission
+      description: No Documentation Found.
+      operationId: Permissions_PostPermission
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Permission'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Permission'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Permission'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Permission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.Permission'
+        description: Permission to add
+        required: true
+  /api/v2/Permissions/{id}:
+    get:
+      tags:
+      - Permissions
+      summary: Gets a Permission
+      description: No Documentation Found.
+      operationId: Permissions_GetPermission
+      parameters:
+      - name: id
+        in: path
+        description: Id of Permission
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.Permission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.Permission'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.Permission'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.Permission'
+      deprecated: false
+    put:
+      tags:
+      - Permissions
+      summary: Updates a Permission
+      description: No Documentation Found.
+      operationId: Permissions_PutPermission
+      parameters:
+      - name: id
+        in: path
+        description: Id of Permission
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Permission'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Permission'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Permission'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Permission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.Permission'
+        description: The Updated Permission
+        required: true
+    delete:
+      tags:
+      - Permissions
+      summary: Deletes a Permission
+      description: No Documentation Found.
+      operationId: Permissions_DeletePermission
+      parameters:
+      - name: id
+        in: path
+        description: Id of Permission
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+components:
+  schemas:
+    API.Models.Permission:
+      required:
+      - Name
+      - DataRequired
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: The identifier of the permission.
+          type: integer
+        Name:
+          description: The name of the permission.
+          type: string
+        Description:
+          type: string
+        DataRequired:
+          description: Indicates if data is required or optional
+          enum:
+          - 'Yes'
+          - 'No'
+          - Optional
+          type: string
+        DataDescription:
+          description: Description of data to be provided with Role Authorization
+          type: string
+    API.PagedResponse_API.Models.Permission:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.Permission'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true

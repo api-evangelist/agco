@@ -1,0 +1,917 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Translation Sets API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: TranslationSets
+paths:
+  /api/v2/TranslationSets:
+    get:
+      tags:
+      - TranslationSets
+      summary: Get a PagedResponse of TranslationSet objects.
+      description: No Documentation Found.
+      operationId: TranslationSets_GetTranslationSets
+      parameters:
+      - name: limit
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: translationRequestID
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: state
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          enum:
+          - OutForProcessing
+          - Processing
+          - PendingApproval
+          - OutForTranslation
+          - Cancelled
+          - Completed
+      - name: stringId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+      - name: languageId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeAttributes
+        in: query
+        description: Names of Attributes to include when retrieving this submission. This should be a comma-separated list. If not provided, Attributes are not included. If '*', all Attributes are included.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSet'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSet'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSet'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/TranslationSets/{ID}:
+    get:
+      tags:
+      - TranslationSets
+      summary: Get a TranslationSet object by its id.
+      description: No Documentation Found.
+      operationId: TranslationSets_GetTranslationSet
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: includeAttributes
+        in: query
+        description: Names of Attributes to include when retrieving this Translation set. This should be a comma-separated list. If not provided, Attributes are not included. If '*', all Attributes are included.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - TranslationSets
+      summary: Update a Translation Set.
+      description: No Documentation Found.
+      operationId: TranslationSets_UpdateTranslationSet
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+        required: true
+  /api/v2/TranslationSets/{ID}/Strings:
+    get:
+      tags:
+      - TranslationSets
+      summary: Get a PagedResponse of TranslationSetString objects
+      description: No Documentation Found.
+      operationId: TranslationSets_GetTranslationSetStrings
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetString'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetString'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetString'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetString'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - TranslationSets
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: TranslationSets_UpdateTranslationSetStrings
+      parameters:
+      - name: ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetString'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetString'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetString'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetString'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetString'
+        required: true
+  /api/v2/TranslationSets/{ID}/SourceStrings:
+    get:
+      tags:
+      - TranslationSets
+      summary: Gets the information needed to translate a string in a translation set
+      description: No Documentation Found.
+      operationId: TranslationSets_GetSourceStrings
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetSourceString'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetSourceString'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetSourceString'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetSourceString'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/TranslationSets/{ID}/Statistics:
+    get:
+      tags:
+      - TranslationSets
+      summary: Gets the statistics for translation sets such as the language ids and count of…
+      description: No Documentation Found.
+      operationId: TranslationSets_GetStatistics
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetStatistics'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetStatistics'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetStatistics'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetStatistics'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/TranslationSets/{ID}/Attributes:
+    get:
+      tags:
+      - TranslationSets
+      summary: Get a PagedResponse of TranslationSetAttribute objects
+      description: No Documentation Found.
+      operationId: TranslationSets_GetTranslationSetAttributes
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetAttribute'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetAttribute'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetAttribute'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetAttribute'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - TranslationSets
+      summary: Create a TranslationSetAttribute object
+      description: No Documentation Found.
+      operationId: TranslationSets_PostTranslationSetAttribute
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+        required: true
+  /api/v2/TranslationSetAttributes/{ID}:
+    put:
+      tags:
+      - TranslationSets
+      summary: Update a TranslationSetAttribute object
+      description: No Documentation Found.
+      operationId: TranslationSets_UpdateTranslationSetAttribute
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+        required: true
+    delete:
+      tags:
+      - TranslationSets
+      summary: Delete a set of TranslationSetAttribute object
+      description: No Documentation Found.
+      operationId: TranslationSets_DeleteTranslationSetAttribute
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/TranslationSetAttributes/Batch:
+    put:
+      tags:
+      - TranslationSets
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: TranslationSets_UpdateTranslationSetAttributes
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+        required: true
+  /api/v2/TranslationSets/{ID}/Attributes/Batch:
+    post:
+      tags:
+      - TranslationSets
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: TranslationSets_PostTranslationSetAttributes
+      parameters:
+      - name: ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+        required: true
+components:
+  schemas:
+    GlobalResources.Shared.Models.TranslationSetStatistics:
+      description: Statistics for a translation set
+      type: object
+      properties:
+        LanguageIDs:
+          description: The IDs of languages for which translaions in this translation set have been requested
+          type: array
+          items:
+            format: int32
+            type: integer
+        StringCount:
+          format: int32
+          description: The count of unique string definitions contained in this translation set
+          type: integer
+    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetAttribute:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    GlobalResources.Shared.Models.TranslationSetSourceString:
+      description: Information needed to translate a string in a translation set
+      type: object
+      properties:
+        StringID:
+          description: The ID of the string to translate
+          type: string
+        LanguageID:
+          format: int32
+          description: The ID of the language from which to translate the string
+          type: integer
+        StringValue:
+          description: The string to translate
+          type: string
+        DescriptionForTranslator:
+          description: A description of the string to translate. This should contain context and parameter count.
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetString:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetString'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    GlobalResources.Shared.Models.TranslationSetString:
+      description: The resulting translation in a translation set.  is the  to which the string will be translated.
+      required:
+      - TranslationSetId
+      - StringID
+      - LanguageID
+      type: object
+      properties:
+        TranslationSetId:
+          format: int32
+          description: The id of the TranslationSet
+          type: integer
+        StringID:
+          description: The Id of the string translation that has been requested
+          type: string
+        LanguageID:
+          format: int32
+          description: The ID of the language into which to translate the string
+          type: integer
+        StringValue:
+          description: The string value returned from the translator
+          type: string
+    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSet:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    GlobalResources.Shared.Models.TranslationSetAttribute:
+      description: An attribute of a
+      required:
+      - Name
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The ID of this attribute.
+          type: integer
+        TranslationSetID:
+          format: int32
+          description: The ID of the translation set to which this attribute belongs.
+          type: integer
+        Name:
+          description: The name of this Attribute.
+          pattern: '[a-zA-Z0-9]+'
+          type: string
+        Value:
+          description: The value of this Attribute
+          type: string
+    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetSourceString:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetSourceString'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    GlobalResources.Shared.Models.TranslationSet:
+      description: A set of strings submitted for translation
+      required:
+      - State
+      - FileIDs
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: The id of the TranslationSet.
+          type: integer
+        Notes:
+          description: Notes on the TranslationSet
+          type: string
+        State:
+          description: An enum indicating the state of the translation set
+          enum:
+          - OutForProcessing
+          - Processing
+          - PendingApproval
+          - OutForTranslation
+          - Cancelled
+          - Completed
+          type: string
+        TranslationRequestID:
+          format: int32
+          description: Read Only. The Id of the TranslationRequest which generated this translation set.
+          type: integer
+        OutDate:
+          format: date-time
+          description: Read Only. The date the translation set was sent out.
+          type: string
+        InDate:
+          format: date-time
+          description: Read Only. The date the translation set was returned.
+          type: string
+        FileIDs:
+          description: IDs for files related to this translation set. For example, the original and processed files
+          type: array
+          items:
+            type: string
+        Attributes:
+          description: Attributes of the Translation Set
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'

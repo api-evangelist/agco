@@ -1,7 +1,9 @@
 ---
 title: 'Press release: AI- and sensor solution awarded silver ...'
 url: https://www.linkedin.com/pulse/press-release-ai-sensor-solution-awarded-silver-medal-agritechnica-z9tdf
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"AGCO" press release artificial intelligence'
 position: 3
 source: serpapi-google

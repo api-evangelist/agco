@@ -1,0 +1,238 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Dealers API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Dealers
+paths:
+  /api/v2/Dealers/{DealerCode}:
+    get:
+      tags:
+      - Dealers
+      summary: Lookup a dealer using a dealer code
+      description: No Documentation Found.
+      operationId: Dealers_GetDealerbyDealerCode
+      parameters:
+      - name: DealerCode
+        in: path
+        description: The Dealer Code to Search for
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.Dealer'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.Dealer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.Dealer'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.Dealer'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Dealers:
+    get:
+      tags:
+      - Dealers
+      summary: Get a list of dealers
+      description: No Documentation Found.
+      operationId: Dealers_GetDealers
+      parameters:
+      - name: Brand
+        in: query
+        description: The brand to filter by.
+        required: false
+        schema:
+          type: string
+      - name: ShippingCountry
+        in: query
+        description: The country to filter by.
+        required: false
+        schema:
+          type: string
+      - name: DealerName
+        in: query
+        description: The partial Dealer Name to filter by. Wildcard supported (*).
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.Dealer'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.Dealer'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    DealerDB.Models.Dealer:
+      type: object
+      properties:
+        DealerCode:
+          type: string
+        DealerName:
+          type: string
+        BillingAddress:
+          type: string
+        BillingAddress2:
+          type: string
+        BillingAddress3:
+          type: string
+        BillingAddress4:
+          type: string
+        BillingCity:
+          type: string
+        BillingState:
+          type: string
+        BillingCountry:
+          type: string
+        BillingZip:
+          type: string
+        Region1:
+          type: string
+        BillingCountryCode:
+          type: string
+        Telephone:
+          type: string
+        ShippingStreet:
+          type: string
+        ShippingAddress2:
+          type: string
+        ShippingAddress3:
+          type: string
+        ShippingAddress4:
+          type: string
+        ShippingCity:
+          type: string
+        ShippingState:
+          type: string
+        ShippingCountry:
+          type: string
+        ShippingZip:
+          type: string
+        Region2:
+          type: string
+        LanguagePreference:
+          type: string
+        RegionMapping:
+          type: string
+        DealerStatus:
+          type: string
+        DealerStatusUpdateDate:
+          type: string
+        IsValid:
+          type: boolean
+          readOnly: true
+        RoleBrand:
+          type: string
+        VATCode:
+          type: string
+        Filler:
+          type: string
+        Brands:
+          type: array
+          items:
+            type: string
+          readOnly: true
+    API.PagedResponse_DealerDB.Models.Dealer:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/DealerDB.Models.Dealer'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

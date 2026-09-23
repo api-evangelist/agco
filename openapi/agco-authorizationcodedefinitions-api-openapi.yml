@@ -1,0 +1,501 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Authorization Code Definitions API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: AuthorizationCodeDefinitions
+paths:
+  /api/v2/AuthorizationCodeDefinitions:
+    get:
+      tags:
+      - AuthorizationCodeDefinitions
+      summary: Get authorization code definitions
+      description: 'Additional searches: validationFields[Name]=true and dataFields[Name]=true. These can be used to search for authorization code definitions that have the specified data or validation fields.'
+      operationId: AuthorizationCodeDefinitions_GetAuthorizationCodeDefinition
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: Optional. If specified, filters definitions by name. Starting and ending wildcards (*) supported.
+        required: false
+        schema:
+          type: string
+      - name: createdByUserID
+        in: query
+        description: Optional. If specified, filters definitions to those created by the given User ID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: deletedByUserID
+        in: query
+        description: Optional. If specified, filters definitions to those deleted by the given User ID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeDeleted
+        in: query
+        description: Optional. Whether to include deleted definitions. 'False' by default.
+        required: false
+        schema:
+          type: boolean
+      - name: categoryID
+        in: query
+        description: Optional. If specified, filters definitions with the designated categoryID.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - AuthorizationCodeDefinitions
+      summary: Add an authorization code definition
+      description: No Documentation Found.
+      operationId: AuthorizationCodeDefinitions_PostAuthorizationCodeDefinition
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+        description: An authorization code definition.
+        required: true
+  /api/v2/AuthorizationCodeDefinitions/{id}:
+    get:
+      tags:
+      - AuthorizationCodeDefinitions
+      summary: Get an authorization code definition by its ID
+      description: No Documentation Found.
+      operationId: AuthorizationCodeDefinitions_GetAuthorizationCodeDefinition
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the authorization code definition.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - AuthorizationCodeDefinitions
+      summary: Update an authorization code definition
+      description: No Documentation Found.
+      operationId: AuthorizationCodeDefinitions_PutAuthorizationCodeDefinition
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the authorization code definition.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+        description: An authorization code definition.
+        required: true
+    delete:
+      tags:
+      - AuthorizationCodeDefinitions
+      summary: Disable an authorization code definition
+      description: No Documentation Found.
+      operationId: AuthorizationCodeDefinitions_DeleteAuthorizationCodeDefinition
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the authorization code definition.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/AuthorizationCodeDefinitions/{ID}/Categories/{categoryID}:
+    post:
+      tags:
+      - AuthorizationCodeDefinitions
+      summary: Add a category to an authorizationCodeDefintion
+      description: No Documentation Found.
+      operationId: AuthorizationCodeDefinitions_AddCategoryToDefinition
+      parameters:
+      - name: ID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: categoryID
+        in: path
+        description: A category ID, as a GUID.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    delete:
+      tags:
+      - AuthorizationCodeDefinitions
+      summary: Deletes the category from the authorization code definition
+      description: No Documentation Found.
+      operationId: AuthorizationCodeDefinitions_RemoveCategoryFromDefinition
+      parameters:
+      - name: ID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: categoryID
+        in: path
+        description: A category ID, as a GUID.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    AuthorizationCodes.Shared.Models.DataField:
+      required:
+      - Type
+      - Name
+      type: object
+      properties:
+        Type:
+          description: The type of this data field.
+          enum:
+          - Boolean
+          - Decimal
+          - Float
+          - VariableLengthByteArray
+          type: string
+        MinValue:
+          format: double
+          description: The minimum value that can be represented by this data field. Required only by the 'Decimal' data type.
+          type: number
+        MaxValue:
+          format: double
+          description: The maximum value that can be represented by this data field. Required only by the 'Decimal' data type.
+          type: number
+        ScaleFactor:
+          format: double
+          description: The resolution of values that can be represented by this data field. The base value is multiplied by this to compute the final value. Required only by the 'Decimal' data type.
+          type: number
+        DigitsPrecision:
+          format: int32
+          description: The number of decimal digits to be used by this data field. Required only by the 'Float' data type. Must be in range 1 - 15.
+          type: integer
+        MaxExponent:
+          format: int32
+          description: The maximum exponent to be used by this data field. Required only by the 'Float' data type. May not be greater than 307.
+          type: integer
+        MinExponent:
+          format: int32
+          description: The minimum exponent to be used by this data field. Required only by the 'Float' data type. May not be less than -292.
+          type: integer
+        Signed:
+          description: Indicates whether this value is signed. Required only by the 'Float' data type.
+          type: boolean
+        Name:
+          description: The name of the field.
+          type: string
+    AuthorizationCodes.Shared.Models.ValidationField:
+      required:
+      - Type
+      - Name
+      type: object
+      properties:
+        Type:
+          description: The type for this validation field.
+          enum:
+          - Boolean
+          - Float
+          - Int
+          - StringCaseInsensitive
+          - StringCaseSensitive
+          type: string
+        Name:
+          description: The name of the field.
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition:
+      description: Represents the model used to define how a type of authorization code is generated.
+      required:
+      - Name
+      type: object
+      properties:
+        ID:
+          description: The ID of the authorization code definition. Read only.
+          type: string
+        AuthorizationID:
+          description: The value used for securing codes generated.
+          type: string
+        Name:
+          description: The name of the authorization code definition. May not be updated.
+          type: string
+        Description:
+          description: A description of this definition. May not be updated.
+          type: string
+        CreatedByUserID:
+          format: int32
+          description: The ID of the user that created this definition. Read only.
+          type: integer
+        CreatedDate:
+          format: date-time
+          description: A timestamp of when this definition was created. Read only.
+          type: string
+        IsDeleted:
+          description: Indicates whether this definition is enabled. True if generating codes is disabled.
+          type: boolean
+        DeletedByUserID:
+          format: int32
+          description: The ID of the user that deleted this definition. Read only.
+          type: integer
+        DeletedDate:
+          format: date-time
+          description: A timestamp of when this definition was deleted. Read only.
+          type: string
+        DataFields:
+          description: The defined fields to include in authorization codes generated from this definition. May not be updated.
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.DataField'
+        ValidationFields:
+          description: The defined fields to verify when reading authorization codes generated from this definition. May not be updated.
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.ValidationField'
+        HashLength:
+          format: int32
+          description: The bit length of the hash data which will be used for the authorization code. Defaults to 20. May not be updated.
+          type: integer
+        RandomLength:
+          format: int32
+          description: The bit length of random data which will be included in the authorization code.  This is necessary to allow creation of "identical" authorization codes containing the same timestamp. Defaults to 5. May not be updated.
+          type: integer
+        DurationAmount:
+          format: int32
+          description: The amount of duration for the specified duration unit used to calculate the Authorization Code. Defaults to 1. May not be updated.
+          type: integer
+        DurationUnits:
+          description: The units of duration used to calculate the Authorization Code. Defaults to 'Days'. May not be updated.
+          enum:
+          - Weeks
+          - Days
+          - Hours
+          - Minutes
+          type: string
+        DurationAccuracy:
+          format: int32
+          description: The number of bits used for timestamp verification. Defaults to 5. May not be updated.
+          type: integer
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true

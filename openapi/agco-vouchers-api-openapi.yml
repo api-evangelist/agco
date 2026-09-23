@@ -1,0 +1,489 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Vouchers API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Vouchers
+paths:
+  /api/v2/Vouchers:
+    get:
+      tags:
+      - Vouchers
+      summary: Gets a list of vouchers
+      description: No Documentation Found.
+      operationId: Vouchers_Get
+      parameters:
+      - name: Type
+        in: query
+        description: Optional. Filter vouchers by Type
+        required: false
+        schema:
+          type: string
+          enum:
+          - Commercial
+          - Internal
+          - Temporary
+          - RightToRepair
+      - name: DealerCode
+        in: query
+        description: Optional. Filter vouchers by DealerCode
+        required: false
+        schema:
+          type: string
+      - name: LicenseTo
+        in: query
+        description: Optional. Filter vouchers by LicenseTo. Wildcard supported (*).
+        required: false
+        schema:
+          type: string
+      - name: Purpose
+        in: query
+        description: Optional. Filter vouchers by Purpose. Wildcard supported (*).
+        required: false
+        schema:
+          type: string
+      - name: OrderNumber
+        in: query
+        description: Optional. Filter vouchers by OrderNumber
+        required: false
+        schema:
+          type: string
+      - name: Email
+        in: query
+        description: Optional. Filter vouchers by Email. Wildcard supported (*).
+        required: false
+        schema:
+          type: string
+      - name: ModifiedBy
+        in: query
+        description: Optional. Filter vouchers by ModifiedBy
+        required: false
+        schema:
+          type: string
+      - name: CreatedAfter
+        in: query
+        description: Optional. Filter vouchers by CreatedDate
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: CreatedBefore
+        in: query
+        description: Optional. Filter vouchers by CreatedDate
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: PunchedAfter
+        in: query
+        description: Optional. Filter vouchers by PunchedDate
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: PunchedBefore
+        in: query
+        description: Optional. Filter vouchers by PunchedDate
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: Punched
+        in: query
+        description: Optional. Filter vouchers by Punched status
+        required: false
+        schema:
+          type: boolean
+      - name: ExpirationAfter
+        in: query
+        description: Optional. Filter vouchers by ExpirationDate
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: ExpirationBefore
+        in: query
+        description: Optional. Filter vouchers by ExpirationDate
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: Deleted
+        in: query
+        description: Optional. Filter vouchers by Deleted state. By default only vouchers that are not deleted are returned.
+        required: false
+        schema:
+          type: string
+          enum:
+          - NotDeleted
+          - Deleted
+          - All
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.Voucher'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.Voucher'
+      deprecated: false
+    post:
+      tags:
+      - Vouchers
+      summary: Create a voucher
+      description: No Documentation Found.
+      operationId: Vouchers_Post
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.Voucher'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.Voucher'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.Voucher'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.Voucher'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.Voucher'
+        description: The voucher to add.
+        required: true
+  /api/v2/Vouchers/{VoucherCode}:
+    get:
+      tags:
+      - Vouchers
+      summary: Get a voucher
+      description: No Documentation Found.
+      operationId: Vouchers_Get
+      parameters:
+      - name: VoucherCode
+        in: path
+        description: The voucher code of the voucher to get.
+        required: true
+        schema:
+          type: string
+      - name: Deleted
+        in: query
+        description: Optional. Filter vouchers by Deleted state. By default only vouchers that are not deleted are returned.
+        required: false
+        schema:
+          type: string
+          enum:
+          - NotDeleted
+          - Deleted
+          - All
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.Voucher'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.Voucher'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.Voucher'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DealerDB.Models.Voucher'
+      deprecated: false
+    put:
+      tags:
+      - Vouchers
+      summary: Update a voucher
+      description: No Documentation Found.
+      operationId: Vouchers_Put
+      parameters:
+      - name: VoucherCode
+        in: path
+        description: The voucher code of the voucher to update.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.Voucher'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.Voucher'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.Voucher'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.Voucher'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DealerDB.Models.Voucher'
+        description: The updated voucher.
+        required: true
+    delete:
+      tags:
+      - Vouchers
+      summary: Delete a voucher
+      description: No Documentation Found.
+      operationId: Vouchers_Delete
+      parameters:
+      - name: VoucherCode
+        in: path
+        description: The voucher code of the voucher to delete.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+  /api/v2/Vouchers/{VoucherCode}/VoucherHistory:
+    get:
+      tags:
+      - Vouchers
+      summary: Get a voucher's history
+      description: No Documentation Found.
+      operationId: Vouchers_GetVoucherHistory
+      parameters:
+      - name: VoucherCode
+        in: path
+        description: The voucher code to get history for.
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.VoucherHistory'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.VoucherHistory'
+      deprecated: false
+components:
+  schemas:
+    API.PagedResponse_DealerDB.Models.Voucher:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/DealerDB.Models.Voucher'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.PagedResponse_DealerDB.Models.VoucherHistory:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/DealerDB.Models.VoucherHistory'
+          readOnly: true
+    DealerDB.Models.Voucher:
+      description: A voucher for EDT activation
+      type: object
+      properties:
+        VoucherCode:
+          description: The voucher code.
+          type: string
+        Type:
+          description: The type of voucher. Commercial is the default if not specified.
+          enum:
+          - Commercial
+          - Internal
+          - Temporary
+          - RightToRepair
+          type: string
+        DealerCode:
+          description: The dealer code the voucher is assigned to.  Required for commercial and right to repair vouchers.
+          type: string
+        LicenseTo:
+          description: Required for Internal Vouchers
+          type: string
+        Purpose:
+          description: Required for Internal Vouchers. Not supported for other Vouchers.
+          type: string
+        OrderNumber:
+          description: The order number of a license. Required for Commercial and Right To Repair Vouchers. Not supported for other Vouchers.
+          type: string
+        Email:
+          description: Required for internal vouchers.
+          type: string
+        ModifiedBy:
+          description: Read-Only. The user that made the last modification to the voucher.
+          type: string
+        CreatedDate:
+          format: date-time
+          description: Read-Only. The date the voucher was created.
+          type: string
+        PunchedDate:
+          format: date-time
+          description: Read-Only. The date the voucher was punched.
+          type: string
+        Punched:
+          description: True if voucher has aleady been used.  False if the voucher has not been used.
+          type: boolean
+        Deleted:
+          description: Read-Only. True if voucher has been deleted.
+          type: boolean
+        ExpirationDate:
+          format: date-time
+          description: The expiration date of the voucher. Required for Temporary and Right to Repair Vouchers.
+          type: string
+    DealerDB.Models.VoucherHistory:
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The id of the voucher history item
+          type: integer
+        ChangedDate:
+          format: date-time
+          type: string
+        VoucherCode:
+          description: The voucher code.
+          type: string
+        Type:
+          description: The type of voucher.
+          enum:
+          - Commercial
+          - Internal
+          - Temporary
+          - RightToRepair
+          type: string
+        DealerCode:
+          description: The dealer code the voucher is assigned to.  Required for commercial vouchers.
+          type: string
+        LicenseTo:
+          description: Required for Internal Vouchers
+          type: string
+        Purpose:
+          description: Required for Internal Vouchers
+          type: string
+        OrderNumber:
+          description: The order number of a commercial license. Required for Commercial Vouchers. Not supported for other Vouchers.
+          type: string
+        Email:
+          description: The email address. Required for Internal Vouchers
+          type: string
+        ModifiedBy:
+          description: Read-Only. The user that made the last modification to the voucher.
+          type: string
+        CreatedDate:
+          format: date-time
+          description: Read-Only. The date the voucher was created.
+          type: string
+        PunchedDate:
+          format: date-time
+          description: Read-Only. The date the voucher was punched.
+          type: string
+        Punched:
+          description: True if voucher has aleady been used.  False if the voucher has not been used.
+          type: boolean
+        Deleted:
+          description: Read-Only. True if voucher has been deleted.
+          type: boolean
+        ExpirationDate:
+          format: date-time
+          description: The expiration date of the voucher. Required for Temporary Vouchers.
+          type: string

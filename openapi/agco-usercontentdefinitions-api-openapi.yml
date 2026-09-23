@@ -1,0 +1,277 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: User Content Definitions API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: UserContentDefinitions
+paths:
+  /api/v2/UserContentDefinitions:
+    get:
+      tags:
+      - UserContentDefinitions
+      summary: Get UserContentDefinitions
+      description: 'Gets a collection of UserContentDefinitions. When successful, the response is a PagedResponse of UserContentDefinitions.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: UserContentDefinitions_GetUserContentDefinitions
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: userID
+        in: query
+        description: Optional. Filter by UserID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: contentDefinitionID
+        in: query
+        description: Optional. Filter by ContentDefinitionID
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - UserContentDefinitions
+      summary: Create a UserContentDefinition
+      description: 'Creates a UserContentDefinition. The body of the POST is the UserContentDefinition to create.
+
+        The UserContentDefinitionID will be assigned on creation of the Job. When successful, the response
+
+        is the UserContentDefinitionID. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: UserContentDefinitions_PostUserContentDefinition
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+        description: The UserContentDefinition to create.
+        required: true
+  /api/v2/UserContentDefinitions/{userContentDefinitionID}:
+    get:
+      tags:
+      - UserContentDefinitions
+      summary: Get a UserContentDefinition by ID
+      description: 'Gets a UserContentDefinition by ID. When successful, the response is the requested UserContentDefinition.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: UserContentDefinitions_GetUserContentDefinition
+      parameters:
+      - name: userContentDefinitionID
+        in: path
+        description: The ID of the UserContentDefinition to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    delete:
+      tags:
+      - UserContentDefinitions
+      summary: Delete a UserContentDefinition
+      description: 'Deletes an UserContentDefinition. When successful, the response is empty. If unsuccessful, an appropriate
+
+        ApiError is returned.'
+      operationId: UserContentDefinitions_DeleteUserContentDefinition
+      parameters:
+      - name: userContentDefinitionID
+        in: path
+        description: The ID of the UserContentDefinition to delete
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    ContentSubmission.Shared.BusinessEntities.UserContentDefinition:
+      description: Relationship indicating that a User can manage submissions for the Content
+      type: object
+      properties:
+        UserContentDefinitionID:
+          format: int32
+          description: Read Only. The ID of the User to ContentDefinition relationship.
+          type: integer
+        UserID:
+          format: int32
+          description: The ID of the user.
+          type: integer
+        ContentDefinitionID:
+          format: int32
+          description: The ID of the ContentDefinition.
+          type: integer
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.UserContentDefinition:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

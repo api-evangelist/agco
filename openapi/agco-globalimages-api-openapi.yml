@@ -1,0 +1,521 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Global Images API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: GlobalImages
+paths:
+  /api/v2/GlobalImages:
+    get:
+      tags:
+      - GlobalImages
+      summary: Get a paged response of GlobalImage
+      description: No Documentation Found.
+      operationId: GlobalImages_GetGlobalImages
+      parameters:
+      - name: search
+        in: query
+        description: Optional. Searches for matching global images with the matching Category Name, Publisher or Description
+        required: false
+        schema:
+          type: string
+      - name: categoryId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+      - name: publisher
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        description: Indicates whether to include GlobalImages marked as removed.
+        required: false
+        schema:
+          type: boolean
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: state
+        in: query
+        description: Optional. Filter to include only images with a state matching the provided value.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Created
+          - Available
+          - Removed
+      - name: afterDate
+        in: query
+        description: Optional. Filter to include only images with a 'Date' after the provided value.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.GlobalImage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.GlobalImage'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.GlobalImage'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.GlobalImage'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - GlobalImages
+      summary: Create the metadata for a GlobalImage before uploading.
+      description: No Documentation Found.
+      operationId: GlobalImages_PostGlobalImage
+      parameters:
+      - name: overridePublisherOrDate
+        in: query
+        description: Whether to set the publisher and date to the provided values.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+        description: The file's metadata.
+        required: true
+  /api/v2/GlobalImages/{ID}:
+    get:
+      tags:
+      - GlobalImages
+      summary: Gets a GlobalImage's metadata
+      description: No Documentation Found.
+      operationId: GlobalImages_GetGlobalImage
+      parameters:
+      - name: ID
+        in: path
+        description: The GlobalImage's id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - GlobalImages
+      summary: Update the metadata for an image
+      description: 'Update the metadata for an image. Size may not be modified by the client.
+
+        Set status to ''Available'' to publish an image. Both the image and thumbnail must be uploaded.
+
+        Set status to ''Created'' to reset an image''s contents and re-upload.
+
+        A file may only be ''Removed'' by the DELETE method.'
+      operationId: GlobalImages_PutGlobalImage
+      parameters:
+      - name: ID
+        in: path
+        description: The GlobalImage's id.
+        required: true
+        schema:
+          type: string
+      - name: overridePublisherOrDate
+        in: query
+        description: Whether to set the publisher and date to the provided values.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+        description: The GlobalImage's metadata
+        required: true
+    delete:
+      tags:
+      - GlobalImages
+      summary: Mark a file as 'Removed'.
+      description: No Documentation Found.
+      operationId: GlobalImages_DeleteFile
+      parameters:
+      - name: ID
+        in: path
+        description: The GlobalImage's id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/GlobalImages/{ID}/ImageContents:
+    get:
+      tags:
+      - GlobalImages
+      summary: Download the contents of a GlobalImage.
+      description: No Documentation Found.
+      operationId: GlobalImages_GetGlobalImageContents
+      parameters:
+      - name: ID
+        in: path
+        description: The global image metadata id.
+        required: true
+        schema:
+          type: string
+      - name: isFullImage
+        in: query
+        description: Indicated whether to download the full image or the thumbnail. Defaults to 'true'.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - GlobalImages
+      summary: Upload the contents of a GlobalImage.
+      description: 'Both the image and thumbnail must be uploaded.
+
+        Set isFullImage = ''True'' for Full Image, isFullImage = ''False'' for Thumbnail'
+      operationId: GlobalImages_PutGlobalImageContents
+      parameters:
+      - name: ID
+        in: path
+        description: The global image metadata id.
+        required: true
+        schema:
+          type: string
+      - name: isFullImage
+        in: query
+        description: Indicated whether this is the full image or the thumbnail. Defaults to 'true'.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    GlobalResources.Shared.Models.GlobalImage:
+      description: An image from the Global Image library.
+      required:
+      - CRC
+      - ThumbnailCRC
+      - State
+      - Name
+      - Description
+      - Width
+      - Height
+      type: object
+      properties:
+        Id:
+          description: The Id of the GlobalImage Metadata.
+          type: string
+        CRC:
+          description: The Hash of the file (SHA256, HEX-encoded).
+          type: string
+        ThumbnailCRC:
+          description: The Hash of the thumbnail file (SHA256, HEX-encoded).
+          type: string
+        State:
+          description: Indicates the state of this file. Must be 'Created' when created. Read Only.
+          enum:
+          - Created
+          - Available
+          - Removed
+          type: string
+        Name:
+          description: The name of the file when downloaded.
+          type: string
+        Description:
+          description: The description of the file.
+          type: string
+        Publisher:
+          description: The Publisher of the file.
+          type: string
+        Categories:
+          description: The category of the file.
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImageCategory'
+        Date:
+          format: date-time
+          description: The date of the file.
+          type: string
+        Size:
+          format: int64
+          description: The size of the file in bytes. Null until assigned by server when marked as 'Available'. Read Only
+          type: integer
+        ThumbnailSize:
+          format: int64
+          description: The size of the thumbnail file in bytes. Null until assigned by server when marked as 'Available'. Read Only
+          type: integer
+        Width:
+          format: int32
+          description: The width of the file.
+          type: integer
+        Height:
+          format: int32
+          description: The height of the file.
+          type: integer
+    API.IPagedResponse_GlobalResources.Shared.Models.GlobalImage:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    System.Object:
+      type: object
+      properties: {}
+    GlobalResources.Shared.Models.GlobalImageCategory:
+      description: An image category from the Global Image library.
+      required:
+      - Name
+      type: object
+      properties:
+        Id:
+          description: The Id of the GlobalImage Categories.
+          type: string
+        Name:
+          description: The name of the GlobalImage Category.
+          type: string

@@ -1,0 +1,540 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: User Permissions API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: User Permissions
+paths:
+  /api/v2/Users/{id}/Permissions:
+    get:
+      tags:
+      - User Permissions
+      summary: Get a user's permissions
+      description: No Documentation Found.
+      operationId: UserPermissions_GetPermissions
+      parameters:
+      - name: id
+        in: path
+        description: The User's ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: Permission
+        in: query
+        description: Filter by permission name. Supports ending wildcard (*). Optional.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.UserEffectivePermission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.UserEffectivePermission'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Users/Current/Permissions:
+    get:
+      tags:
+      - User Permissions
+      summary: Get a user's permissions
+      description: No Documentation Found.
+      operationId: UserPermissions_GetPermissions
+      parameters:
+      - name: Permission
+        in: query
+        description: Filter by permission name. Supports ending wildcard (*). Optional.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.UserEffectivePermission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.UserEffectivePermission'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Users/{id}/Roles:
+    get:
+      tags:
+      - User Permissions
+      summary: Get a user's roles
+      description: No Documentation Found.
+      operationId: UserPermissions_GetRoles
+      parameters:
+      - name: id
+        in: path
+        description: The User's ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: Role
+        in: query
+        description: Filter by role name. Supports ending wildcard (*). Optional.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Role'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Role'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - User Permissions
+      summary: Update a user's roles
+      description: No Documentation Found.
+      operationId: UserPermissions_Put
+      parameters:
+      - name: id
+        in: path
+        description: The User's ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.UserRoleChange'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.UserRoleChange'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.UserRoleChange'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.UserRoleChange'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.UserRoleChange'
+        description: A list of changes to the User's Roles
+        required: true
+  /api/v2/Roles/{id}/Users:
+    get:
+      tags:
+      - User Permissions
+      summary: Get all user's in a role
+      description: No Documentation Found.
+      operationId: UserPermissions_GetUsers
+      parameters:
+      - name: id
+        in: path
+        description: The Role's ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.User'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - User Permissions
+      summary: Update a Role's users
+      description: No Documentation Found.
+      operationId: UserPermissions_Put
+      parameters:
+      - name: id
+        in: path
+        description: The Role's ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.RoleUserChange'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.RoleUserChange'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.RoleUserChange'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.RoleUserChange'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/API.Models.RoleUserChange'
+        description: A list of changes to the Role's Users
+        required: true
+  /api/v2/Users/Current/Roles:
+    get:
+      tags:
+      - User Permissions
+      summary: Gets the current user's roles
+      description: No Documentation Found.
+      operationId: UserPermissions_GetCurrentUserRoles
+      parameters:
+      - name: Role
+        in: query
+        description: Filter by role name. Supports ending wildcard (*). Optional.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Role'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_API.Models.Role'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    API.Models.UserRoleChange:
+      required:
+      - Name
+      - Action
+      type: object
+      properties:
+        Name:
+          description: The name of the role
+          type: string
+        Action:
+          description: The action to take with the role
+          enum:
+          - Grant
+          - Revoke
+          type: string
+    API.Models.Role:
+      description: Defines an API Role
+      required:
+      - Name
+      - Description
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: The role's identifier.
+          type: integer
+        Name:
+          description: The name of the role. Must be alpha-numeric strings separated by a period (.).
+          pattern: ^[0-9a-zA-Z]*?[a-zA-Z]+[0-9a-zA-Z]*$
+          type: string
+        Description:
+          description: Role description
+          type: string
+    API.Models.UserEffectivePermission:
+      type: object
+      properties:
+        UserID:
+          format: int32
+          type: integer
+        PermissionId:
+          format: int32
+          type: integer
+        PermissionName:
+          type: string
+    API.PagedResponse_API.Models.Role:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.Role'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.Models.RoleUserChange:
+      required:
+      - Id
+      - Action
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: The Id of the User
+          type: integer
+        Action:
+          description: The action to take with the user
+          enum:
+          - Grant
+          - Revoke
+          type: string
+    API.Models.User:
+      type: object
+      properties:
+        UserID:
+          format: int32
+          description: The user ID
+          type: integer
+        Name:
+          description: The user's name
+          type: string
+        Username:
+          description: The username used for authentication
+          type: string
+        Password:
+          description: Never Returned.  Required when creating a new user or updating a user.  When changing a user's password this field must contain the current password.
+          type: string
+        ChangePassword:
+          description: Never Returned.  When changing a user's password, this field must contain the new password.
+          type: string
+        Email:
+          description: The user's email address
+          type: string
+    API.PagedResponse_API.Models.UserEffectivePermission:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.UserEffectivePermission'
+          readOnly: true
+    API.PagedResponse_API.Models.User:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.User'
+          readOnly: true

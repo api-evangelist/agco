@@ -1,0 +1,355 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Package Typeto Bundles API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: PackageTypetoBundles
+paths:
+  /api/v2/Bundles/{bundleID}/PackageTypetoBundles/Batch:
+    put:
+      tags:
+      - PackageTypetoBundles
+      summary: Update multiple Package Type ID to Bundle Relationships
+      description: No Documentation Found.
+      operationId: PackageTypetoBundles_PutBatch
+      parameters:
+      - name: bundleID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+        required: true
+    post:
+      tags:
+      - PackageTypetoBundles
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: PackageTypetoBundles_PostBatch
+      parameters:
+      - name: bundleID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+        required: true
+  /api/v2/PackageTypetoBundles:
+    get:
+      tags:
+      - PackageTypetoBundles
+      summary: Get all of the Package Type to Bundle Relationships
+      description: No Documentation Found.
+      operationId: PackageTypetoBundles_Get
+      parameters:
+      - name: BundleID
+        in: query
+        description: Optional. Filter by BundleID.
+        required: false
+        schema:
+          type: string
+      - name: PackageTypeID
+        in: query
+        description: Optional. Filter by PackageTypeID.
+        required: false
+        schema:
+          type: string
+      - name: PackageVersion
+        in: query
+        description: Optional. Filter by PackageVersion.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.PackageTypeIDtoBundle'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.PackageTypeIDtoBundle'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - PackageTypetoBundles
+      summary: Update a Package Type ID to Bundle Relationship
+      description: No Documentation Found.
+      operationId: PackageTypetoBundles_Put
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+        description: The PackageTypeToBundle to update.
+        required: true
+    post:
+      tags:
+      - PackageTypetoBundles
+      summary: Add a new Package Type ID to Bundle Relationship
+      description: No Documentation Found.
+      operationId: PackageTypetoBundles_Post
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+        description: The PackageTypeToBundle to add.
+        required: true
+    delete:
+      tags:
+      - PackageTypetoBundles
+      summary: Delete a Package Type to Bundle Relationship
+      description: No Documentation Found.
+      operationId: PackageTypetoBundles_Delete
+      parameters:
+      - name: BundleID
+        in: query
+        description: The BundleID
+        required: true
+        schema:
+          type: string
+      - name: PackageTypeID
+        in: query
+        description: The PackageTypeID
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    API.PagedResponse_UpdateSystem.Models.PackageTypeIDtoBundle:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.PackageTypeIDtoBundle'
+          readOnly: true
+    UpdateSystem.Models.PackageTypeIDtoBundle:
+      required:
+      - BundleID
+      - PackageTypeID
+      - PackageVersion
+      - Priority
+      type: object
+      properties:
+        BundleID:
+          description: The bundle to include the package in.
+          type: string
+        PackageTypeID:
+          description: The package type id of the package to include
+          type: string
+        PackageVersion:
+          format: int32
+          description: The package version of the package to include
+          type: integer
+        SubscriptionType:
+          description: Optional. The type of subscription supported.  The default subscription type is Required.
+          enum:
+          - Required
+          - IncludeByDefault
+          - ExcludeByDefault
+          type: string
+        Priority:
+          format: int32
+          description: The execution priority of the package relative to other packages in the bundle. Range 1 - 100, lower value indication higher priority.
+          maximum: 100
+          minimum: 1
+          type: integer
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

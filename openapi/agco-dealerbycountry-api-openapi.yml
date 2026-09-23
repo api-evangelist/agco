@@ -1,0 +1,113 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Dealer By Country API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: DealerByCountry
+paths:
+  /api/v2/DealerByCountry:
+    get:
+      tags:
+      - DealerByCountry
+      summary: Get a total count of dealers per country
+      description: No Documentation Found.
+      operationId: DealerByCountry_GetCountries
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.DealersPerCountry'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_DealerDB.Models.DealersPerCountry'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    API.PagedResponse_DealerDB.Models.DealersPerCountry:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/DealerDB.Models.DealersPerCountry'
+          readOnly: true
+    DealerDB.Models.DealersPerCountry:
+      type: object
+      properties:
+        Country:
+          type: string
+        Count:
+          format: int32
+          type: integer
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

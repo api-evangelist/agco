@@ -1,0 +1,230 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: File Uploads API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: File Uploads
+paths:
+  /api/v2/FileUploads/Report:
+    post:
+      tags:
+      - File Uploads
+      summary: Build a report from file uploads
+      description: No Documentation Found.
+      operationId: FileUploads_PostReport
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_Communication.Models.FileUpload'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_Communication.Models.FileUpload'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Communication.Models.FileUploadReportQuery'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Communication.Models.FileUploadReportQuery'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Communication.Models.FileUploadReportQuery'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/Communication.Models.FileUploadReportQuery'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Communication.Models.FileUploadReportQuery'
+        required: true
+components:
+  schemas:
+    API.PagedResponse_Communication.Models.FileUpload:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/Communication.Models.FileUpload'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    Communication.Models.FieldFilter:
+      required:
+      - Field
+      type: object
+      properties:
+        Field:
+          description: The field to filter
+          type: string
+        Type:
+          description: Optional. The filter type. Default is HasFieldMatching.
+          enum:
+          - HasFieldMatching
+          - HasIndexDataMatching
+          - DoesNotHaveIndexDataMatching
+          type: string
+        Comparison:
+          description: Optional. The type of value comparison to apply.  Default is Equal.
+          enum:
+          - Equal
+          - NotEqual
+          - LessThan
+          - LessThanOrEqual
+          - GreaterThan
+          - GreaterThanOrEqual
+          - In
+          - NotIn
+          type: string
+        Value:
+          description: The value used with comparison to filter results. Do not use with "Set" comparisons
+          type: string
+        Values:
+          description: The set of values to use with comparison to filter results.  Use with "Set" comparisons.
+          type: array
+          items:
+            type: string
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    System.Object:
+      type: object
+      properties: {}
+    Communication.Models.FileUploadReportQuery:
+      type: object
+      properties:
+        FieldFilters:
+          description: Optional. Filter results by field values. Multiple filters are combined with 'AND' logic.
+          type: array
+          items:
+            $ref: '#/components/schemas/Communication.Models.FieldFilter'
+        IncludeIndexFields:
+          description: "Optional. The index data fields to include in the results.  \n            By default any index data fields included in FieldFilters will be included."
+          type: array
+          items:
+            type: string
+        IncludeStoredDataFields:
+          description: "Optional. The stored data fields to include in the results. \n            By default stored data fields are omitted in the result.\n            Limit must be 25 or less to return stored data fields."
+          type: array
+          items:
+            type: string
+        Limit:
+          format: int32
+          description: Optional. Limit number of results returned. The default value is 10.
+          maximum: 25
+          minimum: 1
+          type: integer
+        Offset:
+          format: int32
+          description: Optional. Offset for the results returned. The default value is 0.
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+    Communication.Models.FileUpload:
+      type: object
+      properties:
+        SubmissionCode:
+          description: The submission code
+          type: string
+        CreatedDate:
+          format: date-time
+          description: The date the file was created
+          type: string
+        DealerID:
+          description: The Dearler ID
+          type: string
+        Email:
+          description: The email address provided with the file upload
+          type: string
+        Name:
+          description: The name provided with the file upload
+          type: string
+        NodeID:
+          description: The node ID
+          type: string
+        Phone:
+          description: The phone number provided with the file upload
+          type: string
+        UploadDate:
+          format: date-time
+          description: The date the file was uploaded
+          type: string
+        Voucher:
+          description: The voucher of the EDT instance
+          type: string
+        Description:
+          description: The description
+          type: string
+        Version:
+          description: The EDT version
+          type: string
+        IndexData:
+          description: "The Index Data for the File Upload. \n            Fields without a value are omitted.\n            Index Data may not be included in the response if no index data was requested."
+          type: object
+          additionalProperties:
+            type: string
+        StoredData:
+          description: "The Stored Data for the File Upload. \n            Fields without a value are omitted.\n            Stored Data may not be included in the response if no stored data was requested."
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/System.Object'
+        FileID:
+          description: The file ID
+          type: string
+        FileTypeID:
+          description: The File Type ID
+          type: string

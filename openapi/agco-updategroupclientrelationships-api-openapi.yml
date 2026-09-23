@@ -1,0 +1,325 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Update Group Client Relationships API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: UpdateGroupClientRelationships
+paths:
+  /api/v2/UpdateGroupClientRelationships:
+    get:
+      tags:
+      - UpdateGroupClientRelationships
+      summary: Get a list of current Client Subscriptions
+      description: No Documentation Found.
+      operationId: UpdateGroupClientRelationships_GetSubscriptions
+      parameters:
+      - name: ClientID
+        in: query
+        description: Optional. Filter by Client ID
+        required: false
+        schema:
+          type: string
+      - name: UpdateGroupID
+        in: query
+        description: Optional. Filter by Update Group ID
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: Active
+        in: query
+        description: Optional. Filter by Active
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroupClientRelationship'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.UpdateGroupClientRelationship'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - UpdateGroupClientRelationships
+      summary: DEPRECATED. Set client subscription status for an update group
+      description: No Documentation Found.
+      operationId: UpdateGroupClientRelationships_PutSubscriptionByClientIDUpdateGroupID
+      parameters:
+      - name: ClientID
+        in: query
+        description: The Client ID.  This can be a client ID that has not been registered yet.
+        required: true
+        schema:
+          type: string
+      - name: UpdateGroupID
+        in: query
+        description: The Update Group ID
+        required: true
+        schema:
+          type: string
+      - name: Active
+        in: query
+        description: Subscribe the client to the Update Group.
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - UpdateGroupClientRelationships
+      summary: Add a subscription
+      description: No Documentation Found.
+      operationId: UpdateGroupClientRelationships_PostSubscription
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+        description: The UpdateGroupClientRelationship to add.
+        required: true
+  /api/v2/UpdateGroupClientRelationships/{RelationshipID}:
+    get:
+      tags:
+      - UpdateGroupClientRelationships
+      summary: Get a subscription by RelationshipID
+      description: No Documentation Found.
+      operationId: UpdateGroupClientRelationships_GetSubscription
+      parameters:
+      - name: RelationshipID
+        in: path
+        description: The RelationshipID.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - UpdateGroupClientRelationships
+      summary: Updates a Subscription
+      description: No Documentation Found.
+      operationId: UpdateGroupClientRelationships_PutSubscription
+      parameters:
+      - name: RelationshipID
+        in: path
+        description: The relationship id of the UpdateGroupClientRelationship
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+        description: The updated UpdateGroupClientRelationship
+        required: true
+components:
+  schemas:
+    API.PagedResponse_UpdateSystem.Models.UpdateGroupClientRelationship:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          readOnly: true
+    UpdateSystem.Models.UpdateGroupClientRelationship:
+      required:
+      - UpdateGroupID
+      - ClientID
+      type: object
+      properties:
+        RelationshipID:
+          description: Read Only after creation. The relationship id.  A relationship id will be assigned if not provided on creation.
+          type: string
+        UpdateGroupID:
+          description: Read Only after creation. The update group to subscribe to.
+          type: string
+        ClientID:
+          description: Read Only after creation. The client id of the subscriber.
+          type: string
+        LastCheckin:
+          format: date-time
+          description: ReadOnly. The timestamp of the last checkin.
+          type: string
+        Active:
+          description: The subscription status.  The status is active by default.
+          type: boolean
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

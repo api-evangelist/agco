@@ -1,0 +1,307 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Languages API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Languages
+paths:
+  /api/v2/Languages:
+    get:
+      tags:
+      - Languages
+      summary: Get a list of the languages for which translations are supported.
+      description: No Documentation Found.
+      operationId: Languages_GetLanguages
+      parameters:
+      - name: limit
+        in: query
+        description: limit the number of Language objects returned. Optional (defaults to 10).
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: the number of Language objects to skip. Optional (defaults to 0).
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: includeDeleted
+        in: query
+        description: whether to include languages marked as deleted. Defaults to false
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.Language'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.Language'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.Language'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_GlobalResources.Shared.Models.Language'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Languages
+      summary: Add a Language to support for translations.
+      description: No Documentation Found.
+      operationId: Languages_CreateLanguage
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+        required: true
+  /api/v2/Languages/{LocaleID}:
+    get:
+      tags:
+      - Languages
+      summary: Get a language by its id. Returns a Language object
+      description: No Documentation Found.
+      operationId: Languages_GetLanguage
+      parameters:
+      - name: LocaleID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Languages
+      summary: Update a language’s description. Accepts a Language object
+      description: No Documentation Found.
+      operationId: Languages_UpdateLanguage
+      parameters:
+      - name: LocaleID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+        required: true
+    delete:
+      tags:
+      - Languages
+      summary: Remove a Language from those supported for translations.
+      description: No Documentation Found.
+      operationId: Languages_DeleteLanguage
+      parameters:
+      - name: LocaleID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    GlobalResources.Shared.Models.Language:
+      description: A language used for string translations.
+      required:
+      - LocaleId
+      - Description
+      type: object
+      properties:
+        LocaleId:
+          format: int32
+          description: The Locale Id of the language.
+          type: integer
+        Description:
+          description: The description of the language (e.g. “English – United States”).
+          type: string
+        IsDeleted:
+          description: Indicates whether the API supports the language. Must be false when created. Read Only.
+          type: boolean
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.IPagedResponse_GlobalResources.Shared.Models.Language:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true

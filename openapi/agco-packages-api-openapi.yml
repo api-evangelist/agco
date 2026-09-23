@@ -1,0 +1,355 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Packages API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Packages
+paths:
+  /api/v2/Packages:
+    get:
+      tags:
+      - Packages
+      summary: List Packages
+      description: No Documentation Found.
+      operationId: Packages_GetPackages
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: PackageTypeID
+        in: query
+        description: Optional. If provided, filters by PackageTypeID.
+        required: false
+        schema:
+          type: string
+      - name: Version
+        in: query
+        description: Optional. If provided, filters by Version.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: Released
+        in: query
+        description: Optional. If provided, filters by Released.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.Package'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.Package'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Packages
+      summary: Add a Package to the Update System
+      description: No Documentation Found.
+      operationId: Packages_PostPackage
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Package'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Package'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Package'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Package'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Package'
+        description: The package to add.
+        required: true
+  /api/v2/Packages/{ID}:
+    get:
+      tags:
+      - Packages
+      summary: Find a Package
+      description: No Documentation Found.
+      operationId: Packages_GetPackage
+      parameters:
+      - name: ID
+        in: path
+        description: The Package ID to Search for
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Package'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Package'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Package'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.Package'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Packages
+      summary: Modify a Packge to the Update System
+      description: No Documentation Found.
+      operationId: Packages_PutPackage
+      parameters:
+      - name: ID
+        in: path
+        description: The unique ID of the Package
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Package'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Package'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Package'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Package'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.Package'
+        description: The package to update.
+        required: true
+    delete:
+      tags:
+      - Packages
+      summary: Delete a Package
+      description: No Documentation Found.
+      operationId: Packages_DeletePackage
+      parameters:
+      - name: ID
+        in: path
+        description: The Package ID to Delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    UpdateSystem.Models.Package:
+      required:
+      - PackageTypeID
+      - Url
+      - CRC
+      - Version
+      - Description
+      - ReleaseDate
+      type: object
+      properties:
+        PackageID:
+          description: Read Only. The package ID
+          type: string
+        PackageTypeID:
+          description: The id of the package type this package belongs to.
+          type: string
+        Url:
+          description: The Url to download the package from.
+          type: string
+        CRC:
+          description: The CRC used to validate the download.
+          type: string
+        Notes:
+          description: Notes about the package
+          type: string
+        Version:
+          format: int32
+          description: The version.
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        PreviousVersion:
+          format: int32
+          description: For delta packages, the previous version required.  For non-delta packages, the Previous version is 0.  Default value is 0.
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        Description:
+          description: The package description
+          type: string
+        ReleaseDate:
+          format: date-time
+          description: The date the package was released
+          type: string
+        Released:
+          description: True if the package is released.  Default value is False.
+          type: boolean
+        Autorun:
+          description: Value is true if package should run automatically. Default value is false.
+          type: boolean
+        Switches:
+          description: The command line arguments for the package.  Default value is an empty string.
+          type: string
+        Size:
+          format: int64
+          description: "The size of the file at the specified URL.  If a size is not supplied at creation time, the size will be determined by the response from the URL.\n            If the size provided does not match the size in the response from the URL an error will be returned."
+          type: integer
+        RemoveOnSuccess:
+          description: True to remove the package after successful execution.  Default value is False.
+          type: boolean
+        LocalizedName:
+          description: Optional. The StringID used to localize the name of the Package
+          type: string
+    API.PagedResponse_UpdateSystem.Models.Package:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Package'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

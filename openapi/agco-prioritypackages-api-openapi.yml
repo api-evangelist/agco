@@ -1,0 +1,309 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Priority Packages API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: PriorityPackages
+paths:
+  /api/v2/PriorityPackages:
+    get:
+      tags:
+      - PriorityPackages
+      summary: Get a list of Priority Packages by Client
+      description: No Documentation Found.
+      operationId: PriorityPackages_GetPriorityPackages
+      parameters:
+      - name: ClientID
+        in: query
+        description: Optional. Filter priority packages by ClientID.
+        required: false
+        schema:
+          type: string
+      - name: Status
+        in: query
+        description: Optional. Filter returned packages by status. By default only active packages will be returned.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Active
+          - Completed
+          - All
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.PriorityPackage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.PriorityPackage'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - PriorityPackages
+      summary: Add a Priority Package for a Client
+      description: No Documentation Found.
+      operationId: PriorityPackages_PostPriorityPackages
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+        description: The PriorityPackage to add
+        required: true
+  /api/v2/PriorityPackages/{ID}:
+    get:
+      tags:
+      - PriorityPackages
+      summary: Get a Priority Packages for a Client
+      description: No Documentation Found.
+      operationId: PriorityPackages_GetPriorityPackage
+      parameters:
+      - name: ID
+        in: path
+        description: The Priority Package ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    delete:
+      tags:
+      - PriorityPackages
+      summary: Delete a Priority Package for a Client
+      description: No Documentation Found.
+      operationId: PriorityPackages_DeletePriorityPackages
+      parameters:
+      - name: ID
+        in: path
+        description: The Priority Package ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    API.PagedResponse_UpdateSystem.Models.PriorityPackage:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+          readOnly: true
+    UpdateSystem.Models.PriorityPackage:
+      required:
+      - ClientID
+      - PackageID
+      type: object
+      properties:
+        ClientID:
+          description: The ID of the client to receive the priority package
+          type: string
+        PriorityPackageID:
+          description: Read Only. The ID of the priority package.
+          type: string
+        PackageID:
+          description: The ID of the package to push as a priority package.
+          type: string
+        Switches:
+          description: The command line arguments for the priority package.  Default value is an empty string.
+          type: string
+        TimeStamp:
+          format: date-time
+          description: Read Only. The timestamp of the priority package.
+          type: string
+        PackageTypeID:
+          description: Read Only. From the package specified by package ID.
+          type: string
+        Url:
+          description: Read Only. From the package specified by package ID.
+          type: string
+        CRC:
+          description: Read Only. From the package specified by package ID.
+          type: string
+        Notes:
+          description: Read Only. From the package specified by package ID.
+          type: string
+        Version:
+          format: int32
+          description: Read Only. From the package specified by package ID.
+          type: integer
+        PreviousVersion:
+          format: int32
+          description: Read Only. From the package specified by package ID.
+          type: integer
+        Description:
+          description: Read Only. From the package specified by package ID.
+          type: string
+        ReleaseDate:
+          format: date-time
+          description: "Read Only. From the package specified by package ID.\n            The date the package was released"
+          type: string
+        Released:
+          description: Read Only. From the package specified by package ID.
+          type: boolean
+        Autorun:
+          description: "Read Only. From the package specified by package ID.\n            Value is true if package should run automatically. Default value is false."
+          type: boolean
+        Size:
+          format: int64
+          description: Read Only. From the package specified by package ID.
+          type: integer
+        RemoveOnSuccess:
+          description: Read Only. From the package specified by package ID.
+          type: boolean
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

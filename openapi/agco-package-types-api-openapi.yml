@@ -1,0 +1,378 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Package Types API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Package Types
+paths:
+  /api/v2/PackageTypes:
+    get:
+      tags:
+      - Package Types
+      summary: Get all of the Package Types
+      description: No Documentation Found.
+      operationId: PackageTypes_Get
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit. The default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset. The default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: userID
+        in: query
+        description: Optional. The user ID to sort packageTypes by the user's access
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.PackageType'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_UpdateSystem.Models.PackageType'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Package Types
+      summary: Add a Package Type
+      description: No Documentation Found.
+      operationId: PackageTypes_Post
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+        description: The Package Type to add
+        required: true
+  /api/v2/PackageTypes/{ID}:
+    get:
+      tags:
+      - Package Types
+      summary: Get a specific Package Type
+      description: No Documentation Found.
+      operationId: PackageTypes_Get
+      parameters:
+      - name: ID
+        in: path
+        description: The Package Type ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Package Types
+      summary: Modify a Package Type
+      description: No Documentation Found.
+      operationId: PackageTypes_Put
+      parameters:
+      - name: ID
+        in: path
+        description: The ID of the Package Type
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+        description: The Package Type to update
+        required: true
+    delete:
+      tags:
+      - Package Types
+      summary: Delete a Package Type
+      description: No Documentation Found.
+      operationId: PackageTypes_Delete
+      parameters:
+      - name: ID
+        in: path
+        description: The Package Type ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/PackageTypes/{id}/Users/{userID}:
+    post:
+      tags:
+      - Package Types
+      summary: Add a package type that a user can see
+      description: No Documentation Found.
+      operationId: PackageTypes_AddPackageTypeUser
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Package Type
+        required: true
+        schema:
+          type: string
+      - name: userID
+        in: path
+        description: The userID to link to the package type
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    delete:
+      tags:
+      - Package Types
+      summary: Deletes a package type a user could see
+      description: No Documentation Found.
+      operationId: PackageTypes_RemovePackageTypeUser
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Package Type
+        required: true
+        schema:
+          type: string
+      - name: userID
+        in: path
+        description: The userID to link to the package type
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    UpdateSystem.Models.PackageType:
+      required:
+      - Description
+      type: object
+      properties:
+        PackageTypeID:
+          description: Read Only. The package type id.
+          type: string
+        Description:
+          description: The description of the package type
+          type: string
+        InventoryPackage:
+          description: The inventory package used to determine what version of this package type is installed.
+          type: string
+        Category:
+          description: The inventory category (from the InventoryPackage) used to determine what version of this package type is installed.
+          type: string
+        Attribute:
+          description: The inventory attribute (from the InventoryPackage) used to determine what version of this package type is installed.
+          type: string
+        InventoryFrequency:
+          format: int32
+          description: The number of minutes to wait before requesting another inventory.  The default value is 1440 (24 hours).
+          type: integer
+        MaxDeltaPackages:
+          format: int32
+          description: The maximum number of "chained" delta packages to use when updating the client
+          type: integer
+        LocalizedDescription:
+          description: Optional. The StringID used to localize the description of the PackageType
+          type: string
+        LocalizedName:
+          description: Optional. The StringID used to localize the name of the PackageType
+          type: string
+        Icon:
+          description: Optional.  The icon to use for the PackageType, in base 64
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.PagedResponse_UpdateSystem.Models.PackageType:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

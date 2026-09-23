@@ -1,0 +1,550 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Aftermarket Services API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: AftermarketServices
+paths:
+  /api/v2/AftermarketServices/Certificates:
+    get:
+      tags:
+      - AftermarketServices
+      summary: No Documentation Found
+      description: No Documentation Found.
+      operationId: AftermarketServices_GetCerts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/AftermarketServices/ECUs/{serialNumber}:
+    put:
+      tags:
+      - AftermarketServices
+      summary: Activate or Deactivate an ECU, or Report an ECU as Damaged
+      description: No Documentation Found.
+      operationId: AftermarketServices_PutECU
+      parameters:
+      - name: serialNumber
+        in: path
+        description: The serial number of the ECU.
+        required: true
+        schema:
+          type: string
+      - name: EDTInstanceId
+        in: query
+        description: The EDT Instance Id of the kit calling this method.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AGCOPowerServices.Models.ECU'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AGCOPowerServices.Models.ECU'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AGCOPowerServices.Models.ECU'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AGCOPowerServices.Models.ECU'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AGCOPowerServices.Models.ECU'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AGCOPowerServices.Models.ECU'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AGCOPowerServices.Models.ECU'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AGCOPowerServices.Models.ECU'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AGCOPowerServices.Models.ECU'
+        description: The ecu to modify.
+        required: true
+  /api/v2/AftermarketServices/Engines/{serialNumber}/ProductionData:
+    get:
+      tags:
+      - AftermarketServices
+      summary: Get production calibration data for given engine
+      description: No Documentation Found.
+      operationId: AftermarketServices_GetProductionData
+      parameters:
+      - name: serialNumber
+        in: path
+        description: The serial number of the engine.
+        required: true
+        schema:
+          type: string
+      - name: EDTInstanceId
+        in: query
+        description: The EDT Instance Id of the kit calling this method.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AGCOPowerServices.Models.ProductionData'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AGCOPowerServices.Models.ProductionData'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AGCOPowerServices.Models.ProductionData'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AGCOPowerServices.Models.ProductionData'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/AftermarketServices/Engines/{serialNumber}/IQACodes:
+    get:
+      tags:
+      - AftermarketServices
+      summary: Get injector codes given engine
+      description: No Documentation Found.
+      operationId: AftermarketServices_GetEngineIQACodes
+      parameters:
+      - name: serialNumber
+        in: path
+        description: The serial number of the engine.
+        required: true
+        schema:
+          type: string
+      - name: EDTInstanceId
+        in: query
+        description: The EDT Instance Id of the kit calling this method.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - AftermarketServices
+      summary: Report the IQA codes used by an engine
+      description: No Documentation Found.
+      operationId: AftermarketServices_PutIQACodes
+      parameters:
+      - name: serialNumber
+        in: path
+        description: The serial number of the Engine
+        required: true
+        schema:
+          type: string
+      - name: EDTInstanceId
+        in: query
+        description: The EDT Instance Id of the kit calling this method.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          text/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          text/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                type: string
+        description: A string array of IQA codes in physical order
+        required: true
+  /api/v2/AftermarketServices/UserStatuses:
+    get:
+      tags:
+      - AftermarketServices
+      summary: Retrieve the status of an EDT Kit Registration with AGCO Power Web Services
+      description: No Documentation Found.
+      operationId: AftermarketServices_GetUserStatus
+      parameters:
+      - name: voucherCode
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: dealerCode
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AGCOPowerServices.Models.UserStatus'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AGCOPowerServices.Models.UserStatus'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AGCOPowerServices.Models.UserStatus'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AGCOPowerServices.Models.UserStatus'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - AftermarketServices
+      summary: Update the status of an EDT Kit Registration with AGCO Power Web Services
+      description: No Documentation Found.
+      operationId: AftermarketServices_UpdateUserStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AGCOPowerServices.Models.UserStatus'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AGCOPowerServices.Models.UserStatus'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AGCOPowerServices.Models.UserStatus'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AGCOPowerServices.Models.UserStatus'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AGCOPowerServices.Models.UserStatus'
+        required: true
+  /api/v2/AftermarketServices/Hello:
+    get:
+      tags:
+      - AftermarketServices
+      summary: Check whether there is connectivity to AGCO Power Web Services
+      description: No Documentation Found.
+      operationId: AftermarketServices_GetConnectionStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    System.Object:
+      type: object
+      properties: {}
+    AGCOPowerServices.Models.UserStatus:
+      description: Status of a voucher in the AGCO Power system
+      required:
+      - VoucherCode
+      - DealerCode
+      type: object
+      properties:
+        VoucherCode:
+          description: The voucher code
+          type: string
+        DealerCode:
+          description: The dealer code of the voucher
+          type: string
+        State:
+          description: The state of the voucher
+          enum:
+          - Active
+          - Inactive
+          - None
+          type: string
+    AGCOPowerServices.Models.ProductionData:
+      description: Production data for an AGCO Power engine.
+      required:
+      - DataType
+      - DataValues
+      type: object
+      properties:
+        DataType:
+          description: "Type of data. Valid types are (but not limited to)\n            'PowerCalibration'"
+          type: string
+        DataValues:
+          format: byte
+          description: Raw values of the calibration data
+          type: string
+    AGCOPowerServices.Models.ECU:
+      description: An AGCO Power ECU
+      required:
+      - SerialNumber
+      - EngineSerialNumber
+      - State
+      type: object
+      properties:
+        SerialNumber:
+          description: The serial number of the ECU
+          pattern: ^0?\d{23}$
+          type: string
+        EngineSerialNumber:
+          description: The serial number of the ECU’s engine
+          pattern: (^[A-Z][0-9]+$)|(^[ABCDEFGHJKLMNPRSTVWX1-9][5CMBL][ED][0-5][0-9][0-7][0-9][0-9][0-9]$)
+          type: string
+        ReplacesECUSerialNumber:
+          description: The serial number of the ECU that this ECU replaces. Required if activating an ECU..
+          pattern: ^0?\d{23}$
+          type: string
+        State:
+          description: The state of the ECU
+          enum:
+          - Active
+          - Inactive
+          - Damaged
+          type: string
+        ActivationCode:
+          format: byte
+          description: The code used to activate the ECU. May not be modified. Returned only on activation.
+          type: string
+        DamagedDescription:
+          description: A description why the ECU cannot be deactivated.
+          pattern: ^[a-zA-Z0-9]{0,4096}$
+          type: string

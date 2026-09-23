@@ -1,0 +1,436 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Authorization Categories API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: AuthorizationCategories
+paths:
+  /api/v2/AuthorizationCategories:
+    get:
+      tags:
+      - AuthorizationCategories
+      summary: Get authorization categories
+      description: No Documentation Found.
+      operationId: AuthorizationCategories_Get
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: userID
+        in: query
+        description: Optional. Filter by categories visible to the provided user with the provided userID.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: definitionID
+        in: query
+        description: Optional. Filter by categories containing a definition with the provided ID.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.Category'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.Category'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.Category'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.Category'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - AuthorizationCategories
+      summary: Add an authorization category
+      description: No Documentation Found.
+      operationId: AuthorizationCategories_Post
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+        description: An authorization category.
+        required: true
+  /api/v2/AuthorizationCategories/{id}:
+    put:
+      tags:
+      - AuthorizationCategories
+      summary: Update an authorization category
+      description: No Documentation Found.
+      operationId: AuthorizationCategories_Put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+        description: An authorization category.
+        required: true
+    delete:
+      tags:
+      - AuthorizationCategories
+      summary: Remove an authorization category
+      description: No Documentation Found.
+      operationId: AuthorizationCategories_Delete
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the authorization category.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/AuthorizationCategories/{id}/Users/{userID}:
+    post:
+      tags:
+      - AuthorizationCategories
+      summary: Add a category that a user can see
+      description: No Documentation Found.
+      operationId: AuthorizationCategories_AddUser
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: userID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    delete:
+      tags:
+      - AuthorizationCategories
+      summary: Deletes a category a user could see
+      description: No Documentation Found.
+      operationId: AuthorizationCategories_RemoveUser
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: userID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/AuthorizationCategories/Users:
+    get:
+      tags:
+      - AuthorizationCategories
+      summary: Returns a report of access that users have to Authorization Categories
+      description: No Documentation Found.
+      operationId: AuthorizationCategories_GetUsers
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. Defaults to 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. Defaults to 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: userIDs
+        in: query
+        description: Optional. Includes only users with IDs on the provided comma-separated list.
+        required: false
+        schema:
+          type: string
+      - name: categoryIDs
+        in: query
+        description: Optional. Includes only users with categories with IDs on the provided comma-separated list.
+        required: false
+        schema:
+          type: string
+      - name: includeCategories
+        in: query
+        description: If true, include full Authorization Category detail. Defaults to false.
+        required: false
+        schema:
+          type: boolean
+      - name: includeUsers
+        in: query
+        description: If true, include full User detail. Defaults to false.
+        required: false
+        schema:
+          type: boolean
+      - name: userSearch
+        in: query
+        description: Optional. Includes only users with a Name, Username, or Email containing the provided value.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.CategoryUserReport'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.CategoryUserReport'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.CategoryUserReport'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_AuthorizationCodes.Shared.Models.CategoryUserReport'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    AuthorizationCodes.Shared.Models.Category:
+      description: A category for Authorization Code Definitions
+      type: object
+      properties:
+        ID:
+          description: The ID of the Category.
+          type: string
+        Name:
+          description: The Name of the Category.
+          type: string
+        Description:
+          description: A description of the Category.
+          type: string
+    AuthorizationCodes.Shared.Models.CategoryUserReport:
+      type: object
+      properties:
+        Categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+        User:
+          $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeUser'
+    API.IPagedResponse_AuthorizationCodes.Shared.Models.CategoryUserReport:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.CategoryUserReport'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    API.IPagedResponse_AuthorizationCodes.Shared.Models.Category:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    AuthorizationCodes.Shared.Models.AuthorizationCodeUser:
+      type: object
+      properties:
+        UserID:
+          format: int32
+          type: integer
+        Name:
+          type: string
+        Username:
+          type: string
+        Email:
+          type: string

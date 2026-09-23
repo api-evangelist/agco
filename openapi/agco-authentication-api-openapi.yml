@@ -1,0 +1,472 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Authentication API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Authentication
+paths:
+  /api/v2/AuthenticatedUsers/{UserID}/Tokens:
+    put:
+      tags:
+      - Authentication
+      summary: Manage API tokens
+      description: No Documentation Found.
+      operationId: Authentication_PutManageTokens
+      parameters:
+      - name: UserID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.TokenOptions'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.TokenOptions'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.TokenOptions'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.TokenOptions'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.TokenOptions'
+        description: The options for token management.
+        required: true
+  /api/v2/Authentication:
+    post:
+      tags:
+      - Authentication
+      summary: Authenticate a user
+      description: No Documentation Found.
+      operationId: Authentication_Default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.AuthenticatedUser'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.AuthenticatedUser'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.AuthenticatedUser'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.AuthenticatedUser'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Credentials'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Credentials'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Credentials'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Credentials'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.Credentials'
+        description: Create a user account.
+        required: true
+  /api/v2/Authentication/IsAlive:
+    get:
+      tags:
+      - Authentication
+      summary: Acknowledges the connection to the API
+      description: No Documentation Found.
+      operationId: Authentication_IsAlive
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+  /api/v2/Authentication/RequestPasswordReset:
+    post:
+      tags:
+      - Authentication
+      summary: Request a password reset
+      description: No Documentation Found.
+      operationId: Authentication_RequestPasswordReset
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.PasswordResetRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.PasswordResetRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.PasswordResetRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.PasswordResetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.PasswordResetRequest'
+        description: The password reset request.
+        required: true
+  /api/v2/Authentication/ResetPasword:
+    post:
+      tags:
+      - Authentication
+      summary: Reset a password
+      description: No Documentation Found.
+      operationId: Authentication_ResetPasword
+      responses:
+        '204':
+          description: No Content
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.PasswordReset'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.PasswordReset'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.PasswordReset'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.PasswordReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.PasswordReset'
+        description: The password reset detail.
+        required: true
+  /api/v2/Authentication/OAuthRedirect:
+    get:
+      tags:
+      - Authentication
+      summary: Redirect to OIDC provider with configured and provided query parameters
+      description: Authentication required if not a known host. PKCE required if not a known host or if using response_mode=fragment.
+      operationId: Authentication_OAuthRedirect
+      parameters:
+      - name: redirectUri
+        in: query
+        description: URI of target application to which to redirect once logged in to OIDC.
+        required: true
+        schema:
+          type: string
+      - name: code_challenge
+        in: query
+        description: Value used PKCE to prevent abuse of authorization code.
+        required: false
+        schema:
+          type: string
+      - name: code_challenge_method
+        in: query
+        description: 'Used for PKCE. Method used to compute code_challenge from code_verifier. Supported values: ''S256''.'
+        required: false
+        schema:
+          type: string
+      - name: response_mode
+        in: query
+        description: 'Optional. Location in redirect uri to place the authorization code. Supported values: ''fragment'' and code''.'
+        required: false
+        schema:
+          type: string
+      - name: prompt
+        in: query
+        description: 'Optional. Supported values: ''none'', ''consent'', ''select_account'', and ''login''.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+      deprecated: false
+  /api/v2/Authentication/OAuthCallback:
+    get:
+      tags:
+      - Authentication
+      summary: Provided as "redirectUri" query parameter when redirecting to OIDC provider
+      description: No Documentation Found.
+      operationId: Authentication_OAuthCallback
+      parameters:
+      - name: code
+        in: query
+        description: Authorization code to be exchanged for an access token.
+        required: false
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: Copy of the state parameter sent to the OIDC provider.
+        required: false
+        schema:
+          type: string
+      - name: error
+        in: query
+        description: Conditionally provided by OIDC provider in case of error.
+        required: false
+        schema:
+          type: string
+      - name: error_description
+        in: query
+        description: Conditionally provided by OIDC provider in case of error.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+      deprecated: false
+  /api/v2/Authentication/OAuthUser:
+    post:
+      tags:
+      - Authentication
+      summary: Login using OpenID
+      description: Exchange an either an authorization code or a refresh token for an access token. Usage of refresh token requires authentication.
+      operationId: Authentication_OAuthUser
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.AuthenticatedUser'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.AuthenticatedUser'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.AuthenticatedUser'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.AuthenticatedUser'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.OAuthTokenParams'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.OAuthTokenParams'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.OAuthTokenParams'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.OAuthTokenParams'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.OAuthTokenParams'
+        description: Either 'code'  or 'refresh_token' is required.
+        required: true
+  /api/v2/Authentication/OAuthCertificate:
+    get:
+      tags:
+      - Authentication
+      summary: Retrieve the certificate used for OAuth Client Authentication
+      description: No Documentation Found.
+      operationId: Authentication_OAuthCertificate
+      parameters:
+      - name: download
+        in: query
+        description: True to download as a .cer file. Returns certificate properties by default.
+        required: false
+        schema:
+          type: boolean
+      - name: auth_verifier
+        in: query
+        description: Internal use.
+        required: false
+        schema:
+          type: string
+      - name: auth_verifier_ms
+        in: query
+        description: Internal use.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+      deprecated: false
+components:
+  schemas:
+    API.Models.PasswordResetRequest:
+      required:
+      - Username
+      - Url
+      - ParameterName
+      type: object
+      properties:
+        Username:
+          description: The username to reset the password for
+          type: string
+        Url:
+          description: The URL to direct the user to reset the password.
+          type: string
+        ParameterName:
+          description: The query string parameter name to use for supplying the password reset token
+          type: string
+    API.Models.TokenOptions:
+      type: object
+      properties:
+        BearerAction:
+          description: The action to perform on the bearer token. Optional. Defaults to ‘None’.
+          enum:
+          - None
+          - Reset
+          - Disable
+          type: string
+        MACAction:
+          description: The action to perform on the MAC token. Optional. Defaults to ‘None’.
+          enum:
+          - None
+          - Reset
+          - Disable
+          type: string
+    System.Object:
+      type: object
+      properties: {}
+    API.Models.Credentials:
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          description: A unique ID a user needs to login with
+          type: string
+        password:
+          description: A secret word or phrase that must be used to gain admission
+          type: string
+        BearerAction:
+          description: The action to perform on the bearer token. Optional. Defaults to ‘None’.
+          enum:
+          - None
+          - Reset
+          - Disable
+          type: string
+        MACAction:
+          description: The action to perform on the MAC token. Optional. Defaults to ‘None’.
+          enum:
+          - None
+          - Reset
+          - Disable
+          type: string
+    API.Models.OAuthTokenParams:
+      description: Either 'code'  or 'refresh_token' is required.
+      type: object
+      properties:
+        code:
+          description: Authorization Code from OIDC provider.
+          type: string
+        code_verifier:
+          description: Required if PKCE is used. Value from which code_challenge was generated.
+          type: string
+        refresh_token:
+          description: Refresh Token from OIDC provider.
+          type: string
+    API.Models.PasswordReset:
+      required:
+      - Token
+      - NewPassword
+      type: object
+      properties:
+        Token:
+          description: The password reset token
+          type: string
+        NewPassword:
+          description: The new password
+          type: string
+    API.Models.AuthenticatedUser:
+      type: object
+      properties:
+        UserID:
+          format: int32
+          description: The user ID
+          type: integer
+        Name:
+          description: The user's name
+          type: string
+        Username:
+          description: The username used for authentication
+          type: string
+        Email:
+          description: The user's email address
+          type: string
+        Token:
+          description: The token to use for API access
+          type: string
+        MACToken:
+          description: The MAC token to use for API access
+          type: string
+        MACId:
+          description: The MAC identifier to use for API access
+          type: string
+        ExpiresIn:
+          format: int32
+          description: How long the access token is valid, in seconds.
+          type: integer
+        RefreshToken:
+          description: A refresh token used to request an updated Access Token.
+          type: string

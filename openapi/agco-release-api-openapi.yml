@@ -1,0 +1,367 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Release API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Release
+paths:
+  /api/v2/Releases:
+    get:
+      tags:
+      - Release
+      summary: Get Release
+      description: 'Gets a collection of Release. When successful, the response is a PagedResponse of Release.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Release_GetReleases
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: visible
+        in: query
+        description: Optional. Filter by visible.
+        required: false
+        schema:
+          type: boolean
+      - name: bundleID
+        in: query
+        description: Optional. Filter by BundleID.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.Release'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_ContentSubmission.Shared.BusinessEntities.Release'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Release
+      summary: Create a Release
+      description: 'Creates a Release. The body of the POST is the Release to create.
+
+        The ReleaseId will be assigned on creation of the Job. When successful, the response
+
+        is the Release Id. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Release_PostRelease
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+        description: The Release to create.
+        required: true
+  /api/v2/Releases/{ReleaseId}:
+    get:
+      tags:
+      - Release
+      summary: Get a Release by ID
+      description: 'Gets a Release by ID. When successful, the response is the requested Release.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Release_GetRelease
+      parameters:
+      - name: ReleaseId
+        in: path
+        description: The ID of the Release to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Releases/{releaseId}:
+    put:
+      tags:
+      - Release
+      summary: Update a Release
+      description: 'Updates a Release. The body of the PUT is the updated Release.
+
+        When successful, the response is empty. If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Release_PutContentDefinition
+      parameters:
+      - name: releaseId
+        in: path
+        description: The ID of the Release to update
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+        description: The updated Release
+        required: true
+  /api/v2/Releases/{ReleaseId}/Bundle/{BundleId}:
+    post:
+      tags:
+      - Release
+      summary: Associates the release with a bundle
+      description: No Documentation Found.
+      operationId: Release_PostReleaseBundle
+      parameters:
+      - name: ReleaseId
+        in: path
+        description: The release identifier.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: BundleId
+        in: path
+        description: The bundle identifier.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    delete:
+      tags:
+      - Release
+      summary: Deletes the association between a release and a bundle
+      description: No Documentation Found.
+      operationId: Release_DeleteReleaseBundle
+      parameters:
+      - name: ReleaseId
+        in: path
+        description: The release identifier.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: BundleId
+        in: path
+        description: The bundle identifier.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    ContentSubmission.Shared.BusinessEntities.Release:
+      description: Release class
+      type: object
+      properties:
+        ReleaseID:
+          format: int32
+          description: Release ID
+          type: integer
+        ReleaseNumber:
+          description: Release Number
+          type: string
+        BuildDate:
+          format: date-time
+          description: Build Date
+          type: string
+        ReleaseDate:
+          format: date-time
+          description: Release Date
+          type: string
+        Visible:
+          description: Visible
+          type: boolean
+        BundleIDs:
+          description: IDs of AUC Bundles associated with this Release.
+          type: array
+          items:
+            type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.Release:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

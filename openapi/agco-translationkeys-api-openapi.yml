@@ -1,0 +1,283 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Translation Keys API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: TranslationKeys
+paths:
+  /api/v2/TranslationKeys:
+    get:
+      tags:
+      - TranslationKeys
+      summary: Get a paged response of TranslationKeys
+      description: ''
+      operationId: TranslationKeys_Get
+      parameters:
+      - name: limit
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: keyNames
+        in: query
+        description: Can filter by keyNames, a comma deliminated list.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_OASSupport.Shared.Models.TranslationKey'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_OASSupport.Shared.Models.TranslationKey'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_OASSupport.Shared.Models.TranslationKey'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.IPagedResponse_OASSupport.Shared.Models.TranslationKey'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - TranslationKeys
+      summary: Create a translationKey object
+      description: No Documentation Found.
+      operationId: TranslationKeys_CreateTranslationKey
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+        required: true
+  /api/v2/TranslationKeys/{ID}:
+    get:
+      tags:
+      - TranslationKeys
+      summary: Get TranslationKey by ID
+      description: No Documentation Found.
+      operationId: TranslationKeys_GetTranslationKey
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - TranslationKeys
+      summary: Update the StringID of the translationKey object
+      description: No Documentation Found.
+      operationId: TranslationKeys_UpdateTranslationKey
+      parameters:
+      - name: ID
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+        required: true
+components:
+  schemas:
+    OASSupport.Shared.Models.TranslationKey:
+      description: A translation key to map the relationship of keyNames, usually for ODX, and string Ids
+      required:
+      - KeyName
+      - StringID
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The identifier for the translationKey. Read Only.
+          type: integer
+        KeyName:
+          description: The key name of the item. One example is tkODX_HWIKM14R01
+          type: string
+        StringID:
+          description: Foreign key to StringDefinitionID
+          type: string
+    API.IPagedResponse_OASSupport.Shared.Models.TranslationKey:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

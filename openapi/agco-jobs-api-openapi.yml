@@ -1,0 +1,396 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Jobs API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Jobs
+paths:
+  /api/v2/jobs:
+    get:
+      tags:
+      - Jobs
+      summary: Get Jobs
+      description: 'Gets a collection of Jobs. When successful, the response is a PagedResponse of Jobs.
+
+        If unsuccessful, an appropriate ApiError is returned.
+
+        ///'
+      operationId: Jobs_GetJobs
+      parameters:
+      - name: limit
+        in: query
+        description: Optional. The page limit.  If not specified, the default page limit is 10.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Optional. The page offset.  If not specified, the default page offset is 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: isIncludeDeleted
+        in: query
+        description: Does it include deleted job, or not
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_BuildSystem.Shared.DTO.Job'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.PagedResponse_BuildSystem.Shared.DTO.Job'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    post:
+      tags:
+      - Jobs
+      summary: Create a Job
+      description: 'Creates a Job. The body of the POST is the Job to create. The JobID will be assigned on
+
+        creation of the Job. When successful, the response is the JobID. If unsuccessful, an
+
+        appropriate ApiError is returned.'
+      operationId: Jobs_PostJob
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+        description: The job to create.  The JobID will be assigned on creation of the Job.
+        required: true
+  /api/v2/jobs/{jobID}:
+    get:
+      tags:
+      - Jobs
+      summary: Get a Job by ID
+      description: 'Gets a Job by ID. When successful, the response is the requested Job.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Jobs_GetJob
+      parameters:
+      - name: jobID
+        in: path
+        description: The ID of the Job to get.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: isIncludeDeleted
+        in: query
+        description: Does it include deleted job, or not
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - Jobs
+      summary: Update a Job
+      description: 'Updates a Job. The body of the PUT is the updated Job. When successful, the response is empty.
+
+        If unsuccessful, an appropriate ApiError is returned.'
+      operationId: Jobs_PutJob
+      parameters:
+      - name: jobID
+        in: path
+        description: The id of the job to update
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+        description: The updated job
+        required: true
+    delete:
+      tags:
+      - Jobs
+      summary: Mark the delete flag for the Job
+      description: 'Deletes a Job. When successful, the response is empty. If unsuccessful, an appropriate
+
+        ApiError is returned.'
+      operationId: Jobs_DeleteJob
+      parameters:
+      - name: jobID
+        in: path
+        description: The id of the job to delete
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    API.PagedResponse_BuildSystem.Shared.DTO.Job:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+          readOnly: true
+    BuildSystem.Shared.DTO.ParameterMapping:
+      description: A DTO for an IParameterMapping
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter this mapping applies to
+          type: string
+        SourceType:
+          description: The source type used for supplying the parameter
+          enum:
+          - Constant
+          - Variable
+          type: string
+        Source:
+          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
+          type: string
+    BuildSystem.Shared.DTO.Parameter:
+      description: A DTO for an IParameter
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter
+          type: string
+        Type:
+          description: The data type of the parameter
+          enum:
+          - String
+          - Boolean
+          - Integer
+          - Float
+          - StringDictionary
+          type: string
+        Direction:
+          description: The parameter direction (Input or Output)
+          enum:
+          - Input
+          - Output
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    BuildSystem.Shared.DTO.Job:
+      description: A DTO for an IJob
+      type: object
+      properties:
+        JobID:
+          format: int32
+          description: The ID of the job
+          type: integer
+        Name:
+          description: The name of the job
+          type: string
+        Deleted:
+          description: Indicates if the job has been deleted.
+          type: boolean
+        Parameters:
+          description: The parameters for the job
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Parameter'
+          readOnly: true
+        Activities:
+          description: The activities which are performed for the job
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.JobActivity'
+          readOnly: true
+    BuildSystem.Shared.DTO.JobActivity:
+      description: A DTO for an IJobActivity
+      type: object
+      properties:
+        JobActivityID:
+          format: int32
+          description: The ID of this job activity
+          type: integer
+        JobID:
+          format: int32
+          description: The ID of the job this job activity belongs to
+          type: integer
+        ActivityID:
+          format: int32
+          description: The ID of the activity to be run as part of the job
+          type: integer
+        RunOrder:
+          format: int32
+          description: The order of this job activity relative to others in the job
+          type: integer
+        ParameterMappings:
+          description: The mapping of values from a source to be used for the activity parameters
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterMapping'
+          readOnly: true

@@ -1,0 +1,213 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Package Reports API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: PackageReports
+paths:
+  /api/v2/Clients/{ClientID}/PackageReports/Batch:
+    put:
+      tags:
+      - PackageReports
+      summary: Submit a batch of package reports
+      description: No Documentation Found.
+      operationId: PackageReports_Batch
+      parameters:
+      - name: ClientID
+        in: path
+        description: The Client ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+        description: The Package Reports
+        required: true
+  /api/v2/Clients/{ClientID}/PackageReports:
+    get:
+      tags:
+      - PackageReports
+      summary: Get the package reports for a client
+      description: No Documentation Found.
+      operationId: PackageReports_Default
+      parameters:
+      - name: ClientID
+        in: path
+        description: The Client ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+    put:
+      tags:
+      - PackageReports
+      summary: Submit a package report
+      description: No Documentation Found.
+      operationId: PackageReports_Default
+      parameters:
+      - name: ClientID
+        in: path
+        description: The Client ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+        description: The Package Report
+        required: true
+components:
+  schemas:
+    UpdateSystem.Models.PackageReport:
+      type: object
+      properties:
+        PackageID:
+          description: The PackageID.
+          type: string
+        PackageDescription:
+          description: Read Only. The package description
+          type: string
+        Categories:
+          description: The package report's categories.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Category'
+    UpdateSystem.Models.Category:
+      required:
+      - category
+      type: object
+      properties:
+        category:
+          description: The category name. Limit 50 characters. Categories with names exceeding this limit will be ignored.
+          type: string
+        Values:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.AttributeValue'
+    UpdateSystem.Models.AttributeValue:
+      required:
+      - Key
+      type: object
+      properties:
+        Key:
+          description: The attribute name. Limit 50 characters. Attributes with names exceeding this limit will be ignored.
+          type: string
+        Value:
+          description: The value
+          type: string
+        TimeStamp:
+          format: date-time
+          description: Read Only. The timestamp.
+          type: string
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

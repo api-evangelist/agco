@@ -1,0 +1,81 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Notifications API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: Notifications
+paths:
+  /api/v2/Notifications:
+    post:
+      tags:
+      - Notifications
+      summary: Sends an email message
+      description: No Documentation Found.
+      operationId: Notifications_PostMail
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Notification'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/API.Models.Notification'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Notification'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/API.Models.Notification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/API.Models.Notification'
+        description: The Notification Object.
+        required: true
+components:
+  schemas:
+    API.Models.Notification:
+      required:
+      - To_Addresses
+      - Subject
+      - MessageBody
+      - IsBodyHtml
+      type: object
+      properties:
+        To_Addresses:
+          type: array
+          items:
+            type: string
+        Subject:
+          type: string
+        MessageBody:
+          type: string
+        CC_Addresses:
+          type: array
+          items:
+            type: string
+        IsBodyHtml:
+          type: boolean
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

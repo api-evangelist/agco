@@ -1,0 +1,226 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Update System API
+servers:
+- url: https://secure.agco-ats.com
+tags:
+- name: UpdateSystem
+paths:
+  /api/v2/UpdateSystem:
+    get:
+      tags:
+      - UpdateSystem
+      summary: Checks the Client ID into the Update System
+      description: No Documentation Found.
+      operationId: UpdateSystem_GetCheckin
+      parameters:
+      - name: ClientID
+        in: query
+        description: The Client ID to check-in.  If this is a new client ID it will be added to Clients.
+        required: true
+        schema:
+          type: string
+      - name: Preview
+        in: query
+        description: Get Pkgs w\o updating Datetimes(true|false)
+        required: true
+        schema:
+          type: boolean
+      - name: RunAllInventories
+        in: query
+        description: Force return inventories. Defaults to false.
+        required: false
+        schema:
+          type: boolean
+      - name: transactionID
+        in: query
+        description: Optional. The 'NextTransactionID' from the previous check-in. Used to detect duplicate client IDs.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.CheckinResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.CheckinResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.CheckinResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateSystem.Models.CheckinResult'
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+  /api/v2/Clients/{ClientID}/CachedFiles:
+    get:
+      tags:
+      - UpdateSystem
+      summary: Get a list of Cached Files installed on the client Machine
+      description: No Documentation Found.
+      operationId: UpdateSystem_GetCachedFiles
+      parameters:
+      - name: ClientID
+        in: path
+        description: The ClientID of the Client
+        required: true
+        schema:
+          type: string
+      - name: Expired
+        in: query
+        description: Only Expired Files (true|false)
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: API Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/API.Models.ApiError'
+      deprecated: false
+components:
+  schemas:
+    UpdateSystem.Models.Package:
+      required:
+      - PackageTypeID
+      - Url
+      - CRC
+      - Version
+      - Description
+      - ReleaseDate
+      type: object
+      properties:
+        PackageID:
+          description: Read Only. The package ID
+          type: string
+        PackageTypeID:
+          description: The id of the package type this package belongs to.
+          type: string
+        Url:
+          description: The Url to download the package from.
+          type: string
+        CRC:
+          description: The CRC used to validate the download.
+          type: string
+        Notes:
+          description: Notes about the package
+          type: string
+        Version:
+          format: int32
+          description: The version.
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        PreviousVersion:
+          format: int32
+          description: For delta packages, the previous version required.  For non-delta packages, the Previous version is 0.  Default value is 0.
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        Description:
+          description: The package description
+          type: string
+        ReleaseDate:
+          format: date-time
+          description: The date the package was released
+          type: string
+        Released:
+          description: True if the package is released.  Default value is False.
+          type: boolean
+        Autorun:
+          description: Value is true if package should run automatically. Default value is false.
+          type: boolean
+        Switches:
+          description: The command line arguments for the package.  Default value is an empty string.
+          type: string
+        Size:
+          format: int64
+          description: "The size of the file at the specified URL.  If a size is not supplied at creation time, the size will be determined by the response from the URL.\n            If the size provided does not match the size in the response from the URL an error will be returned."
+          type: integer
+        RemoveOnSuccess:
+          description: True to remove the package after successful execution.  Default value is False.
+          type: boolean
+        LocalizedName:
+          description: Optional. The StringID used to localize the name of the Package
+          type: string
+    UpdateSystem.Models.CheckinResult:
+      type: object
+      properties:
+        Packages:
+          description: The packages for the client to run.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Package'
+        RemovePackages:
+          description: The package ids for the client to remove.
+          type: array
+          items:
+            type: string
+        NextTransactionID:
+          description: The transaction ID to use for the next checkin.
+          type: string
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

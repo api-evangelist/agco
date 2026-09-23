@@ -1,7 +1,9 @@
 ---
 title: AGCO Tech Day 2025 Spotlights AI, Autonomy and Mixed ...
 url: https://investors.agcocorp.com/news-releases/news-release-details/agco-tech-day-2025-spotlights-ai-autonomy-and-mixed-fleet
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"AGCO" press release artificial intelligence'
 position: 1
 source: serpapi-google
