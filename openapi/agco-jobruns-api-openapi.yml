@@ -252,62 +252,17 @@ paths:
       deprecated: false
 components:
   schemas:
-    BuildSystem.Shared.DTO.ActivityRun:
-      description: A DTO for an IActivityRun
-      required:
-      - Status
+    API.Models.ApiError:
       type: object
       properties:
-        ActivityRunID:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
           format: int32
-          description: The identifier for the ActivityRun
           type: integer
-        JobActivityID:
-          format: int32
-          description: Read Only. The ID of the Job Activity that defines this activity run
-          type: integer
-        JobRunID:
-          format: int32
-          description: Read Only. The ID of the JobRun under which this ActivityRun is executing
-          type: integer
-        Parameters:
-          description: The parameters used for this run of the activity.  Parameters cannot be added or removed, but output parameter values may be updated.
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterValue'
-          readOnly: true
-        Status:
-          $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRunStatus'
-          description: The status of this ActivityRun
-        Steps:
-          description: Read Only. The steps to be executed for the activity.  These steps come from the relationship through JobActivity down to ActivityStep
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityStep'
-          readOnly: true
-        StartDate:
-          format: date-time
-          description: Read Only. The UTC date and time when the activity started
-          type: string
-        EndDate:
-          format: date-time
-          description: Read Only. The UTC date and time when the activity completed
-          type: string
-    BuildSystem.Shared.DTO.ParameterMapping:
-      description: A DTO for an IParameterMapping
-      type: object
-      properties:
-        Name:
-          description: The name of the parameter this mapping applies to
-          type: string
-        SourceType:
-          description: The source type used for supplying the parameter
-          enum:
-          - Constant
-          - Variable
-          type: string
-        Source:
-          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
+        MoreInfo:
           type: string
     BuildSystem.Shared.DTO.ActivityStep:
       description: A DTO for an IActivityStep
@@ -344,6 +299,30 @@ components:
           items:
             $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterMapping'
           readOnly: true
+    BuildSystem.Shared.DTO.ActivityRunStatus:
+      description: A DTO for an IActivityRunStatus
+      type: object
+      properties:
+        Status:
+          description: The status of the ActivityRun
+          enum:
+          - Ready
+          - InProgress
+          - Succeeded
+          - Cancelled
+          - Failed
+          type: string
+        CurrentStep:
+          format: int32
+          description: The activity step currently executing, indicated by numeric order
+          type: integer
+        StepStatus:
+          description: The status text from the currently executing step
+          type: string
+        StepProgress:
+          format: int32
+          description: The percent progress from the currently executing step.  This value shall be null if progress is not available
+          type: integer
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -367,50 +346,21 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    API.PagedResponse_BuildSystem.Shared.DTO.JobRun:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.DTO.JobRun'
-          readOnly: true
-    BuildSystem.Shared.DTO.ParameterValue:
-      description: A DTO for an IParameterValue
+    BuildSystem.Shared.DTO.ParameterMapping:
+      description: A DTO for an IParameterMapping
       type: object
       properties:
         Name:
-          description: The name of the parameter this value is for
+          description: The name of the parameter this mapping applies to
           type: string
-        Value:
-          description: The parameter value in string representation
-          type: string
-        Direction:
-          description: The parameter direction (Input or Output)
+        SourceType:
+          description: The source type used for supplying the parameter
           enum:
-          - Input
-          - Output
+          - Constant
+          - Variable
+          type: string
+        Source:
+          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
           type: string
     BuildSystem.Shared.DTO.JobRun:
       description: A DTO for an IJobRun
@@ -453,27 +403,77 @@ components:
           format: date-time
           description: The UTC date and time when the job completed
           type: string
-    BuildSystem.Shared.DTO.ActivityRunStatus:
-      description: A DTO for an IActivityRunStatus
+    API.PagedResponse_BuildSystem.Shared.DTO.JobRun:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
       type: object
       properties:
-        Status:
-          description: The status of the ActivityRun
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.JobRun'
+          readOnly: true
+    BuildSystem.Shared.DTO.ParameterValue:
+      description: A DTO for an IParameterValue
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter this value is for
+          type: string
+        Value:
+          description: The parameter value in string representation
+          type: string
+        Direction:
+          description: The parameter direction (Input or Output)
           enum:
-          - Ready
-          - InProgress
-          - Succeeded
-          - Cancelled
-          - Failed
+          - Input
+          - Output
           type: string
-        CurrentStep:
+    BuildSystem.Shared.DTO.ActivityRun:
+      description: A DTO for an IActivityRun
+      required:
+      - Status
+      type: object
+      properties:
+        ActivityRunID:
           format: int32
-          description: The activity step currently executing, indicated by numeric order
+          description: The identifier for the ActivityRun
           type: integer
-        StepStatus:
-          description: The status text from the currently executing step
+        JobActivityID:
+          format: int32
+          description: Read Only. The ID of the Job Activity that defines this activity run
+          type: integer
+        JobRunID:
+          format: int32
+          description: Read Only. The ID of the JobRun under which this ActivityRun is executing
+          type: integer
+        Parameters:
+          description: The parameters used for this run of the activity.  Parameters cannot be added or removed, but output parameter values may be updated.
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterValue'
+          readOnly: true
+        Status:
+          $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityRunStatus'
+          description: The status of this ActivityRun
+        Steps:
+          description: Read Only. The steps to be executed for the activity.  These steps come from the relationship through JobActivity down to ActivityStep
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ActivityStep'
+          readOnly: true
+        StartDate:
+          format: date-time
+          description: Read Only. The UTC date and time when the activity started
           type: string
-        StepProgress:
-          format: int32
-          description: The percent progress from the currently executing step.  This value shall be null if progress is not available
-          type: integer
+        EndDate:
+          format: date-time
+          description: Read Only. The UTC date and time when the activity completed
+          type: string

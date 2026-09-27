@@ -77,7 +77,7 @@ paths:
       - Licenses
       summary: Get a license
       description: No Documentation Found.
-      operationId: Licenses_Get
+      operationId: getApiV2LicensesByID
       parameters:
       - name: ID
         in: path
@@ -117,8 +117,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/API.Models.ApiError'
       deprecated: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Licenses_Get
 components:
   schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.PagedResponse_DealerDB.Models.License:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/DealerDB.Models.License'
+          readOnly: true
     DealerDB.Models.License:
       type: object
       properties:
@@ -181,32 +212,3 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.PagedResponse_DealerDB.Models.License:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/DealerDB.Models.License'
-          readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string

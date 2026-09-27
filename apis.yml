@@ -35,7 +35,6 @@ tags:
   - Manufacturing
   - Telematics
   - Precision Agriculture
-  - Diagnostics
 url: https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/apis.yml
 apis:
 - aid: agco:agco-locations-api

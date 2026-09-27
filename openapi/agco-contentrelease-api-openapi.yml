@@ -158,7 +158,7 @@ paths:
       description: 'Gets a ContentReleaseVersion by ID. When successful, the response is the requested ContentReleaseVersion.
 
         If unsuccessful, an appropriate ApiError is returned.'
-      operationId: ContentRelease_GetContentReleaseVersion
+      operationId: getApiV2ContentReleasesByContentReleaseId
       parameters:
       - name: ContentReleaseId
         in: path
@@ -199,6 +199,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/API.Models.ApiError'
       deprecated: false
+      x-operation-id-source: normalized
+      x-operation-id-original: ContentRelease_GetContentReleaseVersion
     put:
       tags:
       - ContentRelease
@@ -272,6 +274,58 @@ paths:
       deprecated: false
 components:
   schemas:
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion:
       description: ContentReleaseVersion class
       type: object
@@ -305,56 +359,4 @@ components:
           type: boolean
         TestReportUrl:
           description: The URL at which test reports for this content can be found
-          type: string
-    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion'
-          readOnly: true
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
           type: string

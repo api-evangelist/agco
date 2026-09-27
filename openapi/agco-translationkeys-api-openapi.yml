@@ -218,6 +218,17 @@ paths:
         required: true
 components:
   schemas:
+    API.IPagedResponse_OASSupport.Shared.Models.TranslationKey:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
     OASSupport.Shared.Models.TranslationKey:
       description: A translation key to map the relationship of keyNames, usually for ODX, and string Ids
       required:
@@ -235,17 +246,18 @@ components:
         StringID:
           description: Foreign key to StringDefinitionID
           type: string
-    API.IPagedResponse_OASSupport.Shared.Models.TranslationKey:
+    API.Models.ApiError:
       type: object
       properties:
-        Entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
-          readOnly: true
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          readOnly: true
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -269,15 +281,3 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string

@@ -259,6 +259,17 @@ components:
         IsDeleted:
           description: Indicates whether the API supports the language. Must be false when created. Read Only.
           type: boolean
+    API.IPagedResponse_GlobalResources.Shared.Models.Language:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
     API.Models.ApiError:
       type: object
       properties:
@@ -293,15 +304,4 @@ components:
           format: int32
           description: The number of entities prior to this page of items.
           type: integer
-          readOnly: true
-    API.IPagedResponse_GlobalResources.Shared.Models.Language:
-      type: object
-      properties:
-        Entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalResources.Shared.Models.Language'
-          readOnly: true
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
           readOnly: true

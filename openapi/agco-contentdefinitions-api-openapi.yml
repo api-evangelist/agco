@@ -565,23 +565,18 @@ paths:
         required: true
 components:
   schemas:
-    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
+    API.Models.ApiError:
       type: object
       properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
-          readOnly: true
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinition:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -599,6 +594,44 @@ components:
           items:
             $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
           readOnly: true
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+          readOnly: true
+    ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
+      description: An attribute of a definition of the content for submission
+      required:
+      - Name
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The ID of this attribute.
+          type: integer
+        ContentDefinitionID:
+          format: int32
+          description: The ID of the content definition to which this attribute belongs.
+          type: integer
+        Name:
+          description: The name of this Attribute.
+          pattern: '[a-zA-Z0-9]+'
+          type: string
+        Value:
+          description: The value of this Attribute
+          type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -622,39 +655,6 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
-      description: An attribute of a definition of the content for submission
-      required:
-      - Name
-      type: object
-      properties:
-        ID:
-          format: int32
-          description: The ID of this attribute.
-          type: integer
-        ContentDefinitionID:
-          format: int32
-          description: The ID of the content definition to which this attribute belongs.
-          type: integer
-        Name:
-          description: The name of this Attribute.
-          pattern: '[a-zA-Z0-9]+'
-          type: string
-        Value:
-          description: The value of this Attribute
-          type: string
     ContentSubmission.Shared.BusinessEntities.ContentDefinition:
       description: The definition of the content for submission
       required:

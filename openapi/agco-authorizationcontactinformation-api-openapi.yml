@@ -150,17 +150,6 @@ paths:
         required: true
 components:
   schemas:
-    API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationContactInformation:
-      type: object
-      properties:
-        Entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationContactInformation'
-          readOnly: true
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          readOnly: true
     AuthorizationCodes.Shared.Models.AuthorizationContactInformation:
       required:
       - AuthorizationCodeID
@@ -209,6 +198,17 @@ components:
           format: date-time
           description: The date the authorization code was created.
           type: string
+    API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationContactInformation:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationContactInformation'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:

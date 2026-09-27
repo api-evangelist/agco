@@ -119,7 +119,7 @@ paths:
       - PackageReports
       summary: Submit a package report
       description: No Documentation Found.
-      operationId: PackageReports_Default
+      operationId: putApiV2ClientsByClientIDPackageReports
       parameters:
       - name: ClientID
         in: path
@@ -156,6 +156,8 @@ paths:
               $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
         description: The Package Report
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: PackageReports_Default
 components:
   schemas:
     UpdateSystem.Models.PackageReport:
@@ -184,6 +186,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UpdateSystem.Models.AttributeValue'
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     UpdateSystem.Models.AttributeValue:
       required:
       - Key
@@ -198,16 +212,4 @@ components:
         TimeStamp:
           format: date-time
           description: Read Only. The timestamp.
-          type: string
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
           type: string

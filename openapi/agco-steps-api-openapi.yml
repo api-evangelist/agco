@@ -218,27 +218,17 @@ paths:
         required: true
 components:
   schemas:
-    BuildSystem.Shared.DTO.Parameter:
-      description: A DTO for an IParameter
+    API.Models.ApiError:
       type: object
       properties:
-        Name:
-          description: The name of the parameter
+        DeveloperMessage:
           type: string
-        Type:
-          description: The data type of the parameter
-          enum:
-          - String
-          - Boolean
-          - Integer
-          - Float
-          - StringDictionary
+        UserMessage:
           type: string
-        Direction:
-          description: The parameter direction (Input or Output)
-          enum:
-          - Input
-          - Output
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
           type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
@@ -263,17 +253,27 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.Models.ApiError:
+    BuildSystem.Shared.DTO.Parameter:
+      description: A DTO for an IParameter
       type: object
       properties:
-        DeveloperMessage:
+        Name:
+          description: The name of the parameter
           type: string
-        UserMessage:
+        Type:
+          description: The data type of the parameter
+          enum:
+          - String
+          - Boolean
+          - Integer
+          - Float
+          - StringDictionary
           type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
+        Direction:
+          description: The parameter direction (Input or Output)
+          enum:
+          - Input
+          - Output
           type: string
     BuildSystem.Shared.DTO.Step:
       description: Step

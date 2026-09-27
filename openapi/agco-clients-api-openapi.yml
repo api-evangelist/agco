@@ -61,7 +61,7 @@ paths:
       - Clients
       summary: Get a Client in the Update System
       description: No Documentation Found.
-      operationId: Clients_Get
+      operationId: getApiV2ClientsByID
       parameters:
       - name: ID
         in: path
@@ -101,6 +101,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/API.Models.ApiError'
       deprecated: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Clients_Get
     put:
       tags:
       - Clients
@@ -253,32 +255,35 @@ paths:
       deprecated: false
 components:
   schemas:
-    UpdateSystem.Models.AvailableSubscription:
+    API.Models.ApiError:
       type: object
       properties:
-        PackageType:
-          $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
-          description: The PackageType this subscription is for.
-        SubscriptionType:
-          description: The type of subscription supported.
-          enum:
-          - Required
-          - IncludeByDefault
-          - ExcludeByDefault
+        DeveloperMessage:
           type: string
-    UpdateSystem.Models.Client:
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.PagedResponse_UpdateSystem.Models.AvailableUpdateGroupSubscription:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
       type: object
       properties:
-        ClientID:
-          description: Read Only. The id of the client
-          type: string
-        Tag:
-          description: A description of the client that can be used for easy reference
-          type: string
-        LastCheckin:
-          format: date-time
-          description: Read Only. The time of the client's last checkin with the server.
-          type: string
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.AvailableUpdateGroupSubscription'
+          readOnly: true
     UpdateSystem.Models.PackageType:
       required:
       - Description
@@ -315,75 +320,6 @@ components:
           type: string
         Icon:
           description: Optional.  The icon to use for the PackageType, in base 64
-          type: string
-    API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
-          readOnly: true
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
-    API.PagedResponse_UpdateSystem.Models.Client:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.Client'
-          readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
           type: string
     UpdateSystem.Models.UpdateGroup:
       required:
@@ -432,6 +368,72 @@ components:
         LocalizedName:
           description: Optional. The StringID used to localize the name of the update group
           type: string
+    UpdateSystem.Models.Client:
+      type: object
+      properties:
+        ClientID:
+          description: Read Only. The id of the client
+          type: string
+        Tag:
+          description: A description of the client that can be used for easy reference
+          type: string
+        LastCheckin:
+          format: date-time
+          description: Read Only. The time of the client's last checkin with the server.
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          readOnly: true
+    UpdateSystem.Models.AvailableSubscription:
+      type: object
+      properties:
+        PackageType:
+          $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          description: The PackageType this subscription is for.
+        SubscriptionType:
+          description: The type of subscription supported.
+          enum:
+          - Required
+          - IncludeByDefault
+          - ExcludeByDefault
+          type: string
     UpdateSystem.Models.AvailableUpdateGroupSubscription:
       type: object
       properties:
@@ -443,6 +445,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UpdateSystem.Models.AvailableSubscription'
+    API.PagedResponse_UpdateSystem.Models.Client:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Client'
+          readOnly: true
     UpdateSystem.Models.UpdateGroupSubscription:
       required:
       - UpdateGroupID
@@ -467,20 +486,3 @@ components:
         Include:
           description: True to receive content of type indicated by PackageTypeID.
           type: boolean
-    API.PagedResponse_UpdateSystem.Models.AvailableUpdateGroupSubscription:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.AvailableUpdateGroupSubscription'
-          readOnly: true

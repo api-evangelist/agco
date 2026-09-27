@@ -112,7 +112,7 @@ paths:
       - Users
       summary: Get a specific user
       description: No Documentation Found.
-      operationId: Users_Get
+      operationId: getApiV2UsersById
       parameters:
       - name: id
         in: path
@@ -138,6 +138,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/API.Models.User'
       deprecated: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Users_Get
     put:
       tags:
       - Users
@@ -248,6 +250,23 @@ paths:
         required: true
 components:
   schemas:
+    API.PagedResponse_API.Models.User:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.User'
+          readOnly: true
     API.Models.User:
       type: object
       properties:
@@ -292,21 +311,4 @@ components:
           format: int32
           description: The number of entities prior to this page of items.
           type: integer
-          readOnly: true
-    API.PagedResponse_API.Models.User:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/API.Models.User'
           readOnly: true

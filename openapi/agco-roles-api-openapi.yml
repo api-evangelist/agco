@@ -286,41 +286,6 @@ paths:
         required: true
 components:
   schemas:
-    API.Models.Role:
-      description: Defines an API Role
-      required:
-      - Name
-      - Description
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: The role's identifier.
-          type: integer
-        Name:
-          description: The name of the role. Must be alpha-numeric strings separated by a period (.).
-          pattern: ^[0-9a-zA-Z]*?[a-zA-Z]+[0-9a-zA-Z]*$
-          type: string
-        Description:
-          description: Role description
-          type: string
-    API.PagedResponse_API.Models.Role:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/API.Models.Role'
-          readOnly: true
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -369,21 +334,23 @@ components:
         DataDescription:
           description: Description of data to be provided with Role Authorization
           type: string
-    API.Models.RolePermissionChange:
-      description: Change to the Permissions that a Role is given.
+    API.Models.Role:
+      description: Defines an API Role
       required:
-      - Permission
-      - Action
+      - Name
+      - Description
       type: object
       properties:
-        Permission:
-          description: The name of the permission to grant or revoke.
+        Id:
+          format: int32
+          description: The role's identifier.
+          type: integer
+        Name:
+          description: The name of the role. Must be alpha-numeric strings separated by a period (.).
+          pattern: ^[0-9a-zA-Z]*?[a-zA-Z]+[0-9a-zA-Z]*$
           type: string
-        Action:
-          description: The action to take.
-          enum:
-          - Grant
-          - Revoke
+        Description:
+          description: Role description
           type: string
     API.PagedResponse_API.Models.Permission:
       description: A response containing a page of results and metadata concerning the results
@@ -401,4 +368,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/API.Models.Permission'
+          readOnly: true
+    API.Models.RolePermissionChange:
+      description: Change to the Permissions that a Role is given.
+      required:
+      - Permission
+      - Action
+      type: object
+      properties:
+        Permission:
+          description: The name of the permission to grant or revoke.
+          type: string
+        Action:
+          description: The action to take.
+          enum:
+          - Grant
+          - Revoke
+          type: string
+    API.PagedResponse_API.Models.Role:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.Role'
           readOnly: true

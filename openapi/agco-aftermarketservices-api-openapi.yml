@@ -464,41 +464,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    System.Object:
-      type: object
-      properties: {}
-    AGCOPowerServices.Models.UserStatus:
-      description: Status of a voucher in the AGCO Power system
-      required:
-      - VoucherCode
-      - DealerCode
-      type: object
-      properties:
-        VoucherCode:
-          description: The voucher code
-          type: string
-        DealerCode:
-          description: The dealer code of the voucher
-          type: string
-        State:
-          description: The state of the voucher
-          enum:
-          - Active
-          - Inactive
-          - None
-          type: string
     AGCOPowerServices.Models.ProductionData:
       description: Production data for an AGCO Power engine.
       required:
@@ -512,6 +477,18 @@ components:
         DataValues:
           format: byte
           description: Raw values of the calibration data
+          type: string
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
           type: string
     AGCOPowerServices.Models.ECU:
       description: An AGCO Power ECU
@@ -548,3 +525,26 @@ components:
           description: A description why the ECU cannot be deactivated.
           pattern: ^[a-zA-Z0-9]{0,4096}$
           type: string
+    AGCOPowerServices.Models.UserStatus:
+      description: Status of a voucher in the AGCO Power system
+      required:
+      - VoucherCode
+      - DealerCode
+      type: object
+      properties:
+        VoucherCode:
+          description: The voucher code
+          type: string
+        DealerCode:
+          description: The dealer code of the voucher
+          type: string
+        State:
+          description: The state of the voucher
+          enum:
+          - Active
+          - Inactive
+          - None
+          type: string
+    System.Object:
+      type: object
+      properties: {}

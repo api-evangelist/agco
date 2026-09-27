@@ -252,6 +252,18 @@ paths:
       deprecated: false
 components:
   schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.PagedResponse_BuildSystem.Shared.DTO.Job:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -268,6 +280,55 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BuildSystem.Shared.DTO.Job'
+          readOnly: true
+    BuildSystem.Shared.DTO.JobActivity:
+      description: A DTO for an IJobActivity
+      type: object
+      properties:
+        JobActivityID:
+          format: int32
+          description: The ID of this job activity
+          type: integer
+        JobID:
+          format: int32
+          description: The ID of the job this job activity belongs to
+          type: integer
+        ActivityID:
+          format: int32
+          description: The ID of the activity to be run as part of the job
+          type: integer
+        RunOrder:
+          format: int32
+          description: The order of this job activity relative to others in the job
+          type: integer
+        ParameterMappings:
+          description: The mapping of values from a source to be used for the activity parameters
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterMapping'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
           readOnly: true
     BuildSystem.Shared.DTO.ParameterMapping:
       description: A DTO for an IParameterMapping
@@ -307,41 +368,6 @@ components:
           - Input
           - Output
           type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
     BuildSystem.Shared.DTO.Job:
       description: A DTO for an IJob
       type: object
@@ -367,30 +393,4 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BuildSystem.Shared.DTO.JobActivity'
-          readOnly: true
-    BuildSystem.Shared.DTO.JobActivity:
-      description: A DTO for an IJobActivity
-      type: object
-      properties:
-        JobActivityID:
-          format: int32
-          description: The ID of this job activity
-          type: integer
-        JobID:
-          format: int32
-          description: The ID of the job this job activity belongs to
-          type: integer
-        ActivityID:
-          format: int32
-          description: The ID of the activity to be run as part of the job
-          type: integer
-        RunOrder:
-          format: int32
-          description: The order of this job activity relative to others in the job
-          type: integer
-        ParameterMappings:
-          description: The mapping of values from a source to be used for the activity parameters
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterMapping'
           readOnly: true

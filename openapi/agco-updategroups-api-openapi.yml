@@ -118,7 +118,7 @@ paths:
       - UpdateGroups
       summary: Get a specific Update Group by ID
       description: No Documentation Found.
-      operationId: UpdateGroups_Get
+      operationId: getApiV2UpdateGroupsByID
       parameters:
       - name: ID
         in: path
@@ -158,6 +158,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/API.Models.ApiError'
       deprecated: false
+      x-operation-id-source: normalized
+      x-operation-id-original: UpdateGroups_Get
     put:
       tags:
       - UpdateGroups
@@ -333,18 +335,6 @@ components:
         LocalizedName:
           description: Optional. The StringID used to localize the name of the update group
           type: string
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -368,6 +358,18 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.PagedResponse_UpdateSystem.Models.UpdateGroup:
       description: A response containing a page of results and metadata concerning the results
       required:

@@ -716,90 +716,13 @@ paths:
         required: true
 components:
   schemas:
-    GlobalResources.Shared.Models.TranslationSetStatistics:
-      description: Statistics for a translation set
-      type: object
-      properties:
-        LanguageIDs:
-          description: The IDs of languages for which translaions in this translation set have been requested
-          type: array
-          items:
-            format: int32
-            type: integer
-        StringCount:
-          format: int32
-          description: The count of unique string definitions contained in this translation set
-          type: integer
-    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetAttribute:
+    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetSourceString:
       type: object
       properties:
         Entities:
           type: array
           items:
-            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
-          readOnly: true
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          readOnly: true
-    GlobalResources.Shared.Models.TranslationSetSourceString:
-      description: Information needed to translate a string in a translation set
-      type: object
-      properties:
-        StringID:
-          description: The ID of the string to translate
-          type: string
-        LanguageID:
-          format: int32
-          description: The ID of the language from which to translate the string
-          type: integer
-        StringValue:
-          description: The string to translate
-          type: string
-        DescriptionForTranslator:
-          description: A description of the string to translate. This should contain context and parameter count.
-          type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetString:
-      type: object
-      properties:
-        Entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetString'
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetSourceString'
           readOnly: true
         Metadata:
           $ref: '#/components/schemas/API.PagedResponseMetadata'
@@ -826,13 +749,79 @@ components:
         StringValue:
           description: The string value returned from the translator
           type: string
-    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSet:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    GlobalResources.Shared.Models.TranslationSetStatistics:
+      description: Statistics for a translation set
+      type: object
+      properties:
+        LanguageIDs:
+          description: The IDs of languages for which translaions in this translation set have been requested
+          type: array
+          items:
+            format: int32
+            type: integer
+        StringCount:
+          format: int32
+          description: The count of unique string definitions contained in this translation set
+          type: integer
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    GlobalResources.Shared.Models.TranslationSetSourceString:
+      description: Information needed to translate a string in a translation set
+      type: object
+      properties:
+        StringID:
+          description: The ID of the string to translate
+          type: string
+        LanguageID:
+          format: int32
+          description: The ID of the language from which to translate the string
+          type: integer
+        StringValue:
+          description: The string to translate
+          type: string
+        DescriptionForTranslator:
+          description: A description of the string to translate. This should contain context and parameter count.
+          type: string
+    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetAttribute:
       type: object
       properties:
         Entities:
           type: array
           items:
-            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
           readOnly: true
         Metadata:
           $ref: '#/components/schemas/API.PagedResponseMetadata'
@@ -858,13 +847,13 @@ components:
         Value:
           description: The value of this Attribute
           type: string
-    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetSourceString:
+    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSetString:
       type: object
       properties:
         Entities:
           type: array
           items:
-            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetSourceString'
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetString'
           readOnly: true
         Metadata:
           $ref: '#/components/schemas/API.PagedResponseMetadata'
@@ -915,3 +904,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute'
+    API.IPagedResponse_GlobalResources.Shared.Models.TranslationSet:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.TranslationSet'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true

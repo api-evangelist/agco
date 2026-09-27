@@ -207,22 +207,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    ContentSubmission.Shared.BusinessEntities.UserContentDefinition:
-      description: Relationship indicating that a User can manage submissions for the Content
-      type: object
-      properties:
-        UserContentDefinitionID:
-          format: int32
-          description: Read Only. The ID of the User to ContentDefinition relationship.
-          type: integer
-        UserID:
-          format: int32
-          description: The ID of the user.
-          type: integer
-        ContentDefinitionID:
-          format: int32
-          description: The ID of the ContentDefinition.
-          type: integer
     API.PagedResponse_ContentSubmission.Shared.BusinessEntities.UserContentDefinition:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -240,6 +224,18 @@ components:
           items:
             $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.UserContentDefinition'
           readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -263,15 +259,19 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.Models.ApiError:
+    ContentSubmission.Shared.BusinessEntities.UserContentDefinition:
+      description: Relationship indicating that a User can manage submissions for the Content
       type: object
       properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
+        UserContentDefinitionID:
           format: int32
+          description: Read Only. The ID of the User to ContentDefinition relationship.
           type: integer
-        MoreInfo:
-          type: string
+        UserID:
+          format: int32
+          description: The ID of the user.
+          type: integer
+        ContentDefinitionID:
+          format: int32
+          description: The ID of the ContentDefinition.
+          type: integer

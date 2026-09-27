@@ -633,50 +633,48 @@ paths:
         required: true
 components:
   schemas:
-    BuildSystem.Shared.Interfaces.IActivityRun:
-      description: IActivityRun
+    BuildSystem.Shared.Interfaces.IJobRun:
+      description: interface of JobRun
       type: object
       properties:
-        ActivityRunID:
-          format: int32
-          description: ActivityRunID
-          type: integer
-          readOnly: true
-        JobActivityID:
-          format: int32
-          description: JobActivityID
-          type: integer
-          readOnly: true
         JobRunID:
           format: int32
           description: JobRunID
           type: integer
           readOnly: true
+        JobID:
+          format: int32
+          description: job id
+          type: integer
         Parameters:
           description: Parameters
           type: array
           items:
             $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterValue'
+          readOnly: true
         Status:
-          $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityRunStatus'
-          description: Status
-        Steps:
-          description: Steps
+          description: status
+          enum:
+          - Ready
+          - InProgress
+          - Succeeded
+          - Cancelled
+          - Failed
+          type: string
+        ActivityRuns:
+          description: ActivityRuns
           type: array
           items:
-            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityStep'
-          readOnly: true
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityRun'
         StartDate:
           format: date-time
-          description: StartDate
+          description: Start Date
           type: string
-          readOnly: true
         EndDate:
           format: date-time
-          description: EndDate
+          description: end date
           type: string
-          readOnly: true
-    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmission:
       description: A response containing a page of results and metadata concerning the results
       required:
       - Metadata
@@ -691,100 +689,41 @@ components:
           description: The set of entities that make up this page.
           type: array
           items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
           readOnly: true
-    BuildSystem.Shared.Interfaces.IActivityStep:
-      description: IActivityStep
+    ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
+      description: The definition of the content for submission
+      required:
+      - Name
       type: object
       properties:
-        ActivityStepID:
+        ID:
           format: int32
-          description: ActivityStepID
+          description: The ID of this attribute.
           type: integer
-          readOnly: true
-        ActivityID:
+        ContentSubmissionID:
           format: int32
-          description: ActivityID
+          description: The ID of the content submission to which this attribute belongs.
           type: integer
-        StepID:
-          format: int32
-          description: step id
-          type: integer
-        RunOrder:
-          format: int32
-          description: run order
-          type: integer
-        UseConfig:
-          description: UseConfig
-          type: string
-        StepName:
-          description: steo name
-          type: string
-          readOnly: true
-        ImplementationID:
-          description: Implementation ID
-          type: string
-          readOnly: true
-        ParameterMappings:
-          description: ParameterMappings
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterMapping'
-    BuildSystem.Shared.Interfaces.IParameterValue:
-      description: Declares members that must be implemented by parameter value objects.
-      type: object
-      properties:
         Name:
-          description: Gets or sets the name of the parameter.
+          description: The name of this Attribute.
+          pattern: '[a-zA-Z0-9]+'
           type: string
         Value:
-          description: Gets or sets the value of the parameter.
+          description: The value of this Attribute
           type: string
-        Direction:
-          description: "Gets or sets a value indicating whether the parameter value is an \n            input to the build part or an output from the build part."
-          enum:
-          - Input
-          - Output
-          type: string
-    BuildSystem.Shared.Interfaces.IParameterMapping:
-      description: IParameterMapping
+    API.Models.ApiError:
       type: object
       properties:
-        Name:
-          description: name
+        DeveloperMessage:
           type: string
-        SourceType:
-          description: SourceType
-          enum:
-          - Constant
-          - Variable
+        UserMessage:
           type: string
-        Source:
-          description: Source
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
           type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
     ContentSubmission.Shared.BusinessEntities.ContentSubmission:
       description: A content submission
       type: object
@@ -859,43 +798,30 @@ components:
         Value:
           description: The value of this Attribute
           type: string
-    API.Models.ApiError:
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
       type: object
       properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
+        TotalCount:
           format: int32
+          description: The total number of entities matching the request.
           type: integer
-        MoreInfo:
-          type: string
-    BuildSystem.Shared.Interfaces.IActivityRunStatus:
-      description: "Declares members of objects that communicate the progress of an \n            asynchronous activity run."
-      type: object
-      properties:
-        Status:
-          description: Gets or sets the status of the activity run.
-          enum:
-          - Ready
-          - InProgress
-          - Succeeded
-          - Cancelled
-          - Failed
-          type: string
-        CurrentStep:
+          readOnly: true
+        Limit:
           format: int32
-          description: Gets or sets the number of the step the activity is currently running.
+          description: The number of entities this paged response is limited to.
           type: integer
-        StepStatus:
-          description: "Gets or sets a description of the current status of the currently \n            running step."
-          type: string
-        StepProgress:
+          readOnly: true
+        Offset:
           format: int32
-          description: Gets or sets a measurement of the current progress of the current step.
+          description: The number of entities prior to this page of items.
           type: integer
-    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmission:
+          readOnly: true
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
       description: A response containing a page of results and metadata concerning the results
       required:
       - Metadata
@@ -910,7 +836,7 @@ components:
           description: The set of entities that make up this page.
           type: array
           items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
           readOnly: true
     ContentSubmission.Shared.BusinessEntities.ContentDefinition:
       description: The definition of the content for submission
@@ -940,48 +866,81 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
-    ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
-      description: The definition of the content for submission
-      required:
-      - Name
+    BuildSystem.Shared.Interfaces.IActivityStep:
+      description: IActivityStep
       type: object
       properties:
-        ID:
+        ActivityStepID:
           format: int32
-          description: The ID of this attribute.
-          type: integer
-        ContentSubmissionID:
-          format: int32
-          description: The ID of the content submission to which this attribute belongs.
-          type: integer
-        Name:
-          description: The name of this Attribute.
-          pattern: '[a-zA-Z0-9]+'
-          type: string
-        Value:
-          description: The value of this Attribute
-          type: string
-    BuildSystem.Shared.Interfaces.IJobRun:
-      description: interface of JobRun
-      type: object
-      properties:
-        JobRunID:
-          format: int32
-          description: JobRunID
+          description: ActivityStepID
           type: integer
           readOnly: true
-        JobID:
+        ActivityID:
           format: int32
-          description: job id
+          description: ActivityID
           type: integer
-        Parameters:
-          description: Parameters
+        StepID:
+          format: int32
+          description: step id
+          type: integer
+        RunOrder:
+          format: int32
+          description: run order
+          type: integer
+        UseConfig:
+          description: UseConfig
+          type: string
+        StepName:
+          description: steo name
+          type: string
+          readOnly: true
+        ImplementationID:
+          description: Implementation ID
+          type: string
+          readOnly: true
+        ParameterMappings:
+          description: ParameterMappings
           type: array
           items:
-            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterValue'
-          readOnly: true
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterMapping'
+    BuildSystem.Shared.Interfaces.IParameterValue:
+      description: Declares members that must be implemented by parameter value objects.
+      type: object
+      properties:
+        Name:
+          description: Gets or sets the name of the parameter.
+          type: string
+        Value:
+          description: Gets or sets the value of the parameter.
+          type: string
+        Direction:
+          description: "Gets or sets a value indicating whether the parameter value is an \n            input to the build part or an output from the build part."
+          enum:
+          - Input
+          - Output
+          type: string
+    BuildSystem.Shared.Interfaces.IParameterMapping:
+      description: IParameterMapping
+      type: object
+      properties:
+        Name:
+          description: name
+          type: string
+        SourceType:
+          description: SourceType
+          enum:
+          - Constant
+          - Variable
+          type: string
+        Source:
+          description: Source
+          type: string
+    BuildSystem.Shared.Interfaces.IActivityRunStatus:
+      description: "Declares members of objects that communicate the progress of an \n            asynchronous activity run."
+      type: object
+      properties:
         Status:
-          description: status
+          description: Gets or sets the status of the activity run.
           enum:
           - Ready
           - InProgress
@@ -989,16 +948,57 @@ components:
           - Cancelled
           - Failed
           type: string
-        ActivityRuns:
-          description: ActivityRuns
+        CurrentStep:
+          format: int32
+          description: Gets or sets the number of the step the activity is currently running.
+          type: integer
+        StepStatus:
+          description: "Gets or sets a description of the current status of the currently \n            running step."
+          type: string
+        StepProgress:
+          format: int32
+          description: Gets or sets a measurement of the current progress of the current step.
+          type: integer
+    BuildSystem.Shared.Interfaces.IActivityRun:
+      description: IActivityRun
+      type: object
+      properties:
+        ActivityRunID:
+          format: int32
+          description: ActivityRunID
+          type: integer
+          readOnly: true
+        JobActivityID:
+          format: int32
+          description: JobActivityID
+          type: integer
+          readOnly: true
+        JobRunID:
+          format: int32
+          description: JobRunID
+          type: integer
+          readOnly: true
+        Parameters:
+          description: Parameters
           type: array
           items:
-            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityRun'
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterValue'
+        Status:
+          $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityRunStatus'
+          description: Status
+        Steps:
+          description: Steps
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityStep'
+          readOnly: true
         StartDate:
           format: date-time
-          description: Start Date
+          description: StartDate
           type: string
+          readOnly: true
         EndDate:
           format: date-time
-          description: end date
+          description: EndDate
           type: string
+          readOnly: true

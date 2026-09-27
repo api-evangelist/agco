@@ -343,28 +343,30 @@ paths:
       deprecated: false
 components:
   schemas:
-    AuthorizationCodes.Shared.Models.Category:
-      description: A category for Authorization Code Definitions
+    AuthorizationCodes.Shared.Models.AuthorizationCodeUser:
       type: object
       properties:
-        ID:
-          description: The ID of the Category.
-          type: string
+        UserID:
+          format: int32
+          type: integer
         Name:
-          description: The Name of the Category.
           type: string
-        Description:
-          description: A description of the Category.
+        Username:
           type: string
-    AuthorizationCodes.Shared.Models.CategoryUserReport:
+        Email:
+          type: string
+    API.Models.ApiError:
       type: object
       properties:
-        Categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
-        User:
-          $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeUser'
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.IPagedResponse_AuthorizationCodes.Shared.Models.CategoryUserReport:
       type: object
       properties:
@@ -372,17 +374,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.CategoryUserReport'
-          readOnly: true
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          readOnly: true
-    API.IPagedResponse_AuthorizationCodes.Shared.Models.Category:
-      type: object
-      properties:
-        Entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
           readOnly: true
         Metadata:
           $ref: '#/components/schemas/API.PagedResponseMetadata'
@@ -410,27 +401,36 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.Models.ApiError:
+    API.IPagedResponse_AuthorizationCodes.Shared.Models.Category:
       type: object
       properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    AuthorizationCodes.Shared.Models.AuthorizationCodeUser:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    AuthorizationCodes.Shared.Models.CategoryUserReport:
       type: object
       properties:
-        UserID:
-          format: int32
-          type: integer
+        Categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.Category'
+        User:
+          $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCodeUser'
+    AuthorizationCodes.Shared.Models.Category:
+      description: A category for Authorization Code Definitions
+      type: object
+      properties:
+        ID:
+          description: The ID of the Category.
+          type: string
         Name:
+          description: The Name of the Category.
           type: string
-        Username:
-          type: string
-        Email:
+        Description:
+          description: A description of the Category.
           type: string

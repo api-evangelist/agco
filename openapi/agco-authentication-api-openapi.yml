@@ -367,65 +367,6 @@ components:
         ParameterName:
           description: The query string parameter name to use for supplying the password reset token
           type: string
-    API.Models.TokenOptions:
-      type: object
-      properties:
-        BearerAction:
-          description: The action to perform on the bearer token. Optional. Defaults to ‘None’.
-          enum:
-          - None
-          - Reset
-          - Disable
-          type: string
-        MACAction:
-          description: The action to perform on the MAC token. Optional. Defaults to ‘None’.
-          enum:
-          - None
-          - Reset
-          - Disable
-          type: string
-    System.Object:
-      type: object
-      properties: {}
-    API.Models.Credentials:
-      required:
-      - username
-      - password
-      type: object
-      properties:
-        username:
-          description: A unique ID a user needs to login with
-          type: string
-        password:
-          description: A secret word or phrase that must be used to gain admission
-          type: string
-        BearerAction:
-          description: The action to perform on the bearer token. Optional. Defaults to ‘None’.
-          enum:
-          - None
-          - Reset
-          - Disable
-          type: string
-        MACAction:
-          description: The action to perform on the MAC token. Optional. Defaults to ‘None’.
-          enum:
-          - None
-          - Reset
-          - Disable
-          type: string
-    API.Models.OAuthTokenParams:
-      description: Either 'code'  or 'refresh_token' is required.
-      type: object
-      properties:
-        code:
-          description: Authorization Code from OIDC provider.
-          type: string
-        code_verifier:
-          description: Required if PKCE is used. Value from which code_challenge was generated.
-          type: string
-        refresh_token:
-          description: Refresh Token from OIDC provider.
-          type: string
     API.Models.PasswordReset:
       required:
       - Token
@@ -469,4 +410,63 @@ components:
           type: integer
         RefreshToken:
           description: A refresh token used to request an updated Access Token.
+          type: string
+    API.Models.TokenOptions:
+      type: object
+      properties:
+        BearerAction:
+          description: The action to perform on the bearer token. Optional. Defaults to ‘None’.
+          enum:
+          - None
+          - Reset
+          - Disable
+          type: string
+        MACAction:
+          description: The action to perform on the MAC token. Optional. Defaults to ‘None’.
+          enum:
+          - None
+          - Reset
+          - Disable
+          type: string
+    API.Models.OAuthTokenParams:
+      description: Either 'code'  or 'refresh_token' is required.
+      type: object
+      properties:
+        code:
+          description: Authorization Code from OIDC provider.
+          type: string
+        code_verifier:
+          description: Required if PKCE is used. Value from which code_challenge was generated.
+          type: string
+        refresh_token:
+          description: Refresh Token from OIDC provider.
+          type: string
+    System.Object:
+      type: object
+      properties: {}
+    API.Models.Credentials:
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          description: A unique ID a user needs to login with
+          type: string
+        password:
+          description: A secret word or phrase that must be used to gain admission
+          type: string
+        BearerAction:
+          description: The action to perform on the bearer token. Optional. Defaults to ‘None’.
+          enum:
+          - None
+          - Reset
+          - Disable
+          type: string
+        MACAction:
+          description: The action to perform on the MAC token. Optional. Defaults to ‘None’.
+          enum:
+          - None
+          - Reset
+          - Disable
           type: string
