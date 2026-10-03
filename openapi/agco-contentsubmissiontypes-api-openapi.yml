@@ -237,6 +237,18 @@ paths:
       deprecated: false
 components:
   schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     ContentSubmission.Shared.BusinessEntities.ContentSubmissionType:
       description: A type of content available for submission
       required:
@@ -277,15 +289,3 @@ components:
         Enabled:
           description: Indicates whether this submission type is available to be used
           type: boolean
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string

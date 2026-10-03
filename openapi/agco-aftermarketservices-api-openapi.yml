@@ -464,6 +464,9 @@ paths:
       deprecated: false
 components:
   schemas:
+    System.Object:
+      type: object
+      properties: {}
     AGCOPowerServices.Models.ProductionData:
       description: Production data for an AGCO Power engine.
       required:
@@ -477,18 +480,6 @@ components:
         DataValues:
           format: byte
           description: Raw values of the calibration data
-          type: string
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
           type: string
     AGCOPowerServices.Models.ECU:
       description: An AGCO Power ECU
@@ -545,6 +536,15 @@ components:
           - Inactive
           - None
           type: string
-    System.Object:
+    API.Models.ApiError:
       type: object
-      properties: {}
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

@@ -142,23 +142,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.PagedResponse_API.Models.Log:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/API.Models.Log'
-          readOnly: true
     API.Models.Log:
       type: object
       properties:
@@ -181,6 +164,23 @@ components:
           type: integer
         MoreInfo:
           type: string
+    API.PagedResponse_API.Models.Log:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.Log'
+          readOnly: true
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:

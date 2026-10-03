@@ -363,6 +363,30 @@ paths:
       deprecated: false
 components:
   schemas:
+    API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCode:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
+    AuthorizationCodes.Shared.Models.Parameter:
+      description: A parameter used to create an authorization code.
+      required:
+      - Name
+      - Value
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter. May not be updated.
+          type: string
+        Value:
+          description: The value of the parameter. May not be updated.
+          type: string
     AuthorizationCodes.Shared.Models.AuthorizationContactInformation:
       required:
       - AuthorizationCodeID
@@ -411,26 +435,6 @@ components:
           format: date-time
           description: The date the authorization code was created.
           type: string
-    AuthorizationCodes.Shared.Models.CodeValidationModel:
-      type: object
-      properties:
-        IsValid:
-          type: boolean
-        ExpirationDate:
-          format: date-time
-          type: string
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
     AuthorizationCodes.Shared.Models.AuthorizationCode:
       description: Represents the model containing an authorization code used to unlock a feature in machines and EDT
       type: object
@@ -478,17 +482,14 @@ components:
           format: date-time
           description: A date at which this code should begin being valid. Optional. Set on create only.
           type: string
-    API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCode:
+    AuthorizationCodes.Shared.Models.CodeValidationModel:
       type: object
       properties:
-        Entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationCode'
-          readOnly: true
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          readOnly: true
+        IsValid:
+          type: boolean
+        ExpirationDate:
+          format: date-time
+          type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -512,16 +513,15 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    AuthorizationCodes.Shared.Models.Parameter:
-      description: A parameter used to create an authorization code.
-      required:
-      - Name
-      - Value
+    API.Models.ApiError:
       type: object
       properties:
-        Name:
-          description: The name of the parameter. May not be updated.
+        DeveloperMessage:
           type: string
-        Value:
-          description: The value of the parameter. May not be updated.
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
           type: string

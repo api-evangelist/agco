@@ -218,34 +218,6 @@ paths:
         required: true
 components:
   schemas:
-    API.IPagedResponse_OASSupport.Shared.Models.TranslationKey:
-      type: object
-      properties:
-        Entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
-          readOnly: true
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          readOnly: true
-    OASSupport.Shared.Models.TranslationKey:
-      description: A translation key to map the relationship of keyNames, usually for ODX, and string Ids
-      required:
-      - KeyName
-      - StringID
-      type: object
-      properties:
-        ID:
-          format: int32
-          description: The identifier for the translationKey. Read Only.
-          type: integer
-        KeyName:
-          description: The key name of the item. One example is tkODX_HWIKM14R01
-          type: string
-        StringID:
-          description: Foreign key to StringDefinitionID
-          type: string
     API.Models.ApiError:
       type: object
       properties:
@@ -280,4 +252,32 @@ components:
           format: int32
           description: The number of entities prior to this page of items.
           type: integer
+          readOnly: true
+    OASSupport.Shared.Models.TranslationKey:
+      description: A translation key to map the relationship of keyNames, usually for ODX, and string Ids
+      required:
+      - KeyName
+      - StringID
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The identifier for the translationKey. Read Only.
+          type: integer
+        KeyName:
+          description: The key name of the item. One example is tkODX_HWIKM14R01
+          type: string
+        StringID:
+          description: Foreign key to StringDefinitionID
+          type: string
+    API.IPagedResponse_OASSupport.Shared.Models.TranslationKey:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/OASSupport.Shared.Models.TranslationKey'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
           readOnly: true

@@ -286,6 +286,18 @@ paths:
       deprecated: false
 components:
   schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     ContentSubmission.Shared.BusinessEntities.Release:
       description: Release class
       type: object
@@ -313,35 +325,6 @@ components:
           type: array
           items:
             type: string
-    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.Release:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
-          readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -364,4 +347,21 @@ components:
           format: int32
           description: The number of entities prior to this page of items.
           type: integer
+          readOnly: true
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.Release:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.Release'
           readOnly: true

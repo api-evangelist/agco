@@ -233,26 +233,45 @@ paths:
         required: true
 components:
   schemas:
-    API.Models.ApiError:
+    DealerDB.Models.EDTLiteRegistration:
+      description: Registration for an EDT Lite
+      required:
+      - InstanceID
+      - VoucherCode
+      - ExpirationDate
       type: object
       properties:
-        DeveloperMessage:
+        InstanceID:
+          description: The identifier for the EDT Lite.
           type: string
-        UserMessage:
+        VoucherCode:
+          description: The voucher code with which the EDT Lite was created.
           type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
+        DealerCode:
+          description: The dealer code with which the EDT Lite was created.
           type: string
-    DealerDB.Models.LicenseActivation:
+        ExpirationDate:
+          format: date-time
+          description: The date at which the content of the EDT Lite expires.
+          type: string
+    DealerDB.Models.LicenseActivationConfirm:
+      required:
+      - LicenseVersion
       type: object
       properties:
-        LicenseData:
-          description: The license data in base64 format.
+        LicenseVersion:
+          description: The license version to confirm
           type: string
-        Key:
-          description: The license key in base64 format.  This is only provided when the LicenseData is a new license.
+    DealerDB.Models.LicenseActivationUpdate:
+      required:
+      - LicenseVersion
+      type: object
+      properties:
+        LicenseVersion:
+          description: The license version to update
+          type: string
+        SystemInfo:
+          description: Information about  the system being activated
           type: string
     DealerDB.Models.LicenseActivationCreate:
       required:
@@ -280,43 +299,24 @@ components:
           - EDT
           - EDTLite
           type: string
-    DealerDB.Models.EDTLiteRegistration:
-      description: Registration for an EDT Lite
-      required:
-      - InstanceID
-      - VoucherCode
-      - ExpirationDate
+    DealerDB.Models.LicenseActivation:
       type: object
       properties:
-        InstanceID:
-          description: The identifier for the EDT Lite.
+        LicenseData:
+          description: The license data in base64 format.
           type: string
-        VoucherCode:
-          description: The voucher code with which the EDT Lite was created.
+        Key:
+          description: The license key in base64 format.  This is only provided when the LicenseData is a new license.
           type: string
-        DealerCode:
-          description: The dealer code with which the EDT Lite was created.
-          type: string
-        ExpirationDate:
-          format: date-time
-          description: The date at which the content of the EDT Lite expires.
-          type: string
-    DealerDB.Models.LicenseActivationUpdate:
-      required:
-      - LicenseVersion
+    API.Models.ApiError:
       type: object
       properties:
-        LicenseVersion:
-          description: The license version to update
+        DeveloperMessage:
           type: string
-        SystemInfo:
-          description: Information about  the system being activated
+        UserMessage:
           type: string
-    DealerDB.Models.LicenseActivationConfirm:
-      required:
-      - LicenseVersion
-      type: object
-      properties:
-        LicenseVersion:
-          description: The license version to confirm
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
           type: string

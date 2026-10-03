@@ -255,72 +255,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    API.PagedResponse_UpdateSystem.Models.AvailableUpdateGroupSubscription:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.AvailableUpdateGroupSubscription'
-          readOnly: true
-    UpdateSystem.Models.PackageType:
-      required:
-      - Description
-      type: object
-      properties:
-        PackageTypeID:
-          description: Read Only. The package type id.
-          type: string
-        Description:
-          description: The description of the package type
-          type: string
-        InventoryPackage:
-          description: The inventory package used to determine what version of this package type is installed.
-          type: string
-        Category:
-          description: The inventory category (from the InventoryPackage) used to determine what version of this package type is installed.
-          type: string
-        Attribute:
-          description: The inventory attribute (from the InventoryPackage) used to determine what version of this package type is installed.
-          type: string
-        InventoryFrequency:
-          format: int32
-          description: The number of minutes to wait before requesting another inventory.  The default value is 1440 (24 hours).
-          type: integer
-        MaxDeltaPackages:
-          format: int32
-          description: The maximum number of "chained" delta packages to use when updating the client
-          type: integer
-        LocalizedDescription:
-          description: Optional. The StringID used to localize the description of the PackageType
-          type: string
-        LocalizedName:
-          description: Optional. The StringID used to localize the name of the PackageType
-          type: string
-        Icon:
-          description: Optional.  The icon to use for the PackageType, in base 64
-          type: string
     UpdateSystem.Models.UpdateGroup:
       required:
       - Description
@@ -368,6 +302,125 @@ components:
         LocalizedName:
           description: Optional. The StringID used to localize the name of the update group
           type: string
+    UpdateSystem.Models.PackageType:
+      required:
+      - Description
+      type: object
+      properties:
+        PackageTypeID:
+          description: Read Only. The package type id.
+          type: string
+        Description:
+          description: The description of the package type
+          type: string
+        InventoryPackage:
+          description: The inventory package used to determine what version of this package type is installed.
+          type: string
+        Category:
+          description: The inventory category (from the InventoryPackage) used to determine what version of this package type is installed.
+          type: string
+        Attribute:
+          description: The inventory attribute (from the InventoryPackage) used to determine what version of this package type is installed.
+          type: string
+        InventoryFrequency:
+          format: int32
+          description: The number of minutes to wait before requesting another inventory.  The default value is 1440 (24 hours).
+          type: integer
+        MaxDeltaPackages:
+          format: int32
+          description: The maximum number of "chained" delta packages to use when updating the client
+          type: integer
+        LocalizedDescription:
+          description: Optional. The StringID used to localize the description of the PackageType
+          type: string
+        LocalizedName:
+          description: Optional. The StringID used to localize the name of the PackageType
+          type: string
+        Icon:
+          description: Optional.  The icon to use for the PackageType, in base 64
+          type: string
+    UpdateSystem.Models.UpdateGroupSubscription:
+      required:
+      - UpdateGroupID
+      - PackageTypeID
+      - ClientID
+      - Include
+      type: object
+      properties:
+        UpdateGroupSubscriptionID:
+          format: int32
+          description: The Update Group Subscription ID.  This ID will be automatically assigned when creating an Update Group Subscription.
+          type: integer
+        UpdateGroupID:
+          description: The Update Group this subscription is relevant for.
+          type: string
+        PackageTypeID:
+          description: The PackageType to set subscription status for
+          type: string
+        ClientID:
+          description: The ClientID.
+          type: string
+        Include:
+          description: True to receive content of type indicated by PackageTypeID.
+          type: boolean
+    API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
+          readOnly: true
+    API.PagedResponse_UpdateSystem.Models.AvailableUpdateGroupSubscription:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.AvailableUpdateGroupSubscription'
+          readOnly: true
+    UpdateSystem.Models.AvailableUpdateGroupSubscription:
+      type: object
+      properties:
+        UpdateGroup:
+          $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          description: The Update Group this subscription is for.
+        AvailableSubscriptions:
+          description: The available subscriptions for this update group.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.AvailableSubscription'
+    UpdateSystem.Models.AvailableSubscription:
+      type: object
+      properties:
+        PackageType:
+          $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          description: The PackageType this subscription is for.
+        SubscriptionType:
+          description: The type of subscription supported.
+          enum:
+          - Required
+          - IncludeByDefault
+          - ExcludeByDefault
+          type: string
     UpdateSystem.Models.Client:
       type: object
       properties:
@@ -404,47 +457,18 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
+    API.Models.ApiError:
       type: object
       properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupSubscription'
-          readOnly: true
-    UpdateSystem.Models.AvailableSubscription:
-      type: object
-      properties:
-        PackageType:
-          $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
-          description: The PackageType this subscription is for.
-        SubscriptionType:
-          description: The type of subscription supported.
-          enum:
-          - Required
-          - IncludeByDefault
-          - ExcludeByDefault
+        DeveloperMessage:
           type: string
-    UpdateSystem.Models.AvailableUpdateGroupSubscription:
-      type: object
-      properties:
-        UpdateGroup:
-          $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
-          description: The Update Group this subscription is for.
-        AvailableSubscriptions:
-          description: The available subscriptions for this update group.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.AvailableSubscription'
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.PagedResponse_UpdateSystem.Models.Client:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -462,27 +486,3 @@ components:
           items:
             $ref: '#/components/schemas/UpdateSystem.Models.Client'
           readOnly: true
-    UpdateSystem.Models.UpdateGroupSubscription:
-      required:
-      - UpdateGroupID
-      - PackageTypeID
-      - ClientID
-      - Include
-      type: object
-      properties:
-        UpdateGroupSubscriptionID:
-          format: int32
-          description: The Update Group Subscription ID.  This ID will be automatically assigned when creating an Update Group Subscription.
-          type: integer
-        UpdateGroupID:
-          description: The Update Group this subscription is relevant for.
-          type: string
-        PackageTypeID:
-          description: The PackageType to set subscription status for
-          type: string
-        ClientID:
-          description: The ClientID.
-          type: string
-        Include:
-          description: True to receive content of type indicated by PackageTypeID.
-          type: boolean

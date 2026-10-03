@@ -250,23 +250,6 @@ paths:
         required: true
 components:
   schemas:
-    API.PagedResponse_API.Models.User:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/API.Models.User'
-          readOnly: true
     API.Models.User:
       type: object
       properties:
@@ -289,6 +272,23 @@ components:
         Email:
           description: The user's email address
           type: string
+    API.PagedResponse_API.Models.User:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.User'
+          readOnly: true
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:

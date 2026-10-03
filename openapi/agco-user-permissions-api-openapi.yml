@@ -374,6 +374,23 @@ paths:
       deprecated: false
 components:
   schemas:
+    API.PagedResponse_API.Models.Role:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/API.Models.Role'
+          readOnly: true
     API.PagedResponse_API.Models.User:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -391,17 +408,21 @@ components:
           items:
             $ref: '#/components/schemas/API.Models.User'
           readOnly: true
-    API.Models.ApiError:
+    API.Models.RoleUserChange:
+      required:
+      - Id
+      - Action
       type: object
       properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
+        Id:
           format: int32
+          description: The Id of the User
           type: integer
-        MoreInfo:
+        Action:
+          description: The action to take with the user
+          enum:
+          - Grant
+          - Revoke
           type: string
     API.PagedResponse_API.Models.UserEffectivePermission:
       description: A response containing a page of results and metadata concerning the results
@@ -419,79 +440,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/API.Models.UserEffectivePermission'
-          readOnly: true
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
-    API.Models.UserRoleChange:
-      required:
-      - Name
-      - Action
-      type: object
-      properties:
-        Name:
-          description: The name of the role
-          type: string
-        Action:
-          description: The action to take with the role
-          enum:
-          - Grant
-          - Revoke
-          type: string
-    API.Models.Role:
-      description: Defines an API Role
-      required:
-      - Name
-      - Description
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: The role's identifier.
-          type: integer
-        Name:
-          description: The name of the role. Must be alpha-numeric strings separated by a period (.).
-          pattern: ^[0-9a-zA-Z]*?[a-zA-Z]+[0-9a-zA-Z]*$
-          type: string
-        Description:
-          description: Role description
-          type: string
-    API.PagedResponse_API.Models.Role:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/API.Models.Role'
           readOnly: true
     API.Models.User:
       type: object
@@ -515,21 +463,23 @@ components:
         Email:
           description: The user's email address
           type: string
-    API.Models.RoleUserChange:
+    API.Models.Role:
+      description: Defines an API Role
       required:
-      - Id
-      - Action
+      - Name
+      - Description
       type: object
       properties:
         Id:
           format: int32
-          description: The Id of the User
+          description: The role's identifier.
           type: integer
-        Action:
-          description: The action to take with the user
-          enum:
-          - Grant
-          - Revoke
+        Name:
+          description: The name of the role. Must be alpha-numeric strings separated by a period (.).
+          pattern: ^[0-9a-zA-Z]*?[a-zA-Z]+[0-9a-zA-Z]*$
+          type: string
+        Description:
+          description: Role description
           type: string
     API.Models.UserEffectivePermission:
       type: object
@@ -541,4 +491,54 @@ components:
           format: int32
           type: integer
         PermissionName:
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.Models.UserRoleChange:
+      required:
+      - Name
+      - Action
+      type: object
+      properties:
+        Name:
+          description: The name of the role
+          type: string
+        Action:
+          description: The action to take with the role
+          enum:
+          - Grant
+          - Revoke
           type: string

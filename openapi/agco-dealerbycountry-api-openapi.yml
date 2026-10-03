@@ -51,31 +51,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.PagedResponse_DealerDB.Models.DealersPerCountry:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/DealerDB.Models.DealersPerCountry'
-          readOnly: true
-    DealerDB.Models.DealersPerCountry:
-      type: object
-      properties:
-        Country:
-          type: string
-        Count:
-          format: int32
-          type: integer
     API.Models.ApiError:
       type: object
       properties:
@@ -110,4 +85,29 @@ components:
           format: int32
           description: The number of entities prior to this page of items.
           type: integer
+          readOnly: true
+    DealerDB.Models.DealersPerCountry:
+      type: object
+      properties:
+        Country:
+          type: string
+        Count:
+          format: int32
+          type: integer
+    API.PagedResponse_DealerDB.Models.DealersPerCountry:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/DealerDB.Models.DealersPerCountry'
           readOnly: true

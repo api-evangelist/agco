@@ -51,6 +51,18 @@ paths:
       deprecated: false
 components:
   schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.PagedResponse_Communication.Models.FileUploadType:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -68,17 +80,17 @@ components:
           items:
             $ref: '#/components/schemas/Communication.Models.FileUploadType'
           readOnly: true
-    API.Models.ApiError:
+    Communication.Models.FileUploadType:
       type: object
       properties:
-        DeveloperMessage:
+        ID:
+          description: The file upload type ID
           type: string
-        UserMessage:
+        Name:
+          description: The name of the file upload type
           type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
+        NameStringId:
+          description: The string translation id of the file upload type
           type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
@@ -103,15 +115,3 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    Communication.Models.FileUploadType:
-      type: object
-      properties:
-        ID:
-          description: The file upload type ID
-          type: string
-        Name:
-          description: The name of the file upload type
-          type: string
-        NameStringId:
-          description: The string translation id of the file upload type
-          type: string

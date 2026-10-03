@@ -238,22 +238,40 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.PagedResponse_UpdateSystem.Models.Package:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
+    API.Models.ApiError:
       type: object
       properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
           readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.Package'
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
           readOnly: true
     UpdateSystem.Models.Package:
       required:
@@ -318,38 +336,20 @@ components:
         LocalizedName:
           description: Optional. The StringID used to localize the name of the Package
           type: string
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
+    API.PagedResponse_UpdateSystem.Models.Package:
+      description: A response containing a page of results and metadata concerning the results
       required:
-      - TotalCount
-      - Limit
-      - Offset
+      - Metadata
+      - Entities
       type: object
       properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
           readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Package'
           readOnly: true

@@ -45,6 +45,18 @@ paths:
         required: true
 components:
   schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.Models.Notification:
       required:
       - To_Addresses
@@ -67,15 +79,3 @@ components:
             type: string
         IsBodyHtml:
           type: boolean
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string

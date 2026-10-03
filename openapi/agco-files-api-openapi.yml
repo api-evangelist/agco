@@ -333,29 +333,9 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.Models.ApiError:
+    System.Object:
       type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    API.IPagedResponse_GlobalResources.Shared.Models.FileDownload:
-      type: object
-      properties:
-        Entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
-          readOnly: true
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          readOnly: true
+      properties: {}
     GlobalResources.Shared.Models.FileDownload:
       description: A language used for string translations.
       required:
@@ -400,6 +380,17 @@ components:
         Path:
           description: The Path of the file.
           type: string
+    API.IPagedResponse_GlobalResources.Shared.Models.FileDownload:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.FileDownload'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -423,6 +414,15 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    System.Object:
+    API.Models.ApiError:
       type: object
-      properties: {}
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

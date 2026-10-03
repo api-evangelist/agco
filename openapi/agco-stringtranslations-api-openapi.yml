@@ -223,6 +223,18 @@ paths:
         required: true
 components:
   schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     GlobalResources.Shared.Models.StringTranslation:
       description: A translation of a string in a specific language
       required:
@@ -270,18 +282,6 @@ components:
         Metadata:
           $ref: '#/components/schemas/API.PagedResponseMetadata'
           readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:

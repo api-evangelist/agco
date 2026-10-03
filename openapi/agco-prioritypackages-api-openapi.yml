@@ -193,23 +193,18 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.PagedResponse_UpdateSystem.Models.PriorityPackage:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
+    API.Models.ApiError:
       type: object
       properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
-          readOnly: true
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     UpdateSystem.Models.PriorityPackage:
       required:
       - ClientID
@@ -272,18 +267,23 @@ components:
         RemoveOnSuccess:
           description: Read Only. From the package specified by package ID.
           type: boolean
-    API.Models.ApiError:
+    API.PagedResponse_UpdateSystem.Models.PriorityPackage:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
       type: object
       properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.PriorityPackage'
+          readOnly: true
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:

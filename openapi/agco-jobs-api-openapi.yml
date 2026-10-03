@@ -252,18 +252,48 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.Models.ApiError:
+    BuildSystem.Shared.DTO.ParameterMapping:
+      description: A DTO for an IParameterMapping
       type: object
       properties:
-        DeveloperMessage:
+        Name:
+          description: The name of the parameter this mapping applies to
           type: string
-        UserMessage:
+        SourceType:
+          description: The source type used for supplying the parameter
+          enum:
+          - Constant
+          - Variable
           type: string
-        ErrorCode:
+        Source:
+          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
+          type: string
+    BuildSystem.Shared.DTO.Job:
+      description: A DTO for an IJob
+      type: object
+      properties:
+        JobID:
           format: int32
+          description: The ID of the job
           type: integer
-        MoreInfo:
+        Name:
+          description: The name of the job
           type: string
+        Deleted:
+          description: Indicates if the job has been deleted.
+          type: boolean
+        Parameters:
+          description: The parameters for the job
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Parameter'
+          readOnly: true
+        Activities:
+          description: The activities which are performed for the job
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.JobActivity'
+          readOnly: true
     API.PagedResponse_BuildSystem.Shared.DTO.Job:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -330,21 +360,17 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    BuildSystem.Shared.DTO.ParameterMapping:
-      description: A DTO for an IParameterMapping
+    API.Models.ApiError:
       type: object
       properties:
-        Name:
-          description: The name of the parameter this mapping applies to
+        DeveloperMessage:
           type: string
-        SourceType:
-          description: The source type used for supplying the parameter
-          enum:
-          - Constant
-          - Variable
+        UserMessage:
           type: string
-        Source:
-          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
           type: string
     BuildSystem.Shared.DTO.Parameter:
       description: A DTO for an IParameter
@@ -368,29 +394,3 @@ components:
           - Input
           - Output
           type: string
-    BuildSystem.Shared.DTO.Job:
-      description: A DTO for an IJob
-      type: object
-      properties:
-        JobID:
-          format: int32
-          description: The ID of the job
-          type: integer
-        Name:
-          description: The name of the job
-          type: string
-        Deleted:
-          description: Indicates if the job has been deleted.
-          type: boolean
-        Parameters:
-          description: The parameters for the job
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Parameter'
-          readOnly: true
-        Activities:
-          description: The activities which are performed for the job
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.DTO.JobActivity'
-          readOnly: true

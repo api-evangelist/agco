@@ -218,63 +218,6 @@ paths:
         required: true
 components:
   schemas:
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
-    BuildSystem.Shared.DTO.Parameter:
-      description: A DTO for an IParameter
-      type: object
-      properties:
-        Name:
-          description: The name of the parameter
-          type: string
-        Type:
-          description: The data type of the parameter
-          enum:
-          - String
-          - Boolean
-          - Integer
-          - Float
-          - StringDictionary
-          type: string
-        Direction:
-          description: The parameter direction (Input or Output)
-          enum:
-          - Input
-          - Output
-          type: string
     BuildSystem.Shared.DTO.Step:
       description: Step
       required:
@@ -325,3 +268,60 @@ components:
           items:
             $ref: '#/components/schemas/BuildSystem.Shared.DTO.Step'
           readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    BuildSystem.Shared.DTO.Parameter:
+      description: A DTO for an IParameter
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter
+          type: string
+        Type:
+          description: The data type of the parameter
+          enum:
+          - String
+          - Boolean
+          - Integer
+          - Float
+          - StringDictionary
+          type: string
+        Direction:
+          description: The parameter direction (Input or Output)
+          enum:
+          - Input
+          - Output
+          type: string

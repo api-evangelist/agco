@@ -335,29 +335,6 @@ components:
         LocalizedName:
           description: Optional. The StringID used to localize the name of the update group
           type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
     API.Models.ApiError:
       type: object
       properties:
@@ -386,4 +363,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
           readOnly: true

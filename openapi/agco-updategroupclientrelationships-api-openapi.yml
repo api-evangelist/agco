@@ -249,6 +249,18 @@ paths:
         required: true
 components:
   schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.PagedResponse_UpdateSystem.Models.UpdateGroupClientRelationship:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -288,18 +300,6 @@ components:
         Active:
           description: The subscription status.  The status is active by default.
           type: boolean
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:

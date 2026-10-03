@@ -133,6 +133,34 @@ paths:
       deprecated: false
 components:
   schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    UpdateSystem.Models.CheckinResult:
+      type: object
+      properties:
+        Packages:
+          description: The packages for the client to run.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Package'
+        RemovePackages:
+          description: The package ids for the client to remove.
+          type: array
+          items:
+            type: string
+        NextTransactionID:
+          description: The transaction ID to use for the next checkin.
+          type: string
     UpdateSystem.Models.Package:
       required:
       - PackageTypeID
@@ -195,32 +223,4 @@ components:
           type: boolean
         LocalizedName:
           description: Optional. The StringID used to localize the name of the Package
-          type: string
-    UpdateSystem.Models.CheckinResult:
-      type: object
-      properties:
-        Packages:
-          description: The packages for the client to run.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.Package'
-        RemovePackages:
-          description: The package ids for the client to remove.
-          type: array
-          items:
-            type: string
-        NextTransactionID:
-          description: The transaction ID to use for the next checkin.
-          type: string
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
           type: string

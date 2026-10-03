@@ -150,6 +150,18 @@ paths:
         required: true
 components:
   schemas:
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     AuthorizationCodes.Shared.Models.AuthorizationContactInformation:
       required:
       - AuthorizationCodeID
@@ -232,15 +244,3 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
