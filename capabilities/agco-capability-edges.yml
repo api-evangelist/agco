@@ -1,9 +1,10 @@
 slug: agco
-provider: agco
+provider: Agco
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
 - Agriculture & Food Production
+- Software & Technology
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,7 +12,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 3
+edge_count: 6
 edges:
 - tag: Telemetry
   spec_file: agco-telemetry-api-openapi.yml
@@ -41,3 +42,31 @@ edges:
   confidence: 0.85
   evidence: GET /machines  listMachines  AGCO List Machines
   reason: Listing farm machines from AGCO agricultural equipment fleet is on-farm equipment inventory/telemetry.
+- tag: User Permissions
+  spec_file: agco-user-permissions-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: Get a user's permissions ... Update a user's roles ... API.Models.UserEffectivePermission
+  reason: Operations read and assign roles and effective permissions for users — role-based access administration,
+    which is Identity & Access Management.
+- tag: Permissions
+  spec_file: agco-permissions-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: GET /api/v2/Permissions  Permissions_GetPermissions  List Permissions; POST ... Adds a Permission
+  reason: CRUD over permission entities used to control access to the platform — access rights administration,
+    i.e. Identity & Access Management.
+- tag: Roles
+  spec_file: agco-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /api/v2/Roles  Roles_PostRole  Adds a User Role; PUT /api/v2/Roles/{id}/Permissions  Manage
+    the Permissions for a Role
+  reason: Role-based access control administration — user roles and their permission assignments — which
+    is Identity & Access Management.
