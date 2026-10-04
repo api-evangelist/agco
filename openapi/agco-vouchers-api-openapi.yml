@@ -324,7 +324,58 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.PagedResponse_DealerDB.Models.Voucher:
+    DealerDB.Models.Voucher:
+      description: A voucher for EDT activation
+      type: object
+      properties:
+        VoucherCode:
+          description: The voucher code.
+          type: string
+        Type:
+          description: The type of voucher. Commercial is the default if not specified.
+          enum:
+          - Commercial
+          - Internal
+          - Temporary
+          - RightToRepair
+          type: string
+        DealerCode:
+          description: The dealer code the voucher is assigned to.  Required for commercial and right to repair vouchers.
+          type: string
+        LicenseTo:
+          description: Required for Internal Vouchers
+          type: string
+        Purpose:
+          description: Required for Internal Vouchers. Not supported for other Vouchers.
+          type: string
+        OrderNumber:
+          description: The order number of a license. Required for Commercial and Right To Repair Vouchers. Not supported for other Vouchers.
+          type: string
+        Email:
+          description: Required for internal vouchers.
+          type: string
+        ModifiedBy:
+          description: Read-Only. The user that made the last modification to the voucher.
+          type: string
+        CreatedDate:
+          format: date-time
+          description: Read-Only. The date the voucher was created.
+          type: string
+        PunchedDate:
+          format: date-time
+          description: Read-Only. The date the voucher was punched.
+          type: string
+        Punched:
+          description: True if voucher has aleady been used.  False if the voucher has not been used.
+          type: boolean
+        Deleted:
+          description: Read-Only. True if voucher has been deleted.
+          type: boolean
+        ExpirationDate:
+          format: date-time
+          description: The expiration date of the voucher. Required for Temporary and Right to Repair Vouchers.
+          type: string
+    API.PagedResponse_DealerDB.Models.VoucherHistory:
       description: A response containing a page of results and metadata concerning the results
       required:
       - Metadata
@@ -339,7 +390,30 @@ components:
           description: The set of entities that make up this page.
           type: array
           items:
-            $ref: '#/components/schemas/DealerDB.Models.Voucher'
+            $ref: '#/components/schemas/DealerDB.Models.VoucherHistory'
+          readOnly: true
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
           readOnly: true
     DealerDB.Models.VoucherHistory:
       type: object
@@ -398,7 +472,7 @@ components:
           format: date-time
           description: The expiration date of the voucher. Required for Temporary Vouchers.
           type: string
-    API.PagedResponse_DealerDB.Models.VoucherHistory:
+    API.PagedResponse_DealerDB.Models.Voucher:
       description: A response containing a page of results and metadata concerning the results
       required:
       - Metadata
@@ -413,79 +487,5 @@ components:
           description: The set of entities that make up this page.
           type: array
           items:
-            $ref: '#/components/schemas/DealerDB.Models.VoucherHistory'
-          readOnly: true
-    DealerDB.Models.Voucher:
-      description: A voucher for EDT activation
-      type: object
-      properties:
-        VoucherCode:
-          description: The voucher code.
-          type: string
-        Type:
-          description: The type of voucher. Commercial is the default if not specified.
-          enum:
-          - Commercial
-          - Internal
-          - Temporary
-          - RightToRepair
-          type: string
-        DealerCode:
-          description: The dealer code the voucher is assigned to.  Required for commercial and right to repair vouchers.
-          type: string
-        LicenseTo:
-          description: Required for Internal Vouchers
-          type: string
-        Purpose:
-          description: Required for Internal Vouchers. Not supported for other Vouchers.
-          type: string
-        OrderNumber:
-          description: The order number of a license. Required for Commercial and Right To Repair Vouchers. Not supported for other Vouchers.
-          type: string
-        Email:
-          description: Required for internal vouchers.
-          type: string
-        ModifiedBy:
-          description: Read-Only. The user that made the last modification to the voucher.
-          type: string
-        CreatedDate:
-          format: date-time
-          description: Read-Only. The date the voucher was created.
-          type: string
-        PunchedDate:
-          format: date-time
-          description: Read-Only. The date the voucher was punched.
-          type: string
-        Punched:
-          description: True if voucher has aleady been used.  False if the voucher has not been used.
-          type: boolean
-        Deleted:
-          description: Read-Only. True if voucher has been deleted.
-          type: boolean
-        ExpirationDate:
-          format: date-time
-          description: The expiration date of the voucher. Required for Temporary and Right to Repair Vouchers.
-          type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
+            $ref: '#/components/schemas/DealerDB.Models.Voucher'
           readOnly: true

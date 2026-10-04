@@ -333,9 +333,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    System.Object:
-      type: object
-      properties: {}
     GlobalResources.Shared.Models.FileDownload:
       description: A language used for string translations.
       required:
@@ -380,6 +377,18 @@ components:
         Path:
           description: The Path of the file.
           type: string
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.IPagedResponse_GlobalResources.Shared.Models.FileDownload:
       type: object
       properties:
@@ -414,15 +423,6 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.Models.ApiError:
+    System.Object:
       type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
+      properties: {}

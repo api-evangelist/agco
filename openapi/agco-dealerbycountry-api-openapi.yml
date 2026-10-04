@@ -51,6 +51,14 @@ paths:
       deprecated: false
 components:
   schemas:
+    DealerDB.Models.DealersPerCountry:
+      type: object
+      properties:
+        Country:
+          type: string
+        Count:
+          format: int32
+          type: integer
     API.Models.ApiError:
       type: object
       properties:
@@ -86,14 +94,6 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    DealerDB.Models.DealersPerCountry:
-      type: object
-      properties:
-        Country:
-          type: string
-        Count:
-          format: int32
-          type: integer
     API.PagedResponse_DealerDB.Models.DealersPerCountry:
       description: A response containing a page of results and metadata concerning the results
       required:

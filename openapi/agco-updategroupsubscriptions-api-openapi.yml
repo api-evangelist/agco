@@ -333,42 +333,6 @@ paths:
         required: true
 components:
   schemas:
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    UpdateSystem.Models.UpdateGroupSubscription:
-      required:
-      - UpdateGroupID
-      - PackageTypeID
-      - ClientID
-      - Include
-      type: object
-      properties:
-        UpdateGroupSubscriptionID:
-          format: int32
-          description: The Update Group Subscription ID.  This ID will be automatically assigned when creating an Update Group Subscription.
-          type: integer
-        UpdateGroupID:
-          description: The Update Group this subscription is relevant for.
-          type: string
-        PackageTypeID:
-          description: The PackageType to set subscription status for
-          type: string
-        ClientID:
-          description: The ClientID.
-          type: string
-        Include:
-          description: True to receive content of type indicated by PackageTypeID.
-          type: boolean
     API.PagedResponse_UpdateSystem.Models.UpdateGroupSubscription:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -409,3 +373,39 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    UpdateSystem.Models.UpdateGroupSubscription:
+      required:
+      - UpdateGroupID
+      - PackageTypeID
+      - ClientID
+      - Include
+      type: object
+      properties:
+        UpdateGroupSubscriptionID:
+          format: int32
+          description: The Update Group Subscription ID.  This ID will be automatically assigned when creating an Update Group Subscription.
+          type: integer
+        UpdateGroupID:
+          description: The Update Group this subscription is relevant for.
+          type: string
+        PackageTypeID:
+          description: The PackageType to set subscription status for
+          type: string
+        ClientID:
+          description: The ClientID.
+          type: string
+        Include:
+          description: True to receive content of type indicated by PackageTypeID.
+          type: boolean

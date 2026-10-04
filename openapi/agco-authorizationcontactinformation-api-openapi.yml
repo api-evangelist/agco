@@ -150,6 +150,17 @@ paths:
         required: true
 components:
   schemas:
+    API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationContactInformation:
+      type: object
+      properties:
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationContactInformation'
+          readOnly: true
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          readOnly: true
     API.Models.ApiError:
       type: object
       properties:
@@ -162,6 +173,29 @@ components:
           type: integer
         MoreInfo:
           type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
     AuthorizationCodes.Shared.Models.AuthorizationContactInformation:
       required:
       - AuthorizationCodeID
@@ -210,37 +244,3 @@ components:
           format: date-time
           description: The date the authorization code was created.
           type: string
-    API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationContactInformation:
-      type: object
-      properties:
-        Entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorizationCodes.Shared.Models.AuthorizationContactInformation'
-          readOnly: true
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          readOnly: true
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true

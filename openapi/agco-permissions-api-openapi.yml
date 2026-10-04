@@ -181,31 +181,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.Models.Permission:
-      required:
-      - Name
-      - DataRequired
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: The identifier of the permission.
-          type: integer
-        Name:
-          description: The name of the permission.
-          type: string
-        Description:
-          type: string
-        DataRequired:
-          description: Indicates if data is required or optional
-          enum:
-          - 'Yes'
-          - 'No'
-          - Optional
-          type: string
-        DataDescription:
-          description: Description of data to be provided with Role Authorization
-          type: string
     API.PagedResponse_API.Models.Permission:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -246,3 +221,28 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
+    API.Models.Permission:
+      required:
+      - Name
+      - DataRequired
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: The identifier of the permission.
+          type: integer
+        Name:
+          description: The name of the permission.
+          type: string
+        Description:
+          type: string
+        DataRequired:
+          description: Indicates if data is required or optional
+          enum:
+          - 'Yes'
+          - 'No'
+          - Optional
+          type: string
+        DataDescription:
+          description: Description of data to be provided with Role Authorization
+          type: string

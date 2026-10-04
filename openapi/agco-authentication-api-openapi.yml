@@ -351,9 +351,18 @@ paths:
       deprecated: false
 components:
   schemas:
-    System.Object:
+    API.Models.PasswordReset:
+      required:
+      - Token
+      - NewPassword
       type: object
-      properties: {}
+      properties:
+        Token:
+          description: The password reset token
+          type: string
+        NewPassword:
+          description: The new password
+          type: string
     API.Models.TokenOptions:
       type: object
       properties:
@@ -370,66 +379,6 @@ components:
           - None
           - Reset
           - Disable
-          type: string
-    API.Models.PasswordResetRequest:
-      required:
-      - Username
-      - Url
-      - ParameterName
-      type: object
-      properties:
-        Username:
-          description: The username to reset the password for
-          type: string
-        Url:
-          description: The URL to direct the user to reset the password.
-          type: string
-        ParameterName:
-          description: The query string parameter name to use for supplying the password reset token
-          type: string
-    API.Models.PasswordReset:
-      required:
-      - Token
-      - NewPassword
-      type: object
-      properties:
-        Token:
-          description: The password reset token
-          type: string
-        NewPassword:
-          description: The new password
-          type: string
-    API.Models.AuthenticatedUser:
-      type: object
-      properties:
-        UserID:
-          format: int32
-          description: The user ID
-          type: integer
-        Name:
-          description: The user's name
-          type: string
-        Username:
-          description: The username used for authentication
-          type: string
-        Email:
-          description: The user's email address
-          type: string
-        Token:
-          description: The token to use for API access
-          type: string
-        MACToken:
-          description: The MAC token to use for API access
-          type: string
-        MACId:
-          description: The MAC identifier to use for API access
-          type: string
-        ExpiresIn:
-          format: int32
-          description: How long the access token is valid, in seconds.
-          type: integer
-        RefreshToken:
-          description: A refresh token used to request an updated Access Token.
           type: string
     API.Models.Credentials:
       required:
@@ -469,4 +418,55 @@ components:
           type: string
         refresh_token:
           description: Refresh Token from OIDC provider.
+          type: string
+    System.Object:
+      type: object
+      properties: {}
+    API.Models.AuthenticatedUser:
+      type: object
+      properties:
+        UserID:
+          format: int32
+          description: The user ID
+          type: integer
+        Name:
+          description: The user's name
+          type: string
+        Username:
+          description: The username used for authentication
+          type: string
+        Email:
+          description: The user's email address
+          type: string
+        Token:
+          description: The token to use for API access
+          type: string
+        MACToken:
+          description: The MAC token to use for API access
+          type: string
+        MACId:
+          description: The MAC identifier to use for API access
+          type: string
+        ExpiresIn:
+          format: int32
+          description: How long the access token is valid, in seconds.
+          type: integer
+        RefreshToken:
+          description: A refresh token used to request an updated Access Token.
+          type: string
+    API.Models.PasswordResetRequest:
+      required:
+      - Username
+      - Url
+      - ParameterName
+      type: object
+      properties:
+        Username:
+          description: The username to reset the password for
+          type: string
+        Url:
+          description: The URL to direct the user to reset the password.
+          type: string
+        ParameterName:
+          description: The query string parameter name to use for supplying the password reset token
           type: string

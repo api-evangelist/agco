@@ -133,18 +133,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
     UpdateSystem.Models.CheckinResult:
       type: object
       properties:
@@ -160,6 +148,18 @@ components:
             type: string
         NextTransactionID:
           description: The transaction ID to use for the next checkin.
+          type: string
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
           type: string
     UpdateSystem.Models.Package:
       required:

@@ -166,6 +166,18 @@ paths:
       deprecated: false
 components:
   schemas:
+    GlobalResources.Shared.Models.GlobalImageCategory:
+      description: An image category from the Global Image library.
+      required:
+      - Name
+      type: object
+      properties:
+        Id:
+          description: The Id of the GlobalImage Categories.
+          type: string
+        Name:
+          description: The name of the GlobalImage Category.
+          type: string
     API.Models.ApiError:
       type: object
       properties:
@@ -189,18 +201,6 @@ components:
         Metadata:
           $ref: '#/components/schemas/API.PagedResponseMetadata'
           readOnly: true
-    GlobalResources.Shared.Models.GlobalImageCategory:
-      description: An image category from the Global Image library.
-      required:
-      - Name
-      type: object
-      properties:
-        Id:
-          description: The Id of the GlobalImage Categories.
-          type: string
-        Name:
-          description: The name of the GlobalImage Category.
-          type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:

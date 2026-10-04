@@ -142,28 +142,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.Models.Log:
-      type: object
-      properties:
-        ID:
-          type: string
-        Message:
-          type: string
-        TimeStamp:
-          format: date-time
-          type: string
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
     API.PagedResponse_API.Models.Log:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -204,3 +182,25 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.Models.Log:
+      type: object
+      properties:
+        ID:
+          type: string
+        Message:
+          type: string
+        TimeStamp:
+          format: date-time
+          type: string

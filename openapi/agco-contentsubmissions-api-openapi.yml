@@ -633,59 +633,63 @@ paths:
         required: true
 components:
   schemas:
-    BuildSystem.Shared.Interfaces.IActivityStep:
-      description: IActivityStep
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmission:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
       type: object
       properties:
-        ActivityStepID:
-          format: int32
-          description: ActivityStepID
-          type: integer
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
           readOnly: true
-        ActivityID:
-          format: int32
-          description: ActivityID
-          type: integer
-        StepID:
-          format: int32
-          description: step id
-          type: integer
-        RunOrder:
-          format: int32
-          description: run order
-          type: integer
-        UseConfig:
-          description: UseConfig
-          type: string
-        StepName:
-          description: steo name
-          type: string
-          readOnly: true
-        ImplementationID:
-          description: Implementation ID
-          type: string
-          readOnly: true
-        ParameterMappings:
-          description: ParameterMappings
+        Entities:
+          description: The set of entities that make up this page.
           type: array
           items:
-            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterMapping'
-    BuildSystem.Shared.Interfaces.IParameterMapping:
-      description: IParameterMapping
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
+          readOnly: true
+    API.Models.ApiError:
       type: object
       properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    ContentSubmission.Shared.BusinessEntities.ContentDefinition:
+      description: The definition of the content for submission
+      required:
+      - Description
+      type: object
+      properties:
+        ContentDefinitionID:
+          format: int32
+          description: The ID of this content definition.
+          type: integer
         Name:
-          description: name
+          description: The name of this content. Name must be valid for Attribute on PackageType.
           type: string
-        SourceType:
-          description: SourceType
-          enum:
-          - Constant
-          - Variable
+        TypeID:
+          format: int32
+          description: The type of content.
+          type: integer
+        PackageTypeID:
+          description: Read Only. The ID of the package type used for this content.
           type: string
-        Source:
-          description: Source
+        Description:
+          description: The description used on the package type in the AGCO Update System
           type: string
+        Attributes:
+          description: Attributes of this ContentDefinition
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
     ContentSubmission.Shared.BusinessEntities.ContentSubmission:
       description: A content submission
       type: object
@@ -739,6 +743,71 @@ components:
         Definition:
           $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
           description: The ContentDefinition for this ContentSubmission
+    ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
+      description: The definition of the content for submission
+      required:
+      - Name
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The ID of this attribute.
+          type: integer
+        ContentSubmissionID:
+          format: int32
+          description: The ID of the content submission to which this attribute belongs.
+          type: integer
+        Name:
+          description: The name of this Attribute.
+          pattern: '[a-zA-Z0-9]+'
+          type: string
+        Value:
+          description: The value of this Attribute
+          type: string
+    ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
+      description: An attribute of a definition of the content for submission
+      required:
+      - Name
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The ID of this attribute.
+          type: integer
+        ContentDefinitionID:
+          format: int32
+          description: The ID of the content definition to which this attribute belongs.
+          type: integer
+        Name:
+          description: The name of this Attribute.
+          pattern: '[a-zA-Z0-9]+'
+          type: string
+        Value:
+          description: The value of this Attribute
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
     BuildSystem.Shared.Interfaces.IActivityRunStatus:
       description: "Declares members of objects that communicate the progress of an \n            asynchronous activity run."
       type: object
@@ -763,6 +832,80 @@ components:
           format: int32
           description: Gets or sets a measurement of the current progress of the current step.
           type: integer
+    BuildSystem.Shared.Interfaces.IJobRun:
+      description: interface of JobRun
+      type: object
+      properties:
+        JobRunID:
+          format: int32
+          description: JobRunID
+          type: integer
+          readOnly: true
+        JobID:
+          format: int32
+          description: job id
+          type: integer
+        Parameters:
+          description: Parameters
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterValue'
+          readOnly: true
+        Status:
+          description: status
+          enum:
+          - Ready
+          - InProgress
+          - Succeeded
+          - Cancelled
+          - Failed
+          type: string
+        ActivityRuns:
+          description: ActivityRuns
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityRun'
+        StartDate:
+          format: date-time
+          description: Start Date
+          type: string
+        EndDate:
+          format: date-time
+          description: end date
+          type: string
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
+          readOnly: true
+    BuildSystem.Shared.Interfaces.IParameterValue:
+      description: Declares members that must be implemented by parameter value objects.
+      type: object
+      properties:
+        Name:
+          description: Gets or sets the name of the parameter.
+          type: string
+        Value:
+          description: Gets or sets the value of the parameter.
+          type: string
+        Direction:
+          description: "Gets or sets a value indicating whether the parameter value is an \n            input to the build part or an output from the build part."
+          enum:
+          - Input
+          - Output
+          type: string
     BuildSystem.Shared.Interfaces.IActivityRun:
       description: IActivityRun
       type: object
@@ -806,199 +949,56 @@ components:
           description: EndDate
           type: string
           readOnly: true
-    BuildSystem.Shared.Interfaces.IJobRun:
-      description: interface of JobRun
+    BuildSystem.Shared.Interfaces.IActivityStep:
+      description: IActivityStep
       type: object
       properties:
-        JobRunID:
+        ActivityStepID:
           format: int32
-          description: JobRunID
+          description: ActivityStepID
           type: integer
           readOnly: true
-        JobID:
+        ActivityID:
           format: int32
-          description: job id
+          description: ActivityID
           type: integer
-        Parameters:
-          description: Parameters
+        StepID:
+          format: int32
+          description: step id
+          type: integer
+        RunOrder:
+          format: int32
+          description: run order
+          type: integer
+        UseConfig:
+          description: UseConfig
+          type: string
+        StepName:
+          description: steo name
+          type: string
+          readOnly: true
+        ImplementationID:
+          description: Implementation ID
+          type: string
+          readOnly: true
+        ParameterMappings:
+          description: ParameterMappings
           type: array
           items:
-            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterValue'
-          readOnly: true
-        Status:
-          description: status
+            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IParameterMapping'
+    BuildSystem.Shared.Interfaces.IParameterMapping:
+      description: IParameterMapping
+      type: object
+      properties:
+        Name:
+          description: name
+          type: string
+        SourceType:
+          description: SourceType
           enum:
-          - Ready
-          - InProgress
-          - Succeeded
-          - Cancelled
-          - Failed
+          - Constant
+          - Variable
           type: string
-        ActivityRuns:
-          description: ActivityRuns
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.Interfaces.IActivityRun'
-        StartDate:
-          format: date-time
-          description: Start Date
-          type: string
-        EndDate:
-          format: date-time
-          description: end date
-          type: string
-    ContentSubmission.Shared.BusinessEntities.ContentDefinition:
-      description: The definition of the content for submission
-      required:
-      - Description
-      type: object
-      properties:
-        ContentDefinitionID:
-          format: int32
-          description: The ID of this content definition.
-          type: integer
-        Name:
-          description: The name of this content. Name must be valid for Attribute on PackageType.
-          type: string
-        TypeID:
-          format: int32
-          description: The type of content.
-          type: integer
-        PackageTypeID:
-          description: Read Only. The ID of the package type used for this content.
-          type: string
-        Description:
-          description: The description used on the package type in the AGCO Update System
-          type: string
-        Attributes:
-          description: Attributes of this ContentDefinition
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
-    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmission:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmission'
-          readOnly: true
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute'
-          readOnly: true
-    BuildSystem.Shared.Interfaces.IParameterValue:
-      description: Declares members that must be implemented by parameter value objects.
-      type: object
-      properties:
-        Name:
-          description: Gets or sets the name of the parameter.
-          type: string
-        Value:
-          description: Gets or sets the value of the parameter.
-          type: string
-        Direction:
-          description: "Gets or sets a value indicating whether the parameter value is an \n            input to the build part or an output from the build part."
-          enum:
-          - Input
-          - Output
-          type: string
-    ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
-      description: An attribute of a definition of the content for submission
-      required:
-      - Name
-      type: object
-      properties:
-        ID:
-          format: int32
-          description: The ID of this attribute.
-          type: integer
-        ContentDefinitionID:
-          format: int32
-          description: The ID of the content definition to which this attribute belongs.
-          type: integer
-        Name:
-          description: The name of this Attribute.
-          pattern: '[a-zA-Z0-9]+'
-          type: string
-        Value:
-          description: The value of this Attribute
-          type: string
-    ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
-      description: The definition of the content for submission
-      required:
-      - Name
-      type: object
-      properties:
-        ID:
-          format: int32
-          description: The ID of this attribute.
-          type: integer
-        ContentSubmissionID:
-          format: int32
-          description: The ID of the content submission to which this attribute belongs.
-          type: integer
-        Name:
-          description: The name of this Attribute.
-          pattern: '[a-zA-Z0-9]+'
-          type: string
-        Value:
-          description: The value of this Attribute
+        Source:
+          description: Source
           type: string

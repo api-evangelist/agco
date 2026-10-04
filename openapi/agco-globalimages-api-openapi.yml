@@ -396,9 +396,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    System.Object:
-      type: object
-      properties: {}
     API.Models.ApiError:
       type: object
       properties:
@@ -411,40 +408,16 @@ components:
           type: integer
         MoreInfo:
           type: string
-    GlobalResources.Shared.Models.GlobalImageCategory:
-      description: An image category from the Global Image library.
-      required:
-      - Name
+    API.IPagedResponse_GlobalResources.Shared.Models.GlobalImage:
       type: object
       properties:
-        Id:
-          description: The Id of the GlobalImage Categories.
-          type: string
-        Name:
-          description: The name of the GlobalImage Category.
-          type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
+        Entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
           readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
           readOnly: true
     GlobalResources.Shared.Models.GlobalImage:
       description: An image from the Global Image library.
@@ -508,14 +481,41 @@ components:
           format: int32
           description: The height of the file.
           type: integer
-    API.IPagedResponse_GlobalResources.Shared.Models.GlobalImage:
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
       type: object
       properties:
-        Entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalResources.Shared.Models.GlobalImage'
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
           readOnly: true
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
           readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    System.Object:
+      type: object
+      properties: {}
+    GlobalResources.Shared.Models.GlobalImageCategory:
+      description: An image category from the Global Image library.
+      required:
+      - Name
+      type: object
+      properties:
+        Id:
+          description: The Id of the GlobalImage Categories.
+          type: string
+        Name:
+          description: The name of the GlobalImage Category.
+          type: string

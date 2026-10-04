@@ -289,6 +289,23 @@ paths:
       deprecated: false
 components:
   schemas:
+    API.PagedResponse_UpdateSystem.Models.PackageType:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+          readOnly: true
     API.Models.ApiError:
       type: object
       properties:
@@ -301,29 +318,6 @@ components:
           type: integer
         MoreInfo:
           type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
     UpdateSystem.Models.PackageType:
       required:
       - Description
@@ -361,20 +355,26 @@ components:
         Icon:
           description: Optional.  The icon to use for the PackageType, in base 64
           type: string
-    API.PagedResponse_UpdateSystem.Models.PackageType:
-      description: A response containing a page of results and metadata concerning the results
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
       required:
-      - Metadata
-      - Entities
+      - TotalCount
+      - Limit
+      - Offset
       type: object
       properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
           readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.PackageType'
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
           readOnly: true

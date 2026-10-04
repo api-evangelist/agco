@@ -160,6 +160,21 @@ paths:
       x-operation-id-original: PackageReports_Default
 components:
   schemas:
+    UpdateSystem.Models.AttributeValue:
+      required:
+      - Key
+      type: object
+      properties:
+        Key:
+          description: The attribute name. Limit 50 characters. Attributes with names exceeding this limit will be ignored.
+          type: string
+        Value:
+          description: The value
+          type: string
+        TimeStamp:
+          format: date-time
+          description: Read Only. The timestamp.
+          type: string
     API.Models.ApiError:
       type: object
       properties:
@@ -184,21 +199,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UpdateSystem.Models.AttributeValue'
-    UpdateSystem.Models.AttributeValue:
-      required:
-      - Key
-      type: object
-      properties:
-        Key:
-          description: The attribute name. Limit 50 characters. Attributes with names exceeding this limit will be ignored.
-          type: string
-        Value:
-          description: The value
-          type: string
-        TimeStamp:
-          format: date-time
-          description: Read Only. The timestamp.
-          type: string
     UpdateSystem.Models.PackageReport:
       type: object
       properties:

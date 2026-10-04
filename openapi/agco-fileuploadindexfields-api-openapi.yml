@@ -86,6 +86,12 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
+    Communication.Models.FileUploadIndexField:
+      type: object
+      properties:
+        Field:
+          description: The name of the file upload index field
+          type: string
     API.PagedResponse_Communication.Models.FileUploadIndexField:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -103,9 +109,3 @@ components:
           items:
             $ref: '#/components/schemas/Communication.Models.FileUploadIndexField'
           readOnly: true
-    Communication.Models.FileUploadIndexField:
-      type: object
-      properties:
-        Field:
-          description: The name of the file upload index field
-          type: string

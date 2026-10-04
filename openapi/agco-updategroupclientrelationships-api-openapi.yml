@@ -278,28 +278,6 @@ components:
           items:
             $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
           readOnly: true
-    UpdateSystem.Models.UpdateGroupClientRelationship:
-      required:
-      - UpdateGroupID
-      - ClientID
-      type: object
-      properties:
-        RelationshipID:
-          description: Read Only after creation. The relationship id.  A relationship id will be assigned if not provided on creation.
-          type: string
-        UpdateGroupID:
-          description: Read Only after creation. The update group to subscribe to.
-          type: string
-        ClientID:
-          description: Read Only after creation. The client id of the subscriber.
-          type: string
-        LastCheckin:
-          format: date-time
-          description: ReadOnly. The timestamp of the last checkin.
-          type: string
-        Active:
-          description: The subscription status.  The status is active by default.
-          type: boolean
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -323,3 +301,25 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
+    UpdateSystem.Models.UpdateGroupClientRelationship:
+      required:
+      - UpdateGroupID
+      - ClientID
+      type: object
+      properties:
+        RelationshipID:
+          description: Read Only after creation. The relationship id.  A relationship id will be assigned if not provided on creation.
+          type: string
+        UpdateGroupID:
+          description: Read Only after creation. The update group to subscribe to.
+          type: string
+        ClientID:
+          description: Read Only after creation. The client id of the subscriber.
+          type: string
+        LastCheckin:
+          format: date-time
+          description: ReadOnly. The timestamp of the last checkin.
+          type: string
+        Active:
+          description: The subscription status.  The status is active by default.
+          type: boolean

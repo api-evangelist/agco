@@ -54,84 +54,6 @@ paths:
         required: true
 components:
   schemas:
-    System.Object:
-      type: object
-      properties: {}
-    API.PagedResponse_Communication.Models.FileUpload:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/Communication.Models.FileUpload'
-          readOnly: true
-    Communication.Models.FieldFilter:
-      required:
-      - Field
-      type: object
-      properties:
-        Field:
-          description: The field to filter
-          type: string
-        Type:
-          description: Optional. The filter type. Default is HasFieldMatching.
-          enum:
-          - HasFieldMatching
-          - HasIndexDataMatching
-          - DoesNotHaveIndexDataMatching
-          type: string
-        Comparison:
-          description: Optional. The type of value comparison to apply.  Default is Equal.
-          enum:
-          - Equal
-          - NotEqual
-          - LessThan
-          - LessThanOrEqual
-          - GreaterThan
-          - GreaterThanOrEqual
-          - In
-          - NotIn
-          type: string
-        Value:
-          description: The value used with comparison to filter results. Do not use with "Set" comparisons
-          type: string
-        Values:
-          description: The set of values to use with comparison to filter results.  Use with "Set" comparisons.
-          type: array
-          items:
-            type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
     API.Models.ApiError:
       type: object
       properties:
@@ -144,36 +66,6 @@ components:
           type: integer
         MoreInfo:
           type: string
-    Communication.Models.FileUploadReportQuery:
-      type: object
-      properties:
-        FieldFilters:
-          description: Optional. Filter results by field values. Multiple filters are combined with 'AND' logic.
-          type: array
-          items:
-            $ref: '#/components/schemas/Communication.Models.FieldFilter'
-        IncludeIndexFields:
-          description: "Optional. The index data fields to include in the results.  \n            By default any index data fields included in FieldFilters will be included."
-          type: array
-          items:
-            type: string
-        IncludeStoredDataFields:
-          description: "Optional. The stored data fields to include in the results. \n            By default stored data fields are omitted in the result.\n            Limit must be 25 or less to return stored data fields."
-          type: array
-          items:
-            type: string
-        Limit:
-          format: int32
-          description: Optional. Limit number of results returned. The default value is 10.
-          maximum: 25
-          minimum: 1
-          type: integer
-        Offset:
-          format: int32
-          description: Optional. Offset for the results returned. The default value is 0.
-          maximum: 2147483647
-          minimum: 0
-          type: integer
     Communication.Models.FileUpload:
       type: object
       properties:
@@ -228,3 +120,111 @@ components:
         FileTypeID:
           description: The File Type ID
           type: string
+    API.PagedResponse_Communication.Models.FileUpload:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/Communication.Models.FileUpload'
+          readOnly: true
+    Communication.Models.FileUploadReportQuery:
+      type: object
+      properties:
+        FieldFilters:
+          description: Optional. Filter results by field values. Multiple filters are combined with 'AND' logic.
+          type: array
+          items:
+            $ref: '#/components/schemas/Communication.Models.FieldFilter'
+        IncludeIndexFields:
+          description: "Optional. The index data fields to include in the results.  \n            By default any index data fields included in FieldFilters will be included."
+          type: array
+          items:
+            type: string
+        IncludeStoredDataFields:
+          description: "Optional. The stored data fields to include in the results. \n            By default stored data fields are omitted in the result.\n            Limit must be 25 or less to return stored data fields."
+          type: array
+          items:
+            type: string
+        Limit:
+          format: int32
+          description: Optional. Limit number of results returned. The default value is 10.
+          maximum: 25
+          minimum: 1
+          type: integer
+        Offset:
+          format: int32
+          description: Optional. Offset for the results returned. The default value is 0.
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    System.Object:
+      type: object
+      properties: {}
+    Communication.Models.FieldFilter:
+      required:
+      - Field
+      type: object
+      properties:
+        Field:
+          description: The field to filter
+          type: string
+        Type:
+          description: Optional. The filter type. Default is HasFieldMatching.
+          enum:
+          - HasFieldMatching
+          - HasIndexDataMatching
+          - DoesNotHaveIndexDataMatching
+          type: string
+        Comparison:
+          description: Optional. The type of value comparison to apply.  Default is Equal.
+          enum:
+          - Equal
+          - NotEqual
+          - LessThan
+          - LessThanOrEqual
+          - GreaterThan
+          - GreaterThanOrEqual
+          - In
+          - NotIn
+          type: string
+        Value:
+          description: The value used with comparison to filter results. Do not use with "Set" comparisons
+          type: string
+        Values:
+          description: The set of values to use with comparison to filter results.  Use with "Set" comparisons.
+          type: array
+          items:
+            type: string

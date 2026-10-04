@@ -252,6 +252,149 @@ paths:
       deprecated: false
 components:
   schemas:
+    BuildSystem.Shared.DTO.ActivityRunStatus:
+      description: A DTO for an IActivityRunStatus
+      type: object
+      properties:
+        Status:
+          description: The status of the ActivityRun
+          enum:
+          - Ready
+          - InProgress
+          - Succeeded
+          - Cancelled
+          - Failed
+          type: string
+        CurrentStep:
+          format: int32
+          description: The activity step currently executing, indicated by numeric order
+          type: integer
+        StepStatus:
+          description: The status text from the currently executing step
+          type: string
+        StepProgress:
+          format: int32
+          description: The percent progress from the currently executing step.  This value shall be null if progress is not available
+          type: integer
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    BuildSystem.Shared.DTO.ParameterValue:
+      description: A DTO for an IParameterValue
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter this value is for
+          type: string
+        Value:
+          description: The parameter value in string representation
+          type: string
+        Direction:
+          description: The parameter direction (Input or Output)
+          enum:
+          - Input
+          - Output
+          type: string
+    BuildSystem.Shared.DTO.ParameterMapping:
+      description: A DTO for an IParameterMapping
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter this mapping applies to
+          type: string
+        SourceType:
+          description: The source type used for supplying the parameter
+          enum:
+          - Constant
+          - Variable
+          type: string
+        Source:
+          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
+          type: string
+    API.PagedResponse_BuildSystem.Shared.DTO.JobRun:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.JobRun'
+          readOnly: true
+    BuildSystem.Shared.DTO.ActivityStep:
+      description: A DTO for an IActivityStep
+      type: object
+      properties:
+        ActivityStepID:
+          format: int32
+          description: The id of this activity step
+          type: integer
+        ActivityID:
+          format: int32
+          description: The id of the activity this activity step belongs to
+          type: integer
+        StepID:
+          format: int32
+          description: The id of the step
+          type: integer
+        RunOrder:
+          format: int32
+          description: The order of this activity step relative to other activity steps
+          type: integer
+        UseConfig:
+          description: Indicates the configuration for the ActivityStep to use at runtime.  The build agent must provide this configuration
+          type: string
+        StepName:
+          description: The name of the step
+          type: string
+        ImplementationID:
+          description: The implementation id which is used to look up the step implementation
+          type: string
+        ParameterMappings:
+          description: The mapping of values from a source to be used for the step parameters
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterMapping'
+          readOnly: true
     BuildSystem.Shared.DTO.JobRun:
       description: A DTO for an IJobRun
       type: object
@@ -292,149 +435,6 @@ components:
         EndDate:
           format: date-time
           description: The UTC date and time when the job completed
-          type: string
-    BuildSystem.Shared.DTO.ParameterMapping:
-      description: A DTO for an IParameterMapping
-      type: object
-      properties:
-        Name:
-          description: The name of the parameter this mapping applies to
-          type: string
-        SourceType:
-          description: The source type used for supplying the parameter
-          enum:
-          - Constant
-          - Variable
-          type: string
-        Source:
-          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
-          type: string
-    API.PagedResponse_BuildSystem.Shared.DTO.JobRun:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.DTO.JobRun'
-          readOnly: true
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
-    BuildSystem.Shared.DTO.ActivityRunStatus:
-      description: A DTO for an IActivityRunStatus
-      type: object
-      properties:
-        Status:
-          description: The status of the ActivityRun
-          enum:
-          - Ready
-          - InProgress
-          - Succeeded
-          - Cancelled
-          - Failed
-          type: string
-        CurrentStep:
-          format: int32
-          description: The activity step currently executing, indicated by numeric order
-          type: integer
-        StepStatus:
-          description: The status text from the currently executing step
-          type: string
-        StepProgress:
-          format: int32
-          description: The percent progress from the currently executing step.  This value shall be null if progress is not available
-          type: integer
-    BuildSystem.Shared.DTO.ActivityStep:
-      description: A DTO for an IActivityStep
-      type: object
-      properties:
-        ActivityStepID:
-          format: int32
-          description: The id of this activity step
-          type: integer
-        ActivityID:
-          format: int32
-          description: The id of the activity this activity step belongs to
-          type: integer
-        StepID:
-          format: int32
-          description: The id of the step
-          type: integer
-        RunOrder:
-          format: int32
-          description: The order of this activity step relative to other activity steps
-          type: integer
-        UseConfig:
-          description: Indicates the configuration for the ActivityStep to use at runtime.  The build agent must provide this configuration
-          type: string
-        StepName:
-          description: The name of the step
-          type: string
-        ImplementationID:
-          description: The implementation id which is used to look up the step implementation
-          type: string
-        ParameterMappings:
-          description: The mapping of values from a source to be used for the step parameters
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterMapping'
-          readOnly: true
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    BuildSystem.Shared.DTO.ParameterValue:
-      description: A DTO for an IParameterValue
-      type: object
-      properties:
-        Name:
-          description: The name of the parameter this value is for
-          type: string
-        Value:
-          description: The parameter value in string representation
-          type: string
-        Direction:
-          description: The parameter direction (Input or Output)
-          enum:
-          - Input
-          - Output
           type: string
     BuildSystem.Shared.DTO.ActivityRun:
       description: A DTO for an IActivityRun

@@ -303,65 +303,6 @@ components:
           items:
             $ref: '#/components/schemas/API.Models.Role'
           readOnly: true
-    API.Models.RolePermissionChange:
-      description: Change to the Permissions that a Role is given.
-      required:
-      - Permission
-      - Action
-      type: object
-      properties:
-        Permission:
-          description: The name of the permission to grant or revoke.
-          type: string
-        Action:
-          description: The action to take.
-          enum:
-          - Grant
-          - Revoke
-          type: string
-    API.Models.Permission:
-      required:
-      - Name
-      - DataRequired
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: The identifier of the permission.
-          type: integer
-        Name:
-          description: The name of the permission.
-          type: string
-        Description:
-          type: string
-        DataRequired:
-          description: Indicates if data is required or optional
-          enum:
-          - 'Yes'
-          - 'No'
-          - Optional
-          type: string
-        DataDescription:
-          description: Description of data to be provided with Role Authorization
-          type: string
-    API.Models.Role:
-      description: Defines an API Role
-      required:
-      - Name
-      - Description
-      type: object
-      properties:
-        Id:
-          format: int32
-          description: The role's identifier.
-          type: integer
-        Name:
-          description: The name of the role. Must be alpha-numeric strings separated by a period (.).
-          pattern: ^[0-9a-zA-Z]*?[a-zA-Z]+[0-9a-zA-Z]*$
-          type: string
-        Description:
-          description: Role description
-          type: string
     API.PagedResponse_API.Models.Permission:
       description: A response containing a page of results and metadata concerning the results
       required:
@@ -402,3 +343,62 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
+    API.Models.Role:
+      description: Defines an API Role
+      required:
+      - Name
+      - Description
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: The role's identifier.
+          type: integer
+        Name:
+          description: The name of the role. Must be alpha-numeric strings separated by a period (.).
+          pattern: ^[0-9a-zA-Z]*?[a-zA-Z]+[0-9a-zA-Z]*$
+          type: string
+        Description:
+          description: Role description
+          type: string
+    API.Models.Permission:
+      required:
+      - Name
+      - DataRequired
+      type: object
+      properties:
+        Id:
+          format: int32
+          description: The identifier of the permission.
+          type: integer
+        Name:
+          description: The name of the permission.
+          type: string
+        Description:
+          type: string
+        DataRequired:
+          description: Indicates if data is required or optional
+          enum:
+          - 'Yes'
+          - 'No'
+          - Optional
+          type: string
+        DataDescription:
+          description: Description of data to be provided with Role Authorization
+          type: string
+    API.Models.RolePermissionChange:
+      description: Change to the Permissions that a Role is given.
+      required:
+      - Permission
+      - Action
+      type: object
+      properties:
+        Permission:
+          description: The name of the permission to grant or revoke.
+          type: string
+        Action:
+          description: The action to take.
+          enum:
+          - Grant
+          - Revoke
+          type: string

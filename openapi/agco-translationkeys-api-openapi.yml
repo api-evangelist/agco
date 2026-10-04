@@ -230,6 +230,23 @@ components:
           type: integer
         MoreInfo:
           type: string
+    OASSupport.Shared.Models.TranslationKey:
+      description: A translation key to map the relationship of keyNames, usually for ODX, and string Ids
+      required:
+      - KeyName
+      - StringID
+      type: object
+      properties:
+        ID:
+          format: int32
+          description: The identifier for the translationKey. Read Only.
+          type: integer
+        KeyName:
+          description: The key name of the item. One example is tkODX_HWIKM14R01
+          type: string
+        StringID:
+          description: Foreign key to StringDefinitionID
+          type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -253,23 +270,6 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    OASSupport.Shared.Models.TranslationKey:
-      description: A translation key to map the relationship of keyNames, usually for ODX, and string Ids
-      required:
-      - KeyName
-      - StringID
-      type: object
-      properties:
-        ID:
-          format: int32
-          description: The identifier for the translationKey. Read Only.
-          type: integer
-        KeyName:
-          description: The key name of the item. One example is tkODX_HWIKM14R01
-          type: string
-        StringID:
-          description: Foreign key to StringDefinitionID
-          type: string
     API.IPagedResponse_OASSupport.Shared.Models.TranslationKey:
       type: object
       properties:

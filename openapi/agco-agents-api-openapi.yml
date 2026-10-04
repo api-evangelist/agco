@@ -458,6 +458,55 @@ paths:
         required: true
 components:
   schemas:
+    BuildSystem.Shared.DTO.AgentStatus:
+      description: A DTO for an IAgentStatus
+      required:
+      - Online
+      type: object
+      properties:
+        Online:
+          description: Indicates if the agent is online
+          type: boolean
+        LastStatusUpdate:
+          format: date-time
+          description: ReadOnly. The UTC date and time of the last status update
+          type: string
+    BuildSystem.Shared.DTO.ActivityRunStatus:
+      description: A DTO for an IActivityRunStatus
+      type: object
+      properties:
+        Status:
+          description: The status of the ActivityRun
+          enum:
+          - Ready
+          - InProgress
+          - Succeeded
+          - Cancelled
+          - Failed
+          type: string
+        CurrentStep:
+          format: int32
+          description: The activity step currently executing, indicated by numeric order
+          type: integer
+        StepStatus:
+          description: The status text from the currently executing step
+          type: string
+        StepProgress:
+          format: int32
+          description: The percent progress from the currently executing step.  This value shall be null if progress is not available
+          type: integer
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     BuildSystem.Shared.DTO.Agent:
       description: A DTO for an IAgent
       required:
@@ -491,66 +540,6 @@ components:
           format: int32
           description: The 'Heartbeat Interval' used by the Build Agent.
           type: integer
-    BuildSystem.Shared.DTO.AgentStatus:
-      description: A DTO for an IAgentStatus
-      required:
-      - Online
-      type: object
-      properties:
-        Online:
-          description: Indicates if the agent is online
-          type: boolean
-        LastStatusUpdate:
-          format: date-time
-          description: ReadOnly. The UTC date and time of the last status update
-          type: string
-    API.PagedResponse_BuildSystem.Shared.DTO.Agent:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
-          readOnly: true
-    BuildSystem.Shared.DTO.ParameterMapping:
-      description: A DTO for an IParameterMapping
-      type: object
-      properties:
-        Name:
-          description: The name of the parameter this mapping applies to
-          type: string
-        SourceType:
-          description: The source type used for supplying the parameter
-          enum:
-          - Constant
-          - Variable
-          type: string
-        Source:
-          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
-          type: string
-    BuildSystem.Shared.DTO.StepConfiguration:
-      description: Step Configuration
-      required:
-      - StepImplementationID
-      type: object
-      properties:
-        StepImplementationID:
-          description: The Implementation ID of the step this configuration is for
-          type: string
-        Configurations:
-          description: The configuration names supported.  The configurations collection is empty for steps which do not require configuration.
-          type: array
-          items:
-            type: string
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -574,30 +563,38 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    BuildSystem.Shared.DTO.ActivityRunStatus:
-      description: A DTO for an IActivityRunStatus
+    BuildSystem.Shared.DTO.ParameterValue:
+      description: A DTO for an IParameterValue
       type: object
       properties:
-        Status:
-          description: The status of the ActivityRun
+        Name:
+          description: The name of the parameter this value is for
+          type: string
+        Value:
+          description: The parameter value in string representation
+          type: string
+        Direction:
+          description: The parameter direction (Input or Output)
           enum:
-          - Ready
-          - InProgress
-          - Succeeded
-          - Cancelled
-          - Failed
+          - Input
+          - Output
           type: string
-        CurrentStep:
-          format: int32
-          description: The activity step currently executing, indicated by numeric order
-          type: integer
-        StepStatus:
-          description: The status text from the currently executing step
+    BuildSystem.Shared.DTO.ParameterMapping:
+      description: A DTO for an IParameterMapping
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter this mapping applies to
           type: string
-        StepProgress:
-          format: int32
-          description: The percent progress from the currently executing step.  This value shall be null if progress is not available
-          type: integer
+        SourceType:
+          description: The source type used for supplying the parameter
+          enum:
+          - Constant
+          - Variable
+          type: string
+        Source:
+          description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
+          type: string
     BuildSystem.Shared.DTO.ActivityStep:
       description: A DTO for an IActivityStep
       type: object
@@ -633,34 +630,20 @@ components:
           items:
             $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterMapping'
           readOnly: true
-    API.Models.ApiError:
+    BuildSystem.Shared.DTO.StepConfiguration:
+      description: Step Configuration
+      required:
+      - StepImplementationID
       type: object
       properties:
-        DeveloperMessage:
+        StepImplementationID:
+          description: The Implementation ID of the step this configuration is for
           type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    BuildSystem.Shared.DTO.ParameterValue:
-      description: A DTO for an IParameterValue
-      type: object
-      properties:
-        Name:
-          description: The name of the parameter this value is for
-          type: string
-        Value:
-          description: The parameter value in string representation
-          type: string
-        Direction:
-          description: The parameter direction (Input or Output)
-          enum:
-          - Input
-          - Output
-          type: string
+        Configurations:
+          description: The configuration names supported.  The configurations collection is empty for steps which do not require configuration.
+          type: array
+          items:
+            type: string
     BuildSystem.Shared.DTO.ActivityRun:
       description: A DTO for an IActivityRun
       required:
@@ -702,3 +685,20 @@ components:
           format: date-time
           description: Read Only. The UTC date and time when the activity completed
           type: string
+    API.PagedResponse_BuildSystem.Shared.DTO.Agent:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildSystem.Shared.DTO.Agent'
+          readOnly: true
