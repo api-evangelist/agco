@@ -1,0 +1,12 @@
+{
+ "url": "https://secure.agco-ats.com/swagger/docs/v1",
+ "requested_url": "https://secure.agco-ats.com:443/swagger/docs/v1",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 349305,
+ "sha256": "8b416443df5c0dfcc34c6c8c510c1d1e5bd927b46fbb034c1448113405fe4629",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
