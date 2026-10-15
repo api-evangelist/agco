@@ -1,0 +1,67 @@
+edges:
+- partner_name: ODVA (CIP / EtherNet/IP)
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  evidence: https://marketplace.odva.org/organizations/2874-agco-corporation
+  category: CIP network products
+  channel: standard-directory
+  relationship: standard-participant
+  contract_reference:
+    register: ODVA Marketplace (marketplace.odva.org/organizations)
+    spec_file: null
+    standard: CIP (EtherNet/IP, DeviceNet, ControlNet, CompoNet)
+    role: ODVA conformance-declared vendor
+    registered_name: AGCO Corporation
+    website: http://www.agcocorp.com
+    matched_domain: agcocorp.com
+    matched_by: domain
+    licensed_technologies:
+    - EtherNet/IP
+    certified_products:
+    - product: EtherNet/IP
+      listed_products: 1
+      lapsed: false
+    signal_note: certified_products = one entry per TECHNOLOGY with a listed (Declaration of Conformity) product;
+      listed_products is context, never read
+    detected_by: sweep-industrial-robotics.py
+    detected: '2026-10-15'
+  detected_by: sweep-industrial-robotics.py
+  first_seen: '2026-10-15'
+- partner_name: ODVA (CIP / EtherNet/IP)
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  evidence: https://marketplace.odva.org/organizations/2874-agco-corporation
+  category: CIP network products
+  channel: standard-directory
+  relationship: compatible
+  shape: ethernet-ip
+  evidence_kind: conformance-register
+  degree: declared-conformance
+  report_only: true
+  contract_reference:
+    register: ODVA Marketplace (marketplace.odva.org/organizations)
+    spec_file: null
+    standard: EtherNet/IP
+    role: ethernet-ip-conformance-declared
+    registered_name: AGCO Corporation
+    matched_domain: agcocorp.com
+    detected_by: sweep-industrial-robotics.py
+    detected: '2026-10-15'
+  detected_by: sweep-industrial-robotics.py
+  first_seen: '2026-10-15'
+generated: '2026-10-15'
+method: searched
+source:
+- https://opcfoundation.org/products/
+- https://marketplace.odva.org/organizations
+checked:
+- https://marketplace.odva.org/organizations
+- https://opcfoundation.org/products/
+- https://repo.ros2.org/rosdistro_cache/humble-cache.yaml.gz
+- https://repo.ros2.org/rosdistro_cache/jazzy-cache.yaml.gz
+- https://repo.ros2.org/rosdistro_cache/kilted-cache.yaml.gz
+- https://repo.ros2.org/rosdistro_cache/rolling-cache.yaml.gz
