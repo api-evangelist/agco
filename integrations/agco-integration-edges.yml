@@ -53,12 +53,50 @@ edges:
     detected: '2026-10-15'
   detected_by: sweep-industrial-robotics.py
   first_seen: '2026-10-15'
+- partner_name: agrirouter (DKE-Data)
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  evidence: https://agrirouter.com/en/solutions/agco-taskdoc
+  category: farm data exchange
+  channel: standard-directory
+  relationship: standard-participant
+  contract_reference:
+    register: agrirouter Solution Finder (agrirouter.com/en/solutions)
+    spec_file: null
+    standard: agrirouter (ISO 11783-10 TaskData, shape, telemetry)
+    role: agrirouter-ready-solution
+    registered_name: AGCO Corporation
+    website: https://www.agcocorp.com
+    matched_domain: agcocorp.com
+    matched_by: domain
+    solutions:
+    - category: telemetry-platform
+      solutions:
+      - agco-taskdoc
+      sends:
+      - taskdata-other
+      - taskdata-work-order
+      - taskdata-work-record
+      receives:
+      - taskdata-other
+      - taskdata-work-order
+      - taskdata-work-record
+    signal_note: 'participation only: solutions are context, one entry per category; never a count'
+    detected_by: sweep-agriculture-food.py
+    detected: '2026-10-15'
+  detected_by: sweep-agriculture-food.py
+  first_seen: '2026-10-15'
 generated: '2026-10-15'
 method: searched
 source:
 - https://opcfoundation.org/products/
 - https://marketplace.odva.org/organizations
 checked:
+- https://aggateway.org/AboutUs/Members.aspx
+- https://agrirouter.com/en/solutions
+- https://climate.com/en-us/partners.html
 - https://marketplace.odva.org/organizations
 - https://opcfoundation.org/products/
 - https://repo.ros2.org/rosdistro_cache/humble-cache.yaml.gz
