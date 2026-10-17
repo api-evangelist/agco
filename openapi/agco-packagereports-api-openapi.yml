@@ -175,30 +175,6 @@ components:
           format: date-time
           description: Read Only. The timestamp.
           type: string
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    UpdateSystem.Models.Category:
-      required:
-      - category
-      type: object
-      properties:
-        category:
-          description: The category name. Limit 50 characters. Categories with names exceeding this limit will be ignored.
-          type: string
-        Values:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.AttributeValue'
     UpdateSystem.Models.PackageReport:
       type: object
       properties:
@@ -213,3 +189,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UpdateSystem.Models.Category'
+    UpdateSystem.Models.Category:
+      required:
+      - category
+      type: object
+      properties:
+        category:
+          description: The category name. Limit 50 characters. Categories with names exceeding this limit will be ignored.
+          type: string
+        Values:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.AttributeValue'
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string

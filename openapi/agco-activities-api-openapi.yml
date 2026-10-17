@@ -250,41 +250,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
     BuildSystem.Shared.DTO.ParameterMapping:
       description: A DTO for an IParameterMapping
       type: object
@@ -300,28 +265,6 @@ components:
           type: string
         Source:
           description: The source of the value.  The meaning of this value is determined by the source type.  When the source type is “Constant” then source is the value formatted as a string.  When the source type is “Variable” then the source is the name of the variable
-          type: string
-    BuildSystem.Shared.DTO.Parameter:
-      description: A DTO for an IParameter
-      type: object
-      properties:
-        Name:
-          description: The name of the parameter
-          type: string
-        Type:
-          description: The data type of the parameter
-          enum:
-          - String
-          - Boolean
-          - Integer
-          - Float
-          - StringDictionary
-          type: string
-        Direction:
-          description: The parameter direction (Input or Output)
-          enum:
-          - Input
-          - Output
           type: string
     BuildSystem.Shared.DTO.ActivityStep:
       description: A DTO for an IActivityStep
@@ -357,6 +300,63 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BuildSystem.Shared.DTO.ParameterMapping'
+          readOnly: true
+    BuildSystem.Shared.DTO.Parameter:
+      description: A DTO for an IParameter
+      type: object
+      properties:
+        Name:
+          description: The name of the parameter
+          type: string
+        Type:
+          description: The data type of the parameter
+          enum:
+          - String
+          - Boolean
+          - Integer
+          - Float
+          - StringDictionary
+          type: string
+        Direction:
+          description: The parameter direction (Input or Output)
+          enum:
+          - Input
+          - Output
+          type: string
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
           readOnly: true
     BuildSystem.Shared.DTO.Activity:
       description: A DTO for an IActivity

@@ -223,18 +223,6 @@ paths:
         required: true
 components:
   schemas:
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
     GlobalResources.Shared.Models.StringTranslation:
       description: A translation of a string in a specific language
       required:
@@ -271,6 +259,18 @@ components:
           format: int32
           description: The id of the language of the translation
           type: integer
+    API.Models.ApiError:
+      type: object
+      properties:
+        DeveloperMessage:
+          type: string
+        UserMessage:
+          type: string
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
+          type: string
     API.IPagedResponse_GlobalResources.Shared.Models.StringTranslation:
       type: object
       properties:

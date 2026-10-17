@@ -334,29 +334,6 @@ components:
           type: integer
         MoreInfo:
           type: string
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
     AuthorizationCodes.Shared.Models.ValidationField:
       required:
       - Type
@@ -372,50 +349,6 @@ components:
           - StringCaseInsensitive
           - StringCaseSensitive
           type: string
-        Name:
-          description: The name of the field.
-          type: string
-    AuthorizationCodes.Shared.Models.DataField:
-      required:
-      - Type
-      - Name
-      type: object
-      properties:
-        Type:
-          description: The type of this data field.
-          enum:
-          - Boolean
-          - Decimal
-          - Float
-          - VariableLengthByteArray
-          type: string
-        MinValue:
-          format: double
-          description: The minimum value that can be represented by this data field. Required only by the 'Decimal' data type.
-          type: number
-        MaxValue:
-          format: double
-          description: The maximum value that can be represented by this data field. Required only by the 'Decimal' data type.
-          type: number
-        ScaleFactor:
-          format: double
-          description: The resolution of values that can be represented by this data field. The base value is multiplied by this to compute the final value. Required only by the 'Decimal' data type.
-          type: number
-        DigitsPrecision:
-          format: int32
-          description: The number of decimal digits to be used by this data field. Required only by the 'Float' data type. Must be in range 1 - 15.
-          type: integer
-        MaxExponent:
-          format: int32
-          description: The maximum exponent to be used by this data field. Required only by the 'Float' data type. May not be greater than 307.
-          type: integer
-        MinExponent:
-          format: int32
-          description: The minimum exponent to be used by this data field. Required only by the 'Float' data type. May not be less than -292.
-          type: integer
-        Signed:
-          description: Indicates whether this value is signed. Required only by the 'Float' data type.
-          type: boolean
         Name:
           description: The name of the field.
           type: string
@@ -490,6 +423,73 @@ components:
           format: int32
           description: The number of bits used for timestamp verification. Defaults to 5. May not be updated.
           type: integer
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    AuthorizationCodes.Shared.Models.DataField:
+      required:
+      - Type
+      - Name
+      type: object
+      properties:
+        Type:
+          description: The type of this data field.
+          enum:
+          - Boolean
+          - Decimal
+          - Float
+          - VariableLengthByteArray
+          type: string
+        MinValue:
+          format: double
+          description: The minimum value that can be represented by this data field. Required only by the 'Decimal' data type.
+          type: number
+        MaxValue:
+          format: double
+          description: The maximum value that can be represented by this data field. Required only by the 'Decimal' data type.
+          type: number
+        ScaleFactor:
+          format: double
+          description: The resolution of values that can be represented by this data field. The base value is multiplied by this to compute the final value. Required only by the 'Decimal' data type.
+          type: number
+        DigitsPrecision:
+          format: int32
+          description: The number of decimal digits to be used by this data field. Required only by the 'Float' data type. Must be in range 1 - 15.
+          type: integer
+        MaxExponent:
+          format: int32
+          description: The maximum exponent to be used by this data field. Required only by the 'Float' data type. May not be greater than 307.
+          type: integer
+        MinExponent:
+          format: int32
+          description: The minimum exponent to be used by this data field. Required only by the 'Float' data type. May not be less than -292.
+          type: integer
+        Signed:
+          description: Indicates whether this value is signed. Required only by the 'Float' data type.
+          type: boolean
+        Name:
+          description: The name of the field.
+          type: string
     API.IPagedResponse_AuthorizationCodes.Shared.Models.AuthorizationCodeDefinition:
       type: object
       properties:

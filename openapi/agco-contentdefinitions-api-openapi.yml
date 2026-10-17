@@ -577,35 +577,7 @@ components:
           type: integer
         MoreInfo:
           type: string
-    ContentSubmission.Shared.BusinessEntities.ContentDefinition:
-      description: The definition of the content for submission
-      required:
-      - Description
-      type: object
-      properties:
-        ContentDefinitionID:
-          format: int32
-          description: The ID of this content definition.
-          type: integer
-        Name:
-          description: The name of this content. Name must be valid for Attribute on PackageType.
-          type: string
-        TypeID:
-          format: int32
-          description: The type of content.
-          type: integer
-        PackageTypeID:
-          description: Read Only. The ID of the package type used for this content.
-          type: string
-        Description:
-          description: The description used on the package type in the AGCO Update System
-          type: string
-        Attributes:
-          description: Attributes of this ContentDefinition
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
-    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinition:
       description: A response containing a page of results and metadata concerning the results
       required:
       - Metadata
@@ -620,7 +592,7 @@ components:
           description: The set of entities that make up this page.
           type: array
           items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
           readOnly: true
     ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
       description: An attribute of a definition of the content for submission
@@ -666,7 +638,35 @@ components:
           description: The number of entities prior to this page of items.
           type: integer
           readOnly: true
-    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinition:
+    ContentSubmission.Shared.BusinessEntities.ContentDefinition:
+      description: The definition of the content for submission
+      required:
+      - Description
+      type: object
+      properties:
+        ContentDefinitionID:
+          format: int32
+          description: The ID of this content definition.
+          type: integer
+        Name:
+          description: The name of this content. Name must be valid for Attribute on PackageType.
+          type: string
+        TypeID:
+          format: int32
+          description: The type of content.
+          type: integer
+        PackageTypeID:
+          description: Read Only. The ID of the package type used for this content.
+          type: string
+        Description:
+          description: The description used on the package type in the AGCO Update System
+          type: string
+        Attributes:
+          description: Attributes of this ContentDefinition
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
+    API.PagedResponse_ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
       description: A response containing a page of results and metadata concerning the results
       required:
       - Metadata
@@ -681,5 +681,5 @@ components:
           description: The set of entities that make up this page.
           type: array
           items:
-            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition'
+            $ref: '#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute'
           readOnly: true

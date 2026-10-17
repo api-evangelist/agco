@@ -560,147 +560,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    UpdateSystem.Models.UpdateMetricsData.ActiveVersionByClientRecord:
-      type: object
-      properties:
-        ReleaseName:
-          type: string
-        ClientCount:
-          format: int32
-          type: integer
-        BundleNumber:
-          format: int32
-          type: integer
-    UpdateSystem.Models.Bundle:
-      required:
-      - Description
-      - UpdateGroupID
-      - BundleNumber
-      type: object
-      properties:
-        BundleID:
-          description: Read-Only.
-          type: string
-        Description:
-          description: The Bundle description.
-          type: string
-        UpdateGroupID:
-          description: The update group this bundle belongs to.
-          type: string
-        BundleNumber:
-          format: int32
-          description: The bundle number
-          type: integer
-        Active:
-          description: 'Default Value: false. During the creation of the Bundle, this field must be false.'
-          type: boolean
-    API.Models.ApiError:
-      type: object
-      properties:
-        DeveloperMessage:
-          type: string
-        UserMessage:
-          type: string
-        ErrorCode:
-          format: int32
-          type: integer
-        MoreInfo:
-          type: string
-    API.PagedResponse_UpdateSystem.Models.UpdateGroupClientRelationship:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
-          readOnly: true
-    UpdateSystem.Models.AttributeValue:
-      required:
-      - Key
-      type: object
-      properties:
-        Key:
-          description: The attribute name. Limit 50 characters. Attributes with names exceeding this limit will be ignored.
-          type: string
-        Value:
-          description: The value
-          type: string
-        TimeStamp:
-          format: date-time
-          description: Read Only. The timestamp.
-          type: string
-    UpdateSystem.Models.Package:
-      required:
-      - PackageTypeID
-      - Url
-      - CRC
-      - Version
-      - Description
-      - ReleaseDate
-      type: object
-      properties:
-        PackageID:
-          description: Read Only. The package ID
-          type: string
-        PackageTypeID:
-          description: The id of the package type this package belongs to.
-          type: string
-        Url:
-          description: The Url to download the package from.
-          type: string
-        CRC:
-          description: The CRC used to validate the download.
-          type: string
-        Notes:
-          description: Notes about the package
-          type: string
-        Version:
-          format: int32
-          description: The version.
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-        PreviousVersion:
-          format: int32
-          description: For delta packages, the previous version required.  For non-delta packages, the Previous version is 0.  Default value is 0.
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-        Description:
-          description: The package description
-          type: string
-        ReleaseDate:
-          format: date-time
-          description: The date the package was released
-          type: string
-        Released:
-          description: True if the package is released.  Default value is False.
-          type: boolean
-        Autorun:
-          description: Value is true if package should run automatically. Default value is false.
-          type: boolean
-        Switches:
-          description: The command line arguments for the package.  Default value is an empty string.
-          type: string
-        Size:
-          format: int64
-          description: "The size of the file at the specified URL.  If a size is not supplied at creation time, the size will be determined by the response from the URL.\n            If the size provided does not match the size in the response from the URL an error will be returned."
-          type: integer
-        RemoveOnSuccess:
-          description: True to remove the package after successful execution.  Default value is False.
-          type: boolean
-        LocalizedName:
-          description: Optional. The StringID used to localize the name of the Package
-          type: string
     UpdateSystem.Models.UpdateMetricsData:
       description: Model that retrieves the data for UpdateMetrics
       type: object
@@ -739,47 +598,33 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UpdateSystem.Models.UpdateMetricsData.PackageErrorsRecord'
-    UpdateSystem.Models.ClientInfo:
+    API.Models.ApiError:
       type: object
       properties:
-        ClientID:
-          description: The id of the client
+        DeveloperMessage:
           type: string
-        Package:
-          description: The packages
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
-    UpdateSystem.Models.Client:
-      type: object
-      properties:
-        ClientID:
-          description: Read Only. The id of the client
+        UserMessage:
           type: string
-        Tag:
-          description: A description of the client that can be used for easy reference
+        ErrorCode:
+          format: int32
+          type: integer
+        MoreInfo:
           type: string
-        LastCheckin:
-          format: date-time
-          description: Read Only. The time of the client's last checkin with the server.
-          type: string
-    API.PagedResponse_UpdateSystem.Models.PackageStatusSummary:
-      description: A response containing a page of results and metadata concerning the results
+    UpdateSystem.Models.AttributeValue:
       required:
-      - Metadata
-      - Entities
+      - Key
       type: object
       properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.PackageStatusSummary'
-          readOnly: true
+        Key:
+          description: The attribute name. Limit 50 characters. Attributes with names exceeding this limit will be ignored.
+          type: string
+        Value:
+          description: The value
+          type: string
+        TimeStamp:
+          format: date-time
+          description: Read Only. The timestamp.
+          type: string
     UpdateSystem.Models.Category:
       required:
       - category
@@ -792,7 +637,39 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UpdateSystem.Models.AttributeValue'
-    API.PagedResponse_UpdateSystem.Models.UpdateGroup:
+    UpdateSystem.Models.PackageStatusSummary:
+      type: object
+      properties:
+        PackageStatusItems:
+          description: The individual package status items
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.PackageStatus'
+        PackageID:
+          description: The ID of the package
+          type: string
+        Package:
+          description: The name of the package
+          type: string
+        Downloaded:
+          format: int64
+          description: The number of clients that have completed the download
+          type: integer
+        Installed:
+          format: int64
+          description: The number of clients that have completed the install
+          type: integer
+        Error:
+          format: int32
+          description: The result of the install
+          type: integer
+        AverageDownloadTime:
+          description: The average time required to complete the download
+          type: string
+        AverageInstallTime:
+          description: The average time required to complete the install
+          type: string
+    API.PagedResponse_UpdateSystem.Models.Bundle:
       description: A response containing a page of results and metadata concerning the results
       required:
       - Metadata
@@ -807,79 +684,8 @@ components:
           description: The set of entities that make up this page.
           type: array
           items:
-            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+            $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
           readOnly: true
-    UpdateSystem.Models.PagedClientStatusMetadata:
-      required:
-      - TotalCount
-      - Limit
-      - Offset
-      - ReportValueLabel
-      - ReportResultLabel
-      - ReportResultExpected
-      type: object
-      properties:
-        TotalCount:
-          format: int32
-          description: The total number of entities matching the request.
-          type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
-        ReportValueLabel:
-          description: The label for data contained in ClientStatus.ReportValue
-          type: string
-        ReportResultLabel:
-          description: The label for data contained in ClientStatus.ReportResults
-          type: string
-        ReportResultExpected:
-          description: The label for data contained in ClientStatus.ReportResults
-          type: string
-    UpdateSystem.Models.PackageStatus:
-      type: object
-      properties:
-        ClientID:
-          description: The id of the client
-          type: string
-        DownloadTime:
-          description: The amount of time spent downloading
-          type: string
-        Downloaded:
-          description: The number of bytes downloaded
-          type: string
-        Size:
-          description: The total size of the package
-          type: string
-        Percentage:
-          description: The download completion percentage
-          type: string
-        InstallStarted:
-          description: The time the package was started
-          type: string
-        InstallCompleted:
-          description: The time the package completed
-          type: string
-        InstallResult:
-          description: The package result
-          type: string
-        ClientKey:
-          description: The client's tag
-          type: string
-        InstallTime:
-          description: The amount of time required to run the package
-          type: string
-        Timestamp:
-          format: date-time
-          description: The time the status was last updated
-          type: string
     UpdateSystem.Models.UpdateGroup:
       required:
       - Description
@@ -944,65 +750,7 @@ components:
           items:
             $ref: '#/components/schemas/UpdateSystem.Models.ClientStatus'
           readOnly: true
-    UpdateSystem.Models.PackageReport:
-      type: object
-      properties:
-        PackageID:
-          description: The PackageID.
-          type: string
-        PackageDescription:
-          description: Read Only. The package description
-          type: string
-        Categories:
-          description: The package report's categories.
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.Category'
-    UpdateSystem.Models.UpdateMetricsData.PackageErrorsRecord:
-      type: object
-      properties:
-        ErrorCode:
-          type: string
-        ShortDescription:
-          type: string
-        LongDescription:
-          type: string
-        ClientCount:
-          format: int32
-          type: integer
-    UpdateSystem.Models.PackageStatusSummary:
-      type: object
-      properties:
-        PackageStatusItems:
-          description: The individual package status items
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateSystem.Models.PackageStatus'
-        PackageID:
-          description: The ID of the package
-          type: string
-        Package:
-          description: The name of the package
-          type: string
-        Downloaded:
-          format: int64
-          description: The number of clients that have completed the download
-          type: integer
-        Installed:
-          format: int64
-          description: The number of clients that have completed the install
-          type: integer
-        Error:
-          format: int32
-          description: The result of the install
-          type: integer
-        AverageDownloadTime:
-          description: The average time required to complete the download
-          type: string
-        AverageInstallTime:
-          description: The average time required to complete the install
-          type: string
-    API.PagedResponse_UpdateSystem.Models.Bundle:
+    API.PagedResponse_UpdateSystem.Models.PackageStatusSummary:
       description: A response containing a page of results and metadata concerning the results
       required:
       - Metadata
@@ -1017,31 +765,117 @@ components:
           description: The set of entities that make up this page.
           type: array
           items:
-            $ref: '#/components/schemas/UpdateSystem.Models.Bundle'
+            $ref: '#/components/schemas/UpdateSystem.Models.PackageStatusSummary'
           readOnly: true
-    API.PagedResponseMetadata:
-      description: Metadata for the paged response
-      required:
-      - TotalCount
-      - Limit
-      - Offset
+    UpdateSystem.Models.Client:
       type: object
       properties:
-        TotalCount:
+        ClientID:
+          description: Read Only. The id of the client
+          type: string
+        Tag:
+          description: A description of the client that can be used for easy reference
+          type: string
+        LastCheckin:
+          format: date-time
+          description: Read Only. The time of the client's last checkin with the server.
+          type: string
+    UpdateSystem.Models.PackageReport:
+      type: object
+      properties:
+        PackageID:
+          description: The PackageID.
+          type: string
+        PackageDescription:
+          description: Read Only. The package description
+          type: string
+        Categories:
+          description: The package report's categories.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.Category'
+    UpdateSystem.Models.UpdateGroupClientRelationship:
+      required:
+      - UpdateGroupID
+      - ClientID
+      type: object
+      properties:
+        RelationshipID:
+          description: Read Only after creation. The relationship id.  A relationship id will be assigned if not provided on creation.
+          type: string
+        UpdateGroupID:
+          description: Read Only after creation. The update group to subscribe to.
+          type: string
+        ClientID:
+          description: Read Only after creation. The client id of the subscriber.
+          type: string
+        LastCheckin:
+          format: date-time
+          description: ReadOnly. The timestamp of the last checkin.
+          type: string
+        Active:
+          description: The subscription status.  The status is active by default.
+          type: boolean
+    UpdateSystem.Models.PackageStatus:
+      type: object
+      properties:
+        ClientID:
+          description: The id of the client
+          type: string
+        DownloadTime:
+          description: The amount of time spent downloading
+          type: string
+        Downloaded:
+          description: The number of bytes downloaded
+          type: string
+        Size:
+          description: The total size of the package
+          type: string
+        Percentage:
+          description: The download completion percentage
+          type: string
+        InstallStarted:
+          description: The time the package was started
+          type: string
+        InstallCompleted:
+          description: The time the package completed
+          type: string
+        InstallResult:
+          description: The package result
+          type: string
+        ClientKey:
+          description: The client's tag
+          type: string
+        InstallTime:
+          description: The amount of time required to run the package
+          type: string
+        Timestamp:
+          format: date-time
+          description: The time the status was last updated
+          type: string
+    UpdateSystem.Models.Bundle:
+      required:
+      - Description
+      - UpdateGroupID
+      - BundleNumber
+      type: object
+      properties:
+        BundleID:
+          description: Read-Only.
+          type: string
+        Description:
+          description: The Bundle description.
+          type: string
+        UpdateGroupID:
+          description: The update group this bundle belongs to.
+          type: string
+        BundleNumber:
           format: int32
-          description: The total number of entities matching the request.
+          description: The bundle number
           type: integer
-          readOnly: true
-        Limit:
-          format: int32
-          description: The number of entities this paged response is limited to.
-          type: integer
-          readOnly: true
-        Offset:
-          format: int32
-          description: The number of entities prior to this page of items.
-          type: integer
-          readOnly: true
+        Active:
+          description: 'Default Value: false. During the creation of the Bundle, this field must be false.'
+          type: boolean
     UpdateSystem.Models.UpdateMetricsData.CurrentStateByClientRecord:
       type: object
       properties:
@@ -1050,6 +884,103 @@ components:
         ClientCount:
           format: int32
           type: integer
+    API.PagedResponse_UpdateSystem.Models.UpdateGroupClientRelationship:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroupClientRelationship'
+          readOnly: true
+    API.PagedResponse_UpdateSystem.Models.UpdateGroup:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.UpdateGroup'
+          readOnly: true
+    UpdateSystem.Models.Package:
+      required:
+      - PackageTypeID
+      - Url
+      - CRC
+      - Version
+      - Description
+      - ReleaseDate
+      type: object
+      properties:
+        PackageID:
+          description: Read Only. The package ID
+          type: string
+        PackageTypeID:
+          description: The id of the package type this package belongs to.
+          type: string
+        Url:
+          description: The Url to download the package from.
+          type: string
+        CRC:
+          description: The CRC used to validate the download.
+          type: string
+        Notes:
+          description: Notes about the package
+          type: string
+        Version:
+          format: int32
+          description: The version.
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        PreviousVersion:
+          format: int32
+          description: For delta packages, the previous version required.  For non-delta packages, the Previous version is 0.  Default value is 0.
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        Description:
+          description: The package description
+          type: string
+        ReleaseDate:
+          format: date-time
+          description: The date the package was released
+          type: string
+        Released:
+          description: True if the package is released.  Default value is False.
+          type: boolean
+        Autorun:
+          description: Value is true if package should run automatically. Default value is false.
+          type: boolean
+        Switches:
+          description: The command line arguments for the package.  Default value is an empty string.
+          type: string
+        Size:
+          format: int64
+          description: "The size of the file at the specified URL.  If a size is not supplied at creation time, the size will be determined by the response from the URL.\n            If the size provided does not match the size in the response from the URL an error will be returned."
+          type: integer
+        RemoveOnSuccess:
+          description: True to remove the package after successful execution.  Default value is False.
+          type: boolean
+        LocalizedName:
+          description: Optional. The StringID used to localize the name of the Package
+          type: string
     UpdateSystem.Models.ClientStatus:
       type: object
       properties:
@@ -1076,25 +1007,94 @@ components:
           format: int32
           description: The number of minutes that have passed since the last check-in
           type: integer
-    UpdateSystem.Models.UpdateGroupClientRelationship:
+    UpdateSystem.Models.PagedClientStatusMetadata:
       required:
-      - UpdateGroupID
-      - ClientID
+      - TotalCount
+      - Limit
+      - Offset
+      - ReportValueLabel
+      - ReportResultLabel
+      - ReportResultExpected
       type: object
       properties:
-        RelationshipID:
-          description: Read Only after creation. The relationship id.  A relationship id will be assigned if not provided on creation.
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+        ReportValueLabel:
+          description: The label for data contained in ClientStatus.ReportValue
           type: string
-        UpdateGroupID:
-          description: Read Only after creation. The update group to subscribe to.
+        ReportResultLabel:
+          description: The label for data contained in ClientStatus.ReportResults
           type: string
+        ReportResultExpected:
+          description: The label for data contained in ClientStatus.ReportResults
+          type: string
+    UpdateSystem.Models.UpdateMetricsData.PackageErrorsRecord:
+      type: object
+      properties:
+        ErrorCode:
+          type: string
+        ShortDescription:
+          type: string
+        LongDescription:
+          type: string
+        ClientCount:
+          format: int32
+          type: integer
+    UpdateSystem.Models.ClientInfo:
+      type: object
+      properties:
         ClientID:
-          description: Read Only after creation. The client id of the subscriber.
+          description: The id of the client
           type: string
-        LastCheckin:
-          format: date-time
-          description: ReadOnly. The timestamp of the last checkin.
+        Package:
+          description: The packages
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateSystem.Models.PackageReport'
+    API.PagedResponseMetadata:
+      description: Metadata for the paged response
+      required:
+      - TotalCount
+      - Limit
+      - Offset
+      type: object
+      properties:
+        TotalCount:
+          format: int32
+          description: The total number of entities matching the request.
+          type: integer
+          readOnly: true
+        Limit:
+          format: int32
+          description: The number of entities this paged response is limited to.
+          type: integer
+          readOnly: true
+        Offset:
+          format: int32
+          description: The number of entities prior to this page of items.
+          type: integer
+          readOnly: true
+    UpdateSystem.Models.UpdateMetricsData.ActiveVersionByClientRecord:
+      type: object
+      properties:
+        ReleaseName:
           type: string
-        Active:
-          description: The subscription status.  The status is active by default.
-          type: boolean
+        ClientCount:
+          format: int32
+          type: integer
+        BundleNumber:
+          format: int32
+          type: integer

@@ -245,13 +245,14 @@ components:
           type: integer
         MoreInfo:
           type: string
-    DealerDB.Models.LicenseActivationConfirm:
-      required:
-      - LicenseVersion
+    DealerDB.Models.LicenseActivation:
       type: object
       properties:
-        LicenseVersion:
-          description: The license version to confirm
+        LicenseData:
+          description: The license data in base64 format.
+          type: string
+        Key:
+          description: The license key in base64 format.  This is only provided when the LicenseData is a new license.
           type: string
     DealerDB.Models.LicenseActivationUpdate:
       required:
@@ -264,14 +265,13 @@ components:
         SystemInfo:
           description: Information about  the system being activated
           type: string
-    DealerDB.Models.LicenseActivation:
+    DealerDB.Models.LicenseActivationConfirm:
+      required:
+      - LicenseVersion
       type: object
       properties:
-        LicenseData:
-          description: The license data in base64 format.
-          type: string
-        Key:
-          description: The license key in base64 format.  This is only provided when the LicenseData is a new license.
+        LicenseVersion:
+          description: The license version to confirm
           type: string
     DealerDB.Models.EDTLiteRegistration:
       description: Registration for an EDT Lite

@@ -324,6 +324,40 @@ paths:
       deprecated: false
 components:
   schemas:
+    API.PagedResponse_DealerDB.Models.VoucherHistory:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/DealerDB.Models.VoucherHistory'
+          readOnly: true
+    API.PagedResponse_DealerDB.Models.Voucher:
+      description: A response containing a page of results and metadata concerning the results
+      required:
+      - Metadata
+      - Entities
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/API.PagedResponseMetadata'
+          description: Metadata about this paged response
+          readOnly: true
+        Entities:
+          description: The set of entities that make up this page.
+          type: array
+          items:
+            $ref: '#/components/schemas/DealerDB.Models.Voucher'
+          readOnly: true
     DealerDB.Models.Voucher:
       description: A voucher for EDT activation
       type: object
@@ -375,23 +409,6 @@ components:
           format: date-time
           description: The expiration date of the voucher. Required for Temporary and Right to Repair Vouchers.
           type: string
-    API.PagedResponse_DealerDB.Models.VoucherHistory:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/DealerDB.Models.VoucherHistory'
-          readOnly: true
     API.PagedResponseMetadata:
       description: Metadata for the paged response
       required:
@@ -472,20 +489,3 @@ components:
           format: date-time
           description: The expiration date of the voucher. Required for Temporary Vouchers.
           type: string
-    API.PagedResponse_DealerDB.Models.Voucher:
-      description: A response containing a page of results and metadata concerning the results
-      required:
-      - Metadata
-      - Entities
-      type: object
-      properties:
-        Metadata:
-          $ref: '#/components/schemas/API.PagedResponseMetadata'
-          description: Metadata about this paged response
-          readOnly: true
-        Entities:
-          description: The set of entities that make up this page.
-          type: array
-          items:
-            $ref: '#/components/schemas/DealerDB.Models.Voucher'
-          readOnly: true
