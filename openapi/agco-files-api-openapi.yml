@@ -426,3 +426,9 @@ components:
         Path:
           description: The Path of the file.
           type: string
+x-provenance:
+  method: harvested
+  publisher: Agco
+  source: https://secure.agco-ats.com/swagger/docs/v1
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
