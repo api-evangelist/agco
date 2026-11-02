@@ -1,0 +1,1237 @@
+name: Agco
+aid: agco
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
+specificationVersion: '0.23'
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - plans
+  - authentication
+  - security
+  generated: '2026-09-03'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/agco.png
+tags:
+  - Fortune 500
+  - Agriculture
+  - Farm Equipment
+  - Manufacturing
+  - Telematics
+  - Precision Agriculture
+url: https://raw.githubusercontent.com/api-evangelist/agco/refs/heads/main/apis.yml
+apis:
+- aid: agco:agco-locations-api
+  name: agco Locations API
+  description: Access machine location and tracking data.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Location
+  tags_raw:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-locations-api-openapi.yml
+  - type: Portal
+    url: https://get.agcoconnect.com/
+  - type: Documentation
+    url: https://github.com/agco/agco-json-api-profiles
+- aid: agco:agco-machines-api
+  name: agco Machines API
+  description: Access machine information and status.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Machines
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-machines-api-openapi.yml
+  - type: Portal
+    url: https://get.agcoconnect.com/
+  - type: Documentation
+    url: https://github.com/agco/agco-json-api-profiles
+- aid: agco:agco-telemetry-api
+  name: agco Telemetry API
+  description: Retrieve machine telemetry and sensor data.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Telemetry
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-telemetry-api-openapi.yml
+  - type: Portal
+    url: https://get.agcoconnect.com/
+  - type: Documentation
+    url: https://github.com/agco/agco-json-api-profiles
+- aid: agco:agco-activities-api
+  name: Agco Activities API
+  description: The Activities API from Agco — 2 operation(s) for activities.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Activities
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-activities-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-activityruns-api
+  name: Agco Activity Runs API
+  description: The ActivityRuns API from Agco — 3 operation(s) for activityruns.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - ActivityRuns
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-activityruns-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-aftermarketservices-api
+  name: Agco Aftermarket Services API
+  description: The AftermarketServices API from Agco — 6 operation(s) for aftermarketservices.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Aftermarket Services
+  tags_raw:
+  - AftermarketServices
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-aftermarketservices-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-agents-api
+  name: Agco Agents API
+  description: The Agents API from Agco — 6 operation(s) for agents.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-agents-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-authentication-api
+  name: Agco Authentication API
+  description: The Authentication API from Agco — 9 operation(s) for authentication.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-authentication-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-authorizationcategories-api
+  name: Agco Authorization Categories API
+  description: The AuthorizationCategories API from Agco — 4 operation(s) for authorizationcategories.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - AuthorizationCategories
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-authorizationcategories-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-authorizationcodedefinitions-api
+  name: Agco Authorization Code Definitions API
+  description: >-
+    The AuthorizationCodeDefinitions API from Agco — 3 operation(s) for authorizationcodedefinitions.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - AuthorizationCodeDefinitions
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-authorizationcodedefinitions-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-authorizationcodes-api
+  name: Agco Authorization Codes API
+  description: The AuthorizationCodes API from Agco — 4 operation(s) for authorizationcodes.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - AuthorizationCodes
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-authorizationcodes-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-authorizationcontactinformation-api
+  name: Agco Authorization Contact Information API
+  description: >-
+    The AuthorizationContactInformation API from Agco — 1 operation(s) for authorizationcontactinformation.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - AuthorizationContactInformation
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-authorizationcontactinformation-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-brands-api
+  name: Agco Brands API
+  description: The Brands API from Agco — 1 operation(s) for brands.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Brands
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-brands-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-bundles-api
+  name: Agco Bundles API
+  description: The Bundles API from Agco — 2 operation(s) for bundles.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Bundles
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-bundles-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-clients-api
+  name: Agco Clients API
+  description: The Clients API from Agco — 4 operation(s) for clients.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Clients
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-clients-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-contentdefinitions-api
+  name: Agco Content Definitions API
+  description: The ContentDefinitions API from Agco — 6 operation(s) for contentdefinitions.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - ContentDefinitions
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-contentdefinitions-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-contentrelease-api
+  name: Agco Content Release API
+  description: The ContentRelease API from Agco — 2 operation(s) for contentrelease.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - ContentRelease
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-contentrelease-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-contentsubmissions-api
+  name: Agco Content Submissions API
+  description: The ContentSubmissions API from Agco — 7 operation(s) for contentsubmissions.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - ContentSubmissions
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-contentsubmissions-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-contentsubmissiontypes-api
+  name: Agco Content Submission Types API
+  description: The ContentSubmissionTypes API from Agco — 2 operation(s) for contentsubmissiontypes.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - ContentSubmissionTypes
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-contentsubmissiontypes-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-dealerbycountry-api
+  name: Agco Dealer By Country API
+  description: The DealerByCountry API from Agco — 1 operation(s) for dealerbycountry.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - DealerByCountry
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-dealerbycountry-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-dealers-api
+  name: Agco Dealers API
+  description: The Dealers API from Agco — 2 operation(s) for dealers.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Dealers
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-dealers-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-files-api
+  name: Agco Files API
+  description: The Files API from Agco — 3 operation(s) for files.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - File
+  tags_raw:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-files-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-fileuploadindexfields-api
+  name: Agco File Upload Index Fields API
+  description: The FileUploadIndexFields API from Agco — 1 operation(s) for fileuploadindexfields.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - FileUploadIndexFields
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-fileuploadindexfields-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-fileuploadtypes-api
+  name: Agco File Upload Types API
+  description: The FileUploadTypes API from Agco — 1 operation(s) for fileuploadtypes.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - FileUploadTypes
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-fileuploadtypes-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-globalimagecategories-api
+  name: Agco Global Image Categories API
+  description: The GlobalImageCategories API from Agco — 2 operation(s) for globalimagecategories.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - GlobalImageCategories
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-globalimagecategories-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-globalimages-api
+  name: Agco Global Images API
+  description: The GlobalImages API from Agco — 3 operation(s) for globalimages.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - GlobalImages
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-globalimages-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-jobruns-api
+  name: Agco Job Runs API
+  description: The JobRuns API from Agco — 2 operation(s) for jobruns.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - JobRuns
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-jobruns-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-jobs-api
+  name: Agco Jobs API
+  description: The Jobs API from Agco — 2 operation(s) for jobs.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Job
+  tags_raw:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-jobs-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-languages-api
+  name: Agco Languages API
+  description: The Languages API from Agco — 2 operation(s) for languages.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Language
+  tags_raw:
+  - Languages
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-languages-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-licenseactivations-api
+  name: Agco License Activations API
+  description: The LicenseActivations API from Agco — 4 operation(s) for licenseactivations.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - LicenseActivations
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-licenseactivations-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-licenses-api
+  name: Agco Licenses API
+  description: The Licenses API from Agco — 2 operation(s) for licenses.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Licenses
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-licenses-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-logs-api
+  name: Agco Logs API
+  description: The Logs API from Agco — 2 operation(s) for logs.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-logs-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-notifications-api
+  name: Agco Notifications API
+  description: The Notifications API from Agco — 1 operation(s) for notifications.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Notification
+  tags_raw:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-notifications-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-packagereports-api
+  name: Agco Package Reports API
+  description: The PackageReports API from Agco — 2 operation(s) for packagereports.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - PackageReports
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-packagereports-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-packages-api
+  name: Agco Packages API
+  description: The Packages API from Agco — 2 operation(s) for packages.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Packages
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-packages-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-packagetypetobundles-api
+  name: Agco Package Typeto Bundles API
+  description: The PackageTypetoBundles API from Agco — 2 operation(s) for packagetypetobundles.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - PackageTypetoBundles
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-packagetypetobundles-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-permissions-api
+  name: Agco Permissions API
+  description: The Permissions API from Agco — 2 operation(s) for permissions.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-permissions-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-prioritypackages-api
+  name: Agco Priority Packages API
+  description: The PriorityPackages API from Agco — 2 operation(s) for prioritypackages.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - PriorityPackages
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-prioritypackages-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-release-api
+  name: Agco Release API
+  description: The Release API from Agco — 4 operation(s) for release.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Releases
+  tags_raw:
+  - Release
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-release-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-reporting-api
+  name: Agco Reporting API
+  description: The Reporting API from Agco — 10 operation(s) for reporting.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Reporting
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-reporting-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-roles-api
+  name: Agco Roles API
+  description: The Roles API from Agco — 3 operation(s) for roles.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-roles-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-steps-api
+  name: Agco Steps API
+  description: The Steps API from Agco — 2 operation(s) for steps.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Steps
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-steps-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-stringdefinitions-api
+  name: Agco String Definitions API
+  description: The StringDefinitions API from Agco — 3 operation(s) for stringdefinitions.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - StringDefinitions
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-stringdefinitions-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-stringtranslations-api
+  name: Agco String Translations API
+  description: The StringTranslations API from Agco — 3 operation(s) for stringtranslations.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - StringTranslations
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-stringtranslations-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-translationkeys-api
+  name: Agco Translation Keys API
+  description: The TranslationKeys API from Agco — 2 operation(s) for translationkeys.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - TranslationKeys
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-translationkeys-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-translationrequests-api
+  name: Agco Translation Requests API
+  description: The TranslationRequests API from Agco — 3 operation(s) for translationrequests.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - TranslationRequests
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-translationrequests-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-translationsets-api
+  name: Agco Translation Sets API
+  description: The TranslationSets API from Agco — 9 operation(s) for translationsets.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Translation Sets
+  tags_raw:
+  - TranslationSets
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-translationsets-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-updategroupclientrelationships-api
+  name: Agco Update Group Client Relationships API
+  description: >-
+    The UpdateGroupClientRelationships API from Agco — 2 operation(s) for updategroupclientrelationships.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - UpdateGroupClientRelationships
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-updategroupclientrelationships-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-updategroups-api
+  name: Agco Update Groups API
+  description: The UpdateGroups API from Agco — 3 operation(s) for updategroups.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - UpdateGroups
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-updategroups-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-updategroupsubscriptions-api
+  name: Agco Update Group Subscriptions API
+  description: >-
+    The UpdateGroupSubscriptions API from Agco — 3 operation(s) for updategroupsubscriptions.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - UpdateGroupSubscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-updategroupsubscriptions-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-updatesystem-api
+  name: Agco Update System API
+  description: The UpdateSystem API from Agco — 2 operation(s) for updatesystem.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - UpdateSystem
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-updatesystem-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-usercontentdefinitions-api
+  name: Agco User Content Definitions API
+  description: The UserContentDefinitions API from Agco — 2 operation(s) for usercontentdefinitions.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - UserContentDefinitions
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-usercontentdefinitions-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-users-api
+  name: Agco Users API
+  description: The Users API from Agco — 3 operation(s) for users.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - User
+  tags_raw:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-users-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-voucherhistory-api
+  name: Agco Voucher History API
+  description: The VoucherHistory API from Agco — 1 operation(s) for voucherhistory.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - VoucherHistory
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-voucherhistory-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-vouchers-api
+  name: Agco Vouchers API
+  description: The Vouchers API from Agco — 3 operation(s) for vouchers.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Vouchers
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-vouchers-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-file-uploads-api
+  name: Agco File Uploads API
+  description: The File Uploads API from Agco — 1 operation(s) for file uploads.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - File Uploads
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-file-uploads-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-package-types-api
+  name: Agco Package Types API
+  description: The Package Types API from Agco — 3 operation(s) for package types.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - Package Types
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-package-types-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+- aid: agco:agco-user-permissions-api
+  name: Agco User Permissions API
+  description: The User Permissions API from Agco — 5 operation(s) for user permissions.
+  humanURL: https://get.agcoconnect.com/
+  baseURL: https://api.agcocorp.com
+  tags:
+  - User Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/agco-user-permissions-api-openapi.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Authentication
+    url: authentication/agco-ats-authentication.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+description: >-
+  AGCO is a global manufacturer of agricultural machinery and precision-ag technology — Fendt, Massey Ferguson, Valtra,
+  Challenger, GSI and PTx. Its one publicly reachable machine-readable contract is the AGCO Technical Support (ATS) API
+  at secure.agco-ats.com: a Swagger 2.0 document with 285 operations across 55 tags, served with a public Swagger UI,
+  covering dealer records, authorization codes and vouchers, software package distribution to Electronic Diagnostic Tool
+  (EDT) installations, a content submission and release pipeline, translation workflow, and AGCO Power aftermarket
+  services. AGCO also publishes three first-party JSON:API profiles standardising filtering, search and change events.
+  The AgCommand telematics API announced in 2015 for third-party developers has no reachable public documentation: the
+  developer portal at developer.agcocorp.com no longer publishes and api.agcocorp.com is an API Gateway that
+  authenticates every path.
+created: '2026-05-04'
+modified: '2026-09-04'
+common:
+  - type: FinOps
+    url: finops/agco-finops.yml
+  - type: CapabilityMap
+    url: capabilities/agco-capability-edges.yml
+    name: agco Business Capability Map
+  - type: AgenticAccess
+    url: agentic-access/agco-agentic-access.yml
+  - type: DomainSecurity
+    url: security/agco-domain-security.yml
+  - type: Authentication
+    url: authentication/agco-authentication.yml
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/agco-corporation
+  - type: Portal
+    url: https://get.agcoconnect.com/
+  - type: GettingStarted
+    url: https://github.com/agco/agco-json-api-profiles
+  - type: GitHubOrganization
+    url: https://github.com/agco
+  - type: Blog
+    url: https://news.agcocorp.com/
+  - type: Features
+    data:
+      - name: Machine Telematics
+        description: >-
+          Real-time access to machine performance data including engine speed, load, fuel consumption, and fault codes
+          from AGCO Connect-ready equipment.
+      - name: Fleet Location Tracking
+        description: GPS-based machine location history enabling field work tracking and fleet management dashboards.
+      - name: Diagnostic Fault Codes
+        description: Remote access to machine diagnostic codes enabling proactive maintenance and reducing downtime.
+      - name: JSON API Profiles
+        description: Standardized filtering, search, and change event profiles for consistent API behavior across all resources.
+      - name: Multi-Brand Coverage
+        description: Single API access to data from Fendt, Massey Ferguson, Challenger, and Valtra agricultural equipment.
+  - type: UseCases
+    data:
+      - name: Farm Management Dashboard
+        description: >-
+          Build web and mobile dashboards that display real-time machine location, performance, and fuel status for farm
+          operators.
+      - name: Predictive Maintenance
+        description: >-
+          Monitor machine fault codes and engine hours remotely to schedule preventive maintenance before failures
+          occur.
+      - name: Field Work Tracking
+        description: >-
+          Track machine location and activity data to document field operations, coverage areas, and productivity
+          metrics.
+      - name: Fuel Management
+        description: Monitor fuel levels and consumption rates across a fleet to optimize refueling logistics and reduce costs.
+      - name: Telematics Integration
+        description: Integrate AGCO machine data into existing farm management or precision agriculture software platforms.
+  - type: Integrations
+    data:
+      - name: Procore
+        description: Integration of AGCO telematics data with Procore construction and project management workflows.
+      - name: Precision Ag Software
+        description: Integration with precision agriculture software platforms for combined field and machine data analysis.
+  - type: JSONSchema
+    url: json-schema/agco-location-schema.json
+  - type: JSONSchema
+    url: json-schema/agco-machine-schema.json
+  - type: JSONSchema
+    url: json-schema/agco-telemetry-schema.json
+  - type: JSONStructure
+    url: json-structure/agco-location-structure.json
+  - type: JSONStructure
+    url: json-structure/agco-machine-structure.json
+  - type: JSONStructure
+    url: json-structure/agco-telemetry-structure.json
+  - type: JSONLD
+    url: json-ld/agco-telematics-context.jsonld
+  - type: Examples
+    url: examples/agco-location-example.json
+  - type: Examples
+    url: examples/agco-machine-example.json
+  - type: Examples
+    url: examples/agco-telemetry-example.json
+  - type: SpectralRules
+    url: rules/agco-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/agco-vocabulary.yaml
+  - type: Packages
+    url: packages/agco-packages.yml
+  - type: X-MCPServerCandidate
+    url: mcp/agco-mcp.yml
+  - type: LLMsTxt
+    url: llms/agco-llms.txt
+  - type: Conformance
+    url: conformance/agco-conformance.yml
+  - type: ErrorCatalog
+    url: errors/agco-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/agco-lifecycle.yml
+  - type: Conventions
+    url: conventions/agco-conventions.yml
+  - type: DataModel
+    url: data-model/agco-data-model.yml
+  - type: Overlay
+    url: overlays/agco-ats-api-overlay.yaml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Plans
+    url: plans/agco-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/agco-rate-limits.yml
+  - type: APIReference
+    url: https://secure.agco-ats.com/swagger
+  - type: Documentation
+    url: https://github.com/agco/agco-json-api-profiles
+  - type: Support
+    url: https://agcocorp.support/
+  - type: PrivacyPolicy
+    url: https://www.agcocorp.com/us/en/home/compliance-center/privacy-statement/privacy-statement-en.html
+  - type: TermsOfService
+    url: https://www.agcocorp.com/us/en/home/compliance-center/legal.html
+  - type: Login
+    url: https://access.agcocorp.com/en/
+  - type: Website
+    url: https://www.agcocorp.com/
+x-enrichment:
+  date: '2026-09-04'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v3
