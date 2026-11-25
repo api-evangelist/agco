@@ -194,11 +194,36 @@ Postman and Open Collection request collections.
 - [AGCO AgCommand Locations Machines API](https://apis.io/collections/agco/open-agco-machines-api/)
 - [AGCO AgCommand Locations Telemetry API](https://apis.io/collections/agco/open-agco-telemetry-api/)
 
-#### Overlays (1)
+#### Overlays (35)
 
 OpenAPI overlays, including conversational phrasing for each operation.
 
+- [Agco Activities Api Certification Overlay](https://apis.io/overlays/agco/agco-activities-api-certification-overlay/)
+- [Agco Activityruns Api Certification Overlay](https://apis.io/overlays/agco/agco-activityruns-api-certification-overlay/)
+- [Agco Aftermarketservices Api Certification Overlay](https://apis.io/overlays/agco/agco-aftermarketservices-api-certification-overlay/)
+- [Agco Agents Api Certification Overlay](https://apis.io/overlays/agco/agco-agents-api-certification-overlay/)
 - [Agco Ats Api Overlay](https://apis.io/overlays/agco/agco-ats-api-overlay/)
+- [Agco Authentication Api Certification Overlay](https://apis.io/overlays/agco/agco-authentication-api-certification-overlay/)
+- [Agco Authorizationcategories Api Certification Overlay](https://apis.io/overlays/agco/agco-authorizationcategories-api-certification-overlay/)
+- [Agco Authorizationcodedefinitions Api Certification Overlay](https://apis.io/overlays/agco/agco-authorizationcodedefinitions-api-certification-overlay/)
+- [Agco Authorizationcodes Api Certification Overlay](https://apis.io/overlays/agco/agco-authorizationcodes-api-certification-overlay/)
+- [Agco Authorizationcontactinformation Api Certification Overlay](https://apis.io/overlays/agco/agco-authorizationcontactinformation-api-certification-overlay/)
+- [Agco Brands Api Certification Overlay](https://apis.io/overlays/agco/agco-brands-api-certification-overlay/)
+- [Agco Bundles Api Certification Overlay](https://apis.io/overlays/agco/agco-bundles-api-certification-overlay/)
+- [Agco Clients Api Certification Overlay](https://apis.io/overlays/agco/agco-clients-api-certification-overlay/)
+- [Agco Contentdefinitions Api Certification Overlay](https://apis.io/overlays/agco/agco-contentdefinitions-api-certification-overlay/)
+- [Agco Contentrelease Api Certification Overlay](https://apis.io/overlays/agco/agco-contentrelease-api-certification-overlay/)
+- [Agco Contentsubmissions Api Certification Overlay](https://apis.io/overlays/agco/agco-contentsubmissions-api-certification-overlay/)
+- [Agco Contentsubmissiontypes Api Certification Overlay](https://apis.io/overlays/agco/agco-contentsubmissiontypes-api-certification-overlay/)
+- [Agco Dealerbycountry Api Certification Overlay](https://apis.io/overlays/agco/agco-dealerbycountry-api-certification-overlay/)
+- [Agco Dealers Api Certification Overlay](https://apis.io/overlays/agco/agco-dealers-api-certification-overlay/)
+- [Agco Files Api Certification Overlay](https://apis.io/overlays/agco/agco-files-api-certification-overlay/)
+- [Agco Fileuploadindexfields Api Certification Overlay](https://apis.io/overlays/agco/agco-fileuploadindexfields-api-certification-overlay/)
+- [Agco Fileuploadtypes Api Certification Overlay](https://apis.io/overlays/agco/agco-fileuploadtypes-api-certification-overlay/)
+- [Agco Globalimagecategories Api Certification Overlay](https://apis.io/overlays/agco/agco-globalimagecategories-api-certification-overlay/)
+- [Agco Globalimages Api Certification Overlay](https://apis.io/overlays/agco/agco-globalimages-api-certification-overlay/)
+- [Agco Jobruns Api Certification Overlay](https://apis.io/overlays/agco/agco-jobruns-api-certification-overlay/)
+- …and 10 more published on APIs.io
 
 #### Governance rules (2)
 
@@ -249,18 +274,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 43.3** — developing · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 46.8** — developing · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
 | Discoverability | 66.1 |
-| Contract quality | 55.2 |
+| Contract quality | 59.8 |
 | Contract governance | 45.5 |
-| Operational transparency | 2.6 |
+| Operational transparency | 4.8 |
 | Developer ergonomics | 54.2 |
-| Access clarity | 27.6 |
+| Access clarity | 42.6 |
 
-**Agent readiness 26.4** — agent-aware
+**Agent readiness 25.8** — agent-aware
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -285,8 +310,12 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Agentic Commerce | — |
 | Pagination Ratio | — |
 | Operation Distinctiveness | mostly (partial credit) |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
-**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+**Regulatory alignment 18.6** — Horizontal (data, software, accessibility, platform)
 
 The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/agco/](https://apis.io/providers/agco/).
 
